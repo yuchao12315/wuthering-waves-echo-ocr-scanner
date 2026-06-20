@@ -24,7 +24,7 @@ pip install --user mss>=9.0 pyautogui>=0.9 psutil>=5.9 Pillow>=10.0 numpy>=1.24 
 echo.
 echo [3/3] 安装PaddlePaddle和PaddleOCR（较大，请耐心等待）...
 echo      如果出现权限错误，请以管理员身份运行此脚本
-pip install --user "paddlepaddle>=2.5,<3.0" "paddleocr>=2.7,<3.0" -f https://www.paddlepaddle.org.cn/whl/windows/cpu-mkl-avx/stable.html
+pip install --user "paddlepaddle>=2.5,^<3.0" "paddleocr>=2.7,^<3.0" -f https://www.paddlepaddle.org.cn/whl/windows/cpu-mkl-avx/stable.html
 
 echo.
 if errorlevel 1 (
