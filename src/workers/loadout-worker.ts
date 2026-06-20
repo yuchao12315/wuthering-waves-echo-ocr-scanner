@@ -368,6 +368,13 @@ function calculate(echoes: Echo[], calc: CalcJson, config: Config, allEchoes: Ec
     sonataConstraint = { type: 'none' };
   }
 
+  //只保留副词条同时有暴击和爆伤的
+ filtered = filtered.filter(e => {
+    const types = e.substats.map(s => s.type);
+    return types.includes('CRIT_RATE') && types.includes('CRIT_DMG');
+ });
+ console.log(`[Worker] 双爆筛选后：{filtered.length}个声骸`);
+
   // Score all filtered echoes
   const scored: ScoredEcho[] = filtered.map(e => ({
     id: e.id,
