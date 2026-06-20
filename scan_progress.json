@@ -1,0 +1,8176 @@
+{
+  "scanned_echoes": [
+    {
+      "id": "6cb4a88a40d8c1da",
+      "monsterId": "共鸣回响·鸣式·虚造神型",
+      "monsterName": "共鸣回响·鸣式·虚造神型",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "wishes_of_quiet_snowfall",
+      "mainStat": {
+        "type": "CRIT_DMG",
+        "value": 44.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 9.4
+        },
+        {
+          "type": "DEF_PCT",
+          "value": 10.0
+        }
+      ]
+    },
+    {
+      "id": "ca7071573037c504",
+      "monsterId": "共鸣回响·鸣式·虚造神型",
+      "monsterName": "共鸣回响·鸣式·虚造神型",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "wishes_of_quiet_snowfall",
+      "mainStat": {
+        "type": "CRIT_DMG",
+        "value": 44.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 7.1
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 11.6
+        },
+        {
+          "type": "HP_PCT",
+          "value": 7.9
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 50.0
+        }
+      ]
+    },
+    {
+      "id": "b1ab72203c8350a9",
+      "monsterId": "共鸣回响·鸣式·虚造神型",
+      "monsterName": "共鸣回响·鸣式·虚造神型",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "wishes_of_quiet_snowfall",
+      "mainStat": {
+        "type": "CRIT_DMG",
+        "value": 44.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 13.8
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 7.9
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 470.0
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 9.3
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 9.4
+        }
+      ]
+    },
+    {
+      "id": "88258116afff4dad",
+      "monsterId": "共鸣回响·鸣式·虚造神型",
+      "monsterName": "共鸣回响·鸣式·虚造神型",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "wishes_of_quiet_snowfall",
+      "mainStat": {
+        "type": "CRIT_DMG",
+        "value": 44.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 6.4
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 9.9
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 8.4
+        }
+      ]
+    },
+    {
+      "id": "2c431203fe0899dd",
+      "monsterId": "辛吉勒姆",
+      "monsterName": "辛吉勒姆",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "trailblazing_star",
+      "mainStat": {
+        "type": "CRIT_DMG",
+        "value": 44.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 10.5
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 10.1
+        },
+        {
+          "type": "DEF_PCT",
+          "value": 9.0
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 8.6
+        }
+      ]
+    },
+    {
+      "id": "1567fcebaa75ed18",
+      "monsterId": "辛吉勒姆",
+      "monsterName": "辛吉勒姆",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "trailblazing_star",
+      "mainStat": {
+        "type": "CRIT_DMG",
+        "value": 44.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 16.2
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 8.6
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 40.0
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 10.0
+        }
+      ]
+    },
+    {
+      "id": "9e1b4d6ddc3e9666",
+      "monsterId": "共鸣回响·芙露德莉斯",
+      "monsterName": "共鸣回响·芙露德莉斯",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "gusts_of_welkin",
+      "mainStat": {
+        "type": "CRIT_RATE",
+        "value": 22.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 8.6
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 12.6
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 11.6
+        }
+      ]
+    },
+    {
+      "id": "6cb4a88a40d8c1da",
+      "monsterId": "共鸣回响·鸣式·虚造神型",
+      "monsterName": "共鸣回响·鸣式·虚造神型",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "wishes_of_quiet_snowfall",
+      "mainStat": {
+        "type": "CRIT_DMG",
+        "value": 44.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 9.4
+        },
+        {
+          "type": "DEF_PCT",
+          "value": 10.0
+        }
+      ]
+    },
+    {
+      "id": "ca7071573037c504",
+      "monsterId": "共鸣回响·鸣式·虚造神型",
+      "monsterName": "共鸣回响·鸣式·虚造神型",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "wishes_of_quiet_snowfall",
+      "mainStat": {
+        "type": "CRIT_DMG",
+        "value": 44.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 7.1
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 11.6
+        },
+        {
+          "type": "HP_PCT",
+          "value": 7.9
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 50.0
+        }
+      ]
+    },
+    {
+      "id": "b1ab72203c8350a9",
+      "monsterId": "共鸣回响·鸣式·虚造神型",
+      "monsterName": "共鸣回响·鸣式·虚造神型",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "wishes_of_quiet_snowfall",
+      "mainStat": {
+        "type": "CRIT_DMG",
+        "value": 44.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 13.8
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 7.9
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 470.0
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 9.3
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 9.4
+        }
+      ]
+    },
+    {
+      "id": "88258116afff4dad",
+      "monsterId": "共鸣回响·鸣式·虚造神型",
+      "monsterName": "共鸣回响·鸣式·虚造神型",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "wishes_of_quiet_snowfall",
+      "mainStat": {
+        "type": "CRIT_DMG",
+        "value": 44.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 6.4
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 9.9
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 8.4
+        }
+      ]
+    },
+    {
+      "id": "2c431203fe0899dd",
+      "monsterId": "辛吉勒姆",
+      "monsterName": "辛吉勒姆",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "trailblazing_star",
+      "mainStat": {
+        "type": "CRIT_DMG",
+        "value": 44.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 10.5
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 10.1
+        },
+        {
+          "type": "DEF_PCT",
+          "value": 9.0
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 8.6
+        }
+      ]
+    },
+    {
+      "id": "1567fcebaa75ed18",
+      "monsterId": "辛吉勒姆",
+      "monsterName": "辛吉勒姆",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "trailblazing_star",
+      "mainStat": {
+        "type": "CRIT_DMG",
+        "value": 44.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 16.2
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 8.6
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 40.0
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 10.0
+        }
+      ]
+    },
+    {
+      "id": "9e1b4d6ddc3e9666",
+      "monsterId": "共鸣回响·芙露德莉斯",
+      "monsterName": "共鸣回响·芙露德莉斯",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "gusts_of_welkin",
+      "mainStat": {
+        "type": "CRIT_RATE",
+        "value": 22.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 8.6
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 12.6
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 11.6
+        }
+      ]
+    },
+    {
+      "id": "7169859a79f3ebc0",
+      "monsterId": "共鸣回响·芙露德莉斯",
+      "monsterName": "共鸣回响·芙露德莉斯",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "windward_pilgrimage",
+      "mainStat": {
+        "type": "CRIT_RATE",
+        "value": 22.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 8.7
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 510.0
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 10.1
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 18.6
+        }
+      ]
+    },
+    {
+      "id": "e85f20b4c61f8771",
+      "monsterId": "共鸣回响·芙露德莉斯",
+      "monsterName": "共鸣回响·芙露德莉斯",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "windward_pilgrimage",
+      "mainStat": {
+        "type": "CRIT_RATE",
+        "value": 22.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 9.4
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 10.1
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 12.6
+        }
+      ]
+    },
+    {
+      "id": "59349c3ca80d8711",
+      "monsterId": "",
+      "monsterName": "",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "celestial_light",
+      "mainStat": {
+        "type": "CRIT_DMG",
+        "value": 44.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "FLAT_DEF",
+          "value": 50.0
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.9
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 17.4
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 7.6
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 9.4
+        }
+      ]
+    },
+    {
+      "id": "21cf652bb260cca8",
+      "monsterId": "",
+      "monsterName": "",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "celestial_light",
+      "mainStat": {
+        "type": "CRIT_DMG",
+        "value": 44.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "FLAT_ATK",
+          "value": 40.0
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 12.6
+        },
+        {
+          "type": "HP_PCT",
+          "value": 7.9
+        },
+        {
+          "type": "DEF_PCT",
+          "value": 8.1
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.3
+        }
+      ]
+    },
+    {
+      "id": "37a9de2bfbbbb4cd",
+      "monsterId": "",
+      "monsterName": "",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "celestial_light",
+      "mainStat": {
+        "type": "CRIT_RATE",
+        "value": 22.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "FLAT_DEF",
+          "value": 60.0
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.3
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 7.9
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 12.6
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 360.0
+        }
+      ]
+    },
+    {
+      "id": "3b1507c0d7f4d4f3",
+      "monsterId": "炉芯机骸",
+      "monsterName": "炉芯机骸",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "halo_of_starry_radiance",
+      "mainStat": {
+        "type": "HEAL_BONUS",
+        "value": 26.4
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 9.4
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 10.8
+        },
+        {
+          "type": "DEF_PCT",
+          "value": 10.9
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 7.9
+        }
+      ]
+    },
+    {
+      "id": "5d5ec26b87fc7e71",
+      "monsterId": "海维夏",
+      "monsterName": "海维夏",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "pact_of_neonlight_leap",
+      "mainStat": {
+        "type": "CRIT_DMG",
+        "value": 44.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 9.4
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 16.2
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 9.4
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.3
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 8.6
+        }
+      ]
+    },
+    {
+      "id": "bb3f7bb85a9efea9",
+      "monsterId": "海之女",
+      "monsterName": "海之女",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "crown_of_valor",
+      "mainStat": {
+        "type": "CRIT_RATE",
+        "value": 22.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "HP_PCT",
+          "value": 8.6
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 17.4
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 10.0
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.9
+        }
+      ]
+    },
+    {
+      "id": "c98b0beab1d3b2c3",
+      "monsterId": "海之女",
+      "monsterName": "海之女",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "crown_of_valor",
+      "mainStat": {
+        "type": "CRIT_DMG",
+        "value": 44.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "FLAT_ATK",
+          "value": 40.0
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 6.4
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 18.6
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.9
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 50.0
+        }
+      ]
+    },
+    {
+      "id": "e3b0c44298fc1c14",
+      "monsterId": "",
+      "monsterName": "",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "",
+      "mainStat": null,
+      "secondaryStat": null,
+      "substats": []
+    },
+    {
+      "id": "687c1d58b7580e42",
+      "monsterId": "梦魔·凯尔匹",
+      "monsterName": "梦魔·凯尔匹",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "windward_pilgrimage",
+      "mainStat": {
+        "type": "CRIT_RATE",
+        "value": 22.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 9.3
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 60.0
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 60.0
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 16.2
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 9.4
+        }
+      ]
+    },
+    {
+      "id": "a144fffb585ad76f",
+      "monsterId": "梦魔·凯尔匹",
+      "monsterName": "梦魔·凯尔匹",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "windward_pilgrimage",
+      "mainStat": {
+        "type": "CRIT_DMG",
+        "value": 44.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 6.3
+        },
+        {
+          "type": "HP_PCT",
+          "value": 8.6
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 9.4
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 50.0
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 16.2
+        }
+      ]
+    },
+    {
+      "id": "c0a7d12f461b555a",
+      "monsterId": "梦魔·凯尔匹",
+      "monsterName": "梦魔·凯尔匹",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "windward_pilgrimage",
+      "mainStat": {
+        "type": "CRIT_DMG",
+        "value": 44.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 15.0
+        },
+        {
+          "type": "HP_PCT",
+          "value": 8.6
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 40.0
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.3
+        }
+      ]
+    },
+    {
+      "id": "3b8ee426c94cca60",
+      "monsterId": "梦魔·凯尔匹",
+      "monsterName": "梦魔·凯尔匹",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "windward_pilgrimage",
+      "mainStat": {
+        "type": "CRIT_DMG",
+        "value": 44.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 21.0
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 430.0
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 7.1
+        }
+      ]
+    },
+    {
+      "id": "c432847261f4ce7f",
+      "monsterId": "梦魔·凯尔匹",
+      "monsterName": "梦魔·凯尔匹",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "windward_pilgrimage",
+      "mainStat": {
+        "type": "CRIT_DMG",
+        "value": 44.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "HP_PCT",
+          "value": 7.9
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 10.9
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 19.8
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 9.3
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 50.0
+        }
+      ]
+    },
+    {
+      "id": "651fb4a2b1530002",
+      "monsterId": "梦魔·凯尔匹",
+      "monsterName": "梦魔·凯尔匹",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "windward_pilgrimage",
+      "mainStat": {
+        "type": "CRIT_DMG",
+        "value": 44.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 15.0
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 9.9
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 9.4
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 9.4
+        }
+      ]
+    },
+    {
+      "id": "0201e45adc5bfefd",
+      "monsterId": "梦魔·哀声",
+      "monsterName": "梦魔·哀声",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "eternal_radiance",
+      "mainStat": {
+        "type": "CRIT_DMG",
+        "value": 44.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 10.5
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 9.4
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 510.0
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 15.0
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 7.9
+        }
+      ]
+    },
+    {
+      "id": "35d8cfac473febcd",
+      "monsterId": "梦魔·哀声",
+      "monsterName": "梦魔·哀声",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "eternal_radiance",
+      "mainStat": {
+        "type": "CRIT_DMG",
+        "value": 44.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.9
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 7.9
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 13.8
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 50.0
+        }
+      ]
+    },
+    {
+      "id": "521b262041568b2a",
+      "monsterId": "梦魔·燎照之骑",
+      "monsterName": "梦魔·燎照之骑",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "molten_rift",
+      "mainStat": {
+        "type": "CRIT_RATE",
+        "value": 22.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 21.0
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 40.0
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 7.1
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 7.9
+        }
+      ]
+    },
+    {
+      "id": "2e4c938ae3c11ef9",
+      "monsterId": "梦魔·燎照之骑",
+      "monsterName": "梦魔·燎照之骑",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "molten_rift",
+      "mainStat": {
+        "type": "CRIT_DMG",
+        "value": 44.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 6.9
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 10.1
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 12.6
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 360.0
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 10.1
+        }
+      ]
+    },
+    {
+      "id": "a4c0ce0f5c3b206f",
+      "monsterId": "梦魔·无常凶鹭",
+      "monsterName": "梦魔·无常凶鹭",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "midnight_veil",
+      "mainStat": {
+        "type": "CRIT_DMG",
+        "value": 44.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 7.1
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.9
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 10.0
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 18.6
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 390.0
+        }
+      ]
+    },
+    {
+      "id": "302ea8ae451d92b8",
+      "monsterId": "梦魔·无常凶鹭",
+      "monsterName": "梦魔·无常凶鹭",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "midnight_veil",
+      "mainStat": {
+        "type": "CRIT_RATE",
+        "value": 22.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "FLAT_ATK",
+          "value": 30.0
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 8.1
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 12.6
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "DEF_PCT",
+          "value": 10.9
+        }
+      ]
+    },
+    {
+      "id": "0ff1f57d05045133",
+      "monsterId": "异构武装",
+      "monsterName": "异构武装",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "frosty_resolve",
+      "mainStat": {
+        "type": "CRIT_DMG",
+        "value": 44.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 13.8
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.3
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 10.8
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 470.0
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 30.0
+        }
+      ]
+    },
+    {
+      "id": "9bf24ba027753b5b",
+      "monsterId": "异构武装",
+      "monsterName": "异构武装",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "frosty_resolve",
+      "mainStat": {
+        "type": "CRIT_RATE",
+        "value": 22.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "ENERGY_REGEN",
+          "value": 6.8
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 9.4
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.9
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 21.0
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 7.9
+        }
+      ]
+    },
+    {
+      "id": "e0fc9c740d4d864e",
+      "monsterId": "异构武装",
+      "monsterName": "异构武装",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "frosty_resolve",
+      "mainStat": {
+        "type": "CRIT_RATE",
+        "value": 22.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 13.8
+        },
+        {
+          "type": "DEF_PCT",
+          "value": 14.7
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.3
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 6.4
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 50.0
+        }
+      ]
+    },
+    {
+      "id": "d87562a7b71d58aa",
+      "monsterId": "异构武装",
+      "monsterName": "异构武装",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "frosty_resolve",
+      "mainStat": {
+        "type": "CRIT_RATE",
+        "value": 22.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "ATK_PCT",
+          "value": 6.4
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 10.9
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 16.2
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 7.1
+        }
+      ]
+    },
+    {
+      "id": "ea296b511157a63b",
+      "monsterId": "无归的谬误",
+      "monsterName": "无归的谬误",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "rejuvenating_glow",
+      "mainStat": {
+        "type": "HEAL_BONUS",
+        "value": 26.4
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "FLAT_DEF",
+          "value": 50.0
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 50.0
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 8.4
+        },
+        {
+          "type": "DEF_PCT",
+          "value": 14.7
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 8.6
+        }
+      ]
+    },
+    {
+      "id": "1e077ea1175a2a6a",
+      "monsterId": "无归的谬误",
+      "monsterName": "无归的谬误",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "rejuvenating_glow",
+      "mainStat": {
+        "type": "HEAL_BONUS",
+        "value": 26.4
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 40.0
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 8.4
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 9.3
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 9.4
+        }
+      ]
+    },
+    {
+      "id": "3aaee8ed65edd5bc",
+      "monsterId": "无冠者",
+      "monsterName": "无冠者",
+      "cost": 4,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "havoc_eclipse",
+      "mainStat": {
+        "type": "CRIT_RATE",
+        "value": 22.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 150.0
+      },
+      "substats": [
+        {
+          "type": "ATK_PCT",
+          "value": 7.9
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 17.4
+        },
+        {
+          "type": "DEF_PCT",
+          "value": 9.0
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.9
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 510.0
+        }
+      ]
+    },
+    {
+      "id": "c06ca6336ae8c338",
+      "monsterId": "格洛犸图",
+      "monsterName": "格洛犸图",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "wishes_of_quiet_snowfall",
+      "mainStat": {
+        "type": "ELEM_DMG",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 12.6
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 9.2
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 8.1
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 7.1
+        }
+      ]
+    },
+    {
+      "id": "86f74a21dd2ca61d",
+      "monsterId": "隐迹铁影",
+      "monsterName": "隐迹铁影",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "halo_of_starry_radiance",
+      "mainStat": {
+        "type": "ENERGY_REGEN",
+        "value": 32.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 7.1
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 430.0
+        },
+        {
+          "type": "DEF_PCT",
+          "value": 12.8
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 10.1
+        }
+      ]
+    },
+    {
+      "id": "c4022f334d903445",
+      "monsterId": "重工铁蹄",
+      "monsterName": "重工铁蹄",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "pact_of_neonlight_leap",
+      "mainStat": {
+        "type": "ENERGY_REGEN",
+        "value": 32.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "ATK_PCT",
+          "value": 10.1
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 9.4
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 8.7
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 7.9
+        }
+      ]
+    },
+    {
+      "id": "47f6166e869abc52",
+      "monsterId": "格洛犸图",
+      "monsterName": "格洛犸图",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "trailblazing_star",
+      "mainStat": {
+        "type": "ELEM_DMG",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 15.0
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 9.2
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 60.0
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 9.4
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        }
+      ]
+    },
+    {
+      "id": "1529aac44fad9425",
+      "monsterId": "格洛犸图",
+      "monsterName": "格洛犸图",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "wishes_of_quiet_snowfall",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 6.4
+        },
+        {
+          "type": "HP_PCT",
+          "value": 9.4
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 7.9
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 430.0
+        }
+      ]
+    },
+    {
+      "id": "f4ce9fc640278812",
+      "monsterId": "格洛犸图",
+      "monsterName": "格洛犸图",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "wishes_of_quiet_snowfall",
+      "mainStat": {
+        "type": "ELEM_DMG",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "FLAT_ATK",
+          "value": 50.0
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 16.2
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 9.4
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 8.4
+        }
+      ]
+    },
+    {
+      "id": "95dbe63c46ef1b24",
+      "monsterId": "格洛犸图",
+      "monsterName": "格洛犸图",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "trailblazing_star",
+      "mainStat": {
+        "type": "ELEM_DMG",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 9.4
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 8.7
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 50.0
+        },
+        {
+          "type": "HP_PCT",
+          "value": 9.4
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 8.6
+        }
+      ]
+    },
+    {
+      "id": "4629444eaa09b68f",
+      "monsterId": "格洛犸图",
+      "monsterName": "格洛犸图",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "trailblazing_star",
+      "mainStat": {
+        "type": "ELEM_DMG",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 12.6
+        },
+        {
+          "type": "HP_PCT",
+          "value": 10.1
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 60.0
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 10.9
+        }
+      ]
+    },
+    {
+      "id": "a2878278922dbb21",
+      "monsterId": "格洛犸图",
+      "monsterName": "格洛犸图",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "trailblazing_star",
+      "mainStat": {
+        "type": "ELEM_DMG",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "FLAT_DEF",
+          "value": 40.0
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.3
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 9.4
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 18.6
+        },
+        {
+          "type": "HP_PCT",
+          "value": 10.9
+        }
+      ]
+    },
+    {
+      "id": "a03aad1c4334e270",
+      "monsterId": "格洛犸图",
+      "monsterName": "格洛犸图",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "trailblazing_star",
+      "mainStat": {
+        "type": "ELEM_DMG",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "ENERGY_REGEN",
+          "value": 10.0
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 9.3
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 510.0
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 8.6
+        }
+      ]
+    },
+    {
+      "id": "db5216b589f58f86",
+      "monsterId": "异相·冠顶苍集",
+      "monsterName": "异相·冠顶苍集",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "trailblazing_star",
+      "mainStat": {
+        "type": "ELEM_DMG",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 9.4
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 9.3
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 7.9
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 9.2
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 15.0
+        }
+      ]
+    },
+    {
+      "id": "a911ad9ea26b2a9a",
+      "monsterId": "异相·冠顶苍集",
+      "monsterName": "异相·冠顶苍集",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "trailblazing_star",
+      "mainStat": {
+        "type": "ELEM_DMG",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "FLAT_DEF",
+          "value": 60.0
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 15.0
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 9.4
+        }
+      ]
+    },
+    {
+      "id": "5ccb4ba0e64b7d13",
+      "monsterId": "冠顶械集",
+      "monsterName": "冠顶械集",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "trailblazing_star",
+      "mainStat": {
+        "type": "ELEM_DMG",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 12.6
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 9.9
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 10.8
+        },
+        {
+          "type": "DEF_PCT",
+          "value": 10.0
+        }
+      ]
+    },
+    {
+      "id": "fa47c8a514bb890d",
+      "monsterId": "冠顶械隼",
+      "monsterName": "冠顶械隼",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "trailblazing_star",
+      "mainStat": {
+        "type": "ELEM_DMG",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 8.7
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 6.8
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 430.0
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 7.1
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 15.0
+        }
+      ]
+    },
+    {
+      "id": "f18dabc4e9fc1d73",
+      "monsterId": "冠顶械隼",
+      "monsterName": "冠顶械隼",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "trailblazing_star",
+      "mainStat": {
+        "type": "ELEM_DMG",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 9.4
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 9.3
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 540.0
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 9.2
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 7.9
+        }
+      ]
+    },
+    {
+      "id": "05a5c46383463dc8",
+      "monsterId": "冠顶械隼",
+      "monsterName": "冠顶械隼",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "trailblazing_star",
+      "mainStat": {
+        "type": "ELEM_DMG",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 8.1
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 12.6
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 6.4
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "HP_PCT",
+          "value": 8.6
+        }
+      ]
+    },
+    {
+      "id": "9be1bfdb498bdbbb",
+      "monsterId": "冠顶械集",
+      "monsterName": "冠顶械集",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "trailblazing_star",
+      "mainStat": {
+        "type": "ELEM_DMG",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 6.9
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 12.6
+        },
+        {
+          "type": "HP_PCT",
+          "value": 10.9
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 7.1
+        },
+        {
+          "type": "DEF_PCT",
+          "value": 12.8
+        }
+      ]
+    },
+    {
+      "id": "caed13ce0217f1d3",
+      "monsterId": "风鳞蜃甲",
+      "monsterName": "风鳞蜃甲",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "wishes_of_quiet_snowfall",
+      "mainStat": {
+        "type": "ELEM_DMG",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "ENERGY_REGEN",
+          "value": 10.8
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 8.1
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 50.0
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 11.6
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 7.9
+        }
+      ]
+    },
+    {
+      "id": "6d5bc72675304c1b",
+      "monsterId": "霜鳞蜃甲",
+      "monsterName": "霜鳞蜃甲",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "wishes_of_quiet_snowfall",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 8.1
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 13.8
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 60.0
+        }
+      ]
+    },
+    {
+      "id": "8fceecf54a79fdb9",
+      "monsterId": "霜鳞蜃甲",
+      "monsterName": "霜鳞蜃甲",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "halo_of_starry_radiance",
+      "mainStat": {
+        "type": "ENERGY_REGEN",
+        "value": 32.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "ENERGY_REGEN",
+          "value": 10.0
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.9
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "DEF_PCT",
+          "value": 10.9
+        }
+      ]
+    },
+    {
+      "id": "ba5848404f39aff7",
+      "monsterId": "隐迹铁影",
+      "monsterName": "隐迹铁影",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "halo_of_starry_radiance",
+      "mainStat": {
+        "type": "DEF_PCT",
+        "value": 38.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "ATK_PCT",
+          "value": 10.9
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 50.0
+        },
+        {
+          "type": "HP_PCT",
+          "value": 6.4
+        },
+        {
+          "type": "DEF_PCT",
+          "value": 9.0
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 50.0
+        }
+      ]
+    },
+    {
+      "id": "0a355e15147917f3",
+      "monsterId": "锯袭铁影",
+      "monsterName": "锯袭铁影",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "pact_of_neonlight_leap",
+      "mainStat": null,
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "FLAT_ATK",
+          "value": 30.0
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 13.8
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 360.0
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 10.1
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 9.4
+        }
+      ]
+    },
+    {
+      "id": "66c1a1aac63ebdb2",
+      "monsterId": "重工铁蹄",
+      "monsterName": "重工铁蹄",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "wishes_of_quiet_snowfall",
+      "mainStat": {
+        "type": "ELEM_DMG",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "ATK_PCT",
+          "value": 7.9
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.3
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 10.1
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 9.4
+        }
+      ]
+    },
+    {
+      "id": "0aca8b7277481fe8",
+      "monsterId": "重工铁蹄",
+      "monsterName": "重工铁蹄",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "wishes_of_quiet_snowfall",
+      "mainStat": {
+        "type": "ELEM_DMG",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "ATK_PCT",
+          "value": 8.6
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 50.0
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.3
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 13.8
+        }
+      ]
+    },
+    {
+      "id": "d9ef570f6ac9cf84",
+      "monsterId": "重工铁蹄",
+      "monsterName": "重工铁蹄",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "wishes_of_quiet_snowfall",
+      "mainStat": {
+        "type": "ELEM_DMG",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 6.9
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 7.1
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 9.4
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 6.4
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 12.6
+        }
+      ]
+    },
+    {
+      "id": "86572064717886cc",
+      "monsterId": "重工铁蹄",
+      "monsterName": "重工铁蹄",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "pact_of_neonlight_leap",
+      "mainStat": null,
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 17.4
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 40.0
+        },
+        {
+          "type": "DEF_PCT",
+          "value": 12.8
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.9
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 40.0
+        }
+      ]
+    },
+    {
+      "id": "816fe4424e65e66e",
+      "monsterId": "矿岩机麋",
+      "monsterName": "矿岩机麋",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "pact_of_neonlight_leap",
+      "mainStat": null,
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 15.0
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 10.0
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 7.9
+        }
+      ]
+    },
+    {
+      "id": "f0eff03378de1bf3",
+      "monsterId": "梦魔·紫羽鹭",
+      "monsterName": "梦魔·紫羽鹭",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "crown_of_valor",
+      "mainStat": {
+        "type": "ELEM_DMG",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 6.9
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 40.0
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 15.0
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 470.0
+        }
+      ]
+    },
+    {
+      "id": "f918d2117511e48e",
+      "monsterId": "梦魔·紫羽鹭",
+      "monsterName": "梦魔·紫羽鹭",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "crown_of_valor",
+      "mainStat": {
+        "type": "ELEM_DMG",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "FLAT_ATK",
+          "value": 40.0
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 6.4
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.3
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 17.4
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 8.6
+        }
+      ]
+    },
+    {
+      "id": "8e9b49ef37cbf829",
+      "monsterId": "角鳄",
+      "monsterName": "角鳄",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "windward_pilgrimage",
+      "mainStat": {
+        "type": "ELEM_DMG",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 9.4
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.3
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 7.9
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 50.0
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 19.8
+        }
+      ]
+    },
+    {
+      "id": "e72428bd561cda31",
+      "monsterId": "角鳄",
+      "monsterName": "角鳄",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "windward_pilgrimage",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 6.9
+        },
+        {
+          "type": "HP_PCT",
+          "value": 9.4
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 12.6
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 8.4
+        }
+      ]
+    },
+    {
+      "id": "74e8aae95c0a9c8e",
+      "monsterId": "角鳄",
+      "monsterName": "角鳄",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "windward_pilgrimage",
+      "mainStat": {
+        "type": "ELEM_DMG",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 8.7
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 430.0
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 15.0
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 9.4
+        }
+      ]
+    },
+    {
+      "id": "c7640061578dea4f",
+      "monsterId": "角鳄",
+      "monsterName": "角鳄",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "windward_pilgrimage",
+      "mainStat": {
+        "type": "ELEM_DMG",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 15.0
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 10.1
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 390.0
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.3
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 40.0
+        }
+      ]
+    },
+    {
+      "id": "e16e74e7fa700d7d",
+      "monsterId": "传道者的遗形",
+      "monsterName": "传道者的遗形",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "windward_pilgrimage",
+      "mainStat": {
+        "type": "ELEM_DMG",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 7.1
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 10.5
+        },
+        {
+          "type": "HP_PCT",
+          "value": 7.9
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 10.8
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 13.8
+        }
+      ]
+    },
+    {
+      "id": "594f175b2086a8a7",
+      "monsterId": "荣光节使",
+      "monsterName": "荣光节使",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "windward_pilgrimage",
+      "mainStat": {
+        "type": "ELEM_DMG",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "ATK_PCT",
+          "value": 8.6
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 6.8
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 50.0
+        }
+      ]
+    },
+    {
+      "id": "29c638258975e3c0",
+      "monsterId": "荣光节使",
+      "monsterName": "荣光节使",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "eternal_radiance",
+      "mainStat": null,
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "FLAT_ATK",
+          "value": 40.0
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 12.6
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 430.0
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 8.6
+        }
+      ]
+    },
+    {
+      "id": "1151f6b34a72c455",
+      "monsterId": "荣光节使",
+      "monsterName": "荣光节使",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "eternal_radiance",
+      "mainStat": null,
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 13.8
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 50.0
+        }
+      ]
+    },
+    {
+      "id": "8e8cbdae479cbc18",
+      "monsterId": "飓力熊",
+      "monsterName": "飓力熊",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "gusts_of_welkin",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "ENERGY_REGEN",
+          "value": 9.2
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 17.4
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 60.0
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 8.7
+        }
+      ]
+    },
+    {
+      "id": "f51e229a74e87337",
+      "monsterId": "重塑雕像的拳砾",
+      "monsterName": "重塑雕像的拳砾",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "gusts_of_welkin",
+      "mainStat": {
+        "type": "ELEM_DMG",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 16.2
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 390.0
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 30.0
+        }
+      ]
+    },
+    {
+      "id": "5566a1c0487c19b1",
+      "monsterId": "重塑雕像的拳砾",
+      "monsterName": "重塑雕像的拳砾",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "gusts_of_welkin",
+      "mainStat": {
+        "type": "ELEM_DMG",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "ENERGY_REGEN",
+          "value": 11.6
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.3
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 50.0
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 11.6
+        }
+      ]
+    },
+    {
+      "id": "fda7c33cc5bdfe4a",
+      "monsterId": "重塑雕像的拳砾",
+      "monsterName": "重塑雕像的拳砾",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "eternal_radiance",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 17.4
+        },
+        {
+          "type": "HP_PCT",
+          "value": 9.4
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 10.9
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 430.0
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        }
+      ]
+    },
+    {
+      "id": "7d5f851a7dc8dbb4",
+      "monsterId": "巨布偶",
+      "monsterName": "巨布偶",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "midnight_veil",
+      "mainStat": null,
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "FLAT_DEF",
+          "value": 60.0
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 7.9
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.3
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 13.8
+        }
+      ]
+    },
+    {
+      "id": "84c7d01ed00e38ff",
+      "monsterId": "巨布偶",
+      "monsterName": "巨布偶",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "midnight_veil",
+      "mainStat": null,
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 15.0
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 430.0
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 10.1
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 10.1
+        }
+      ]
+    },
+    {
+      "id": "7fb33eccedb09991",
+      "monsterId": "巨布偶",
+      "monsterName": "巨布偶",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "frosty_resolve",
+      "mainStat": {
+        "type": "ELEM_DMG",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "ENERGY_REGEN",
+          "value": 10.8
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 8.1
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 13.8
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 10.1
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 60.0
+        }
+      ]
+    },
+    {
+      "id": "ec2962155eeb7883",
+      "monsterId": "凝水贵族",
+      "monsterName": "凝水贵族",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "eternal_radiance",
+      "mainStat": null,
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "FLAT_DEF",
+          "value": 60.0
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 13.8
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 9.4
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 8.7
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 40.0
+        }
+      ]
+    },
+    {
+      "id": "2edf7392d00fed4e",
+      "monsterId": "凝水贵族",
+      "monsterName": "凝水贵族",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "frosty_resolve",
+      "mainStat": {
+        "type": "ELEM_DMG",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "HP_PCT",
+          "value": 10.1
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 8.7
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 15.0
+        },
+        {
+          "type": "DEF_PCT",
+          "value": 12.8
+        }
+      ]
+    },
+    {
+      "id": "4ff39057672c1e91",
+      "monsterId": "凝水贵族",
+      "monsterName": "凝水贵族",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "eternal_radiance",
+      "mainStat": null,
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 12.6
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 8.1
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 40.0
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 11.6
+        }
+      ]
+    },
+    {
+      "id": "2eb42d3dbb89244f",
+      "monsterId": "凝水贵族",
+      "monsterName": "凝水贵族",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "frosty_resolve",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "ENERGY_REGEN",
+          "value": 9.2
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 13.8
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 430.0
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.9
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 7.9
+        }
+      ]
+    },
+    {
+      "id": "ef7d2924247d1e2a",
+      "monsterId": "持刃贵族",
+      "monsterName": "持刃贵族",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "midnight_veil",
+      "mainStat": null,
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 8.1
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 21.0
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 7.9
+        },
+        {
+          "type": "DEF_PCT",
+          "value": 13.8
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 9.4
+        }
+      ]
+    },
+    {
+      "id": "fe8cd4afcdc633e0",
+      "monsterId": "幻昼骑士",
+      "monsterName": "幻昼骑士",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "eternal_radiance",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 9.3
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 11.6
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 60.0
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 12.6
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 7.9
+        }
+      ]
+    },
+    {
+      "id": "755232d8be856ab8",
+      "monsterId": "巡游骑士",
+      "monsterName": "巡游骑士",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "frosty_resolve",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 10.1
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 40.0
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 10.9
+        },
+        {
+          "type": "HP_PCT",
+          "value": 8.6
+        }
+      ]
+    },
+    {
+      "id": "0c86d59592a0eac0",
+      "monsterId": "巡游骑士",
+      "monsterName": "巡游骑士",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "midnight_veil",
+      "mainStat": null,
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 6.3
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 580.0
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 18.6
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 6.4
+        }
+      ]
+    },
+    {
+      "id": "c0f4187c6e560b08",
+      "monsterId": "巡游骑士",
+      "monsterName": "巡游骑士",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "frosty_resolve",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 10.1
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 9.9
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 9.4
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 18.6
+        },
+        {
+          "type": "HP_PCT",
+          "value": 8.6
+        }
+      ]
+    },
+    {
+      "id": "7d4a3feacfdf5de2",
+      "monsterId": "车刃镰",
+      "monsterName": "车刃镰",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "sierra_gale",
+      "mainStat": {
+        "type": "ELEM_DMG",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 9.3
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 7.1
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 40.0
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 7.9
+        }
+      ]
+    },
+    {
+      "id": "babecd4191243654",
+      "monsterId": "戏猿",
+      "monsterName": "戏猿",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "sierra_gale",
+      "mainStat": {
+        "type": "ELEM_DMG",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "FLAT_ATK",
+          "value": 40.0
+        },
+        {
+          "type": "HP_PCT",
+          "value": 8.6
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 10.5
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 12.6
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 10.1
+        }
+      ]
+    },
+    {
+      "id": "1fdece8e07af6030",
+      "monsterId": "戏猿",
+      "monsterName": "戏猿",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "rejuvenating_glow",
+      "mainStat": {
+        "type": "ENERGY_REGEN",
+        "value": 32.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 13.8
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 60.0
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 6.4
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        }
+      ]
+    },
+    {
+      "id": "4653a2ec218abb20",
+      "monsterId": "暗鬃狼",
+      "monsterName": "暗鬃狼",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "molten_rift",
+      "mainStat": {
+        "type": "ELEM_DMG",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "FLAT_ATK",
+          "value": 40.0
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.9
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 60.0
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 10.9
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 15.0
+        }
+      ]
+    },
+    {
+      "id": "8cb5eb20de6e092e",
+      "monsterId": "暗鬃狼",
+      "monsterName": "暗鬃狼",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "molten_rift",
+      "mainStat": {
+        "type": "ELEM_DMG",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "ATK_PCT",
+          "value": 8.6
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.3
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "HP_PCT",
+          "value": 7.9
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 16.2
+        }
+      ]
+    },
+    {
+      "id": "f2a6710f3d0f1583",
+      "monsterId": "刺玫菇",
+      "monsterName": "刺玫菇",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "havoc_eclipse",
+      "mainStat": null,
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.3
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 9.2
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 16.2
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 7.9
+        }
+      ]
+    },
+    {
+      "id": "bf833ec1b212f522",
+      "monsterId": "绿熔蜥",
+      "monsterName": "绿熔蜥",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "molten_rift",
+      "mainStat": {
+        "type": "ELEM_DMG",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 9.4
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 12.6
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 8.4
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 10.1
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.9
+        }
+      ]
+    },
+    {
+      "id": "967911ad95ce7f79",
+      "monsterId": "磐石守卫",
+      "monsterName": "磐石守卫",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "守岸人装配中",
+      "mainStat": {
+        "type": "ENERGY_REGEN",
+        "value": 32.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "ENERGY_REGEN",
+          "value": 8.4
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 430.0
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 9.4
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 60.0
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.3
+        }
+      ]
+    },
+    {
+      "id": "6845d514f948cf9f",
+      "monsterId": "磐石守卫",
+      "monsterName": "磐石守卫",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "今汐装配中",
+      "mainStat": null,
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 9.3
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 40.0
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 50.0
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 430.0
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 15.0
+        }
+      ]
+    },
+    {
+      "id": "cb4ff73c998c0647",
+      "monsterId": "冥渊守卫",
+      "monsterName": "冥渊守卫",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "rejuvenating_glow",
+      "mainStat": {
+        "type": "ENERGY_REGEN",
+        "value": 32.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 15.0
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 8.1
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 60.0
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 9.4
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 8.4
+        }
+      ]
+    },
+    {
+      "id": "1c0b2b74664ac55c",
+      "monsterId": "坚岩斗士",
+      "monsterName": "坚岩斗士",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "rejuvenating_glow",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 13.8
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 40.0
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 10.9
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 50.0
+        }
+      ]
+    },
+    {
+      "id": "7323638eac2f39b6",
+      "monsterId": "坚岩斗士",
+      "monsterName": "坚岩斗士",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "rejuvenating_glow",
+      "mainStat": {
+        "type": "ENERGY_REGEN",
+        "value": 32.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "FLAT_HP",
+          "value": 430.0
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 60.0
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 50.0
+        },
+        {
+          "type": "HP_PCT",
+          "value": 10.1
+        }
+      ]
+    },
+    {
+      "id": "d37afcddf419a850",
+      "monsterId": "青羽鹭",
+      "monsterName": "青羽鹭",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "celestial_light",
+      "mainStat": null,
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "HP_PCT",
+          "value": 9.4
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.3
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 10.1
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 17.4
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 9.4
+        }
+      ]
+    },
+    {
+      "id": "2b981ea821df2644",
+      "monsterId": "紫羽鹭",
+      "monsterName": "紫羽鹭",
+      "cost": 3,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "molten_rift",
+      "mainStat": {
+        "type": "ELEM_DMG",
+        "value": 30.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_ATK",
+        "value": 100.0
+      },
+      "substats": [
+        {
+          "type": "DEF_PCT",
+          "value": 10.0
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 15.0
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 8.1
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 10.0
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 7.9
+        }
+      ]
+    },
+    {
+      "id": "fb33a95ea472f874",
+      "monsterId": "影烁者",
+      "monsterName": "影烁者",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "trailblazing_star",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "ENERGY_REGEN",
+          "value": 9.2
+        },
+        {
+          "type": "DEF_PCT",
+          "value": 10.9
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 15.0
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 50.0
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.3
+        }
+      ]
+    },
+    {
+      "id": "cedecc4d1503d0ad",
+      "monsterId": "影烁者",
+      "monsterName": "影烁者",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "wishes_of_quiet_snowfall",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 17.4
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 9.4
+        },
+        {
+          "type": "HP_PCT",
+          "value": 8.6
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 8.7
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 10.1
+        }
+      ]
+    },
+    {
+      "id": "12a7d7c3cfd72b68",
+      "monsterId": "影烁者",
+      "monsterName": "影烁者",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "trailblazing_star",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 13.8
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 9.4
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 40.0
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 9.4
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.3
+        }
+      ]
+    },
+    {
+      "id": "3b4822f426bf5047",
+      "monsterId": "影烁者",
+      "monsterName": "影烁者",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "trailblazing_star",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 19.8
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 50.0
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 8.4
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 430.0
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 6.4
+        }
+      ]
+    },
+    {
+      "id": "45e91aba92708437",
+      "monsterId": "影烁者",
+      "monsterName": "影烁者",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "trailblazing_star",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "FLAT_HP",
+          "value": 540.0
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 19.8
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 10.1
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 7.9
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 10.1
+        }
+      ]
+    },
+    {
+      "id": "977995e5ecd42f44",
+      "monsterId": "冰盈舞者",
+      "monsterName": "冰盈舞者",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "trailblazing_star",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 10.5
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 510.0
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "DEF_PCT",
+          "value": 10.9
+        }
+      ]
+    },
+    {
+      "id": "19dcfafe78c8bdfe",
+      "monsterId": "冰盈舞者",
+      "monsterName": "冰盈舞者",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "trailblazing_star",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 9.2
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 21.0
+        },
+        {
+          "type": "DEF_PCT",
+          "value": 10.9
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 50.0
+        }
+      ]
+    },
+    {
+      "id": "cd7aa0193b29f17b",
+      "monsterId": "冰盈舞者",
+      "monsterName": "冰盈舞者",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "trailblazing_star",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 8.7
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 7.1
+        },
+        {
+          "type": "HP_PCT",
+          "value": 7.9
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 8.6
+        }
+      ]
+    },
+    {
+      "id": "56a08c2b9c30f3a4",
+      "monsterId": "冰盈舞者",
+      "monsterName": "冰盈舞者",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "wishes_of_quiet_snowfall",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 16.2
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 10.8
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 6.4
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.3
+        }
+      ]
+    },
+    {
+      "id": "008dc52aead7ab96",
+      "monsterId": "冰盈舞者",
+      "monsterName": "冰盈舞者",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "trailblazing_star",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 9.4
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 8.1
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 50.0
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 40.0
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 9.4
+        }
+      ]
+    },
+    {
+      "id": "a28eef40caa1efbb",
+      "monsterId": "冰盈舞者",
+      "monsterName": "冰盈舞者",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "trailblazing_star",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "ATK_PCT",
+          "value": 9.4
+        },
+        {
+          "type": "HP_PCT",
+          "value": 10.1
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 10.9
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 10.5
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 8.6
+        }
+      ]
+    },
+    {
+      "id": "03467af989bd0dfa",
+      "monsterId": "冰盈舞者",
+      "monsterName": "冰盈舞者",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "trailblazing_star",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 13.8
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 360.0
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.3
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 7.1
+        }
+      ]
+    },
+    {
+      "id": "ac194aa2af4eb8d8",
+      "monsterId": "²啪啪",
+      "monsterName": "²啪啪",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "pact_of_neonlight_leap",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "ENERGY_REGEN",
+          "value": 11.6
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.3
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 40.0
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 13.8
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 10.1
+        }
+      ]
+    },
+    {
+      "id": "346ecb2ac1ec2491",
+      "monsterId": "岩蛛S4型",
+      "monsterName": "岩蛛S4型",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "trailblazing_star",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "FLAT_ATK",
+          "value": 50.0
+        },
+        {
+          "type": "HP_PCT",
+          "value": 9.4
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 17.4
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 9.4
+        },
+        {
+          "type": "DEF_PCT",
+          "value": 10.9
+        }
+      ]
+    },
+    {
+      "id": "8ed15cb1918039ec",
+      "monsterId": "岩蛛S4型",
+      "monsterName": "岩蛛S4型",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "trailblazing_star",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "ATK_PCT",
+          "value": 10.1
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 60.0
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.9
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 12.4
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 13.8
+        }
+      ]
+    },
+    {
+      "id": "eb24d8ef6ff66936",
+      "monsterId": "岩蛛S4型",
+      "monsterName": "岩蛛S4型",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "halo_of_starry_radiance",
+      "mainStat": {
+        "type": "DEF_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "ENERGY_REGEN",
+          "value": 10.0
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 13.8
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 470.0
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 8.6
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.9
+        }
+      ]
+    },
+    {
+      "id": "aa137f34f718a075",
+      "monsterId": "岩蛛S4型",
+      "monsterName": "岩蛛S4型",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "trailblazing_star",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 18.6
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 10.1
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 8.4
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 40.0
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 10.1
+        }
+      ]
+    },
+    {
+      "id": "31a0134e94e63656",
+      "monsterId": "岩蛛S4型",
+      "monsterName": "岩蛛S4型",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "trailblazing_star",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "ENERGY_REGEN",
+          "value": 10.8
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 9.4
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.3
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 18.6
+        }
+      ]
+    },
+    {
+      "id": "a50b007f31734c65",
+      "monsterId": "岩蛛S4型",
+      "monsterName": "岩蛛S4型",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "pact_of_neonlight_leap",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 18.6
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 10.8
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 8.6
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 50.0
+        },
+        {
+          "type": "DEF_PCT",
+          "value": 10.0
+        }
+      ]
+    },
+    {
+      "id": "afb08dad386e905e",
+      "monsterId": "岩蛛S4型",
+      "monsterName": "岩蛛S4型",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "pact_of_neonlight_leap",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 9.4
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 15.0
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 9.4
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.9
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 10.9
+        }
+      ]
+    },
+    {
+      "id": "18b3d7cbbeccdbc2",
+      "monsterId": "岩蛛S4型",
+      "monsterName": "岩蛛S4型",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "pact_of_neonlight_leap",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        },
+        {
+          "type": "DEF_PCT",
+          "value": 8.1
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 40.0
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 390.0
+        }
+      ]
+    },
+    {
+      "id": "e4a58bc6f2847829",
+      "monsterId": "岩蛛S4型",
+      "monsterName": "岩蛛S4型",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "halo_of_starry_radiance",
+      "mainStat": {
+        "type": "DEF_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "FLAT_ATK",
+          "value": 40.0
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 60.0
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 13.8
+        },
+        {
+          "type": "DEF_PCT",
+          "value": 13.8
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 510.0
+        }
+      ]
+    },
+    {
+      "id": "4144d794579a8337",
+      "monsterId": "矿岩熊蜂",
+      "monsterName": "矿岩熊蜂",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "halo_of_starry_radiance",
+      "mainStat": {
+        "type": "DEF_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 9.3
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 10.0
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 50.0
+        },
+        {
+          "type": "DEF_PCT",
+          "value": 11.8
+        }
+      ]
+    },
+    {
+      "id": "8f4235a4a8f7fdc7",
+      "monsterId": "矿岩熊蜂",
+      "monsterName": "矿岩熊蜂",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "halo_of_starry_radiance",
+      "mainStat": {
+        "type": "DEF_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "DEF_PCT",
+          "value": 11.8
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 6.4
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 17.4
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.3
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 50.0
+        }
+      ]
+    },
+    {
+      "id": "a5eea7d75b94bf61",
+      "monsterId": "植熊蜂",
+      "monsterName": "植熊蜂",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "pact_of_neonlight_leap",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 13.8
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 9.4
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 9.3
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 9.4
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 430.0
+        }
+      ]
+    },
+    {
+      "id": "a01e687a43a423d7",
+      "monsterId": "梦魔·巡徊猎手",
+      "monsterName": "梦魔·巡徊猎手",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "crown_of_valor",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 7.9
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 50.0
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 17.4
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 8.6
+        }
+      ]
+    },
+    {
+      "id": "21d79d6c66ad9631",
+      "monsterId": "梦魔·巡徊猎手",
+      "monsterName": "梦魔·巡徊猎手",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "crown_of_valor",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "FLAT_DEF",
+          "value": 50.0
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 16.2
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 10.8
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.3
+        }
+      ]
+    },
+    {
+      "id": "04d04ba0d51819e5",
+      "monsterId": "梦魔·巡徊猎手",
+      "monsterName": "梦魔·巡徊猎手",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "crown_of_valor",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "ENERGY_REGEN",
+          "value": 10.8
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.9
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 18.6
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 8.6
+        }
+      ]
+    },
+    {
+      "id": "a83e95392eb5228b",
+      "monsterId": "梦魔·巡徊猎手",
+      "monsterName": "梦魔·巡徊猎手",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "crown_of_valor",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "ATK_PCT",
+          "value": 9.4
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.9
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 8.4
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 13.8
+        }
+      ]
+    },
+    {
+      "id": "b85062f800a58e4a",
+      "monsterId": "梦魔·惊蛰猎手",
+      "monsterName": "梦魔·惊蛰猎手",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "crown_of_valor",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 7.1
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 13.8
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 11.6
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 8.6
+        }
+      ]
+    },
+    {
+      "id": "a46cce69d7056b65",
+      "monsterId": "梦魔·惊蛰猎手",
+      "monsterName": "梦魔·惊蛰猎手",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "crown_of_valor",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "ENERGY_REGEN",
+          "value": 8.4
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 17.4
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 50.0
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 50.0
+        }
+      ]
+    },
+    {
+      "id": "95e4c54291ead5cc",
+      "monsterId": "苦信者的作俑",
+      "monsterName": "苦信者的作俑",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "windward_pilgrimage",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.3
+        },
+        {
+          "type": "HP_PCT",
+          "value": 9.4
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 8.6
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 17.4
+        }
+      ]
+    },
+    {
+      "id": "539c75f520dcb3a0",
+      "monsterId": "苦信者的作俑",
+      "monsterName": "苦信者的作俑",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "windward_pilgrimage",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "DEF_PCT",
+          "value": 11.8
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 10.5
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 10.1
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 13.8
+        }
+      ]
+    },
+    {
+      "id": "874e97284be4e448",
+      "monsterId": "苦信者的作俑",
+      "monsterName": "苦信者的作俑",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "windward_pilgrimage",
+      "mainStat": {
+        "type": "HP_PCT",
+        "value": 22.8
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "ENERGY_REGEN",
+          "value": 8.4
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 430.0
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 15.0
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 50.0
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 9.4
+        }
+      ]
+    },
+    {
+      "id": "8434a7961b597c40",
+      "monsterId": "苦信者的作俑",
+      "monsterName": "苦信者的作俑",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "gusts_of_welkin",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 16.2
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 40.0
+        },
+        {
+          "type": "DEF_PCT",
+          "value": 10.0
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 7.1
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 8.1
+        }
+      ]
+    },
+    {
+      "id": "2d278f27c71ee124",
+      "monsterId": "苦信者的作俑",
+      "monsterName": "苦信者的作俑",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "windward_pilgrimage",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 15.0
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 10.9
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 50.0
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 8.7
+        }
+      ]
+    },
+    {
+      "id": "3c93fb50dc4f0c02",
+      "monsterId": "苦信者的作俑",
+      "monsterName": "苦信者的作俑",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "windward_pilgrimage",
+      "mainStat": {
+        "type": "HP_PCT",
+        "value": 22.8
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "DEF_PCT",
+          "value": 10.9
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 8.1
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 17.4
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 60.0
+        }
+      ]
+    },
+    {
+      "id": "80c6b56d96d894ef",
+      "monsterId": "小翼龙·湮灭",
+      "monsterName": "小翼龙·湮灭",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "windward_pilgrimage",
+      "mainStat": {
+        "type": "HP_PCT",
+        "value": 22.8
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "HP_PCT",
+          "value": 10.1
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 510.0
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 7.9
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 16.2
+        }
+      ]
+    },
+    {
+      "id": "1c31525807c6b4c3",
+      "monsterId": "小翼龙·湮灭",
+      "monsterName": "小翼龙·湮灭",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "windward_pilgrimage",
+      "mainStat": {
+        "type": "HP_PCT",
+        "value": 22.8
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 12.6
+        },
+        {
+          "type": "HP_PCT",
+          "value": 8.6
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 60.0
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.9
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 7.1
+        }
+      ]
+    },
+    {
+      "id": "aafa01d23276f24a",
+      "monsterId": "小翼龙·湮灭",
+      "monsterName": "小翼龙·湮灭",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "windward_pilgrimage",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "ENERGY_REGEN",
+          "value": 7.6
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.3
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 390.0
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 9.4
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 15.0
+        }
+      ]
+    },
+    {
+      "id": "37a6baaecfe3437d",
+      "monsterId": "小翼龙·湮灭",
+      "monsterName": "小翼龙·湮灭",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "windward_pilgrimage",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 6.9
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "HP_PCT",
+          "value": 9.4
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 9.4
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 15.0
+        }
+      ]
+    },
+    {
+      "id": "cd2388344c343102",
+      "monsterId": "小翼龙·湮灭",
+      "monsterName": "小翼龙·湮灭",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "windward_pilgrimage",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "ENERGY_REGEN",
+          "value": 10.0
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 8.6
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 40.0
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 9.4
+        }
+      ]
+    },
+    {
+      "id": "62355a5003d8c8f1",
+      "monsterId": "小翼龙·湮灭",
+      "monsterName": "小翼龙·湮灭",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "windward_pilgrimage",
+      "mainStat": {
+        "type": "HP_PCT",
+        "value": 22.8
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "ENERGY_REGEN",
+          "value": 9.2
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 18.6
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 40.0
+        }
+      ]
+    },
+    {
+      "id": "6c3465a7f22261e9",
+      "monsterId": "小翼龙·衍射",
+      "monsterName": "小翼龙·衍射",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "windward_pilgrimage",
+      "mainStat": {
+        "type": "HP_PCT",
+        "value": 22.8
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "FLAT_DEF",
+          "value": 60.0
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 15.0
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 9.4
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 9.4
+        }
+      ]
+    },
+    {
+      "id": "72868a41bee22977",
+      "monsterId": "小翼龙·衍射",
+      "monsterName": "小翼龙·衍射",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "windward_pilgrimage",
+      "mainStat": {
+        "type": "HP_PCT",
+        "value": 22.8
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 9.9
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 510.0
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 15.0
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 9.4
+        }
+      ]
+    },
+    {
+      "id": "c8f23f55203f42c9",
+      "monsterId": "小翼龙·衍射",
+      "monsterName": "小翼龙·衍射",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "windward_pilgrimage",
+      "mainStat": {
+        "type": "HP_PCT",
+        "value": 22.8
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 9.4
+        },
+        {
+          "type": "HP_PCT",
+          "value": 9.4
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 13.8
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 9.3
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 320.0
+        }
+      ]
+    },
+    {
+      "id": "d02631403b0a6111",
+      "monsterId": "小翼龙·衍射",
+      "monsterName": "小翼龙·衍射",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "windward_pilgrimage",
+      "mainStat": {
+        "type": "HP_PCT",
+        "value": 22.8
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 6.3
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 16.2
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 9.4
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "HP_PCT",
+          "value": 10.1
+        }
+      ]
+    },
+    {
+      "id": "219c49865d225a23",
+      "monsterId": "小翼龙·衍射",
+      "monsterName": "小翼龙·衍射",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "windward_pilgrimage",
+      "mainStat": {
+        "type": "HP_PCT",
+        "value": 22.8
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "ATK_PCT",
+          "value": 7.9
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 430.0
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 12.6
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 9.3
+        },
+        {
+          "type": "HP_PCT",
+          "value": 7.9
+        }
+      ]
+    },
+    {
+      "id": "ddfb103def30ebcd",
+      "monsterId": "小翼龙·热熔",
+      "monsterName": "小翼龙·热熔",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "windward_pilgrimage",
+      "mainStat": {
+        "type": "HP_PCT",
+        "value": 22.8
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 21.0
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 10.8
+        },
+        {
+          "type": "HP_PCT",
+          "value": 7.1
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 360.0
+        }
+      ]
+    },
+    {
+      "id": "e5955fdaf7171739",
+      "monsterId": "小翼龙·热熔",
+      "monsterName": "小翼龙·热熔",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "windward_pilgrimage",
+      "mainStat": {
+        "type": "HP_PCT",
+        "value": 22.8
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 19.8
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 9.2
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.9
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 10.1
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 10.1
+        }
+      ]
+    },
+    {
+      "id": "e072a3a54e13f79f",
+      "monsterId": "小翼龙·冷凝",
+      "monsterName": "小翼龙·冷凝",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "windward_pilgrimage",
+      "mainStat": {
+        "type": "HP_PCT",
+        "value": 22.8
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "FLAT_ATK",
+          "value": 40.0
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 10.1
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 9.3
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 15.0
+        },
+        {
+          "type": "DEF_PCT",
+          "value": 8.1
+        }
+      ]
+    },
+    {
+      "id": "da1f52e48621f1a6",
+      "monsterId": "小翼龙·冷凝",
+      "monsterName": "小翼龙·冷凝",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "windward_pilgrimage",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 6.9
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 40.0
+        },
+        {
+          "type": "HP_PCT",
+          "value": 8.6
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 10.1
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 16.2
+        }
+      ]
+    },
+    {
+      "id": "10b8a8ba42a7b801",
+      "monsterId": "小翼龙·冷凝",
+      "monsterName": "小翼龙·冷凝",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "windward_pilgrimage",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 430.0
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 16.2
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 40.0
+        }
+      ]
+    },
+    {
+      "id": "a35013d4da8f46c5",
+      "monsterId": "小翼龙·冷凝",
+      "monsterName": "小翼龙·冷凝",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "windward_pilgrimage",
+      "mainStat": {
+        "type": "HP_PCT",
+        "value": 22.8
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "ENERGY_REGEN",
+          "value": 10.8
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 390.0
+        },
+        {
+          "type": "HP_PCT",
+          "value": 8.6
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 15.0
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        }
+      ]
+    },
+    {
+      "id": "2ae4a7517ebcb186",
+      "monsterId": "小翼龙·冷凝",
+      "monsterName": "小翼龙·冷凝",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "gusts_of_welkin",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 15.0
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 8.7
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 60.0
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 9.4
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 50.0
+        }
+      ]
+    },
+    {
+      "id": "538b3c77490d130c",
+      "monsterId": "小翼龙·冷凝",
+      "monsterName": "小翼龙·冷凝",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "windward_pilgrimage",
+      "mainStat": {
+        "type": "HP_PCT",
+        "value": 22.8
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "FLAT_ATK",
+          "value": 50.0
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 19.8
+        },
+        {
+          "type": "HP_PCT",
+          "value": 8.6
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 9.2
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.3
+        }
+      ]
+    },
+    {
+      "id": "39212cf17a3904b6",
+      "monsterId": "小翼龙·冷凝",
+      "monsterName": "小翼龙·冷凝",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "windward_pilgrimage",
+      "mainStat": {
+        "type": "HP_PCT",
+        "value": 22.8
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 8.1
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 21.0
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 7.1
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 10.9
+        }
+      ]
+    },
+    {
+      "id": "dcfbb1078bbd3dbc",
+      "monsterId": "慈悲节使",
+      "monsterName": "慈悲节使",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "windward_pilgrimage",
+      "mainStat": {
+        "type": "HP_PCT",
+        "value": 22.8
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "HP_PCT",
+          "value": 7.9
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 470.0
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 15.0
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 60.0
+        }
+      ]
+    },
+    {
+      "id": "23fd28d00494d43c",
+      "monsterId": "慈悲节使",
+      "monsterName": "慈悲节使",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "windward_pilgrimage",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "ATK_PCT",
+          "value": 10.9
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 12.6
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 470.0
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.3
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 10.1
+        }
+      ]
+    },
+    {
+      "id": "23082b1a3d036ae5",
+      "monsterId": "慈悲节使",
+      "monsterName": "慈悲节使",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "windward_pilgrimage",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 10.5
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 40.0
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 13.8
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 9.4
+        }
+      ]
+    },
+    {
+      "id": "fc6e6602c6f50b76",
+      "monsterId": "寂寞小姐",
+      "monsterName": "寂寞小姐",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "frosty_resolve",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 13.8
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 7.9
+        },
+        {
+          "type": "HP_PCT",
+          "value": 9.4
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 9.3
+        }
+      ]
+    },
+    {
+      "id": "34162ec40c85fe28",
+      "monsterId": "寂寞小姐",
+      "monsterName": "寂寞小姐",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "frosty_resolve",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 21.0
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 9.4
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 30.0
+        }
+      ]
+    },
+    {
+      "id": "1fd8bef58d2f177e",
+      "monsterId": "幽翎火",
+      "monsterName": "幽翎火",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "midnight_veil",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "HP_PCT",
+          "value": 6.4
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 9.2
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 15.0
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.3
+        }
+      ]
+    },
+    {
+      "id": "649ee6c26dcc7b70",
+      "monsterId": "浮灵偶·莱特",
+      "monsterName": "浮灵偶·莱特",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "frosty_resolve",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 17.4
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 10.8
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 40.0
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 8.1
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 6.4
+        }
+      ]
+    },
+    {
+      "id": "e70d8899dcf72505",
+      "monsterId": "浮灵偶·蕾弗",
+      "monsterName": "浮灵偶·蕾弗",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "frosty_resolve",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 12.6
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 30.0
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 9.4
+        },
+        {
+          "type": "DEF_PCT",
+          "value": 10.0
+        }
+      ]
+    },
+    {
+      "id": "6009cc6aea7608a1",
+      "monsterId": "浮灵偶·海德",
+      "monsterName": "浮灵偶·海德",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "eternal_radiance",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 6.3
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 40.0
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 7.1
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 50.0
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 19.8
+        }
+      ]
+    },
+    {
+      "id": "a29dab1014ada6fb",
+      "monsterId": "浮灵偶·海德",
+      "monsterName": "浮灵偶·海德",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "eternal_radiance",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "HP_PCT",
+          "value": 7.1
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 13.8
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 7.1
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.3
+        },
+        {
+          "type": "DEF_PCT",
+          "value": 10.0
+        }
+      ]
+    },
+    {
+      "id": "0e238c8a62b4ca2e",
+      "monsterId": "霜鬃狼",
+      "monsterName": "霜鬃狼",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "eternal_radiance",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 12.6
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.9
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 8.4
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 60.0
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 470.0
+        }
+      ]
+    },
+    {
+      "id": "7b24c854e07ede89",
+      "monsterId": "雷鬃狼",
+      "monsterName": "雷鬃狼",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "midnight_veil",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "ENERGY_REGEN",
+          "value": 7.6
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 16.2
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 9.4
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        }
+      ]
+    },
+    {
+      "id": "4d4b212eeeeba026",
+      "monsterId": "雷鬃狼",
+      "monsterName": "雷鬃狼",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "midnight_veil",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 18.6
+        },
+        {
+          "type": "DEF_PCT",
+          "value": 9.0
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        },
+        {
+          "type": "HP_PCT",
+          "value": 7.1
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 9.2
+        }
+      ]
+    },
+    {
+      "id": "94d42170628ae213",
+      "monsterId": "风鬃狼",
+      "monsterName": "风鬃狼",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "frosty_resolve",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "DEF_PCT",
+          "value": 10.9
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 7.9
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 12.6
+        }
+      ]
+    },
+    {
+      "id": "be9c301edafa3ef0",
+      "monsterId": "侏侏驼",
+      "monsterName": "侏侏驼",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "rejuvenating_glow",
+      "mainStat": {
+        "type": "HP_PCT",
+        "value": 22.8
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 12.6
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 8.6
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 10.0
+        }
+      ]
+    },
+    {
+      "id": "45656365d4eef085",
+      "monsterId": "侏侏驼",
+      "monsterName": "侏侏驼",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "sierra_gale",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 16.2
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.9
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 40.0
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 9.4
+        }
+      ]
+    },
+    {
+      "id": "ae3800a0455b3e85",
+      "monsterId": "融火虫",
+      "monsterName": "融火虫",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "molten_rift",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 16.2
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 8.1
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 7.9
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 8.6
+        }
+      ]
+    },
+    {
+      "id": "82453926546af1e8",
+      "monsterId": "火鬃狼",
+      "monsterName": "火鬃狼",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "rejuvenating_glow",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "ENERGY_REGEN",
+          "value": 8.4
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 8.6
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 50.0
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 7.9
+        }
+      ]
+    },
+    {
+      "id": "9ff9d278e12a2152",
+      "monsterId": "火鬃狼",
+      "monsterName": "火鬃狼",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "rejuvenating_glow",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "ATK_PCT",
+          "value": 9.4
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 9.3
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 430.0
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 6.8
+        }
+      ]
+    },
+    {
+      "id": "2c26defc4eedd52f",
+      "monsterId": "火鬃狼",
+      "monsterName": "火鬃狼",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "molten_rift",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 12.6
+        },
+        {
+          "type": "DEF_PCT",
+          "value": 10.9
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 8.6
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.9
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 10.0
+        }
+      ]
+    },
+    {
+      "id": "eba42dbcfb790413",
+      "monsterId": "火鬃狼",
+      "monsterName": "火鬃狼",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "rejuvenating_glow",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "ATK_PCT",
+          "value": 7.9
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 6.4
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 7.6
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 40.0
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 60.0
+        }
+      ]
+    },
+    {
+      "id": "8b0d52f681d060ba",
+      "monsterId": "寒霜陆龟",
+      "monsterName": "寒霜陆龟",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "celestial_light",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "DEF_PCT",
+          "value": 10.0
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.9
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 15.0
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 9.4
+        }
+      ]
+    },
+    {
+      "id": "038877ca458be684",
+      "monsterId": "刺玫菇（稚形）",
+      "monsterName": "刺玫菇（稚形）",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "sierra_gale",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 9.3
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 12.6
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 30.0
+        },
+        {
+          "type": "DEF_PCT",
+          "value": 10.9
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 10.1
+        }
+      ]
+    },
+    {
+      "id": "ebf5b29735728a8a",
+      "monsterId": "绿熔蜥（稚形）",
+      "monsterName": "绿熔蜥（稚形）",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "molten_rift",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 9.4
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 12.6
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 7.9
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 8.6
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 12.4
+        }
+      ]
+    },
+    {
+      "id": "1c23cf2c010191d7",
+      "monsterId": "绿熔蜥（稚形）",
+      "monsterName": "绿熔蜥（稚形）",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "molten_rift",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 16.2
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 6.8
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.9
+        },
+        {
+          "type": "DEF_PCT",
+          "value": 12.8
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 8.6
+        }
+      ]
+    },
+    {
+      "id": "5bdf0ba1a0580a02",
+      "monsterId": "游弋蝶",
+      "monsterName": "游弋蝶",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "rejuvenating_glow",
+      "mainStat": {
+        "type": "HP_PCT",
+        "value": 22.8
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "HP_PCT",
+          "value": 9.4
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 8.6
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 10.1
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 40.0
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.3
+        }
+      ]
+    },
+    {
+      "id": "daba8cffdfe905b4",
+      "monsterId": "游弋蝶",
+      "monsterName": "游弋蝶",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "rejuvenating_glow",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 17.4
+        },
+        {
+          "type": "HP_PCT",
+          "value": 7.9
+        },
+        {
+          "type": "DEF_PCT",
+          "value": 10.0
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 8.6
+        }
+      ]
+    },
+    {
+      "id": "bfd259349ae54cfa",
+      "monsterId": "衍射棱镜",
+      "monsterName": "衍射棱镜",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "celestial_light",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 6.3
+        },
+        {
+          "type": "DEF_PCT",
+          "value": 11.8
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 19.8
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 390.0
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 40.0
+        }
+      ]
+    },
+    {
+      "id": "f591320050899468",
+      "monsterId": "热熔棱镜",
+      "monsterName": "热熔棱镜",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "molten_rift",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "ATK_PCT",
+          "value": 7.9
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 12.6
+        },
+        {
+          "type": "RESONANCE_LIBERATION_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 390.0
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 8.6
+        }
+      ]
+    },
+    {
+      "id": "45c51328240e536f",
+      "monsterId": "冷凝棱镜",
+      "monsterName": "冷凝棱镜",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "havoc_eclipse",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 18.6
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 40.0
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.3
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 60.0
+        }
+      ]
+    },
+    {
+      "id": "b708e21aef048d52",
+      "monsterId": "咕咕河豚",
+      "monsterName": "咕咕河豚",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "celestial_light",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 7.9
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 13.8
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 580.0
+        },
+        {
+          "type": "HP_PCT",
+          "value": 7.9
+        }
+      ]
+    },
+    {
+      "id": "0d3193de9ff37c22",
+      "monsterId": "咕咕河豚",
+      "monsterName": "咕咕河豚",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "celestial_light",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 17.4
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 510.0
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 9.4
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 6.4
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        }
+      ]
+    },
+    {
+      "id": "9c57878fd6bca075",
+      "monsterId": "咕咕河豚",
+      "monsterName": "咕咕河豚",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "celestial_light",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "DEF_PCT",
+          "value": 9.0
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 9.3
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 13.8
+        },
+        {
+          "type": "ATK_PCT",
+          "value": 8.6
+        },
+        {
+          "type": "FLAT_DEF",
+          "value": 40.0
+        }
+      ]
+    },
+    {
+      "id": "b4e9c10998d1a771",
+      "monsterId": "呜咔咔",
+      "monsterName": "呜咔咔",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "rejuvenating_glow",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 12.6
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 8.7
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 8.4
+        },
+        {
+          "type": "NORMAL_ATK_DMG",
+          "value": 9.4
+        },
+        {
+          "type": "HEAVY_ATK_DMG",
+          "value": 10.1
+        }
+      ]
+    },
+    {
+      "id": "c2c820730ad8c77f",
+      "monsterId": "呜咔咔",
+      "monsterName": "呜咔咔",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "havoc_eclipse",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_RATE",
+          "value": 10.5
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 50.0
+        },
+        {
+          "type": "HP_PCT",
+          "value": 7.1
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 390.0
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 13.8
+        }
+      ]
+    },
+    {
+      "id": "f5948542130bc23b",
+      "monsterId": "咔嘧",
+      "monsterName": "咔嘧",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "molten_rift",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "CRIT_DMG",
+          "value": 12.6
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.9
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 390.0
+        },
+        {
+          "type": "DEF_PCT",
+          "value": 11.8
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 8.4
+        }
+      ]
+    },
+    {
+      "id": "5aea8dd0b6d4e554",
+      "monsterId": "审判战士",
+      "monsterName": "审判战士",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "havoc_eclipse",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "FLAT_DEF",
+          "value": 60.0
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 15.0
+        },
+        {
+          "type": "FLAT_ATK",
+          "value": 50.0
+        },
+        {
+          "type": "FLAT_HP",
+          "value": 430.0
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.3
+        }
+      ]
+    },
+    {
+      "id": "98e46e6b52909c41",
+      "monsterId": "鸣泣战士",
+      "monsterName": "鸣泣战士",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "molten_rift",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "FLAT_ATK",
+          "value": 50.0
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 9.4
+        },
+        {
+          "type": "CRIT_DMG",
+          "value": 12.6
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 6.3
+        },
+        {
+          "type": "ENERGY_REGEN",
+          "value": 10.8
+        }
+      ]
+    },
+    {
+      "id": "b89e821d8440b835",
+      "monsterId": "裂变幼岩",
+      "monsterName": "裂变幼岩",
+      "cost": 1,
+      "rarity": 5,
+      "level": 25,
+      "tuneLevel": 0,
+      "sonata": "rejuvenating_glow",
+      "mainStat": {
+        "type": "ATK_PCT",
+        "value": 18.0
+      },
+      "secondaryStat": {
+        "type": "FLAT_HP",
+        "value": 2280.0
+      },
+      "substats": [
+        {
+          "type": "ATK_PCT",
+          "value": 7.9
+        },
+        {
+          "type": "HP_PCT",
+          "value": 10.1
+        },
+        {
+          "type": "DEF_PCT",
+          "value": 10.9
+        },
+        {
+          "type": "RESONANCE_SKILL_DMG",
+          "value": 10.9
+        },
+        {
+          "type": "CRIT_RATE",
+          "value": 7.5
+        }
+      ]
+    }
+  ],
+  "completed": true
+}
