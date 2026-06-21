@@ -10,15 +10,17 @@
     "inherentBuffs": [
       {
         "type": "elemDmg",
-        "value": 0.2
+        "value": 0.2,
+        "condition": "固有衍射增伤"
       },
       {
         "type": "atkPct",
-        "value": 0.12
+        "value": 0.12,
+        "condition": "固有攻击加成"
       }
     ],
     "weaponPassiveMultiplier": {
-      "E": 2,
+      "E": 0,
       "Q": 0,
       "变奏": 0
     },
@@ -658,7 +660,13 @@
     "inherentBuffs": [
       {
         "type": "atkPct",
-        "value": 0.12
+        "value": 0.12,
+        "condition": "固有攻击加成"
+      },
+      {
+        "type": "resonanceSkillDmg",
+        "value": 0.2,
+        "condition": "固有共鸣技能增伤"
       }
     ],
     "weaponPassiveMultiplier": {
@@ -1149,7 +1157,13 @@
     "inherentBuffs": [
       {
         "type": "elemDmg",
-        "value": 0.12
+        "value": 0.12,
+        "condition": "固有冷凝增伤"
+      },
+      {
+        "type": "heavyAtkDmg",
+        "value": 0.2,
+        "condition": "固有重击增伤"
       }
     ],
     "weaponPassiveMultiplier": {
@@ -5184,7 +5198,13 @@
     "inherentBuffs": [
       {
         "type": "atkPct",
-        "value": 0.12
+        "value": 0.12,
+        "condition": "固有攻击加成"
+      },
+      {
+        "type": "elemDmg",
+        "value": 0.2,
+        "condition": "固有热熔增伤"
       }
     ],
     "weaponPassiveMultiplier": {
@@ -5716,7 +5736,13 @@
     "inherentBuffs": [
       {
         "type": "elemDmg",
-        "value": 0.15
+        "value": 0.15,
+        "condition": "固有热熔增伤"
+      },
+      {
+        "type": "resonanceLiberationDmg",
+        "value": 0.2,
+        "condition": "固有共鸣解放增伤"
       }
     ],
     "weaponPassiveMultiplier": {
@@ -6349,7 +6375,18 @@
       "type": "atkPct",
       "value": 0.12
     },
-    "inherentBuffs": [],
+    "inherentBuffs": [
+      {
+        "type": "resonanceSkillDmg",
+        "value": 0.5,
+        "condition": "灼热弹匣·轰轰伤害+50%"
+      },
+      {
+        "type": "atkPct",
+        "value": 0.3,
+        "condition": "加麻加辣·热压弹满层+30%攻击"
+      }
+    ],
     "weaponPassiveMultiplier": {
       "E": 0,
       "Q": 0,
@@ -7237,7 +7274,13 @@
     "inherentBuffs": [
       {
         "type": "elemDmg",
-        "value": 0.15
+        "value": 0.15,
+        "condition": "固有热熔增伤"
+      },
+      {
+        "type": "normalAtkDmg",
+        "value": 0.25,
+        "condition": "固有普攻增伤"
       }
     ],
     "weaponPassiveMultiplier": {
@@ -11786,7 +11829,13 @@
     "inherentBuffs": [
       {
         "type": "atkPct",
-        "value": 0.12
+        "value": 0.12,
+        "condition": "固有攻击加成"
+      },
+      {
+        "type": "elemDmg",
+        "value": 0.12,
+        "condition": "固有导电增伤"
       }
     ],
     "weaponPassiveMultiplier": {
@@ -12480,7 +12529,13 @@
     "inherentBuffs": [
       {
         "type": "elemDmg",
-        "value": 0.12
+        "value": 0.12,
+        "condition": "固有导电增伤"
+      },
+      {
+        "type": "resonanceLiberationDmg",
+        "value": 0.15,
+        "condition": "固有解放增伤"
       }
     ],
     "weaponPassiveMultiplier": {
@@ -12942,7 +12997,13 @@
     "inherentBuffs": [
       {
         "type": "atkPct",
-        "value": 0.12
+        "value": 0.12,
+        "condition": "固有攻击加成"
+      },
+      {
+        "type": "heavyAtkDmg",
+        "value": 0.2,
+        "condition": "固有重击增伤"
       }
     ],
     "weaponPassiveMultiplier": {
@@ -13665,7 +13726,13 @@
     "inherentBuffs": [
       {
         "type": "elemDmg",
-        "value": 0.15
+        "value": 0.15,
+        "condition": "固有导电增伤"
+      },
+      {
+        "type": "normalAtkDmg",
+        "value": 0.2,
+        "condition": "固有普攻增伤"
       }
     ],
     "weaponPassiveMultiplier": {
@@ -16362,7 +16429,13 @@
     "inherentBuffs": [
       {
         "type": "atkPct",
-        "value": 0.12
+        "value": 0.12,
+        "condition": "固有攻击加成"
+      },
+      {
+        "type": "normalAtkDmg",
+        "value": 0.2,
+        "condition": "固有普攻增伤"
       }
     ],
     "weaponPassiveMultiplier": {
@@ -24438,7 +24511,13 @@
     "inherentBuffs": [
       {
         "type": "atkPct",
-        "value": 0.12
+        "value": 0.12,
+        "condition": "固有攻击加成"
+      },
+      {
+        "type": "heavyAtkDmg",
+        "value": 0.25,
+        "condition": "固有重击增伤"
       }
     ],
     "weaponPassiveMultiplier": {
@@ -30089,7 +30168,13 @@
     "inherentBuffs": [
       {
         "type": "atkPct",
-        "value": 0.12
+        "value": 0.12,
+        "condition": "固有攻击加成"
+      },
+      {
+        "type": "resonanceSkillDmg",
+        "value": 0.2,
+        "condition": "固有共鸣技能增伤"
       }
     ],
     "weaponPassiveMultiplier": {
@@ -31414,7 +31499,13 @@
     "inherentBuffs": [
       {
         "type": "elemDmg",
-        "value": 0.15
+        "value": 0.15,
+        "condition": "固有湮灭增伤"
+      },
+      {
+        "type": "normalAtkDmg",
+        "value": 0.2,
+        "condition": "固有普攻增伤"
       }
     ],
     "weaponPassiveMultiplier": {

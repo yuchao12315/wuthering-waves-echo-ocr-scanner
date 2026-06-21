@@ -1,0 +1,127 @@
+{
+  "freezing_frost": {
+    "name": "凝夜白霜",
+    "set2": { "type": "elemDmg", "value": 0.10 },
+    "set5": { "type": "elemDmg", "value": 0.30, "stacks": 3, "condition": "普攻/重击命中叠加" }
+  },
+  "molten_rift": {
+    "name": "熔山裂谷",
+    "set2": { "type": "elemDmg", "value": 0.10 },
+    "set5": { "type": "elemDmg", "value": 0.30, "condition": "施放共鸣技能后15秒" }
+  },
+  "void_thunder": {
+    "name": "彻空冥雷",
+    "set2": { "type": "elemDmg", "value": 0.10 },
+    "set5": { "type": "elemDmg", "value": 0.15, "stacks": 2, "condition": "施放共鸣解放后叠加" }
+  },
+  "sierra_gale": {
+    "name": "啸谷长风",
+    "set2": { "type": "elemDmg", "value": 0.10 },
+    "set5": { "type": "elemDmg", "value": 0.30, "condition": "施放共鸣解放后15秒" }
+  },
+  "celestial_light": {
+    "name": "浮星祛暗",
+    "set2": { "type": "elemDmg", "value": 0.10 },
+    "set5": { "type": "elemDmg", "value": 0.30, "condition": "施放变奏技能后15秒" }
+  },
+  "havoc_eclipse": {
+    "name": "沉日劫明",
+    "set2": { "type": "elemDmg", "value": 0.10 },
+    "set5": { "type": "elemDmg", "value": 0.075, "stacks": 4, "condition": "普攻/重击命中叠加" }
+  },
+  "rejuvenating_glow": {
+    "name": "隐世回光",
+    "set2": { "type": "atkPct", "value": 0.10 },
+    "set5": { "type": "atkPct", "value": 0.155, "condition": "施放共鸣技能后全队" }
+  },
+  "moonlit_clouds": {
+    "name": "轻云出月",
+    "set2": { "type": "atkPct", "value": 0.10 },
+    "set5": { "type": "atkPct", "value": 0.225, "condition": "施放延奏技能后全队" }
+  },
+  "lingering_tunes": {
+    "name": "不绝余音",
+    "set2": { "type": "atkPct", "value": 0.10 },
+    "set5": { "type": "atkPct", "value": 0.05, "stacks": 5, "condition": "普攻命中叠加" }
+  },
+  "frosty_resolve": {
+    "name": "凌冽决断",
+    "set2": { "type": "resonanceSkillDmg", "value": 0.12 },
+    "set5": { "type": "resonanceSkillDmg", "value": 0.18, "condition": "施放共鸣技能后攻击命中" }
+  },
+  "eternal_radiance": {
+    "name": "此间永驻之光",
+    "set2": { "type": "atkPct", "value": 0.10 },
+    "set5": null
+  },
+  "midnight_veil": {
+    "name": "幽夜隐匿",
+    "set2": { "type": "atkPct", "value": 0.10 },
+    "set5": null
+  },
+  "empyrean_anthem": {
+    "name": "高天共奏之曲",
+    "set2": { "type": "atkPct", "value": 0.10 },
+    "set5": null
+  },
+  "tidebreaking_courage": {
+    "name": "破浪无惧",
+    "set2": { "type": "atkPct", "value": 0.10 },
+    "set5": null
+  },
+  "gusts_of_welkin": {
+    "name": "流云逝尽之空",
+    "set2": { "type": "atkPct", "value": 0.10 },
+    "set5": null
+  },
+  "windward_pilgrimage": {
+    "name": "愿戴荣光之旅",
+    "set2": { "type": "atkPct", "value": 0.10 },
+    "set5": null
+  },
+  "flaming_clawprint": {
+    "name": "奔狼燎原之焰",
+    "set2": { "type": "atkPct", "value": 0.10 },
+    "set5": null
+  },
+  "pact_of_neonlight_leap": {
+    "name": "逆光跃彩之约",
+    "set2": { "type": "atkPct", "value": 0.10 },
+    "set5": null
+  },
+  "halo_of_starry_radiance": {
+    "name": "星构寻辉之环",
+    "set2": { "type": "atkPct", "value": 0.10 },
+    "set5": null
+  },
+  "rite_of_gilded_revelation": {
+    "name": "流金溯真之式",
+    "set2": { "type": "atkPct", "value": 0.10 },
+    "set5": null
+  },
+  "trailblazing_star": {
+    "name": "长路启航之星",
+    "set2": { "type": "atkPct", "value": 0.10 },
+    "set5": null
+  },
+  "chromatic_foam": {
+    "name": "斑驳粉饰之沫",
+    "set2": { "type": "atkPct", "value": 0.10 },
+    "set5": null
+  },
+  "sound_of_true_name": {
+    "name": "听唤语义之愿",
+    "set2": { "type": "atkPct", "value": 0.10 },
+    "set5": null
+  },
+  "wishes_of_quiet_snowfall": {
+    "name": "雪落无声之愿",
+    "set2": { "type": "atkPct", "value": 0.10 },
+    "set5": null
+  },
+  "reel_of_spliced_memories": {
+    "name": "剪心辑梦之影",
+    "set2": { "type": "atkPct", "value": 0.10 },
+    "set5": null
+  }
+}

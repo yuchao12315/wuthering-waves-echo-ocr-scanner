@@ -129,7 +129,7 @@ export function CalculatorPage() {
     const result = calcDamage(charBase, weapon, weaponRefine, loadoutEchoes, chainNodes)
     if (activeSkillTypes.size === 0) return result.totalExpected
     return result.skills
-      .filter((_, i) => activeSkillTypes.has(charBase.skills[i]?.skillType ?? ''))
+      .filter(sk => activeSkillTypes.has(sk.skillType))
       .reduce((s, sk) => s + sk.expected, 0)
   }, [charBase, weaponName, weaponRefine, activeSkillTypes, chainNodes])
 

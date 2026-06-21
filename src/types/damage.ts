@@ -1,19 +1,26 @@
 export interface Skill {
   name: string
-  multipliers: string[]   // 19-level multiplier strings, e.g. ["24.50%", ..., "88.89%"]
+  multipliers: string[]
   tag: 'E' | 'Q' | '变奏'
   bonusDmg: number
-  treeId: string          // skillTree key ("1"-"17")
-  skillType: string       // e.g. "常态攻击", "共鸣技能", "共鸣解放", "变奏技能", "共鸣回路"
+  treeId: string
+  skillType: string
+  isHeavy?: boolean
 }
 
+export type BuffType =
+  | 'atkPct' | 'critRate' | 'critDmg' | 'elemDmg'
+  | 'normalAtkDmg' | 'heavyAtkDmg' | 'resonanceSkillDmg' | 'resonanceLiberationDmg'
+  | 'hpPct' | 'defPct'
+
 export interface InherentBuff {
-  type: 'elemDmg' | 'atkPct' | 'critRate' | 'critDmg'
+  type: BuffType
   value: number
+  condition?: string
 }
 
 export interface ChainStat {
-  type: 'atkPct' | 'critRate' | 'critDmg' | 'elemDmg' | 'hpPct' | 'defPct'
+  type: BuffType
   value: number
 }
 
@@ -23,15 +30,23 @@ export interface CharacterBase {
   element: string
   ascensionStat: { type: string; value: number }
   inherentBuffs: InherentBuff[]
-  chainStats: ChainStat[]   // 8 resonance chain stat nodes (tree 9-16), always active at Lv90
+  chainStats: ChainStat[]
   weaponPassiveMultiplier: Record<string, number>
   skills: Skill[]
 }
 
+export interface WeaponPassiveEffect {
+  type: BuffType
+  paramIdx: number
+  condition: string
+  stacks?: number
+  stackParamIdx?: number
+}
+
 export interface WeaponPassive {
-  effectName: string       // passive ability name
-  effect: string           // description template with {0}, {1}... placeholders
-  param: string[][]        // param[i][j]: i = placeholder index, j = refinement rank 0-4 (R1-R5)
+  effectName: string
+  effect: string
+  param: string[][]
 }
 
 export interface Weapon {
@@ -43,6 +58,20 @@ export interface Weapon {
   critRate: number
   critDmg: number
   passive: WeaponPassive
+  passiveEffects?: WeaponPassiveEffect[]
+}
+
+export interface SonataSetEffect {
+  type: BuffType
+  value: number
+  condition?: string
+  stacks?: number
+}
+
+export interface SonataEffect {
+  name: string
+  set2: SonataSetEffect | null
+  set5: SonataSetEffect | null
 }
 
 export interface DamageResult {
@@ -59,8 +88,9 @@ export interface DamageResult {
 export interface SkillDamage {
   name: string
   tag: string
-  multiplierStr: string   // raw multiplier string for display, e.g. "48.71%" or "21.58%*4"
-  multiplier: number      // parsed total multiplier as decimal, e.g. 0.4871 or 0.8632
+  skillType: string
+  multiplierStr: string
+  multiplier: number
   expected: number
   crit: number
 }

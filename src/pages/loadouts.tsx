@@ -140,14 +140,10 @@ function DamagePanel({ loadout }: { loadout: SavedLoadout }) {
     })
   }
 
-  const visibleIndices = useMemo(() => {
-    if (activeTypes.size === 0) return result.skills.map((_, i) => i)
-    return result.skills
-      .map((_, i) => i)
-      .filter(i => activeTypes.has(charBase.skills[i]?.skillType ?? ''))
-  }, [result.skills, activeTypes, charBase.skills])
-
-  const filteredSkills = visibleIndices.map(i => result.skills[i])
+  const filteredSkills = useMemo(() => {
+    if (activeTypes.size === 0) return result.skills
+    return result.skills.filter(sk => activeTypes.has(sk.skillType))
+  }, [result.skills, activeTypes])
   const filteredTotal = filteredSkills.reduce((s, sk) => s + sk.expected, 0)
 
   return (
