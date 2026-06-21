@@ -9,6 +9,11 @@
     },
     "inherentBuffs": [
       {
+        "type": "elemDmg",
+        "value": 0.2,
+        "condition": "固有衍射增伤"
+      },
+      {
         "type": "atkPct",
         "value": 0.12,
         "condition": "固有攻击加成"
@@ -6725,6 +6730,11 @@
         "value": 0.5,
         "condition": "灼热弹匣·轰轰伤害+50%",
         "targetSkill": "轰轰"
+      },
+      {
+        "type": "atkPct",
+        "value": 0.3,
+        "condition": "加麻加辣·热压弹满层+30%攻击"
       }
     ],
     "weaponPassiveMultiplier": {
@@ -26224,7 +26234,12 @@
       "type": "critRate",
       "value": 0.08
     },
-    "inherentBuffs": [],
+    "inherentBuffs": [
+      {
+        "type": "elemDmg",
+        "value": 0.12
+      }
+    ],
     "weaponPassiveMultiplier": {
       "E": 0,
       "Q": 0,

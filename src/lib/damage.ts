@@ -252,10 +252,10 @@ export function calcDamage(
       case 'elemDmg': chainElem += cs.value; break
     }
   }
-  if (chainAtkPct) { totalAtkPct += chainAtkPct; addSrc('atk', '共鸣链', chainAtkPct) }
-  if (chainCr) { totalCritRate += chainCr; addSrc('critRate', '共鸣链', chainCr) }
-  if (chainCd) { totalCritDmg += chainCd; addSrc('critDmg', '共鸣链', chainCd) }
-  if (chainElem) { baseElemDmg += chainElem; addSrc('elemDmg', '共鸣链', chainElem) }
+  if (chainAtkPct) { totalAtkPct += chainAtkPct; addSrc('atk', '固有天赋', chainAtkPct) }
+  if (chainCr) { totalCritRate += chainCr; addSrc('critRate', '固有天赋', chainCr) }
+  if (chainCd) { totalCritDmg += chainCd; addSrc('critDmg', '固有天赋', chainCd) }
+  if (chainElem) { baseElemDmg += chainElem; addSrc('elemDmg', '固有天赋', chainElem) }
 
   // Chain effects — global
   for (const eff of activeChainEffects) {
