@@ -96,11 +96,17 @@ function EchoPickerModal({ cost, calc, onPick, onClose }: {
   )
 }
 
+const SKILL_TYPE_LABELS: Record<string, string> = {
+  '常态攻击': '普攻', '共鸣技能': '技能', '共鸣解放': '解放',
+  '变奏技能': '变奏', '共鸣回路': '回路',
+}
+
 function DamagePanel({ loadout }: { loadout: SavedLoadout }) {
   const charBase = charsBase[loadout.characterName]
   const availableWeapons = charBase ? weapons.filter(w => w.type === charBase.weaponType) : []
   const [weaponName, setWeaponName] = useState(availableWeapons[0]?.name ?? '')
   const [refine, setRefine] = useState(1)
+  const [activeTypes, setActiveTypes] = useState<Set<string>>(new Set())
 
   if (!charBase) {
     return <p className="text-xs text-zinc-500 mt-2">暂无该角色的伤害数据</p>
@@ -111,8 +117,70 @@ function DamagePanel({ loadout }: { loadout: SavedLoadout }) {
 
   const result = calcDamage(charBase, weapon, refine, loadout.echoes)
 
+  const allSkillTypes = useMemo(() => {
+    const seen = new Set<string>()
+    const ordered: string[] = []
+    for (const s of charBase.skills) {
+      if (s.skillType && !seen.has(s.skillType)) {
+        seen.add(s.skillType)
+        ordered.push(s.skillType)
+      }
+    }
+    return ordered
+  }, [charBase.skills])
+
+  const toggleType = (t: string) => {
+    setActiveTypes(prev => {
+      const next = new Set(prev)
+      if (next.has(t)) next.delete(t)
+      else next.add(t)
+      return next
+    })
+  }
+
+  const visibleIndices = useMemo(() => {
+    if (activeTypes.size === 0) return result.skills.map((_, i) => i)
+    return result.skills
+      .map((_, i) => i)
+      .filter(i => activeTypes.has(charBase.skills[i]?.skillType ?? ''))
+  }, [result.skills, activeTypes, charBase.skills])
+
+  const filteredSkills = visibleIndices.map(i => result.skills[i])
+  const filteredTotal = filteredSkills.reduce((s, sk) => s + sk.expected, 0)
+
   return (
     <div className="mt-3 border-t border-zinc-800 pt-3">
+      {allSkillTypes.length > 1 && (
+        <div className="flex items-center gap-1.5 mb-3">
+          <span className="text-xs text-zinc-500">共鸣链:</span>
+          {allSkillTypes.map(t => (
+            <button
+              key={t}
+              type="button"
+              onClick={() => toggleType(t)}
+              className={`px-2 py-0.5 text-xs rounded ${
+                activeTypes.has(t)
+                  ? 'bg-purple-600 text-white'
+                  : activeTypes.size === 0
+                    ? 'bg-zinc-800 text-zinc-300'
+                    : 'bg-zinc-800 text-zinc-500'
+              }`}
+            >
+              {SKILL_TYPE_LABELS[t] ?? t}
+            </button>
+          ))}
+          {activeTypes.size > 0 && (
+            <button
+              type="button"
+              onClick={() => setActiveTypes(new Set())}
+              className="text-xs text-red-400 hover:text-red-300 ml-1"
+            >
+              清除
+            </button>
+          )}
+        </div>
+      )}
+
       <div className="flex items-center gap-3 mb-3">
         <select
           value={weaponName}
@@ -167,7 +235,7 @@ function DamagePanel({ loadout }: { loadout: SavedLoadout }) {
           </tr>
         </thead>
         <tbody>
-          {result.skills.map(sk => (
+          {filteredSkills.map(sk => (
             <tr key={sk.name} className="border-b border-zinc-800/50">
               <td className="py-1 text-zinc-300">{sk.name}</td>
               <td className="py-1">
@@ -183,8 +251,8 @@ function DamagePanel({ loadout }: { loadout: SavedLoadout }) {
         </tbody>
         <tfoot>
           <tr className="border-t border-zinc-700">
-            <td colSpan={3} className="py-1 text-zinc-400">总期望伤害</td>
-            <td className="py-1 text-right text-zinc-200 font-mono font-medium">{result.totalExpected.toLocaleString()}</td>
+            <td colSpan={3} className="py-1 text-zinc-400">{activeTypes.size > 0 ? '筛选期望伤害' : '总期望伤害'}</td>
+            <td className="py-1 text-right text-zinc-200 font-mono font-medium">{filteredTotal.toLocaleString()}</td>
             <td />
           </tr>
         </tfoot>
