@@ -10,7 +10,7 @@ import CHARACTERS_BASE from '@/data/characters-base.json'
 import WEAPONS from '@/data/weapons.json'
 import type { Echo, SavedLoadout } from '@/types/echo'
 import type { CalcJson } from '@/types/character'
-import type { CharacterBase, Weapon } from '@/types/damage'
+import type { CharacterBase, Weapon, DamageResult, StatSource } from '@/types/damage'
 
 const GRADE_COLORS: Record<string, string> = {
   SSS: 'text-red-400', SS: 'text-orange-400', S: 'text-yellow-400',
@@ -101,13 +101,82 @@ const SKILL_TYPE_LABELS: Record<string, string> = {
   '变奏技能': '变奏', '共鸣回路': '回路',
 }
 
+function SourceTooltip({ sources, isAtk, baseAtk }: { sources: StatSource[]; isAtk?: boolean; baseAtk?: number }) {
+  if (!sources.length) return null
+  return (
+    <div className="absolute z-10 left-0 top-full mt-1 bg-zinc-900 border border-zinc-700 rounded p-2 shadow-lg min-w-[180px] text-left">
+      {isAtk && baseAtk != null && (
+        <div className="flex justify-between text-[10px] mb-1">
+          <span className="text-zinc-500">攻击白值</span>
+          <span className="text-zinc-300">{baseAtk}</span>
+        </div>
+      )}
+      {sources.map((s, i) => (
+        <div key={i} className="flex justify-between text-[10px]">
+          <span className="text-zinc-500">{s.label}</span>
+          <span className="text-zinc-300">
+            {isAtk && s.label === '声骸固定攻击' ? `+${s.value}` : `+${(s.value * 100).toFixed(1)}%`}
+          </span>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function StatCard({ label, value, sources, isAtk, baseAtk }: {
+  label: string; value: string; sources: StatSource[]; isAtk?: boolean; baseAtk?: number
+}) {
+  const [show, setShow] = useState(false)
+  return (
+    <div
+      className="bg-zinc-800 rounded p-2 text-center relative cursor-pointer"
+      onClick={() => setShow(!show)}
+      onMouseLeave={() => setShow(false)}
+    >
+      <div className="text-xs text-zinc-500">{label}</div>
+      <div className="text-sm font-medium">{value}</div>
+      {sources.length > 0 && <div className="text-[9px] text-zinc-600 mt-0.5">点击查看明细</div>}
+      {show && <SourceTooltip sources={sources} isAtk={isAtk} baseAtk={baseAtk} />}
+    </div>
+  )
+}
+
+function PanelDisplay({ result }: { result: DamageResult }) {
+  const bd = result.breakdown
+  return (
+    <>
+      <div className="grid grid-cols-4 gap-2 mb-3">
+        <StatCard label="攻击力" value={String(result.panel.atk)} sources={bd.atk.sources} isAtk baseAtk={bd.atk.baseAtk} />
+        <StatCard label="暴击率" value={`${(result.panel.critRate * 100).toFixed(1)}%`} sources={bd.critRate.sources} />
+        <StatCard label="暴击伤害" value={`${(result.panel.critDmg * 100).toFixed(1)}%`} sources={bd.critDmg.sources} />
+        <StatCard label="属性增伤" value={`${(result.panel.elemDmg * 100).toFixed(1)}%`} sources={bd.elemDmg.sources} />
+      </div>
+      {(result.panel.resonanceSkillDmg > 0 || result.panel.resonanceLiberationDmg > 0 || result.panel.normalAtkDmg > 0 || result.panel.heavyAtkDmg > 0) && (
+        <div className="grid grid-cols-4 gap-2 mb-3">
+          {result.panel.normalAtkDmg > 0 && (
+            <StatCard label="普攻增伤" value={`${(result.panel.normalAtkDmg * 100).toFixed(1)}%`} sources={bd.normalAtkDmg.sources} />
+          )}
+          {result.panel.heavyAtkDmg > 0 && (
+            <StatCard label="重击增伤" value={`${(result.panel.heavyAtkDmg * 100).toFixed(1)}%`} sources={bd.heavyAtkDmg.sources} />
+          )}
+          {result.panel.resonanceSkillDmg > 0 && (
+            <StatCard label="共鸣技能增伤" value={`${(result.panel.resonanceSkillDmg * 100).toFixed(1)}%`} sources={bd.resonanceSkillDmg.sources} />
+          )}
+          {result.panel.resonanceLiberationDmg > 0 && (
+            <StatCard label="共鸣解放增伤" value={`${(result.panel.resonanceLiberationDmg * 100).toFixed(1)}%`} sources={bd.resonanceLiberationDmg.sources} />
+          )}
+        </div>
+      )}
+    </>
+  )
+}
+
 function DamagePanel({ loadout }: { loadout: SavedLoadout }) {
   const charBase = charsBase[loadout.characterName]
   const availableWeapons = charBase ? weapons.filter(w => w.type === charBase.weaponType) : []
   const [weaponName, setWeaponName] = useState(availableWeapons[0]?.name ?? '')
   const [refine, setRefine] = useState(1)
   const [activeTypes, setActiveTypes] = useState<Set<string>>(new Set())
-  const [chainNodes, setChainNodes] = useState(charBase?.chainStats?.length ?? 0)
   const [chainLevel, setChainLevel] = useState(0)
 
   if (!charBase) {
@@ -117,9 +186,8 @@ function DamagePanel({ loadout }: { loadout: SavedLoadout }) {
   const weapon = weapons.find(w => w.name === weaponName)
   if (!weapon) return null
 
-  const totalChainNodes = charBase.chainStats?.length ?? 0
   const hasChainEffects = (charBase.chainEffects?.length ?? 0) > 0
-  const result = calcDamage(charBase, weapon, refine, loadout.echoes, chainNodes, 10, 90, 89, 0.1, chainLevel)
+  const result = calcDamage(charBase, weapon, refine, loadout.echoes, -1, 10, 90, 89, 0.1, chainLevel)
 
   const allSkillTypes = useMemo(() => {
     const seen = new Set<string>()
@@ -150,22 +218,6 @@ function DamagePanel({ loadout }: { loadout: SavedLoadout }) {
 
   return (
     <div className="mt-3 border-t border-zinc-800 pt-3">
-      {totalChainNodes > 0 && (
-        <div className="flex items-center gap-1.5 mb-3">
-          <span className="text-xs text-zinc-500">共鸣链:</span>
-          {Array.from({ length: totalChainNodes + 1 }, (_, i) => i).map(n => (
-            <button
-              key={n}
-              type="button"
-              onClick={() => setChainNodes(n)}
-              className={`w-6 h-6 text-xs rounded ${chainNodes === n ? 'bg-purple-600 text-white' : 'bg-zinc-800 text-zinc-400'}`}
-            >
-              {n}
-            </button>
-          ))}
-        </div>
-      )}
-
       {hasChainEffects && (
         <div className="flex items-center gap-1.5 mb-3">
           <span className="text-xs text-zinc-500">命座:</span>
@@ -237,52 +289,7 @@ function DamagePanel({ loadout }: { loadout: SavedLoadout }) {
         </div>
       </div>
 
-      <div className="grid grid-cols-4 gap-2 mb-3">
-        <div className="bg-zinc-800 rounded p-2 text-center">
-          <div className="text-xs text-zinc-500">攻击力</div>
-          <div className="text-sm font-medium">{result.panel.atk}</div>
-        </div>
-        <div className="bg-zinc-800 rounded p-2 text-center">
-          <div className="text-xs text-zinc-500">暴击率</div>
-          <div className="text-sm font-medium">{(result.panel.critRate * 100).toFixed(1)}%</div>
-        </div>
-        <div className="bg-zinc-800 rounded p-2 text-center">
-          <div className="text-xs text-zinc-500">暴击伤害</div>
-          <div className="text-sm font-medium">{(result.panel.critDmg * 100).toFixed(1)}%</div>
-        </div>
-        <div className="bg-zinc-800 rounded p-2 text-center">
-          <div className="text-xs text-zinc-500">属性增伤</div>
-          <div className="text-sm font-medium">{(result.panel.elemDmg * 100).toFixed(1)}%</div>
-        </div>
-      </div>
-      {(result.panel.resonanceSkillDmg > 0 || result.panel.resonanceLiberationDmg > 0 || result.panel.normalAtkDmg > 0 || result.panel.heavyAtkDmg > 0) && (
-        <div className="grid grid-cols-4 gap-2 mb-3">
-          {result.panel.normalAtkDmg > 0 && (
-            <div className="bg-zinc-800 rounded p-2 text-center">
-              <div className="text-xs text-zinc-500">普攻增伤</div>
-              <div className="text-sm font-medium">{(result.panel.normalAtkDmg * 100).toFixed(1)}%</div>
-            </div>
-          )}
-          {result.panel.heavyAtkDmg > 0 && (
-            <div className="bg-zinc-800 rounded p-2 text-center">
-              <div className="text-xs text-zinc-500">重击增伤</div>
-              <div className="text-sm font-medium">{(result.panel.heavyAtkDmg * 100).toFixed(1)}%</div>
-            </div>
-          )}
-          {result.panel.resonanceSkillDmg > 0 && (
-            <div className="bg-zinc-800 rounded p-2 text-center">
-              <div className="text-xs text-zinc-500">共鸣技能增伤</div>
-              <div className="text-sm font-medium">{(result.panel.resonanceSkillDmg * 100).toFixed(1)}%</div>
-            </div>
-          )}
-          {result.panel.resonanceLiberationDmg > 0 && (
-            <div className="bg-zinc-800 rounded p-2 text-center">
-              <div className="text-xs text-zinc-500">共鸣解放增伤</div>
-              <div className="text-sm font-medium">{(result.panel.resonanceLiberationDmg * 100).toFixed(1)}%</div>
-            </div>
-          )}
-        </div>
-      )}
+      <PanelDisplay result={result} />
 
       <table className="w-full text-xs">
         <thead>

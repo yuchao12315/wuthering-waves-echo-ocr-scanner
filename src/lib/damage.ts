@@ -165,10 +165,7 @@ export function calcDamage(
   const baseAtk = character.baseAtk + weapon.baseAtk
   const enabledBuffs = character.inherentBuffs.filter(isBuffEnabled)
 
-  // Resolve active chain level (default 0 = no effects active)
   const activeChainLevel = Math.min(6, chainLevel)
-
-  // Collect active chain effects based on sequence level and enabled status
   const activeChainEffects: ChainEffect[] = []
   if (character.chainEffects) {
     for (const eff of character.chainEffects) {
@@ -178,76 +175,110 @@ export function calcDamage(
     }
   }
 
-  // --- Collect global buffs ---
-  let totalAtkPct = weapon.atkPct + echoStats.atkPct + sonataBuff.atkPct
-  let totalCritRate = 0.05 + weapon.critRate + echoStats.critRate
-  let totalCritDmg = 1.50 + weapon.critDmg + echoStats.critDmg
-  let baseElemDmg = echoStats.elemDmg + sonataBuff.elemDmg
+  // Source tracking helpers
+  type S = { label: string; value: number }
+  const src = {
+    atk: [] as S[], critRate: [] as S[], critDmg: [] as S[], elemDmg: [] as S[],
+    normalAtk: [] as S[], heavyAtk: [] as S[], resonanceSkill: [] as S[], resonanceLiberation: [] as S[],
+  }
+  function addSrc(cat: keyof typeof src, label: string, value: number) {
+    if (value) src[cat].push({ label, value })
+  }
+
+  // --- Collect global buffs with source tracking ---
+  let totalAtkPct = 0
+  let totalCritRate = 0.05
+  let totalCritDmg = 1.50
+  let baseElemDmg = 0
   let totalDefIgnore = 0
   let totalResReduce = 0
   let globalDmgDeepen = 0
 
-  const skillDmgBonuses: Record<string, number> = {
-    normalAtk: echoStats.skillDmg.normalAtk + (sonataBuff.skillDmg.normalAtk ?? 0),
-    heavyAtk: echoStats.skillDmg.heavyAtk + (sonataBuff.skillDmg.heavyAtk ?? 0),
-    resonanceSkill: echoStats.skillDmg.resonanceSkill + (sonataBuff.skillDmg.resonanceSkill ?? 0),
-    resonanceLiberation: echoStats.skillDmg.resonanceLiberation + (sonataBuff.skillDmg.resonanceLiberation ?? 0),
+  // Weapon secondary stat
+  if (weapon.atkPct) { totalAtkPct += weapon.atkPct; addSrc('atk', `${weapon.name}副属性`, weapon.atkPct) }
+  if (weapon.critRate) { totalCritRate += weapon.critRate; addSrc('critRate', `${weapon.name}副属性`, weapon.critRate) }
+  if (weapon.critDmg) { totalCritDmg += weapon.critDmg; addSrc('critDmg', `${weapon.name}副属性`, weapon.critDmg) }
+
+  // Echo stats
+  if (echoStats.atkPct) { totalAtkPct += echoStats.atkPct; addSrc('atk', '声骸攻击%', echoStats.atkPct) }
+  if (echoStats.critRate) { totalCritRate += echoStats.critRate; addSrc('critRate', '声骸暴击率', echoStats.critRate) }
+  if (echoStats.critDmg) { totalCritDmg += echoStats.critDmg; addSrc('critDmg', '声骸暴击伤害', echoStats.critDmg) }
+  if (echoStats.elemDmg) { baseElemDmg += echoStats.elemDmg; addSrc('elemDmg', '声骸属性伤害', echoStats.elemDmg) }
+
+  // Sonata
+  if (sonataBuff.atkPct) { totalAtkPct += sonataBuff.atkPct; addSrc('atk', '套装效果', sonataBuff.atkPct) }
+  if (sonataBuff.elemDmg) { baseElemDmg += sonataBuff.elemDmg; addSrc('elemDmg', '套装效果', sonataBuff.elemDmg) }
+
+  const skillDmgBonuses: Record<string, number> = { normalAtk: 0, heavyAtk: 0, resonanceSkill: 0, resonanceLiberation: 0 }
+  // Echo skill dmg substats
+  for (const [k, v] of Object.entries(echoStats.skillDmg)) {
+    if (v) { skillDmgBonuses[k] += v; addSrc(k as keyof typeof src, '声骸技能增伤', v) }
+  }
+  // Sonata skill dmg
+  for (const [k, v] of Object.entries(sonataBuff.skillDmg)) {
+    if (v) { skillDmgBonuses[k] += v; addSrc(k as keyof typeof src, '套装效果', v) }
   }
 
-  // Ascension stat — handle ALL types
+  // Ascension stat
   const asc = character.ascensionStat
   switch (asc.type) {
-    case 'atkPct': totalAtkPct += asc.value; break
-    case 'critRate': totalCritRate += asc.value; break
-    case 'critDmg': totalCritDmg += asc.value; break
-    case 'elemDmg': baseElemDmg += asc.value; break
+    case 'atkPct': totalAtkPct += asc.value; addSrc('atk', '突破属性', asc.value); break
+    case 'critRate': totalCritRate += asc.value; addSrc('critRate', '突破属性', asc.value); break
+    case 'critDmg': totalCritDmg += asc.value; addSrc('critDmg', '突破属性', asc.value); break
+    case 'elemDmg': baseElemDmg += asc.value; addSrc('elemDmg', '突破属性', asc.value); break
   }
 
-  // Inherent buffs — global (no targetSkill) non-skill-dmg types
+  // Inherent buffs
   for (const buff of enabledBuffs) {
     if (buff.targetSkill) continue
+    const lbl = buff.condition ?? '固有技能'
     switch (buff.type) {
-      case 'atkPct': totalAtkPct += buff.value; break
-      case 'critRate': totalCritRate += buff.value; break
-      case 'critDmg': totalCritDmg += buff.value; break
-      case 'elemDmg': baseElemDmg += buff.value; break
+      case 'atkPct': totalAtkPct += buff.value; addSrc('atk', lbl, buff.value); break
+      case 'critRate': totalCritRate += buff.value; addSrc('critRate', lbl, buff.value); break
+      case 'critDmg': totalCritDmg += buff.value; addSrc('critDmg', lbl, buff.value); break
+      case 'elemDmg': baseElemDmg += buff.value; addSrc('elemDmg', lbl, buff.value); break
       case 'defIgnore': totalDefIgnore += buff.value; break
       case 'resReduce': totalResReduce += buff.value; break
       case 'dmgDeepen': globalDmgDeepen += buff.value; break
       default: {
-        // Global skill-type dmg buffs (no targetSkill = applies to all skills of that type)
         const key = BUFF_TO_DMG_KEY[buff.type]
-        if (key) skillDmgBonuses[key] = (skillDmgBonuses[key] ?? 0) + buff.value
+        if (key) { skillDmgBonuses[key] += buff.value; addSrc(key as keyof typeof src, lbl, buff.value) }
       }
     }
   }
 
-  // Chain stats (8 passive attribute nodes)
+  // Chain stats
   const activeChainCount = chainNodes < 0 ? character.chainStats.length : chainNodes
+  let chainAtkPct = 0, chainCr = 0, chainCd = 0, chainElem = 0
   for (let i = 0; i < activeChainCount && i < character.chainStats.length; i++) {
     const cs = character.chainStats[i]
     switch (cs.type) {
-      case 'atkPct': totalAtkPct += cs.value; break
-      case 'critRate': totalCritRate += cs.value; break
-      case 'critDmg': totalCritDmg += cs.value; break
-      case 'elemDmg': baseElemDmg += cs.value; break
+      case 'atkPct': chainAtkPct += cs.value; break
+      case 'critRate': chainCr += cs.value; break
+      case 'critDmg': chainCd += cs.value; break
+      case 'elemDmg': chainElem += cs.value; break
     }
   }
+  if (chainAtkPct) { totalAtkPct += chainAtkPct; addSrc('atk', '共鸣链', chainAtkPct) }
+  if (chainCr) { totalCritRate += chainCr; addSrc('critRate', '共鸣链', chainCr) }
+  if (chainCd) { totalCritDmg += chainCd; addSrc('critDmg', '共鸣链', chainCd) }
+  if (chainElem) { baseElemDmg += chainElem; addSrc('elemDmg', '共鸣链', chainElem) }
 
-  // Chain effects — global (no targetSkill)
+  // Chain effects — global
   for (const eff of activeChainEffects) {
     if (eff.targetSkill) continue
+    const lbl = `S${eff.sequence} ${eff.condition ?? '命座'}`
     switch (eff.type) {
-      case 'atkPct': totalAtkPct += eff.value; break
-      case 'critRate': totalCritRate += eff.value; break
-      case 'critDmg': totalCritDmg += eff.value; break
-      case 'elemDmg': baseElemDmg += eff.value; break
+      case 'atkPct': totalAtkPct += eff.value; addSrc('atk', lbl, eff.value); break
+      case 'critRate': totalCritRate += eff.value; addSrc('critRate', lbl, eff.value); break
+      case 'critDmg': totalCritDmg += eff.value; addSrc('critDmg', lbl, eff.value); break
+      case 'elemDmg': baseElemDmg += eff.value; addSrc('elemDmg', lbl, eff.value); break
       case 'defIgnore': totalDefIgnore += eff.value; break
       case 'resReduce': totalResReduce += eff.value; break
       case 'dmgDeepen': globalDmgDeepen += eff.value; break
       default: {
         const key = BUFF_TO_DMG_KEY[eff.type]
-        if (key) skillDmgBonuses[key] = (skillDmgBonuses[key] ?? 0) + eff.value
+        if (key) { skillDmgBonuses[key] += eff.value; addSrc(key as keyof typeof src, lbl, eff.value) }
       }
     }
   }
@@ -265,26 +296,26 @@ export function calcDamage(
           : eff.stacks
         val *= stackCount
       }
+      const lbl = `${weapon.name}被动`
       switch (eff.type) {
-        case 'atkPct': totalAtkPct += val; break
-        case 'critRate': totalCritRate += val; break
-        case 'critDmg': totalCritDmg += val; break
-        case 'elemDmg': baseElemDmg += val; break
+        case 'atkPct': totalAtkPct += val; addSrc('atk', lbl, val); break
+        case 'critRate': totalCritRate += val; addSrc('critRate', lbl, val); break
+        case 'critDmg': totalCritDmg += val; addSrc('critDmg', lbl, val); break
+        case 'elemDmg': baseElemDmg += val; addSrc('elemDmg', lbl, val); break
         default: {
           const key = BUFF_TO_DMG_KEY[eff.type]
-          if (key) weaponDmgBonuses[key] = (weaponDmgBonuses[key] ?? 0) + val
+          if (key) { weaponDmgBonuses[key] = (weaponDmgBonuses[key] ?? 0) + val; addSrc(key as keyof typeof src, lbl, val) }
         }
       }
     }
   }
 
+  if (echoStats.flatAtk) addSrc('atk', '声骸固定攻击', echoStats.flatAtk)
+
   const totalAtk = baseAtk * (1 + totalAtkPct) + echoStats.flatAtk
 
-  // Defense multiplier with ignore
   const effectiveEnemyDef = 1 - totalDefIgnore
   const defMult = (100 + charLevel) / ((100 + charLevel) + (100 + enemyLevel) * effectiveEnemyDef)
-
-  // Resistance multiplier with reduce
   const effectiveResist = Math.max(0, enemyResist - totalResReduce)
   const resMult = 1 - effectiveResist
 
@@ -366,16 +397,31 @@ export function calcDamage(
 
   const totalExpected = skills.reduce((s, sk) => s + sk.expected, 0)
 
+  const rSkill = (skillDmgBonuses.resonanceSkill ?? 0) + (weaponDmgBonuses.resonanceSkill ?? 0)
+  const rLib = (skillDmgBonuses.resonanceLiberation ?? 0) + (weaponDmgBonuses.resonanceLiberation ?? 0)
+  const nAtk = (skillDmgBonuses.normalAtk ?? 0) + (weaponDmgBonuses.normalAtk ?? 0)
+  const hAtk = (skillDmgBonuses.heavyAtk ?? 0) + (weaponDmgBonuses.heavyAtk ?? 0)
+
   return {
     panel: {
       atk: Math.round(totalAtk),
       critRate: totalCritRate,
       critDmg: totalCritDmg,
       elemDmg: baseElemDmg,
-      resonanceSkillDmg: (skillDmgBonuses.resonanceSkill ?? 0) + (weaponDmgBonuses.resonanceSkill ?? 0),
-      resonanceLiberationDmg: (skillDmgBonuses.resonanceLiberation ?? 0) + (weaponDmgBonuses.resonanceLiberation ?? 0),
-      normalAtkDmg: (skillDmgBonuses.normalAtk ?? 0) + (weaponDmgBonuses.normalAtk ?? 0),
-      heavyAtkDmg: (skillDmgBonuses.heavyAtk ?? 0) + (weaponDmgBonuses.heavyAtk ?? 0),
+      resonanceSkillDmg: rSkill,
+      resonanceLiberationDmg: rLib,
+      normalAtkDmg: nAtk,
+      heavyAtkDmg: hAtk,
+    },
+    breakdown: {
+      atk: { total: Math.round(totalAtk), baseAtk, sources: src.atk },
+      critRate: { total: totalCritRate, sources: src.critRate },
+      critDmg: { total: totalCritDmg, sources: src.critDmg },
+      elemDmg: { total: baseElemDmg, sources: src.elemDmg },
+      normalAtkDmg: { total: nAtk, sources: src.normalAtk },
+      heavyAtkDmg: { total: hAtk, sources: src.heavyAtk },
+      resonanceSkillDmg: { total: rSkill, sources: src.resonanceSkill },
+      resonanceLiberationDmg: { total: rLib, sources: src.resonanceLiberation },
     },
     skills,
     totalExpected,

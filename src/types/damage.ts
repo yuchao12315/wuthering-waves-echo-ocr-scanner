@@ -92,6 +92,22 @@ export interface SonataEffect {
   set5: SonataSetEffect | null
 }
 
+export interface StatSource {
+  label: string
+  value: number
+}
+
+export interface PanelBreakdown {
+  atk: { total: number; baseAtk: number; sources: StatSource[] }
+  critRate: { total: number; sources: StatSource[] }
+  critDmg: { total: number; sources: StatSource[] }
+  elemDmg: { total: number; sources: StatSource[] }
+  normalAtkDmg: { total: number; sources: StatSource[] }
+  heavyAtkDmg: { total: number; sources: StatSource[] }
+  resonanceSkillDmg: { total: number; sources: StatSource[] }
+  resonanceLiberationDmg: { total: number; sources: StatSource[] }
+}
+
 export interface DamageResult {
   panel: {
     atk: number
@@ -103,6 +119,7 @@ export interface DamageResult {
     normalAtkDmg: number
     heavyAtkDmg: number
   }
+  breakdown: PanelBreakdown
   skills: SkillDamage[]
   totalExpected: number
 }
