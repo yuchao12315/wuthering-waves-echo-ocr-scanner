@@ -7,20 +7,20 @@
 
 import type { Echo, StatType } from '@/types/echo'
 import type { CalcJson } from '@/types/character'
-import { costToIndex, CN_TO_STAT } from './constants'
+import { CN_TO_STAT } from './constants'
 
 // 满级(Lv25)各Cost主词条固定数值
 const MAIN_STAT_VALUES: Record<number, Record<string, number>> = {
   1: { 'ATK_PCT': 18.0, 'HP_PCT': 22.8, 'DEF_PCT': 18.0, 'FLAT_HP': 2280 },
   3: { 'ATK_PCT': 30.0, 'HP_PCT': 30.0, 'DEF_PCT': 38.0, 'ELEM_DMG': 30.0, 'ENERGY_REGEN': 32.0, 'FLAT_ATK': 100 },
-  4: { 'ATK_PCT': 33.0, 'HP_PCT': 33.0, 'DEF_PCT': 41.5, 'CRIT_RATE': 22.0, 'CRIT_DMG': 44.0, 'HEAL_BONUS': 26.4, 'FLAT_ATK': 100 },
+  4: { 'ATK_PCT': 33.0, 'HP_PCT': 33.0, 'DEF_PCT': 41.5, 'CRIT_RATE': 22.0, 'CRIT_DMG': 44.0, 'HEAL_BONUS': 26.4, 'FLAT_ATK': 150 },
 }
 
 // 主词条中文key → 固定值 (用于score_max计算)
 const MAIN_STAT_CN_VALUES: Record<number, Record<string, number>> = {
   1: { '攻击%': 18.0, '生命%': 22.8, '防御%': 18.0, '生命': 2280 },
   3: { '攻击%': 30.0, '生命%': 30.0, '防御%': 38.0, '属性伤害加成': 30.0, '共鸣效率': 32.0, '攻击': 100 },
-  4: { '攻击%': 33.0, '生命%': 33.0, '防御%': 41.5, '暴击': 22.0, '暴击伤害': 44.0, '治疗效果加成': 26.4, '攻击': 100 },
+  4: { '攻击%': 33.0, '生命%': 33.0, '防御%': 41.5, '暴击': 22.0, '暴击伤害': 44.0, '治疗效果加成': 26.4, '攻击': 150 },
 }
 
 // 副属性固定值(中文key)
@@ -38,6 +38,12 @@ const MAX_SUB_VALUES: Record<string, number> = {
   '共鸣效率': 12.4,
   '普攻伤害加成': 11.6, '重击伤害加成': 11.6,
   '共鸣技能伤害加成': 11.6, '共鸣解放伤害加成': 11.6,
+}
+
+// 技能伤害词条 → skill_weight 数组下标映射
+// WutheringWavesUID calc_sub_max_score 对技能类副词条额外乘 skill_weight[index]
+const SKILL_INDEX: Record<string, number> = {
+  '普攻伤害加成': 0, '重击伤害加成': 1, '共鸣技能伤害加成': 2, '共鸣解放伤害加成': 3,
 }
 
 /**
@@ -74,7 +80,9 @@ function calcEchoScoreMax(echo: Echo, calc: CalcJson): number {
       const maxVal = MAX_SUB_VALUES[cn] ?? 0
       const w = subProps[cn] ?? 0
       if (w > 0) {
-        validSubScores.push(maxVal * w)
+        const si = SKILL_INDEX[cn]
+        const ratio = si != null ? (calc.skill_weight?.[si] ?? 1) : 1
+        validSubScores.push(maxVal * w * ratio)
       }
     }
   }
@@ -84,7 +92,11 @@ function calcEchoScoreMax(echo: Echo, calc: CalcJson): number {
     for (const [cn, maxVal] of Object.entries(MAX_SUB_VALUES)) {
       if (!usedCns.has(cn)) {
         const w = subProps[cn] ?? 0
-        if (w > 0) candidates.push(maxVal * w)
+        if (w > 0) {
+          const si = SKILL_INDEX[cn]
+          const ratio = si != null ? (calc.skill_weight?.[si] ?? 1) : 1
+          candidates.push(maxVal * w * ratio)
+        }
       }
     }
     candidates.sort((a, b) => b - a)

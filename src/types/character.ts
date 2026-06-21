@@ -4,6 +4,7 @@ export interface CalcJson {
   sub_props: Record<string, number>
   max_main_props: Record<string, string[]>
   max_sub_props: string[]
+  skill_weight: [number, number, number, number]
   score_max: [number, number, number]
   total_grade: number[]
   props_grade: number[][]

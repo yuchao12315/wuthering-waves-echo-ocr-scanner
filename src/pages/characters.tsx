@@ -78,7 +78,7 @@ function CharacterDetail({ char }: { char: Character }) {
 
       {/* 评分上限 */}
       <div className="flex gap-3 text-xs text-zinc-500">
-        <span>满分: C1={calc.score_max[0].toFixed(1)} C3={calc.score_max[1].toFixed(1)} C4={calc.score_max[2].toFixed(1)}</span>
+        <span>满分: C1={calc.score_max[0].toFixed(4)} C3={calc.score_max[1].toFixed(4)} C4={calc.score_max[2].toFixed(4)}</span>
       </div>
     </div>
   )
