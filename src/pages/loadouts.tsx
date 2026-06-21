@@ -237,6 +237,34 @@ function DamagePanel({ loadout }: { loadout: SavedLoadout }) {
           <div className="text-sm font-medium">{(result.panel.elemDmg * 100).toFixed(1)}%</div>
         </div>
       </div>
+      {(result.panel.resonanceSkillDmg > 0 || result.panel.resonanceLiberationDmg > 0 || result.panel.normalAtkDmg > 0 || result.panel.heavyAtkDmg > 0) && (
+        <div className="grid grid-cols-4 gap-2 mb-3">
+          {result.panel.normalAtkDmg > 0 && (
+            <div className="bg-zinc-800 rounded p-2 text-center">
+              <div className="text-xs text-zinc-500">普攻增伤</div>
+              <div className="text-sm font-medium">{(result.panel.normalAtkDmg * 100).toFixed(1)}%</div>
+            </div>
+          )}
+          {result.panel.heavyAtkDmg > 0 && (
+            <div className="bg-zinc-800 rounded p-2 text-center">
+              <div className="text-xs text-zinc-500">重击增伤</div>
+              <div className="text-sm font-medium">{(result.panel.heavyAtkDmg * 100).toFixed(1)}%</div>
+            </div>
+          )}
+          {result.panel.resonanceSkillDmg > 0 && (
+            <div className="bg-zinc-800 rounded p-2 text-center">
+              <div className="text-xs text-zinc-500">共鸣技能增伤</div>
+              <div className="text-sm font-medium">{(result.panel.resonanceSkillDmg * 100).toFixed(1)}%</div>
+            </div>
+          )}
+          {result.panel.resonanceLiberationDmg > 0 && (
+            <div className="bg-zinc-800 rounded p-2 text-center">
+              <div className="text-xs text-zinc-500">共鸣解放增伤</div>
+              <div className="text-sm font-medium">{(result.panel.resonanceLiberationDmg * 100).toFixed(1)}%</div>
+            </div>
+          )}
+        </div>
+      )}
 
       <table className="w-full text-xs">
         <thead>

@@ -98,6 +98,10 @@ export interface DamageResult {
     critRate: number
     critDmg: number
     elemDmg: number
+    resonanceSkillDmg: number
+    resonanceLiberationDmg: number
+    normalAtkDmg: number
+    heavyAtkDmg: number
   }
   skills: SkillDamage[]
   totalExpected: number
