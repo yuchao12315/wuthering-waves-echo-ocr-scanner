@@ -9,6 +9,7 @@ interface LoadoutStore {
   add: (loadout: SavedLoadout) => Promise<void>
   remove: (id: string) => Promise<void>
   rename: (id: string, name: string) => Promise<void>
+  update: (id: string, patch: Partial<SavedLoadout>) => Promise<void>
 }
 
 export const useLoadoutStore = create<LoadoutStore>((set, get) => ({
@@ -33,5 +34,10 @@ export const useLoadoutStore = create<LoadoutStore>((set, get) => ({
   rename: async (id, name) => {
     await db.loadouts.update(id, { name })
     set({ loadouts: get().loadouts.map(l => l.id === id ? { ...l, name } : l) })
+  },
+
+  update: async (id, patch) => {
+    await db.loadouts.update(id, patch)
+    set({ loadouts: get().loadouts.map(l => l.id === id ? { ...l, ...patch } : l) })
   },
 }))

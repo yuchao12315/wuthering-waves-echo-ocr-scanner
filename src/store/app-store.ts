@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import type { Character } from '@/types/character'
 import type { Echo } from '@/types/echo'
 
-type Page = 'echoes' | 'calculator' | 'characters'
+type Page = 'echoes' | 'calculator' | 'characters' | 'loadouts'
 
 interface LoadoutResult {
   echoes: Echo[]

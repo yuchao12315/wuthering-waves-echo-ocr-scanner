@@ -5,6 +5,7 @@ import { useLoadoutStore } from '@/store/loadout-store'
 import { EchoesPage } from '@/pages/echoes'
 import { CalculatorPage } from '@/pages/calculator'
 import { CharactersPage } from '@/pages/characters'
+import { LoadoutsPage } from '@/pages/loadouts'
 import { CHARACTER_WEIGHTS } from '@/lib/characters'
 import type { Character } from '@/types/character'
 
@@ -52,6 +53,7 @@ export default function App() {
   const tabs = [
     { key: 'echoes' as const, label: '声骸管理' },
     { key: 'calculator' as const, label: '搭配计算' },
+    { key: 'loadouts' as const, label: '套装方案' },
     { key: 'characters' as const, label: '角色' },
   ]
 
@@ -75,6 +77,7 @@ export default function App() {
       </nav>
       {page === 'echoes' && <EchoesPage />}
       {page === 'calculator' && <CalculatorPage />}
+      {page === 'loadouts' && <LoadoutsPage />}
       {page === 'characters' && <CharactersPage />}
     </div>
   )
