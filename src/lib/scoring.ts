@@ -65,15 +65,36 @@ function calcEchoScoreMax(echo: Echo, calc: CalcJson): number {
     }
   }
 
-  let subSum = 0
+  const usedCns = new Set<string>()
+  const validSubScores: number[] = []
   for (const sub of (echo.substats ?? [])) {
     const cn = Object.entries(CN_TO_STAT).find(([_, v]) => v === sub.type)?.[0]
     if (cn) {
+      usedCns.add(cn)
       const maxVal = MAX_SUB_VALUES[cn] ?? 0
       const w = subProps[cn] ?? 0
-      subSum += maxVal * w
+      if (w > 0) {
+        validSubScores.push(maxVal * w)
+      }
     }
   }
+
+  if (validSubScores.length < 5) {
+    const candidates: number[] = []
+    for (const [cn, maxVal] of Object.entries(MAX_SUB_VALUES)) {
+      if (!usedCns.has(cn)) {
+        const w = subProps[cn] ?? 0
+        if (w > 0) candidates.push(maxVal * w)
+      }
+    }
+    candidates.sort((a, b) => b - a)
+    for (const c of candidates) {
+      if (validSubScores.length >= 5) break
+      validSubScores.push(c)
+    }
+  }
+
+  const subSum = validSubScores.reduce((s, v) => s + v, 0)
 
   return bestMain + bestSec + subSum
 }

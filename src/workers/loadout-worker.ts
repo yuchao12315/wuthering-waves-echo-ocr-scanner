@@ -88,8 +88,11 @@ function calcEchoScoreMax(echo: Echo, calc: CalcJson): number {
   const mp = calc.main_props[String(cost)] ?? {};
   const sp = calc.sub_props;
 
-  const mainCn = CN_TO_STAT[echo.mainStat.type];
-  const bestMain = mainCn ? ((MAIN_STAT_CN[cost] ?? {})[mainCn] ?? 0) * (mp[mainCn] ?? 0) : 0;
+  let bestMain = 0;
+  if (echo.mainStat) {
+    const mainCn = CN_TO_STAT[echo.mainStat.type];
+    bestMain = mainCn ? ((MAIN_STAT_CN[cost] ?? {})[mainCn] ?? 0) * (mp[mainCn] ?? 0) : 0;
+  }
 
   let bestSec = 0;
   if (echo.secondaryStat) {
@@ -99,13 +102,35 @@ function calcEchoScoreMax(echo: Echo, calc: CalcJson): number {
     }
   }
 
-  let subSum = 0;
+  const usedCns = new Set<string>();
+  const validSubScores: number[] = [];
   for (const sub of echo.substats) {
     const cn = CN_TO_STAT[sub.type];
     if (cn) {
-      subSum += (MAX_SUB[cn] ?? 0) * (sp[cn] ?? 0);
+      usedCns.add(cn);
+      const w = sp[cn] ?? 0;
+      if (w > 0) {
+        validSubScores.push((MAX_SUB[cn] ?? 0) * w);
+      }
     }
   }
+
+  if (validSubScores.length < 5) {
+    const candidates: number[] = [];
+    for (const [cn, maxVal] of Object.entries(MAX_SUB)) {
+      if (!usedCns.has(cn)) {
+        const w = sp[cn] ?? 0;
+        if (w > 0) candidates.push(maxVal * w);
+      }
+    }
+    candidates.sort((a, b) => b - a);
+    for (const c of candidates) {
+      if (validSubScores.length >= 5) break;
+      validSubScores.push(c);
+    }
+  }
+
+  const subSum = validSubScores.reduce((s, v) => s + v, 0);
 
   return bestMain + bestSec + subSum;
 }
