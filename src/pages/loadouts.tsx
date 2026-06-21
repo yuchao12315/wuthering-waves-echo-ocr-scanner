@@ -175,7 +175,7 @@ function DamagePanel({ loadout }: { loadout: SavedLoadout }) {
                   {sk.tag}
                 </span>
               </td>
-              <td className="py-1 text-right text-zinc-400">{(sk.multiplier * 100).toFixed(1)}%</td>
+              <td className="py-1 text-right text-zinc-400">{sk.multiplierStr}</td>
               <td className="py-1 text-right text-zinc-200 font-mono">{sk.expected.toLocaleString()}</td>
               <td className="py-1 text-right text-yellow-400 font-mono">{sk.crit.toLocaleString()}</td>
             </tr>

@@ -55,17 +55,41 @@ function collectEchoStats(echoes: Echo[]): EchoStats {
   return stats
 }
 
+/**
+ * Parse a multiplier string like "48.71%", "21.58%*4", "19.61%+9.81%*3"
+ * into a total decimal multiplier (e.g. 0.4871, 0.8632, 0.4902).
+ */
+export function parseMultiplierStr(str: string): number {
+  if (!str || !str.includes('%')) return 0
+  // Split by '+' to handle compound expressions like "19.61%+9.81%*3"
+  const parts = str.split('+')
+  let total = 0
+  for (const part of parts) {
+    const trimmed = part.trim()
+    // Check for multiplier: "21.58%*4"
+    const match = trimmed.match(/^([0-9.]+)%(?:\*(\d+))?$/)
+    if (match) {
+      const pct = parseFloat(match[1]) / 100
+      const count = match[2] ? parseInt(match[2]) : 1
+      total += pct * count
+    }
+  }
+  return total
+}
+
 export function calcDamage(
   character: CharacterBase,
   weapon: Weapon,
   weaponRefine: number,
   echoes: Echo[],
+  skillLevel = 10,
   charLevel = 90,
   enemyLevel = 90,
   enemyResist = 0.1,
 ): DamageResult {
   const echoStats = collectEchoStats(echoes)
   const refineIdx = Math.max(0, Math.min(4, weaponRefine - 1))
+  const levelIdx = Math.max(0, Math.min(18, skillLevel - 1))
 
   const baseAtk = character.baseAtk + weapon.baseAtk
 
@@ -96,9 +120,16 @@ export function calcDamage(
     if (buff.type === 'elemDmg') baseElemDmg += buff.value
   }
 
+  // Weapon passive: parse the first param value at refinement level as base passive value
+  // This is a simplified approach; full weapon passive effects are complex (see register_weapon.py)
   let weaponPassiveVal = 0
-  if (weapon.passive) {
-    weaponPassiveVal = weapon.passive.values[refineIdx] ?? 0
+  if (weapon.passive && weapon.passive.param.length > 0) {
+    const paramStr = weapon.passive.param[0]?.[refineIdx] ?? ''
+    const match = paramStr.match(/^([0-9.]+)%?$/)
+    if (match) {
+      const val = parseFloat(match[1])
+      weaponPassiveVal = paramStr.includes('%') ? val / 100 : val
+    }
   }
 
   const defMult = (100 + charLevel) / (199 + charLevel + enemyLevel)
@@ -108,6 +139,10 @@ export function calcDamage(
   const totalElemDmg = baseElemDmg + weaponPassiveVal
 
   const skills = character.skills.map(skill => {
+    // Get multiplier string at the selected skill level
+    const multiplierStr = skill.multipliers[levelIdx] ?? skill.multipliers[skill.multipliers.length - 1] ?? '0%'
+    const multiplier = parseMultiplierStr(multiplierStr)
+
     // 增伤区 = 基础属性增伤 + 技能固有增伤 + 武器被动额外倍数
     const extraWeaponMult = character.weaponPassiveMultiplier?.[skill.tag] ?? 0
     let dmgBonus = totalElemDmg + skill.bonusDmg + weaponPassiveVal * extraWeaponMult
@@ -119,14 +154,15 @@ export function calcDamage(
       dmgBonus += echoStats.skillDmg.resonanceLiberation
     }
 
-    const baseDmg = totalAtk * skill.multiplier
+    const baseDmg = totalAtk * multiplier
     const crit = baseDmg * (1 + dmgBonus) * (1 + totalCritDmg) * defMult * resMult
     const expected = baseDmg * (1 + dmgBonus) * (1 + totalCritRate * totalCritDmg) * defMult * resMult
 
     return {
       name: skill.name,
       tag: skill.tag,
-      multiplier: skill.multiplier,
+      multiplierStr,
+      multiplier,
       expected: Math.round(expected),
       crit: Math.round(crit),
     }

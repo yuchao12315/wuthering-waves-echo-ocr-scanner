@@ -1,8 +1,10 @@
 export interface Skill {
   name: string
-  multiplier: number
+  multipliers: string[]   // 19-level multiplier strings, e.g. ["24.50%", ..., "88.89%"]
   tag: 'E' | 'Q' | '变奏'
   bonusDmg: number
+  treeId: string          // skillTree key ("1"-"17")
+  skillType: string       // e.g. "常态攻击", "共鸣技能", "共鸣解放", "变奏技能", "共鸣回路"
 }
 
 export interface InherentBuff {
@@ -20,6 +22,12 @@ export interface CharacterBase {
   skills: Skill[]
 }
 
+export interface WeaponPassive {
+  effectName: string       // passive ability name
+  effect: string           // description template with {0}, {1}... placeholders
+  param: string[][]        // param[i][j]: i = placeholder index, j = refinement rank 0-4 (R1-R5)
+}
+
 export interface Weapon {
   name: string
   type: string
@@ -28,7 +36,7 @@ export interface Weapon {
   atkPct: number
   critRate: number
   critDmg: number
-  passive: { type: string; values: number[] } | null
+  passive: WeaponPassive
 }
 
 export interface DamageResult {
@@ -45,7 +53,8 @@ export interface DamageResult {
 export interface SkillDamage {
   name: string
   tag: string
-  multiplier: number
+  multiplierStr: string   // raw multiplier string for display, e.g. "48.71%" or "21.58%*4"
+  multiplier: number      // parsed total multiplier as decimal, e.g. 0.4871 or 0.8632
   expected: number
   crit: number
 }
