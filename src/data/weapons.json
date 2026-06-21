@@ -1,0 +1,635 @@
+[
+  {
+    "name": "时和岁稔",
+    "type": "长刃",
+    "rarity": 5,
+    "baseAtk": 587,
+    "atkPct": 0,
+    "critRate": 0.243,
+    "critDmg": 0,
+    "passive": {
+      "type": "elemDmg",
+      "values": [
+        0.12,
+        0.15,
+        0.18,
+        0.21,
+        0.24
+      ]
+    }
+  },
+  {
+    "name": "浩境粼光",
+    "type": "长刃",
+    "rarity": 5,
+    "baseAtk": 587,
+    "atkPct": 0.364,
+    "critRate": 0,
+    "critDmg": 0,
+    "passive": {
+      "type": "qDmg",
+      "values": [
+        0.07,
+        0.0875,
+        0.105,
+        0.1225,
+        0.14
+      ]
+    }
+  },
+  {
+    "name": "苍鳞千嶂",
+    "type": "长刃",
+    "rarity": 5,
+    "baseAtk": 587,
+    "atkPct": 0,
+    "critRate": 0,
+    "critDmg": 0.486,
+    "passive": {
+      "type": "elemDmg",
+      "values": [
+        0.12,
+        0.15,
+        0.18,
+        0.21,
+        0.24
+      ]
+    }
+  },
+  {
+    "name": "雷鸣芯片",
+    "type": "长刃",
+    "rarity": 4,
+    "baseAtk": 412,
+    "atkPct": 0.306,
+    "critRate": 0,
+    "critDmg": 0,
+    "passive": null
+  },
+  {
+    "name": "永夜星火",
+    "type": "长刃",
+    "rarity": 4,
+    "baseAtk": 462,
+    "atkPct": 0,
+    "critRate": 0.204,
+    "critDmg": 0,
+    "passive": null
+  },
+  {
+    "name": "星序协响",
+    "type": "长刃",
+    "rarity": 4,
+    "baseAtk": 412,
+    "atkPct": 0,
+    "critRate": 0,
+    "critDmg": 0.408,
+    "passive": null
+  },
+  {
+    "name": "异度",
+    "type": "长刃",
+    "rarity": 4,
+    "baseAtk": 412,
+    "atkPct": 0.306,
+    "critRate": 0,
+    "critDmg": 0,
+    "passive": null
+  },
+  {
+    "name": "擎渊怒涛",
+    "type": "臂铠",
+    "rarity": 5,
+    "baseAtk": 587,
+    "atkPct": 0.364,
+    "critRate": 0,
+    "critDmg": 0,
+    "passive": null
+  },
+  {
+    "name": "裁梦星痕",
+    "type": "臂铠",
+    "rarity": 5,
+    "baseAtk": 587,
+    "atkPct": 0,
+    "critRate": 0.243,
+    "critDmg": 0,
+    "passive": {
+      "type": "elemDmg",
+      "values": [
+        0.12,
+        0.15,
+        0.18,
+        0.21,
+        0.24
+      ]
+    }
+  },
+  {
+    "name": "诸方玄枢",
+    "type": "臂铠",
+    "rarity": 5,
+    "baseAtk": 587,
+    "atkPct": 0,
+    "critRate": 0,
+    "critDmg": 0.486,
+    "passive": {
+      "type": "eDmg",
+      "values": [
+        0.12,
+        0.15,
+        0.18,
+        0.21,
+        0.24
+      ]
+    }
+  },
+  {
+    "name": "呼啸重音",
+    "type": "臂铠",
+    "rarity": 4,
+    "baseAtk": 412,
+    "atkPct": 0.306,
+    "critRate": 0,
+    "critDmg": 0,
+    "passive": null
+  },
+  {
+    "name": "袍泽之固",
+    "type": "臂铠",
+    "rarity": 4,
+    "baseAtk": 462,
+    "atkPct": 0,
+    "critRate": 0.204,
+    "critDmg": 0,
+    "passive": null
+  },
+  {
+    "name": "钢影拳",
+    "type": "臂铠",
+    "rarity": 4,
+    "baseAtk": 412,
+    "atkPct": 0,
+    "critRate": 0,
+    "critDmg": 0.408,
+    "passive": null
+  },
+  {
+    "name": "千古洑流",
+    "type": "迅刀",
+    "rarity": 5,
+    "baseAtk": 587,
+    "atkPct": 0,
+    "critRate": 0.243,
+    "critDmg": 0,
+    "passive": {
+      "type": "elemDmg",
+      "values": [
+        0.12,
+        0.15,
+        0.18,
+        0.21,
+        0.24
+      ]
+    }
+  },
+  {
+    "name": "赫奕流明",
+    "type": "迅刀",
+    "rarity": 5,
+    "baseAtk": 587,
+    "atkPct": 0,
+    "critRate": 0,
+    "critDmg": 0.486,
+    "passive": {
+      "type": "eDmg",
+      "values": [
+        0.12,
+        0.15,
+        0.18,
+        0.21,
+        0.24
+      ]
+    }
+  },
+  {
+    "name": "西升残照",
+    "type": "迅刀",
+    "rarity": 5,
+    "baseAtk": 587,
+    "atkPct": 0.364,
+    "critRate": 0,
+    "critDmg": 0,
+    "passive": null
+  },
+  {
+    "name": "永续坍缩",
+    "type": "迅刀",
+    "rarity": 4,
+    "baseAtk": 462,
+    "atkPct": 0,
+    "critRate": 0.204,
+    "critDmg": 0,
+    "passive": null
+  },
+  {
+    "name": "行进序曲",
+    "type": "迅刀",
+    "rarity": 4,
+    "baseAtk": 412,
+    "atkPct": 0.306,
+    "critRate": 0,
+    "critDmg": 0,
+    "passive": null
+  },
+  {
+    "name": "飞逝芳华",
+    "type": "迅刀",
+    "rarity": 4,
+    "baseAtk": 412,
+    "atkPct": 0,
+    "critRate": 0,
+    "critDmg": 0.408,
+    "passive": null
+  },
+  {
+    "name": "教官之剑",
+    "type": "迅刀",
+    "rarity": 4,
+    "baseAtk": 412,
+    "atkPct": 0.306,
+    "critRate": 0,
+    "critDmg": 0,
+    "passive": null
+  },
+  {
+    "name": "掣傀之手",
+    "type": "音感仪",
+    "rarity": 5,
+    "baseAtk": 500,
+    "atkPct": 0,
+    "critRate": 0.36,
+    "critDmg": 0,
+    "passive": null
+  },
+  {
+    "name": "星厄低吟",
+    "type": "音感仪",
+    "rarity": 5,
+    "baseAtk": 500,
+    "atkPct": 0,
+    "critRate": 0,
+    "critDmg": 0.72,
+    "passive": null
+  },
+  {
+    "name": "漪澜浮录",
+    "type": "音感仪",
+    "rarity": 5,
+    "baseAtk": 500,
+    "atkPct": 0.54,
+    "critRate": 0,
+    "critDmg": 0,
+    "passive": null
+  },
+  {
+    "name": "奇幻变奏",
+    "type": "音感仪",
+    "rarity": 4,
+    "baseAtk": 400,
+    "atkPct": 0,
+    "critRate": 0.24,
+    "critDmg": 0,
+    "passive": null
+  },
+  {
+    "name": "清音",
+    "type": "音感仪",
+    "rarity": 4,
+    "baseAtk": 350,
+    "atkPct": 0.452,
+    "critRate": 0,
+    "critDmg": 0,
+    "passive": null
+  },
+  {
+    "name": "异度·音感仪",
+    "type": "音感仪",
+    "rarity": 4,
+    "baseAtk": 400,
+    "atkPct": 0.36,
+    "critRate": 0,
+    "critDmg": 0,
+    "passive": null
+  },
+  {
+    "name": "今州守望",
+    "type": "音感仪",
+    "rarity": 4,
+    "baseAtk": 400,
+    "atkPct": 0,
+    "critRate": 0,
+    "critDmg": 0.48,
+    "passive": null
+  },
+  {
+    "name": "静谧长夜",
+    "type": "手枪",
+    "rarity": 5,
+    "baseAtk": 587,
+    "atkPct": 0.364,
+    "critRate": 0,
+    "critDmg": 0,
+    "passive": null
+  },
+  {
+    "name": "停驻之烟",
+    "type": "手枪",
+    "rarity": 4,
+    "baseAtk": 412,
+    "atkPct": 0.306,
+    "critRate": 0,
+    "critDmg": 0,
+    "passive": null
+  },
+  {
+    "name": "嘉年华",
+    "type": "手枪",
+    "rarity": 4,
+    "baseAtk": 462,
+    "atkPct": 0,
+    "critRate": 0.204,
+    "critDmg": 0,
+    "passive": null
+  },
+  {
+    "name": "雾切",
+    "type": "长刃",
+    "rarity": 5,
+    "baseAtk": 587,
+    "atkPct": 0,
+    "critRate": 0.243,
+    "critDmg": 0,
+    "passive": null
+  },
+  {
+    "name": "北冥",
+    "type": "长刃",
+    "rarity": 5,
+    "baseAtk": 587,
+    "atkPct": 0,
+    "critRate": 0.243,
+    "critDmg": 0,
+    "passive": null
+  },
+  {
+    "name": "辉光裂斩",
+    "type": "长刃",
+    "rarity": 5,
+    "baseAtk": 587,
+    "atkPct": 0,
+    "critRate": 0,
+    "critDmg": 0.486,
+    "passive": null
+  },
+  {
+    "name": "炽焰烙印",
+    "type": "长刃",
+    "rarity": 5,
+    "baseAtk": 587,
+    "atkPct": 0.364,
+    "critRate": 0,
+    "critDmg": 0,
+    "passive": null
+  },
+  {
+    "name": "炎烬之手",
+    "type": "臂铠",
+    "rarity": 5,
+    "baseAtk": 587,
+    "atkPct": 0,
+    "critRate": 0,
+    "critDmg": 0.486,
+    "passive": null
+  },
+  {
+    "name": "誓阳密文",
+    "type": "臂铠",
+    "rarity": 5,
+    "baseAtk": 587,
+    "atkPct": 0,
+    "critRate": 0,
+    "critDmg": 0.486,
+    "passive": null
+  },
+  {
+    "name": "真理之柄",
+    "type": "臂铠",
+    "rarity": 5,
+    "baseAtk": 587,
+    "atkPct": 0,
+    "critRate": 0.243,
+    "critDmg": 0,
+    "passive": null
+  },
+  {
+    "name": "破晓之脊",
+    "type": "臂铠",
+    "rarity": 5,
+    "baseAtk": 587,
+    "atkPct": 0,
+    "critRate": 0.243,
+    "critDmg": 0,
+    "passive": null
+  },
+  {
+    "name": "望月之印",
+    "type": "臂铠",
+    "rarity": 5,
+    "baseAtk": 587,
+    "atkPct": 0,
+    "critRate": 0.243,
+    "critDmg": 0,
+    "passive": null
+  },
+  {
+    "name": "脉动护腕",
+    "type": "臂铠",
+    "rarity": 5,
+    "baseAtk": 587,
+    "atkPct": 0,
+    "critRate": 0.243,
+    "critDmg": 0,
+    "passive": null
+  },
+  {
+    "name": "裁春",
+    "type": "迅刀",
+    "rarity": 5,
+    "baseAtk": 587,
+    "atkPct": 0,
+    "critRate": 0,
+    "critDmg": 0.486,
+    "passive": null
+  },
+  {
+    "name": "流光残照",
+    "type": "迅刀",
+    "rarity": 5,
+    "baseAtk": 587,
+    "atkPct": 0,
+    "critRate": 0,
+    "critDmg": 0.486,
+    "passive": null
+  },
+  {
+    "name": "恒明极星",
+    "type": "迅刀",
+    "rarity": 5,
+    "baseAtk": 587,
+    "atkPct": 0,
+    "critRate": 0.243,
+    "critDmg": 0,
+    "passive": null
+  },
+  {
+    "name": "翠语裁决",
+    "type": "迅刀",
+    "rarity": 5,
+    "baseAtk": 587,
+    "atkPct": 0,
+    "critRate": 0.243,
+    "critDmg": 0,
+    "passive": null
+  },
+  {
+    "name": "创世翡翠",
+    "type": "迅刀",
+    "rarity": 5,
+    "baseAtk": 587,
+    "atkPct": 0,
+    "critRate": 0.243,
+    "critDmg": 0,
+    "passive": null
+  },
+  {
+    "name": "霜燃",
+    "type": "迅刀",
+    "rarity": 5,
+    "baseAtk": 587,
+    "atkPct": 0,
+    "critRate": 0.243,
+    "critDmg": 0,
+    "passive": null
+  },
+  {
+    "name": "不灭勇气",
+    "type": "迅刀",
+    "rarity": 5,
+    "baseAtk": 587,
+    "atkPct": 0.364,
+    "critRate": 0,
+    "critDmg": 0,
+    "passive": null
+  },
+  {
+    "name": "忘川挽歌",
+    "type": "音感仪",
+    "rarity": 5,
+    "baseAtk": 500,
+    "atkPct": 0,
+    "critRate": 0.36,
+    "critDmg": 0,
+    "passive": null
+  },
+  {
+    "name": "光耀赞歌",
+    "type": "音感仪",
+    "rarity": 5,
+    "baseAtk": 500,
+    "atkPct": 0,
+    "critRate": 0.36,
+    "critDmg": 0,
+    "passive": null
+  },
+  {
+    "name": "霜缀新芽",
+    "type": "音感仪",
+    "rarity": 5,
+    "baseAtk": 500,
+    "atkPct": 0,
+    "critRate": 0,
+    "critDmg": 0.72,
+    "passive": null
+  },
+  {
+    "name": "海妖低语",
+    "type": "音感仪",
+    "rarity": 5,
+    "baseAtk": 500,
+    "atkPct": 0,
+    "critRate": 0,
+    "critDmg": 0.72,
+    "passive": null
+  },
+  {
+    "name": "静谧迷雾",
+    "type": "手枪",
+    "rarity": 5,
+    "baseAtk": 587,
+    "atkPct": 0,
+    "critRate": 0.243,
+    "critDmg": 0,
+    "passive": null
+  },
+  {
+    "name": "终幕之舞",
+    "type": "手枪",
+    "rarity": 5,
+    "baseAtk": 587,
+    "atkPct": 0,
+    "critRate": 0,
+    "critDmg": 0.486,
+    "passive": null
+  },
+  {
+    "name": "光谱冲击",
+    "type": "手枪",
+    "rarity": 5,
+    "baseAtk": 587,
+    "atkPct": 0,
+    "critRate": 0.243,
+    "critDmg": 0,
+    "passive": null
+  },
+  {
+    "name": "光与影",
+    "type": "手枪",
+    "rarity": 5,
+    "baseAtk": 587,
+    "atkPct": 0,
+    "critRate": 0,
+    "critDmg": 0.486,
+    "passive": null
+  },
+  {
+    "name": "相位均质",
+    "type": "手枪",
+    "rarity": 5,
+    "baseAtk": 587,
+    "atkPct": 0,
+    "critRate": 0,
+    "critDmg": 0.486,
+    "passive": null
+  },
+  {
+    "name": "林间咏叹",
+    "type": "手枪",
+    "rarity": 5,
+    "baseAtk": 587,
+    "atkPct": 0,
+    "critRate": 0.243,
+    "critDmg": 0,
+    "passive": null
+  }
+]

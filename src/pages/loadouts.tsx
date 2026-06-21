@@ -3,24 +3,28 @@ import { useLoadoutStore } from '@/store/loadout-store'
 import { useEchoStore } from '@/store/echo-store'
 import { useAppStore } from '@/store/app-store'
 import { EchoCard } from '@/components/echo-card'
-import { getGrade } from '@/lib/scoring'
-import { scoreEcho } from '@/lib/scoring'
+import { getGrade, scoreEcho } from '@/lib/scoring'
+import { calcDamage } from '@/lib/damage'
 import { SONATA_NAMES } from '@/lib/constants'
+import CHARACTERS_BASE from '@/data/characters-base.json'
+import WEAPONS from '@/data/weapons.json'
 import type { Echo, SavedLoadout } from '@/types/echo'
 import type { CalcJson } from '@/types/character'
-
-const STAT_DISPLAY: Record<string, string> = {
-  FLAT_ATK: '攻击', ATK_PCT: '攻击%', FLAT_HP: '生命', HP_PCT: '生命%',
-  FLAT_DEF: '防御', DEF_PCT: '防御%', CRIT_RATE: '暴击率', CRIT_DMG: '暴击伤害',
-  ENERGY_REGEN: '共鸣效率', ELEM_DMG: '属性伤害', HEAL_BONUS: '治疗加成',
-  NORMAL_ATK_DMG: '普攻伤害', HEAVY_ATK_DMG: '重击伤害',
-  RESONANCE_SKILL_DMG: '共鸣技能伤害', RESONANCE_LIBERATION_DMG: '共鸣解放伤害',
-}
+import type { CharacterBase, Weapon } from '@/types/damage'
 
 const GRADE_COLORS: Record<string, string> = {
   SSS: 'text-red-400', SS: 'text-orange-400', S: 'text-yellow-400',
   A: 'text-purple-400', B: 'text-blue-400', C: 'text-zinc-400',
 }
+
+const TAG_COLORS: Record<string, string> = {
+  E: 'bg-blue-900/50 text-blue-300',
+  Q: 'bg-orange-900/50 text-orange-300',
+  '变奏': 'bg-green-900/50 text-green-300',
+}
+
+const charsBase = CHARACTERS_BASE as Record<string, CharacterBase>
+const weapons = WEAPONS as Weapon[]
 
 function EchoPickerModal({ cost, calc, onPick, onClose }: {
   cost: number
@@ -92,6 +96,103 @@ function EchoPickerModal({ cost, calc, onPick, onClose }: {
   )
 }
 
+function DamagePanel({ loadout }: { loadout: SavedLoadout }) {
+  const charBase = charsBase[loadout.characterName]
+  const availableWeapons = charBase ? weapons.filter(w => w.type === charBase.weaponType) : []
+  const [weaponName, setWeaponName] = useState(availableWeapons[0]?.name ?? '')
+  const [refine, setRefine] = useState(1)
+
+  if (!charBase) {
+    return <p className="text-xs text-zinc-500 mt-2">暂无该角色的伤害数据</p>
+  }
+
+  const weapon = weapons.find(w => w.name === weaponName)
+  if (!weapon) return null
+
+  const result = calcDamage(charBase, weapon, refine, loadout.echoes)
+
+  return (
+    <div className="mt-3 border-t border-zinc-800 pt-3">
+      <div className="flex items-center gap-3 mb-3">
+        <select
+          value={weaponName}
+          onChange={e => setWeaponName(e.target.value)}
+          className="bg-zinc-800 border border-zinc-700 rounded px-2 py-1 text-xs"
+        >
+          {availableWeapons.map(w => (
+            <option key={w.name} value={w.name}>{w.name}</option>
+          ))}
+        </select>
+        <div className="flex gap-1">
+          {[1, 2, 3, 4, 5].map(r => (
+            <button
+              key={r}
+              type="button"
+              onClick={() => setRefine(r)}
+              className={`w-6 h-6 text-xs rounded ${refine === r ? 'bg-purple-600 text-white' : 'bg-zinc-800 text-zinc-400'}`}
+            >
+              {r}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="grid grid-cols-4 gap-2 mb-3">
+        <div className="bg-zinc-800 rounded p-2 text-center">
+          <div className="text-xs text-zinc-500">攻击力</div>
+          <div className="text-sm font-medium">{result.panel.atk}</div>
+        </div>
+        <div className="bg-zinc-800 rounded p-2 text-center">
+          <div className="text-xs text-zinc-500">暴击率</div>
+          <div className="text-sm font-medium">{(result.panel.critRate * 100).toFixed(1)}%</div>
+        </div>
+        <div className="bg-zinc-800 rounded p-2 text-center">
+          <div className="text-xs text-zinc-500">暴击伤害</div>
+          <div className="text-sm font-medium">{(result.panel.critDmg * 100).toFixed(1)}%</div>
+        </div>
+        <div className="bg-zinc-800 rounded p-2 text-center">
+          <div className="text-xs text-zinc-500">属性增伤</div>
+          <div className="text-sm font-medium">{(result.panel.elemDmg * 100).toFixed(1)}%</div>
+        </div>
+      </div>
+
+      <table className="w-full text-xs">
+        <thead>
+          <tr className="text-zinc-500 border-b border-zinc-800">
+            <th className="text-left py-1 font-normal">技能</th>
+            <th className="text-left py-1 font-normal">类型</th>
+            <th className="text-right py-1 font-normal">倍率</th>
+            <th className="text-right py-1 font-normal">期望伤害</th>
+            <th className="text-right py-1 font-normal">暴击伤害</th>
+          </tr>
+        </thead>
+        <tbody>
+          {result.skills.map(sk => (
+            <tr key={sk.name} className="border-b border-zinc-800/50">
+              <td className="py-1 text-zinc-300">{sk.name}</td>
+              <td className="py-1">
+                <span className={`px-1.5 py-0.5 rounded text-[10px] ${TAG_COLORS[sk.tag] ?? 'bg-zinc-800 text-zinc-400'}`}>
+                  {sk.tag}
+                </span>
+              </td>
+              <td className="py-1 text-right text-zinc-400">{(sk.multiplier * 100).toFixed(1)}%</td>
+              <td className="py-1 text-right text-zinc-200 font-mono">{sk.expected.toLocaleString()}</td>
+              <td className="py-1 text-right text-yellow-400 font-mono">{sk.crit.toLocaleString()}</td>
+            </tr>
+          ))}
+        </tbody>
+        <tfoot>
+          <tr className="border-t border-zinc-700">
+            <td colSpan={3} className="py-1 text-zinc-400">总期望伤害</td>
+            <td className="py-1 text-right text-zinc-200 font-mono font-medium">{result.totalExpected.toLocaleString()}</td>
+            <td />
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  )
+}
+
 function LoadoutCard({ loadout, onUpdate }: {
   loadout: SavedLoadout
   onUpdate: () => void
@@ -101,10 +202,12 @@ function LoadoutCard({ loadout, onUpdate }: {
   const [editing, setEditing] = useState(false)
   const [editName, setEditName] = useState(loadout.name)
   const [replaceSlot, setReplaceSlot] = useState<number | null>(null)
+  const [showDamage, setShowDamage] = useState(false)
 
   const char = characters.find(c => c.name === loadout.characterName)
   const calc = char?.calc ?? null
   const grade = getGrade(loadout.score)
+  const hasDamageData = loadout.characterName in charsBase
 
   const handleRename = () => {
     if (editName.trim() && editName !== loadout.name) {
@@ -150,6 +253,15 @@ function LoadoutCard({ loadout, onUpdate }: {
         <span className="text-xs text-zinc-500">{loadout.characterName}</span>
         <span className="text-sm">总分: {loadout.score.toFixed(2)}</span>
         <span className={`text-sm font-bold ${GRADE_COLORS[grade] ?? 'text-zinc-400'}`}>{grade}</span>
+        {hasDamageData && (
+          <button
+            type="button"
+            onClick={() => setShowDamage(!showDamage)}
+            className="text-xs text-purple-400 hover:text-purple-300"
+          >
+            {showDamage ? '收起伤害' : '伤害计算'}
+          </button>
+        )}
         <button
           type="button"
           onClick={() => { if (confirm('确定删除该套装？')) remove(loadout.id) }}
@@ -172,6 +284,8 @@ function LoadoutCard({ loadout, onUpdate }: {
           </div>
         ))}
       </div>
+
+      {showDamage && <DamagePanel loadout={loadout} />}
 
       {replaceSlot !== null && (
         <EchoPickerModal

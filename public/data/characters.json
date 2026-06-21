@@ -2,8 +2,8 @@
   {
     "id": 1102,
     "name": "散华",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "冷凝",
+    "weaponType": "迅刀",
     "rarity": 5,
     "calc": {
       "name": "散华-主/副c",
@@ -131,9 +131,9 @@
   {
     "id": 1103,
     "name": "白芷",
-    "element": "unknown",
-    "weaponType": "unknown",
-    "rarity": 5,
+    "element": "冷凝",
+    "weaponType": "音感仪",
+    "rarity": 4,
     "calc": {
       "name": "白芷-通用",
       "main_props": {
@@ -251,8 +251,8 @@
   {
     "id": 1104,
     "name": "凌阳",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "冷凝",
+    "weaponType": "臂铠",
     "rarity": 5,
     "calc": {
       "name": "凌阳-通用",
@@ -380,8 +380,8 @@
   {
     "id": 1105,
     "name": "折枝",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "冷凝",
+    "weaponType": "音感仪",
     "rarity": 5,
     "calc": {
       "name": "折枝-通用",
@@ -509,8 +509,8 @@
   {
     "id": 1106,
     "name": "釉瑚",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "冷凝",
+    "weaponType": "臂铠",
     "rarity": 5,
     "calc": {
       "name": "釉瑚-通用",
@@ -636,8 +636,8 @@
   {
     "id": 1107,
     "name": "珂莱塔",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "冷凝",
+    "weaponType": "手枪",
     "rarity": 5,
     "calc": {
       "name": "珂莱塔-通用",
@@ -763,8 +763,8 @@
   {
     "id": 1108,
     "name": "绯雪",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "冷凝",
+    "weaponType": "迅刀",
     "rarity": 5,
     "calc": {
       "name": "绯雪-通用",
@@ -891,8 +891,8 @@
   {
     "id": 1109,
     "name": "洛瑟菈",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "冷凝",
+    "weaponType": "音感仪",
     "rarity": 5,
     "calc": {
       "name": "洛瑟菈-霜渐",
@@ -1018,9 +1018,9 @@
   {
     "id": 1202,
     "name": "炽霞",
-    "element": "unknown",
-    "weaponType": "unknown",
-    "rarity": 5,
+    "element": "热熔",
+    "weaponType": "手枪",
+    "rarity": 4,
     "calc": {
       "name": "炽霞-通用",
       "main_props": {
@@ -1147,8 +1147,8 @@
   {
     "id": 1203,
     "name": "安可",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "热熔",
+    "weaponType": "音感仪",
     "rarity": 5,
     "calc": {
       "name": "安可-通用",
@@ -1276,9 +1276,9 @@
   {
     "id": 1204,
     "name": "莫特斐",
-    "element": "unknown",
-    "weaponType": "unknown",
-    "rarity": 5,
+    "element": "热熔",
+    "weaponType": "手枪",
+    "rarity": 4,
     "calc": {
       "name": "莫特斐-通用",
       "main_props": {
@@ -1404,8 +1404,8 @@
   {
     "id": 1205,
     "name": "长离",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "热熔",
+    "weaponType": "迅刀",
     "rarity": 5,
     "calc": {
       "name": "长离-主/副c",
@@ -1532,8 +1532,8 @@
   {
     "id": 1206,
     "name": "布兰特",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "热熔",
+    "weaponType": "迅刀",
     "rarity": 5,
     "calc": {
       "name": "布兰特-通用",
@@ -1659,8 +1659,8 @@
   {
     "id": 1207,
     "name": "露帕",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "热熔",
+    "weaponType": "长刃",
     "rarity": 5,
     "calc": {
       "name": "露帕-通用",
@@ -1787,8 +1787,8 @@
   {
     "id": 1208,
     "name": "嘉贝莉娜",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "热熔",
+    "weaponType": "手枪",
     "rarity": 5,
     "calc": {
       "name": "嘉贝莉娜-通用",
@@ -1913,8 +1913,8 @@
   {
     "id": 1209,
     "name": "莫宁",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "热熔",
+    "weaponType": "长刃",
     "rarity": 5,
     "calc": {
       "name": "莫宁-通用",
@@ -2042,8 +2042,8 @@
   {
     "id": 1210,
     "name": "爱弥斯",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "热熔",
+    "weaponType": "迅刀",
     "rarity": 5,
     "calc": {
       "name": "爱弥斯-通用",
@@ -2170,8 +2170,8 @@
   {
     "id": 1211,
     "name": "达妮娅",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "热熔",
+    "weaponType": "音感仪",
     "rarity": 5,
     "calc": {
       "name": "达妮娅-通用",
@@ -2298,8 +2298,8 @@
   {
     "id": 1301,
     "name": "卡卡罗",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "导电",
+    "weaponType": "长刃",
     "rarity": 5,
     "calc": {
       "name": "卡卡罗-通用",
@@ -2427,8 +2427,8 @@
   {
     "id": 1302,
     "name": "吟霖",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "导电",
+    "weaponType": "音感仪",
     "rarity": 5,
     "calc": {
       "name": "吟霖-通用",
@@ -2555,8 +2555,8 @@
   {
     "id": 1303,
     "name": "渊武",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "导电",
+    "weaponType": "臂铠",
     "rarity": 5,
     "calc": {
       "name": "渊武-通用",
@@ -2681,8 +2681,8 @@
   {
     "id": 1304,
     "name": "今汐",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "衍射",
+    "weaponType": "长刃",
     "rarity": 5,
     "calc": {
       "name": "今汐-通用",
@@ -2809,8 +2809,8 @@
   {
     "id": 1305,
     "name": "相里要",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "导电",
+    "weaponType": "臂铠",
     "rarity": 5,
     "calc": {
       "name": "相里要-通用",
@@ -2938,8 +2938,8 @@
   {
     "id": 1306,
     "name": "奥古斯塔",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "导电",
+    "weaponType": "长刃",
     "rarity": 5,
     "calc": {
       "name": "奥古斯塔-通用",
@@ -3065,8 +3065,8 @@
   {
     "id": 1307,
     "name": "卜灵",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "导电",
+    "weaponType": "音感仪",
     "rarity": 5,
     "calc": {
       "name": "卜灵-小维版",
@@ -3185,8 +3185,8 @@
   {
     "id": 1308,
     "name": "丽贝卡",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "导电",
+    "weaponType": "手枪",
     "rarity": 5,
     "calc": {
       "name": "丽贝卡-通用",
@@ -3313,9 +3313,9 @@
   {
     "id": 1402,
     "name": "秧秧",
-    "element": "unknown",
-    "weaponType": "unknown",
-    "rarity": 5,
+    "element": "气动",
+    "weaponType": "迅刀",
+    "rarity": 4,
     "calc": {
       "name": "秧秧-通用",
       "main_props": {
@@ -3443,9 +3443,9 @@
   {
     "id": 1403,
     "name": "秋水",
-    "element": "unknown",
-    "weaponType": "unknown",
-    "rarity": 5,
+    "element": "气动",
+    "weaponType": "手枪",
+    "rarity": 4,
     "calc": {
       "name": "秋水-通用",
       "main_props": {
@@ -3571,8 +3571,8 @@
   {
     "id": 1404,
     "name": "忌炎",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "气动",
+    "weaponType": "长刃",
     "rarity": 5,
     "calc": {
       "name": "忌炎-通用",
@@ -3700,8 +3700,8 @@
   {
     "id": 1405,
     "name": "鉴心",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "气动",
+    "weaponType": "臂铠",
     "rarity": 5,
     "calc": {
       "name": "鉴心-通用",
@@ -3829,8 +3829,8 @@
   {
     "id": 1406,
     "name": "漂泊者·气动",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "气动",
+    "weaponType": "迅刀",
     "rarity": 5,
     "calc": {
       "name": "风主-通用",
@@ -3957,8 +3957,8 @@
   {
     "id": 1407,
     "name": "夏空",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "气动",
+    "weaponType": "手枪",
     "rarity": 5,
     "calc": {
       "name": "夏空-通用",
@@ -4086,8 +4086,8 @@
   {
     "id": 1408,
     "name": "漂泊者·气动",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "气动",
+    "weaponType": "迅刀",
     "rarity": 5,
     "calc": {
       "name": "风主-通用",
@@ -4214,8 +4214,8 @@
   {
     "id": 1409,
     "name": "卡提希娅",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "气动",
+    "weaponType": "迅刀",
     "rarity": 5,
     "calc": {
       "name": "卡提希娅-通用",
@@ -4342,8 +4342,8 @@
   {
     "id": 1410,
     "name": "尤诺",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "气动",
+    "weaponType": "臂铠",
     "rarity": 5,
     "calc": {
       "name": "尤诺-通用",
@@ -4469,8 +4469,8 @@
   {
     "id": 1411,
     "name": "仇远",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "气动",
+    "weaponType": "迅刀",
     "rarity": 5,
     "calc": {
       "name": "仇远-通用",
@@ -4596,8 +4596,8 @@
   {
     "id": 1412,
     "name": "西格莉卡",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "气动",
+    "weaponType": "臂铠",
     "rarity": 5,
     "calc": {
       "name": "西格莉卡-通用",
@@ -4723,8 +4723,8 @@
   {
     "id": 1501,
     "name": "漂泊者·衍射",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "衍射",
+    "weaponType": "迅刀",
     "rarity": 5,
     "calc": {
       "name": "光主-通用",
@@ -4853,8 +4853,8 @@
   {
     "id": 1502,
     "name": "漂泊者·衍射",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "衍射",
+    "weaponType": "迅刀",
     "rarity": 5,
     "calc": {
       "name": "光主-通用",
@@ -4983,8 +4983,8 @@
   {
     "id": 1503,
     "name": "维里奈",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "衍射",
+    "weaponType": "音感仪",
     "rarity": 5,
     "calc": {
       "name": "维里奈-通用",
@@ -5103,9 +5103,9 @@
   {
     "id": 1504,
     "name": "灯灯",
-    "element": "unknown",
-    "weaponType": "unknown",
-    "rarity": 5,
+    "element": "导电",
+    "weaponType": "长刃",
+    "rarity": 4,
     "calc": {
       "name": "灯灯-通用",
       "main_props": {
@@ -5232,8 +5232,8 @@
   {
     "id": 1505,
     "name": "守岸人",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "衍射",
+    "weaponType": "音感仪",
     "rarity": 5,
     "calc": {
       "name": "守岸人-通用",
@@ -5358,8 +5358,8 @@
   {
     "id": 1506,
     "name": "菲比",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "衍射",
+    "weaponType": "音感仪",
     "rarity": 5,
     "calc": {
       "name": "菲比-通用",
@@ -5488,8 +5488,8 @@
   {
     "id": 1507,
     "name": "赞妮",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "衍射",
+    "weaponType": "臂铠",
     "rarity": 5,
     "calc": {
       "name": "赞妮-通用",
@@ -5616,8 +5616,8 @@
   {
     "id": 1508,
     "name": "千咲",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "湮灭",
+    "weaponType": "长刃",
     "rarity": 5,
     "calc": {
       "name": "千咲-通用",
@@ -5743,8 +5743,8 @@
   {
     "id": 1509,
     "name": "琳奈",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "衍射",
+    "weaponType": "手枪",
     "rarity": 5,
     "calc": {
       "name": "琳奈-通用",
@@ -5871,8 +5871,8 @@
   {
     "id": 1510,
     "name": "陆·赫斯",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "衍射",
+    "weaponType": "臂铠",
     "rarity": 5,
     "calc": {
       "name": "陆·赫斯-通用",
@@ -5998,8 +5998,8 @@
   {
     "id": 1511,
     "name": "露西",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "衍射",
+    "weaponType": "手枪",
     "rarity": 5,
     "calc": {
       "name": "露西-通用",
@@ -6125,9 +6125,9 @@
   {
     "id": 1601,
     "name": "桃祈",
-    "element": "unknown",
-    "weaponType": "unknown",
-    "rarity": 5,
+    "element": "湮灭",
+    "weaponType": "长刃",
+    "rarity": 4,
     "calc": {
       "name": "桃祈-通用",
       "main_props": {
@@ -6257,9 +6257,9 @@
   {
     "id": 1602,
     "name": "丹瑾",
-    "element": "unknown",
-    "weaponType": "unknown",
-    "rarity": 5,
+    "element": "湮灭",
+    "weaponType": "迅刀",
+    "rarity": 4,
     "calc": {
       "name": "丹瑾-通用",
       "main_props": {
@@ -6386,8 +6386,8 @@
   {
     "id": 1603,
     "name": "椿",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "湮灭",
+    "weaponType": "迅刀",
     "rarity": 5,
     "calc": {
       "name": "椿-通用",
@@ -6514,8 +6514,8 @@
   {
     "id": 1604,
     "name": "漂泊者·湮灭",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "湮灭",
+    "weaponType": "迅刀",
     "rarity": 5,
     "calc": {
       "name": "暗主-通用",
@@ -6643,8 +6643,8 @@
   {
     "id": 1605,
     "name": "漂泊者·湮灭",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "湮灭",
+    "weaponType": "迅刀",
     "rarity": 5,
     "calc": {
       "name": "暗主-通用",
@@ -6772,8 +6772,8 @@
   {
     "id": 1606,
     "name": "洛可可",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "湮灭",
+    "weaponType": "臂铠",
     "rarity": 5,
     "calc": {
       "name": "洛可可-通用",
@@ -6899,8 +6899,8 @@
   {
     "id": 1607,
     "name": "坎特蕾拉",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "湮灭",
+    "weaponType": "音感仪",
     "rarity": 5,
     "calc": {
       "name": "坎特蕾拉-通用",
@@ -7025,8 +7025,8 @@
   {
     "id": 1608,
     "name": "弗洛洛",
-    "element": "unknown",
-    "weaponType": "unknown",
+    "element": "湮灭",
+    "weaponType": "音感仪",
     "rarity": 5,
     "calc": {
       "name": "弗洛洛-通用",

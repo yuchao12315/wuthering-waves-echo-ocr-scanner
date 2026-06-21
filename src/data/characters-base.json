@@ -1,0 +1,2980 @@
+{
+  "今汐": {
+    "baseAtk": 413,
+    "weaponType": "长刃",
+    "element": "衍射",
+    "ascensionStat": {
+      "type": "critRate",
+      "value": 0.08
+    },
+    "inherentBuffs": [
+      {
+        "type": "elemDmg",
+        "value": 0.2
+      },
+      {
+        "type": "atkPct",
+        "value": 0.12
+      }
+    ],
+    "weaponPassiveMultiplier": {
+      "E": 2,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "蟠龙清辉",
+        "multiplier": 2.0905,
+        "tag": "变奏",
+        "bonusDmg": 0.3
+      },
+      {
+        "name": "声骸·角",
+        "multiplier": 4.6722,
+        "tag": "E",
+        "bonusDmg": 0.46
+      },
+      {
+        "name": "神霓飞芒1",
+        "multiplier": 0.3948,
+        "tag": "E",
+        "bonusDmg": 0.46
+      },
+      {
+        "name": "移岁诛邪",
+        "multiplier": 4.9981,
+        "tag": "Q",
+        "bonusDmg": 0.46
+      },
+      {
+        "name": "凌霄普攻1",
+        "multiplier": 0.8862,
+        "tag": "E",
+        "bonusDmg": 0.46
+      },
+      {
+        "name": "凌霄普攻2",
+        "multiplier": 1.2995,
+        "tag": "E",
+        "bonusDmg": 0.46
+      },
+      {
+        "name": "凌霄普攻3",
+        "multiplier": 1.6574,
+        "tag": "E",
+        "bonusDmg": 0.46
+      },
+      {
+        "name": "流光夕影",
+        "multiplier": 1.5568,
+        "tag": "E",
+        "bonusDmg": 0.46
+      },
+      {
+        "name": "神霓飞芒2",
+        "multiplier": 1.5781,
+        "tag": "E",
+        "bonusDmg": 0.46
+      },
+      {
+        "name": "熠日",
+        "multiplier": 1.1934,
+        "tag": "E",
+        "bonusDmg": 0.46
+      },
+      {
+        "name": "柄星",
+        "multiplier": 25.7492,
+        "tag": "E",
+        "bonusDmg": 0.46
+      }
+    ]
+  },
+  "散华": {
+    "baseAtk": 275,
+    "weaponType": "迅刀",
+    "element": "冷凝",
+    "ascensionStat": {
+      "type": "critDmg",
+      "value": 0.16
+    },
+    "inherentBuffs": [
+      {
+        "type": "atkPct",
+        "value": 0.12
+      }
+    ],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.5724,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻2",
+        "multiplier": 0.4833,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻3",
+        "multiplier": 0.7902,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻4",
+        "multiplier": 1.4649,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "重击",
+        "multiplier": 1.248,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能·冰棱",
+        "multiplier": 1.4976,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能·暴风雪",
+        "multiplier": 2.688,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 8.64,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 1.44,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "凌阳": {
+    "baseAtk": 437,
+    "weaponType": "臂铠",
+    "element": "冷凝",
+    "ascensionStat": {
+      "type": "critRate",
+      "value": 0.08
+    },
+    "inherentBuffs": [
+      {
+        "type": "elemDmg",
+        "value": 0.12
+      }
+    ],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "龙形普攻1",
+        "multiplier": 0.7884,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "龙形普攻2",
+        "multiplier": 0.9984,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "龙形普攻3",
+        "multiplier": 1.3362,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "龙形普攻4",
+        "multiplier": 2.1666,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能·龙吟",
+        "multiplier": 2.376,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能·坠落",
+        "multiplier": 3.456,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 10.08,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 1.56,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "折枝": {
+    "baseAtk": 340,
+    "weaponType": "音感仪",
+    "element": "冷凝",
+    "ascensionStat": {
+      "type": "critDmg",
+      "value": 0.16
+    },
+    "inherentBuffs": [
+      {
+        "type": "atkPct",
+        "value": 0.12
+      }
+    ],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.468,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻2",
+        "multiplier": 0.624,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻3",
+        "multiplier": 0.9984,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 2.4,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 6.72,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 1.2,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "釉瑚": {
+    "baseAtk": 262,
+    "weaponType": "臂铠",
+    "element": "冷凝",
+    "ascensionStat": {
+      "type": "critRate",
+      "value": 0.08
+    },
+    "inherentBuffs": [],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.384,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻2",
+        "multiplier": 0.5568,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻3",
+        "multiplier": 0.816,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 1.92,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 7.2,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 1.08,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "珂莱塔": {
+    "baseAtk": 462,
+    "weaponType": "手枪",
+    "element": "冷凝",
+    "ascensionStat": {
+      "type": "critDmg",
+      "value": 0.16
+    },
+    "inherentBuffs": [
+      {
+        "type": "atkPct",
+        "value": 0.12
+      }
+    ],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.528,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻2",
+        "multiplier": 0.672,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻3",
+        "multiplier": 1.056,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 2.88,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 9.6,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 1.68,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "绯雪": {
+    "baseAtk": 462,
+    "weaponType": "迅刀",
+    "element": "冷凝",
+    "ascensionStat": {
+      "type": "critRate",
+      "value": 0.08
+    },
+    "inherentBuffs": [
+      {
+        "type": "elemDmg",
+        "value": 0.15
+      }
+    ],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.612,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻2",
+        "multiplier": 0.912,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻3",
+        "multiplier": 1.344,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 3.36,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 12.0,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 1.92,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "洛瑟菈": {
+    "baseAtk": 375,
+    "weaponType": "音感仪",
+    "element": "冷凝",
+    "ascensionStat": {
+      "type": "critRate",
+      "value": 0.08
+    },
+    "inherentBuffs": [
+      {
+        "type": "atkPct",
+        "value": 0.12
+      }
+    ],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.624,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻2",
+        "multiplier": 0.816,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻3",
+        "multiplier": 1.2,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 3.12,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 10.56,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 1.68,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "白芷": {
+    "baseAtk": 250,
+    "weaponType": "音感仪",
+    "element": "冷凝",
+    "ascensionStat": {
+      "type": "atkPct",
+      "value": 0.12
+    },
+    "inherentBuffs": [],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.336,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 1.2,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 3.6,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 0.72,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "长离": {
+    "baseAtk": 462,
+    "weaponType": "迅刀",
+    "element": "热熔",
+    "ascensionStat": {
+      "type": "critDmg",
+      "value": 0.16
+    },
+    "inherentBuffs": [
+      {
+        "type": "atkPct",
+        "value": 0.12
+      }
+    ],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.5724,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻2",
+        "multiplier": 0.6612,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻3",
+        "multiplier": 0.816,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻4",
+        "multiplier": 1.416,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能·熔火",
+        "multiplier": 2.16,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能·燎原",
+        "multiplier": 3.84,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 12.48,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 1.8,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "安可": {
+    "baseAtk": 340,
+    "weaponType": "音感仪",
+    "element": "热熔",
+    "ascensionStat": {
+      "type": "critRate",
+      "value": 0.08
+    },
+    "inherentBuffs": [
+      {
+        "type": "elemDmg",
+        "value": 0.15
+      }
+    ],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.42,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻2",
+        "multiplier": 0.6,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻3",
+        "multiplier": 0.78,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻4",
+        "multiplier": 1.08,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 2.64,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 8.88,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 1.44,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "炽霞": {
+    "baseAtk": 275,
+    "weaponType": "手枪",
+    "element": "热熔",
+    "ascensionStat": {
+      "type": "atkPct",
+      "value": 0.12
+    },
+    "inherentBuffs": [],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.468,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻2",
+        "multiplier": 0.612,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻3",
+        "multiplier": 0.804,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻4",
+        "multiplier": 1.38,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 2.16,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 7.2,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 1.2,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "莫特斐": {
+    "baseAtk": 250,
+    "weaponType": "手枪",
+    "element": "热熔",
+    "ascensionStat": {
+      "type": "atkPct",
+      "value": 0.12
+    },
+    "inherentBuffs": [],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.384,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 1.56,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 4.32,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 0.84,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "布兰特": {
+    "baseAtk": 375,
+    "weaponType": "迅刀",
+    "element": "热熔",
+    "ascensionStat": {
+      "type": "critRate",
+      "value": 0.08
+    },
+    "inherentBuffs": [
+      {
+        "type": "elemDmg",
+        "value": 0.15
+      }
+    ],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.648,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻2",
+        "multiplier": 0.864,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻3",
+        "multiplier": 1.296,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 3.6,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 12.96,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 2.04,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "露帕": {
+    "baseAtk": 387,
+    "weaponType": "长刃",
+    "element": "热熔",
+    "ascensionStat": {
+      "type": "critRate",
+      "value": 0.08
+    },
+    "inherentBuffs": [
+      {
+        "type": "atkPct",
+        "value": 0.12
+      }
+    ],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.552,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻2",
+        "multiplier": 0.768,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻3",
+        "multiplier": 1.128,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 2.88,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 10.08,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 1.56,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "嘉贝莉娜": {
+    "baseAtk": 462,
+    "weaponType": "手枪",
+    "element": "热熔",
+    "ascensionStat": {
+      "type": "critDmg",
+      "value": 0.16
+    },
+    "inherentBuffs": [
+      {
+        "type": "atkPct",
+        "value": 0.12
+      }
+    ],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.54,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻2",
+        "multiplier": 0.72,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻3",
+        "multiplier": 1.08,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 2.76,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 9.36,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 1.56,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "莫宁": {
+    "baseAtk": 287,
+    "weaponType": "长刃",
+    "element": "热熔",
+    "ascensionStat": {
+      "type": "atkPct",
+      "value": 0.12
+    },
+    "inherentBuffs": [],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.36,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 1.44,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 4.08,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 0.72,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "爱弥斯": {
+    "baseAtk": 425,
+    "weaponType": "迅刀",
+    "element": "热熔",
+    "ascensionStat": {
+      "type": "critRate",
+      "value": 0.08
+    },
+    "inherentBuffs": [
+      {
+        "type": "elemDmg",
+        "value": 0.15
+      }
+    ],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.588,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻2",
+        "multiplier": 0.816,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻3",
+        "multiplier": 1.224,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 3.12,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 10.8,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 1.68,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "达妮娅": {
+    "baseAtk": 425,
+    "weaponType": "音感仪",
+    "element": "热熔",
+    "ascensionStat": {
+      "type": "critRate",
+      "value": 0.08
+    },
+    "inherentBuffs": [
+      {
+        "type": "elemDmg",
+        "value": 0.15
+      }
+    ],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.66,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻2",
+        "multiplier": 0.888,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻3",
+        "multiplier": 1.32,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 3.72,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 13.2,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 2.16,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "卡卡罗": {
+    "baseAtk": 437,
+    "weaponType": "长刃",
+    "element": "导电",
+    "ascensionStat": {
+      "type": "critDmg",
+      "value": 0.16
+    },
+    "inherentBuffs": [
+      {
+        "type": "atkPct",
+        "value": 0.12
+      }
+    ],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.5568,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻2",
+        "multiplier": 0.6888,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻3",
+        "multiplier": 0.9552,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻4",
+        "multiplier": 1.5408,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能·斩",
+        "multiplier": 2.736,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能·灭",
+        "multiplier": 4.032,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 11.52,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 1.68,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "吟霖": {
+    "baseAtk": 340,
+    "weaponType": "音感仪",
+    "element": "导电",
+    "ascensionStat": {
+      "type": "critRate",
+      "value": 0.08
+    },
+    "inherentBuffs": [
+      {
+        "type": "elemDmg",
+        "value": 0.12
+      }
+    ],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.396,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻2",
+        "multiplier": 0.564,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻3",
+        "multiplier": 0.864,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 2.4,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 8.16,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 1.32,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "渊武": {
+    "baseAtk": 412,
+    "weaponType": "臂铠",
+    "element": "导电",
+    "ascensionStat": {
+      "type": "critRate",
+      "value": 0.08
+    },
+    "inherentBuffs": [
+      {
+        "type": "atkPct",
+        "value": 0.12
+      }
+    ],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.624,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻2",
+        "multiplier": 0.84,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻3",
+        "multiplier": 1.272,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 3.36,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 11.04,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 1.8,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "相里要": {
+    "baseAtk": 412,
+    "weaponType": "臂铠",
+    "element": "导电",
+    "ascensionStat": {
+      "type": "critRate",
+      "value": 0.08
+    },
+    "inherentBuffs": [
+      {
+        "type": "elemDmg",
+        "value": 0.15
+      }
+    ],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.66,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻2",
+        "multiplier": 0.876,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻3",
+        "multiplier": 1.296,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 3.6,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 12.0,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 2.04,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "奥古斯塔": {
+    "baseAtk": 462,
+    "weaponType": "长刃",
+    "element": "导电",
+    "ascensionStat": {
+      "type": "critDmg",
+      "value": 0.16
+    },
+    "inherentBuffs": [
+      {
+        "type": "atkPct",
+        "value": 0.12
+      }
+    ],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.576,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻2",
+        "multiplier": 0.768,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻3",
+        "multiplier": 1.152,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 3.0,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 10.56,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 1.68,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "卜灵": {
+    "baseAtk": 250,
+    "weaponType": "音感仪",
+    "element": "导电",
+    "ascensionStat": {
+      "type": "atkPct",
+      "value": 0.12
+    },
+    "inherentBuffs": [],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.324,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 1.08,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 3.36,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 0.72,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "丽贝卡": {
+    "baseAtk": 400,
+    "weaponType": "手枪",
+    "element": "导电",
+    "ascensionStat": {
+      "type": "critRate",
+      "value": 0.08
+    },
+    "inherentBuffs": [
+      {
+        "type": "elemDmg",
+        "value": 0.15
+      }
+    ],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.66,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻2",
+        "multiplier": 0.888,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻3",
+        "multiplier": 1.344,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 3.6,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 12.48,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 2.04,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "忌炎": {
+    "baseAtk": 437,
+    "weaponType": "长刃",
+    "element": "气动",
+    "ascensionStat": {
+      "type": "critRate",
+      "value": 0.08
+    },
+    "inherentBuffs": [
+      {
+        "type": "atkPct",
+        "value": 0.12
+      }
+    ],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.5928,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻2",
+        "multiplier": 0.7128,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻3",
+        "multiplier": 0.876,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻4",
+        "multiplier": 1.44,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 2.64,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 9.84,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 1.56,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "鉴心": {
+    "baseAtk": 337,
+    "weaponType": "臂铠",
+    "element": "气动",
+    "ascensionStat": {
+      "type": "critRate",
+      "value": 0.08
+    },
+    "inherentBuffs": [
+      {
+        "type": "atkPct",
+        "value": 0.12
+      }
+    ],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.5688,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻2",
+        "multiplier": 0.6648,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻3",
+        "multiplier": 0.924,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻4",
+        "multiplier": 1.3968,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 2.52,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 9.12,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 1.56,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "漂泊者·气动": {
+    "baseAtk": 437,
+    "weaponType": "迅刀",
+    "element": "气动",
+    "ascensionStat": {
+      "type": "critRate",
+      "value": 0.08
+    },
+    "inherentBuffs": [],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.54,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻2",
+        "multiplier": 0.648,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻3",
+        "multiplier": 0.876,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻4",
+        "multiplier": 1.344,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 2.16,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 7.68,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 1.32,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "秧秧": {
+    "baseAtk": 262,
+    "weaponType": "迅刀",
+    "element": "气动",
+    "ascensionStat": {
+      "type": "atkPct",
+      "value": 0.12
+    },
+    "inherentBuffs": [],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.408,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 1.44,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 4.56,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 0.84,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "秋水": {
+    "baseAtk": 262,
+    "weaponType": "手枪",
+    "element": "气动",
+    "ascensionStat": {
+      "type": "atkPct",
+      "value": 0.12
+    },
+    "inherentBuffs": [],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.312,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 1.08,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 3.12,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 0.72,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "夏空": {
+    "baseAtk": 375,
+    "weaponType": "手枪",
+    "element": "气动",
+    "ascensionStat": {
+      "type": "critDmg",
+      "value": 0.16
+    },
+    "inherentBuffs": [
+      {
+        "type": "atkPct",
+        "value": 0.12
+      }
+    ],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.54,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻2",
+        "multiplier": 0.72,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻3",
+        "multiplier": 1.08,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 2.76,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 9.6,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 1.56,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "卡提希娅": {
+    "baseAtk": 312,
+    "weaponType": "迅刀",
+    "element": "气动",
+    "ascensionStat": {
+      "type": "critRate",
+      "value": 0.08
+    },
+    "inherentBuffs": [
+      {
+        "type": "elemDmg",
+        "value": 0.12
+      }
+    ],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.492,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻2",
+        "multiplier": 0.66,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻3",
+        "multiplier": 0.996,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 2.52,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 8.64,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 1.44,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "尤诺": {
+    "baseAtk": 450,
+    "weaponType": "臂铠",
+    "element": "气动",
+    "ascensionStat": {
+      "type": "critRate",
+      "value": 0.08
+    },
+    "inherentBuffs": [
+      {
+        "type": "atkPct",
+        "value": 0.12
+      }
+    ],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.576,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻2",
+        "multiplier": 0.768,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻3",
+        "multiplier": 1.152,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 3.0,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 10.56,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 1.68,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "仇远": {
+    "baseAtk": 375,
+    "weaponType": "迅刀",
+    "element": "气动",
+    "ascensionStat": {
+      "type": "critRate",
+      "value": 0.08
+    },
+    "inherentBuffs": [
+      {
+        "type": "elemDmg",
+        "value": 0.15
+      }
+    ],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.648,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻2",
+        "multiplier": 0.864,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻3",
+        "multiplier": 1.296,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 3.48,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 12.0,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 1.92,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "西格莉卡": {
+    "baseAtk": 437,
+    "weaponType": "臂铠",
+    "element": "气动",
+    "ascensionStat": {
+      "type": "critRate",
+      "value": 0.08
+    },
+    "inherentBuffs": [
+      {
+        "type": "elemDmg",
+        "value": 0.12
+      }
+    ],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.42,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻2",
+        "multiplier": 0.6,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻3",
+        "multiplier": 0.876,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 2.4,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 8.4,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 1.32,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "漂泊者·衍射": {
+    "baseAtk": 375,
+    "weaponType": "迅刀",
+    "element": "衍射",
+    "ascensionStat": {
+      "type": "critRate",
+      "value": 0.08
+    },
+    "inherentBuffs": [],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.54,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻2",
+        "multiplier": 0.648,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻3",
+        "multiplier": 0.876,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻4",
+        "multiplier": 1.344,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 2.28,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 7.92,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 1.32,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "维里奈": {
+    "baseAtk": 275,
+    "weaponType": "音感仪",
+    "element": "衍射",
+    "ascensionStat": {
+      "type": "atkPct",
+      "value": 0.12
+    },
+    "inherentBuffs": [],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.348,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 1.2,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 4.08,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 0.84,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "灯灯": {
+    "baseAtk": 337,
+    "weaponType": "长刃",
+    "element": "导电",
+    "ascensionStat": {
+      "type": "atkPct",
+      "value": 0.12
+    },
+    "inherentBuffs": [],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.42,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 1.56,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 4.8,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 0.96,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "守岸人": {
+    "baseAtk": 287,
+    "weaponType": "音感仪",
+    "element": "衍射",
+    "ascensionStat": {
+      "type": "critDmg",
+      "value": 0.16
+    },
+    "inherentBuffs": [
+      {
+        "type": "atkPct",
+        "value": 0.12
+      }
+    ],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.636,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻2",
+        "multiplier": 0.756,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻3",
+        "multiplier": 0.96,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻4",
+        "multiplier": 1.656,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 3.36,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 12.0,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 1.92,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "菲比": {
+    "baseAtk": 340,
+    "weaponType": "音感仪",
+    "element": "衍射",
+    "ascensionStat": {
+      "type": "critRate",
+      "value": 0.08
+    },
+    "inherentBuffs": [
+      {
+        "type": "elemDmg",
+        "value": 0.12
+      }
+    ],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.408,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻2",
+        "multiplier": 0.588,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻3",
+        "multiplier": 0.888,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 2.52,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 8.64,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 1.44,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "赞妮": {
+    "baseAtk": 437,
+    "weaponType": "臂铠",
+    "element": "衍射",
+    "ascensionStat": {
+      "type": "critDmg",
+      "value": 0.16
+    },
+    "inherentBuffs": [
+      {
+        "type": "atkPct",
+        "value": 0.12
+      }
+    ],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.54,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻2",
+        "multiplier": 0.72,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻3",
+        "multiplier": 1.08,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 2.88,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 9.84,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 1.56,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "千咲": {
+    "baseAtk": 437,
+    "weaponType": "长刃",
+    "element": "湮灭",
+    "ascensionStat": {
+      "type": "critRate",
+      "value": 0.08
+    },
+    "inherentBuffs": [
+      {
+        "type": "atkPct",
+        "value": 0.12
+      }
+    ],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.588,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻2",
+        "multiplier": 0.792,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻3",
+        "multiplier": 1.2,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 3.12,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 10.56,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 1.68,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "琳奈": {
+    "baseAtk": 375,
+    "weaponType": "手枪",
+    "element": "衍射",
+    "ascensionStat": {
+      "type": "critRate",
+      "value": 0.08
+    },
+    "inherentBuffs": [
+      {
+        "type": "elemDmg",
+        "value": 0.15
+      }
+    ],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.576,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻2",
+        "multiplier": 0.78,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻3",
+        "multiplier": 1.152,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 3.0,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 10.56,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 1.68,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "露西": {
+    "baseAtk": 425,
+    "weaponType": "手枪",
+    "element": "衍射",
+    "ascensionStat": {
+      "type": "critRate",
+      "value": 0.08
+    },
+    "inherentBuffs": [
+      {
+        "type": "elemDmg",
+        "value": 0.15
+      }
+    ],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.66,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻2",
+        "multiplier": 0.888,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻3",
+        "multiplier": 1.32,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 3.6,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 12.48,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 2.04,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "桃祈": {
+    "baseAtk": 275,
+    "weaponType": "长刃",
+    "element": "湮灭",
+    "ascensionStat": {
+      "type": "atkPct",
+      "value": 0.12
+    },
+    "inherentBuffs": [],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.444,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 1.56,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 4.8,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 0.96,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "丹瑾": {
+    "baseAtk": 262,
+    "weaponType": "迅刀",
+    "element": "湮灭",
+    "ascensionStat": {
+      "type": "atkPct",
+      "value": 0.12
+    },
+    "inherentBuffs": [],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.42,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 1.44,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 4.56,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 0.84,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "椿": {
+    "baseAtk": 375,
+    "weaponType": "迅刀",
+    "element": "湮灭",
+    "ascensionStat": {
+      "type": "critDmg",
+      "value": 0.16
+    },
+    "inherentBuffs": [
+      {
+        "type": "atkPct",
+        "value": 0.12
+      }
+    ],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.528,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻2",
+        "multiplier": 0.696,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻3",
+        "multiplier": 1.056,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 2.76,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 9.6,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 1.56,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "漂泊者·湮灭": {
+    "baseAtk": 412,
+    "weaponType": "迅刀",
+    "element": "湮灭",
+    "ascensionStat": {
+      "type": "critRate",
+      "value": 0.08
+    },
+    "inherentBuffs": [],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.54,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻2",
+        "multiplier": 0.648,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻3",
+        "multiplier": 0.876,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻4",
+        "multiplier": 1.344,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 2.28,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 7.92,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 1.32,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "洛可可": {
+    "baseAtk": 412,
+    "weaponType": "臂铠",
+    "element": "湮灭",
+    "ascensionStat": {
+      "type": "critRate",
+      "value": 0.08
+    },
+    "inherentBuffs": [
+      {
+        "type": "elemDmg",
+        "value": 0.15
+      }
+    ],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.66,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻2",
+        "multiplier": 0.888,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻3",
+        "multiplier": 1.32,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 3.6,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 12.96,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 2.04,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "坎特蕾拉": {
+    "baseAtk": 340,
+    "weaponType": "音感仪",
+    "element": "湮灭",
+    "ascensionStat": {
+      "type": "critRate",
+      "value": 0.08
+    },
+    "inherentBuffs": [
+      {
+        "type": "elemDmg",
+        "value": 0.12
+      }
+    ],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.42,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻2",
+        "multiplier": 0.6,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻3",
+        "multiplier": 0.888,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 2.52,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 8.88,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 1.44,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "弗洛洛": {
+    "baseAtk": 437,
+    "weaponType": "音感仪",
+    "element": "湮灭",
+    "ascensionStat": {
+      "type": "critDmg",
+      "value": 0.16
+    },
+    "inherentBuffs": [
+      {
+        "type": "atkPct",
+        "value": 0.12
+      }
+    ],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [
+      {
+        "name": "普攻1",
+        "multiplier": 0.54,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻2",
+        "multiplier": 0.72,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "普攻3",
+        "multiplier": 1.08,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣技能",
+        "multiplier": 2.88,
+        "tag": "E",
+        "bonusDmg": 0
+      },
+      {
+        "name": "共鸣解放",
+        "multiplier": 9.84,
+        "tag": "Q",
+        "bonusDmg": 0
+      },
+      {
+        "name": "变奏技能",
+        "multiplier": 1.56,
+        "tag": "变奏",
+        "bonusDmg": 0
+      }
+    ]
+  },
+  "陆·赫斯": {
+    "baseAtk": 462,
+    "weaponType": "臂铠",
+    "element": "衍射",
+    "ascensionStat": {
+      "type": "critRate",
+      "value": 0.08
+    },
+    "inherentBuffs": [
+      {
+        "type": "elemDmg",
+        "value": 0.18
+      }
+    ],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": []
+  }
+}
