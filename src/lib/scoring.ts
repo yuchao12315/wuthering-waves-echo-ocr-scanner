@@ -118,6 +118,77 @@ export function scoreEcho(echo: Echo, calc: CalcJson): number {
   return isNaN(result) ? 0 : Math.round(result * 10000) / 10000
 }
 
+export interface StatScoreDetail {
+  label: string
+  field: '主词条' | '副属性' | '副词条'
+  value: number
+  score: number
+  maxScore: number
+}
+
+export function scoreEchoDetailed(echo: Echo, calc: CalcJson): { total: number; scoreMax: number; details: StatScoreDetail[] } {
+  const scoreMax = calcEchoScoreMax(echo, calc)
+  if (!scoreMax || scoreMax === 0) return { total: 0, scoreMax: 0, details: [] }
+
+  const details: StatScoreDetail[] = []
+  const STAT_DISPLAY: Record<string, string> = {
+    FLAT_ATK: '攻击', ATK_PCT: '攻击%', FLAT_HP: '生命', HP_PCT: '生命%',
+    FLAT_DEF: '防御', DEF_PCT: '防御%', CRIT_RATE: '暴击率', CRIT_DMG: '暴击伤害',
+    ENERGY_REGEN: '共鸣效率', ELEM_DMG: '属性伤害', HEAL_BONUS: '治疗加成',
+    NORMAL_ATK_DMG: '普攻伤害', HEAVY_ATK_DMG: '重击伤害',
+    RESONANCE_SKILL_DMG: '共鸣技能伤害', RESONANCE_LIBERATION_DMG: '共鸣解放伤害',
+  }
+
+  if (echo.mainStat) {
+    const fixedValue = MAIN_STAT_VALUES[echo.cost]?.[echo.mainStat.type] ?? echo.mainStat.value
+    const raw = fixedValue * getMainWeight(echo.mainStat.type, echo.cost, calc)
+    const mainCn = Object.entries(CN_TO_STAT).find(([_, v]) => v === echo.mainStat.type)?.[0]
+    const mainFixed = MAIN_STAT_CN_VALUES[echo.cost] ?? {}
+    const maxRaw = mainCn ? (mainFixed[mainCn] ?? 0) * (calc.main_props[String(echo.cost)]?.[mainCn] ?? 0) : 0
+    details.push({
+      label: STAT_DISPLAY[echo.mainStat.type] ?? echo.mainStat.type,
+      field: '主词条',
+      value: echo.mainStat.value,
+      score: (raw / scoreMax) * 50,
+      maxScore: (maxRaw / scoreMax) * 50,
+    })
+  }
+
+  if (echo.secondaryStat) {
+    const raw = echo.secondaryStat.value * getMainWeight(echo.secondaryStat.type, echo.cost, calc)
+    const secCn = Object.entries(CN_TO_STAT).find(([_, v]) => v === echo.secondaryStat!.type)?.[0]
+    const secFixed = SEC_STAT_CN_VALUES[echo.cost] ?? {}
+    const maxRaw = secCn ? (secFixed[secCn] ?? 0) * (calc.main_props[String(echo.cost)]?.[secCn] ?? 0) : 0
+    details.push({
+      label: STAT_DISPLAY[echo.secondaryStat.type] ?? echo.secondaryStat.type,
+      field: '副属性',
+      value: echo.secondaryStat.value,
+      score: (raw / scoreMax) * 50,
+      maxScore: (maxRaw / scoreMax) * 50,
+    })
+  }
+
+  for (const sub of (echo.substats ?? [])) {
+    if (sub && sub.type && typeof sub.value === 'number') {
+      const raw = sub.value * getSubWeight(sub.type, calc)
+      const cn = Object.entries(CN_TO_STAT).find(([_, v]) => v === sub.type)?.[0]
+      const maxVal = cn ? (MAX_SUB_VALUES[cn] ?? 0) : 0
+      const w = cn ? (calc.sub_props[cn] ?? 0) : 0
+      const maxRaw = maxVal * w
+      details.push({
+        label: STAT_DISPLAY[sub.type] ?? sub.type,
+        field: '副词条',
+        value: sub.value,
+        score: (raw / scoreMax) * 50,
+        maxScore: (maxRaw / scoreMax) * 50,
+      })
+    }
+  }
+
+  const total = details.reduce((s, d) => s + d.score, 0)
+  return { total, scoreMax, details }
+}
+
 export function scoreLoadout(echoes: Echo[], calc: CalcJson): number {
   return echoes.reduce((sum, echo) => sum + scoreEcho(echo, calc), 0)
 }
