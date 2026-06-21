@@ -1,6 +1,6 @@
 {
   "今汐": {
-    "baseAtk": 413,
+    "baseAtk": 412,
     "weaponType": "长刃",
     "element": "衍射",
     "ascensionStat": {
@@ -1856,7 +1856,7 @@
     ]
   },
   "折枝": {
-    "baseAtk": 340,
+    "baseAtk": 375,
     "weaponType": "音感仪",
     "element": "冷凝",
     "ascensionStat": {
@@ -13151,7 +13151,7 @@
     ]
   },
   "吟霖": {
-    "baseAtk": 340,
+    "baseAtk": 400,
     "weaponType": "音感仪",
     "element": "导电",
     "ascensionStat": {
@@ -14391,7 +14391,7 @@
     ]
   },
   "相里要": {
-    "baseAtk": 412,
+    "baseAtk": 425,
     "weaponType": "臂铠",
     "element": "导电",
     "ascensionStat": {
@@ -24283,7 +24283,7 @@
     ]
   },
   "维里奈": {
-    "baseAtk": 275,
+    "baseAtk": 337,
     "weaponType": "音感仪",
     "element": "衍射",
     "ascensionStat": {
@@ -26227,7 +26227,7 @@
     ]
   },
   "菲比": {
-    "baseAtk": 340,
+    "baseAtk": 412,
     "weaponType": "音感仪",
     "element": "衍射",
     "ascensionStat": {
@@ -31602,7 +31602,7 @@
     ]
   },
   "椿": {
-    "baseAtk": 375,
+    "baseAtk": 450,
     "weaponType": "迅刀",
     "element": "湮灭",
     "ascensionStat": {
@@ -32994,7 +32994,7 @@
     ]
   },
   "洛可可": {
-    "baseAtk": 412,
+    "baseAtk": 375,
     "weaponType": "臂铠",
     "element": "湮灭",
     "ascensionStat": {
@@ -33480,7 +33480,7 @@
     ]
   },
   "坎特蕾拉": {
-    "baseAtk": 340,
+    "baseAtk": 400,
     "weaponType": "音感仪",
     "element": "湮灭",
     "ascensionStat": {
