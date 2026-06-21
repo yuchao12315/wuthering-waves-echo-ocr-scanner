@@ -31,6 +31,15 @@ export interface StatEntry {
   value: number
 }
 
+export interface SavedLoadout {
+  id: string
+  name: string
+  characterName: string
+  echoes: Echo[]
+  score: number
+  savedAt: number
+}
+
 export interface Echo {
   id: string
   monsterId: number

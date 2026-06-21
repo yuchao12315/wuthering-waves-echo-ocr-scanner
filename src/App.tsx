@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useEchoStore } from '@/store/echo-store'
 import { useAppStore } from '@/store/app-store'
+import { useLoadoutStore } from '@/store/loadout-store'
 import { EchoesPage } from '@/pages/echoes'
 import { CalculatorPage } from '@/pages/calculator'
 import { CharactersPage } from '@/pages/characters'
@@ -9,10 +10,12 @@ import type { Character } from '@/types/character'
 
 export default function App() {
   const { load } = useEchoStore()
+  const { load: loadLoadouts } = useLoadoutStore()
   const { page, setPage, setCharacters } = useAppStore()
 
   useEffect(() => {
     load()
+    loadLoadouts()
     // 优先从内嵌权重表构建角色列表，回退到旧API
     const chars: Character[] = Object.entries(CHARACTER_WEIGHTS).map(([name, calc], i) => ({
       id: i + 1,

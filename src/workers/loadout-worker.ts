@@ -489,12 +489,14 @@ function calculate(echoes: Echo[], calc: CalcJson, config: Config, allEchoes: Ec
 self.onmessage = (event: MessageEvent) => {
   const data = event.data;
   // 兼容两种消息格式
-  const echoes: Echo[] = data.echoes ?? [];
+  const excludeIds = new Set<string>(data.excludeEchoIds ?? []);
+  const allEchoes: Echo[] = data.echoes ?? [];
+  const echoes = excludeIds.size > 0 ? allEchoes.filter(e => !excludeIds.has(e.id)) : allEchoes;
   const calc: CalcJson = data.calc;
   const sonatas: string[] = data.sonatas ?? data.config?.sonatas ?? [];
   const costFilter: string = data.costFilter ?? 'all';
 
-  console.log(`[Worker] 收到计算请求: ${echoes.length}个声骸, costFilter=${costFilter}`)
+  console.log(`[Worker] 收到计算请求: ${echoes.length}个声骸(排除${excludeIds.size}个), costFilter=${costFilter}`)
 
   calculate(echoes, calc, { sonatas, costFilter }, echoes);
 };
