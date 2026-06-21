@@ -6735,6 +6735,16 @@
         "type": "atkPct",
         "value": 0.3,
         "condition": "加麻加辣·热压弹满层+30%攻击"
+      },
+      {
+        "type": "elemDmg",
+        "value": 0.12,
+        "condition": "固有天赋·属性伤害"
+      },
+      {
+        "type": "atkPct",
+        "value": 0.12,
+        "condition": "固有天赋·攻击"
       }
     ],
     "weaponPassiveMultiplier": {
