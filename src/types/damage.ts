@@ -37,6 +37,8 @@ export interface ChainEffect {
   condition?: string
   /** Regex pattern matching skill name; omit = applies to all skills */
   targetSkill?: string
+  /** Whether this effect is active (default true if omitted). Set false for conditional effects. */
+  enabled?: boolean
 }
 
 export interface CharacterBase {

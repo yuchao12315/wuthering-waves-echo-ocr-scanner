@@ -155,7 +155,7 @@ export function calcDamage(
   charLevel = 90,
   enemyLevel = 89,
   enemyResist = 0.1,
-  chainLevel = -1,
+  chainLevel = 0,
 ): DamageResult {
   const echoStats = collectEchoStats(echoes)
   const sonataBuff = collectSonataBuffs(echoes)
@@ -165,14 +165,14 @@ export function calcDamage(
   const baseAtk = character.baseAtk + weapon.baseAtk
   const enabledBuffs = character.inherentBuffs.filter(isBuffEnabled)
 
-  // Resolve active chain level (default -1 = max 6)
-  const activeChainLevel = chainLevel < 0 ? 6 : Math.min(6, chainLevel)
+  // Resolve active chain level (default 0 = no effects active)
+  const activeChainLevel = Math.min(6, chainLevel)
 
-  // Collect active chain effects based on sequence level
+  // Collect active chain effects based on sequence level and enabled status
   const activeChainEffects: ChainEffect[] = []
   if (character.chainEffects) {
     for (const eff of character.chainEffects) {
-      if (eff.sequence <= activeChainLevel) {
+      if (eff.sequence <= activeChainLevel && eff.enabled !== false) {
         activeChainEffects.push(eff)
       }
     }
