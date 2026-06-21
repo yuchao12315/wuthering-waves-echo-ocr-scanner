@@ -150,7 +150,7 @@ export function calcDamage(
   weapon: Weapon,
   weaponRefine: number,
   echoes: Echo[],
-  chainNodes = -1,
+  _chainNodes = -1,
   skillLevel = 10,
   charLevel = 90,
   enemyLevel = 89,
@@ -239,23 +239,6 @@ export function calcDamage(
       }
     }
   }
-
-  // Chain stats
-  const activeChainCount = chainNodes < 0 ? character.chainStats.length : chainNodes
-  let chainAtkPct = 0, chainCr = 0, chainCd = 0, chainElem = 0
-  for (let i = 0; i < activeChainCount && i < character.chainStats.length; i++) {
-    const cs = character.chainStats[i]
-    switch (cs.type) {
-      case 'atkPct': chainAtkPct += cs.value; break
-      case 'critRate': chainCr += cs.value; break
-      case 'critDmg': chainCd += cs.value; break
-      case 'elemDmg': chainElem += cs.value; break
-    }
-  }
-  if (chainAtkPct) { totalAtkPct += chainAtkPct; addSrc('atk', '固有天赋', chainAtkPct) }
-  if (chainCr) { totalCritRate += chainCr; addSrc('critRate', '固有天赋', chainCr) }
-  if (chainCd) { totalCritDmg += chainCd; addSrc('critDmg', '固有天赋', chainCd) }
-  if (chainElem) { baseElemDmg += chainElem; addSrc('elemDmg', '固有天赋', chainElem) }
 
   // Chain effects — global
   for (const eff of activeChainEffects) {
