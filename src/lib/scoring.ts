@@ -49,9 +49,12 @@ function calcEchoScoreMax(echo: Echo, calc: CalcJson): number {
   const mainProps = calc.main_props[String(cost)] ?? {}
   const subProps = calc.sub_props
 
-  const mainCn = Object.entries(CN_TO_STAT).find(([_, v]) => v === echo.mainStat.type)?.[0]
-  const mainFixed = MAIN_STAT_CN_VALUES[cost] ?? {}
-  const bestMain = mainCn ? (mainFixed[mainCn] ?? 0) * (mainProps[mainCn] ?? 0) : 0
+  let bestMain = 0
+  if (echo.mainStat) {
+    const mainCn = Object.entries(CN_TO_STAT).find(([_, v]) => v === echo.mainStat.type)?.[0]
+    const mainFixed = MAIN_STAT_CN_VALUES[cost] ?? {}
+    bestMain = mainCn ? (mainFixed[mainCn] ?? 0) * (mainProps[mainCn] ?? 0) : 0
+  }
 
   let bestSec = 0
   if (echo.secondaryStat) {

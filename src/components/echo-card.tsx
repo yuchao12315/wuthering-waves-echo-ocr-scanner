@@ -71,7 +71,10 @@ export function EchoCard({ echo, calc, onRemove }: Props) {
             )
           })}
           <div className="flex justify-between text-xs pt-1 border-t border-zinc-800">
-            <span className="text-zinc-400">合计</span>
+            <span className="text-zinc-400">
+              合计
+              <span className="text-zinc-600 ml-2">score_max={detailed.scoreMax.toFixed(2)}</span>
+            </span>
             <span className="tabular-nums">
               <span className="text-zinc-200 font-medium">{detailed.total.toFixed(2)}</span>
               <span className="text-zinc-600">/50.00</span>
