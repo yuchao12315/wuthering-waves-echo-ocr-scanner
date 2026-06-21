@@ -611,6 +611,40 @@
         "treeId": "7",
         "skillType": "共鸣回路"
       }
+    ],
+    "chainStats": [
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
+      }
     ]
   },
   "散华": {
@@ -1067,6 +1101,40 @@
         "bonusDmg": 0,
         "treeId": "7",
         "skillType": "共鸣回路"
+      }
+    ],
+    "chainStats": [
+      {
+        "type": "elemDmg",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "elemDmg",
+        "value": 0.018
+      },
+      {
+        "type": "elemDmg",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "elemDmg",
+        "value": 0.042
       }
     ]
   },
@@ -1641,6 +1709,40 @@
         "treeId": "7",
         "skillType": "共鸣回路"
       }
+    ],
+    "chainStats": [
+      {
+        "type": "elemDmg",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "elemDmg",
+        "value": 0.018
+      },
+      {
+        "type": "elemDmg",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "elemDmg",
+        "value": 0.042
+      }
     ]
   },
   "折枝": {
@@ -2054,6 +2156,40 @@
         "bonusDmg": 0,
         "treeId": "7",
         "skillType": "共鸣回路"
+      }
+    ],
+    "chainStats": [
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
       }
     ]
   },
@@ -2594,6 +2730,40 @@
         "treeId": "7",
         "skillType": "共鸣回路"
       }
+    ],
+    "chainStats": [
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
+      }
     ]
   },
   "珂莱塔": {
@@ -3108,6 +3278,40 @@
         "bonusDmg": 0,
         "treeId": "7",
         "skillType": "共鸣回路"
+      }
+    ],
+    "chainStats": [
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
       }
     ]
   },
@@ -3856,6 +4060,40 @@
         "treeId": "7",
         "skillType": "共鸣回路"
       }
+    ],
+    "chainStats": [
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
+      }
     ]
   },
   "洛瑟菈": {
@@ -4429,6 +4667,40 @@
         "treeId": "7",
         "skillType": "共鸣回路"
       }
+    ],
+    "chainStats": [
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
+      }
     ]
   },
   "白芷": {
@@ -4880,6 +5152,24 @@
         "bonusDmg": 0,
         "treeId": "7",
         "skillType": "共鸣回路"
+      }
+    ],
+    "chainStats": [
+      {
+        "type": "hpPct",
+        "value": 0.018
+      },
+      {
+        "type": "hpPct",
+        "value": 0.018
+      },
+      {
+        "type": "hpPct",
+        "value": 0.042
+      },
+      {
+        "type": "hpPct",
+        "value": 0.042
       }
     ]
   },
@@ -5378,6 +5668,40 @@
         "bonusDmg": 0,
         "treeId": "7",
         "skillType": "共鸣回路"
+      }
+    ],
+    "chainStats": [
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
       }
     ]
   },
@@ -5981,6 +6305,40 @@
         "treeId": "7",
         "skillType": "共鸣回路"
       }
+    ],
+    "chainStats": [
+      {
+        "type": "elemDmg",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "elemDmg",
+        "value": 0.018
+      },
+      {
+        "type": "elemDmg",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "elemDmg",
+        "value": 0.042
+      }
     ]
   },
   "炽霞": {
@@ -6374,6 +6732,40 @@
         "bonusDmg": 0,
         "treeId": "7",
         "skillType": "共鸣回路"
+      }
+    ],
+    "chainStats": [
+      {
+        "type": "elemDmg",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "elemDmg",
+        "value": 0.018
+      },
+      {
+        "type": "elemDmg",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "elemDmg",
+        "value": 0.042
       }
     ]
   },
@@ -6797,6 +7189,40 @@
         "bonusDmg": 0,
         "treeId": "7",
         "skillType": "共鸣回路"
+      }
+    ],
+    "chainStats": [
+      {
+        "type": "elemDmg",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "elemDmg",
+        "value": 0.018
+      },
+      {
+        "type": "elemDmg",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "elemDmg",
+        "value": 0.042
       }
     ]
   },
@@ -7457,6 +7883,40 @@
         "bonusDmg": 0,
         "treeId": "7",
         "skillType": "共鸣回路"
+      }
+    ],
+    "chainStats": [
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
       }
     ]
   },
@@ -8146,6 +8606,40 @@
         "bonusDmg": 0,
         "treeId": "7",
         "skillType": "共鸣回路"
+      }
+    ],
+    "chainStats": [
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
       }
     ]
   },
@@ -8923,6 +9417,40 @@
         "treeId": "7",
         "skillType": "共鸣回路"
       }
+    ],
+    "chainStats": [
+      {
+        "type": "critDmg",
+        "value": 0.024
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "critDmg",
+        "value": 0.024
+      },
+      {
+        "type": "critDmg",
+        "value": 0.056
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "critDmg",
+        "value": 0.056
+      }
     ]
   },
   "莫宁": {
@@ -9577,6 +10105,24 @@
         "bonusDmg": 0,
         "treeId": "7",
         "skillType": "共鸣回路"
+      }
+    ],
+    "chainStats": [
+      {
+        "type": "defPct",
+        "value": 0.0228
+      },
+      {
+        "type": "defPct",
+        "value": 0.0228
+      },
+      {
+        "type": "defPct",
+        "value": 0.0532
+      },
+      {
+        "type": "defPct",
+        "value": 0.0532
       }
     ]
   },
@@ -10353,6 +10899,40 @@
         "bonusDmg": 0,
         "treeId": "7",
         "skillType": "共鸣回路"
+      }
+    ],
+    "chainStats": [
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
       }
     ]
   },
@@ -11159,6 +11739,40 @@
         "treeId": "7",
         "skillType": "共鸣回路"
       }
+    ],
+    "chainStats": [
+      {
+        "type": "critDmg",
+        "value": 0.024
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "critDmg",
+        "value": 0.024
+      },
+      {
+        "type": "critDmg",
+        "value": 0.056
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "critDmg",
+        "value": 0.056
+      }
     ]
   },
   "卡卡罗": {
@@ -11819,6 +12433,40 @@
         "treeId": "7",
         "skillType": "共鸣回路"
       }
+    ],
+    "chainStats": [
+      {
+        "type": "critDmg",
+        "value": 0.024
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "critDmg",
+        "value": 0.024
+      },
+      {
+        "type": "critDmg",
+        "value": 0.056
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "critDmg",
+        "value": 0.056
+      }
     ]
   },
   "吟霖": {
@@ -12246,6 +12894,40 @@
         "bonusDmg": 0,
         "treeId": "7",
         "skillType": "共鸣回路"
+      }
+    ],
+    "chainStats": [
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
       }
     ]
   },
@@ -12936,6 +13618,40 @@
         "treeId": "7",
         "skillType": "共鸣回路"
       }
+    ],
+    "chainStats": [
+      {
+        "type": "elemDmg",
+        "value": 0.018
+      },
+      {
+        "type": "defPct",
+        "value": 0.0228
+      },
+      {
+        "type": "defPct",
+        "value": 0.0228
+      },
+      {
+        "type": "elemDmg",
+        "value": 0.018
+      },
+      {
+        "type": "elemDmg",
+        "value": 0.042
+      },
+      {
+        "type": "defPct",
+        "value": 0.0532
+      },
+      {
+        "type": "defPct",
+        "value": 0.0532
+      },
+      {
+        "type": "elemDmg",
+        "value": 0.042
+      }
     ]
   },
   "相里要": {
@@ -13508,6 +14224,40 @@
         "bonusDmg": 0,
         "treeId": "7",
         "skillType": "共鸣回路"
+      }
+    ],
+    "chainStats": [
+      {
+        "type": "critDmg",
+        "value": 0.024
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "critDmg",
+        "value": 0.024
+      },
+      {
+        "type": "critDmg",
+        "value": 0.056
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "critDmg",
+        "value": 0.056
       }
     ]
   },
@@ -14169,6 +14919,40 @@
         "treeId": "7",
         "skillType": "共鸣回路"
       }
+    ],
+    "chainStats": [
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
+      }
     ]
   },
   "卜灵": {
@@ -14678,6 +15462,24 @@
         "bonusDmg": 0,
         "treeId": "7",
         "skillType": "共鸣回路"
+      }
+    ],
+    "chainStats": [
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
       }
     ]
   },
@@ -15513,6 +16315,40 @@
         "treeId": "7",
         "skillType": "共鸣回路"
       }
+    ],
+    "chainStats": [
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
+      }
     ]
   },
   "忌炎": {
@@ -16056,6 +16892,40 @@
         "bonusDmg": 0,
         "treeId": "7",
         "skillType": "共鸣回路"
+      }
+    ],
+    "chainStats": [
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
       }
     ]
   },
@@ -16704,6 +17574,40 @@
         "treeId": "7",
         "skillType": "共鸣回路"
       }
+    ],
+    "chainStats": [
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
+      }
     ]
   },
   "漂泊者·气动": {
@@ -17243,6 +18147,24 @@
         "treeId": "7",
         "skillType": "共鸣回路"
       }
+    ],
+    "chainStats": [
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      }
     ]
   },
   "秧秧": {
@@ -17635,6 +18557,40 @@
         "bonusDmg": 0,
         "treeId": "7",
         "skillType": "共鸣回路"
+      }
+    ],
+    "chainStats": [
+      {
+        "type": "elemDmg",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "elemDmg",
+        "value": 0.018
+      },
+      {
+        "type": "elemDmg",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "elemDmg",
+        "value": 0.042
       }
     ]
   },
@@ -18117,6 +19073,40 @@
         "treeId": "7",
         "skillType": "共鸣回路"
       }
+    ],
+    "chainStats": [
+      {
+        "type": "elemDmg",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "elemDmg",
+        "value": 0.018
+      },
+      {
+        "type": "elemDmg",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "elemDmg",
+        "value": 0.042
+      }
     ]
   },
   "夏空": {
@@ -18573,6 +19563,40 @@
         "bonusDmg": 0,
         "treeId": "7",
         "skillType": "共鸣回路"
+      }
+    ],
+    "chainStats": [
+      {
+        "type": "critDmg",
+        "value": 0.024
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "critDmg",
+        "value": 0.024
+      },
+      {
+        "type": "critDmg",
+        "value": 0.056
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "critDmg",
+        "value": 0.056
       }
     ]
   },
@@ -19407,6 +20431,40 @@
         "bonusDmg": 0,
         "treeId": "7",
         "skillType": "共鸣回路"
+      }
+    ],
+    "chainStats": [
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "hpPct",
+        "value": 0.018
+      },
+      {
+        "type": "hpPct",
+        "value": 0.018
+      },
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
+      },
+      {
+        "type": "hpPct",
+        "value": 0.042
+      },
+      {
+        "type": "hpPct",
+        "value": 0.042
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
       }
     ]
   },
@@ -20300,6 +21358,40 @@
         "treeId": "7",
         "skillType": "共鸣回路"
       }
+    ],
+    "chainStats": [
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
+      }
     ]
   },
   "仇远": {
@@ -20814,6 +21906,40 @@
         "bonusDmg": 0,
         "treeId": "7",
         "skillType": "共鸣回路"
+      }
+    ],
+    "chainStats": [
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
       }
     ]
   },
@@ -21417,6 +22543,40 @@
         "treeId": "7",
         "skillType": "共鸣回路"
       }
+    ],
+    "chainStats": [
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
+      }
     ]
   },
   "漂泊者·衍射": {
@@ -21897,6 +23057,40 @@
         "bonusDmg": 0,
         "treeId": "7",
         "skillType": "共鸣回路"
+      }
+    ],
+    "chainStats": [
+      {
+        "type": "elemDmg",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "elemDmg",
+        "value": 0.018
+      },
+      {
+        "type": "elemDmg",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "elemDmg",
+        "value": 0.042
       }
     ]
   },
@@ -22553,6 +23747,24 @@
         "treeId": "7",
         "skillType": "共鸣回路"
       }
+    ],
+    "chainStats": [
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      }
     ]
   },
   "灯灯": {
@@ -23179,6 +24391,40 @@
         "treeId": "7",
         "skillType": "共鸣回路"
       }
+    ],
+    "chainStats": [
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
+      }
     ]
   },
   "守岸人": {
@@ -23694,6 +24940,24 @@
         "treeId": "7",
         "skillType": "共鸣回路"
       }
+    ],
+    "chainStats": [
+      {
+        "type": "hpPct",
+        "value": 0.018
+      },
+      {
+        "type": "hpPct",
+        "value": 0.018
+      },
+      {
+        "type": "hpPct",
+        "value": 0.042
+      },
+      {
+        "type": "hpPct",
+        "value": 0.042
+      }
     ]
   },
   "菲比": {
@@ -24208,6 +25472,40 @@
         "bonusDmg": 0,
         "treeId": "7",
         "skillType": "共鸣回路"
+      }
+    ],
+    "chainStats": [
+      {
+        "type": "critDmg",
+        "value": 0.024
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "critDmg",
+        "value": 0.024
+      },
+      {
+        "type": "critDmg",
+        "value": 0.056
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "critDmg",
+        "value": 0.056
       }
     ]
   },
@@ -24839,6 +26137,40 @@
         "bonusDmg": 0,
         "treeId": "7",
         "skillType": "共鸣回路"
+      }
+    ],
+    "chainStats": [
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
       }
     ]
   },
@@ -25761,6 +27093,40 @@
         "treeId": "7",
         "skillType": "共鸣回路"
       }
+    ],
+    "chainStats": [
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
+      }
     ]
   },
   "琳奈": {
@@ -26624,6 +27990,40 @@
         "treeId": "7",
         "skillType": "共鸣回路"
       }
+    ],
+    "chainStats": [
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
+      }
     ]
   },
   "露西": {
@@ -27458,6 +28858,40 @@
         "treeId": "7",
         "skillType": "共鸣回路"
       }
+    ],
+    "chainStats": [
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
+      }
     ]
   },
   "桃祈": {
@@ -28005,6 +29439,40 @@
         "bonusDmg": 0,
         "treeId": "7",
         "skillType": "共鸣回路"
+      }
+    ],
+    "chainStats": [
+      {
+        "type": "elemDmg",
+        "value": 0.018
+      },
+      {
+        "type": "defPct",
+        "value": 0.0228
+      },
+      {
+        "type": "defPct",
+        "value": 0.0228
+      },
+      {
+        "type": "elemDmg",
+        "value": 0.018
+      },
+      {
+        "type": "elemDmg",
+        "value": 0.042
+      },
+      {
+        "type": "defPct",
+        "value": 0.0532
+      },
+      {
+        "type": "defPct",
+        "value": 0.0532
+      },
+      {
+        "type": "elemDmg",
+        "value": 0.042
       }
     ]
   },
@@ -28573,6 +30041,40 @@
         "bonusDmg": 0,
         "treeId": "7",
         "skillType": "共鸣回路"
+      }
+    ],
+    "chainStats": [
+      {
+        "type": "elemDmg",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "elemDmg",
+        "value": 0.018
+      },
+      {
+        "type": "elemDmg",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "elemDmg",
+        "value": 0.042
       }
     ]
   },
@@ -29175,6 +30677,40 @@
         "bonusDmg": 0,
         "treeId": "7",
         "skillType": "共鸣回路"
+      }
+    ],
+    "chainStats": [
+      {
+        "type": "critDmg",
+        "value": 0.024
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "critDmg",
+        "value": 0.024
+      },
+      {
+        "type": "critDmg",
+        "value": 0.056
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "critDmg",
+        "value": 0.056
       }
     ]
   },
@@ -29831,6 +31367,40 @@
         "treeId": "7",
         "skillType": "共鸣回路"
       }
+    ],
+    "chainStats": [
+      {
+        "type": "elemDmg",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "elemDmg",
+        "value": 0.018
+      },
+      {
+        "type": "elemDmg",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "elemDmg",
+        "value": 0.042
+      }
     ]
   },
   "洛可可": {
@@ -30229,6 +31799,40 @@
         "bonusDmg": 0,
         "treeId": "7",
         "skillType": "共鸣回路"
+      }
+    ],
+    "chainStats": [
+      {
+        "type": "critDmg",
+        "value": 0.024
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "critDmg",
+        "value": 0.024
+      },
+      {
+        "type": "critDmg",
+        "value": 0.056
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "critDmg",
+        "value": 0.056
       }
     ]
   },
@@ -30861,6 +32465,40 @@
         "treeId": "7",
         "skillType": "共鸣回路"
       }
+    ],
+    "chainStats": [
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
+      }
     ]
   },
   "弗洛洛": {
@@ -31404,6 +33042,40 @@
         "bonusDmg": 0,
         "treeId": "7",
         "skillType": "共鸣回路"
+      }
+    ],
+    "chainStats": [
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
       }
     ]
   },
@@ -32064,6 +33736,40 @@
         "bonusDmg": 0,
         "treeId": "7",
         "skillType": "共鸣回路"
+      }
+    ],
+    "chainStats": [
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "atkPct",
+        "value": 0.018
+      },
+      {
+        "type": "critRate",
+        "value": 0.012
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "atkPct",
+        "value": 0.042
+      },
+      {
+        "type": "critRate",
+        "value": 0.028
       }
     ]
   }

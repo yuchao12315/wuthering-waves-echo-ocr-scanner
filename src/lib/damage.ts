@@ -82,6 +82,7 @@ export function calcDamage(
   weapon: Weapon,
   weaponRefine: number,
   echoes: Echo[],
+  chainNodes = -1,
   skillLevel = 10,
   charLevel = 90,
   enemyLevel = 90,
@@ -97,7 +98,6 @@ export function calcDamage(
   for (const buff of character.inherentBuffs) {
     if (buff.type === 'atkPct') totalAtkPct += buff.value
   }
-  const totalAtk = baseAtk * (1 + totalAtkPct) + echoStats.flatAtk
 
   let totalCritRate = 0.05 + weapon.critRate + echoStats.critRate
   if (character.ascensionStat.type === 'critRate') {
@@ -119,6 +119,19 @@ export function calcDamage(
   for (const buff of character.inherentBuffs) {
     if (buff.type === 'elemDmg') baseElemDmg += buff.value
   }
+
+  const activeChainCount = chainNodes < 0 ? character.chainStats.length : chainNodes
+  for (let i = 0; i < activeChainCount && i < character.chainStats.length; i++) {
+    const cs = character.chainStats[i]
+    switch (cs.type) {
+      case 'atkPct': totalAtkPct += cs.value; break
+      case 'critRate': totalCritRate += cs.value; break
+      case 'critDmg': totalCritDmg += cs.value; break
+      case 'elemDmg': baseElemDmg += cs.value; break
+    }
+  }
+
+  const totalAtk = baseAtk * (1 + totalAtkPct) + echoStats.flatAtk
 
   // Weapon passive: parse the first param value at refinement level as base passive value
   // This is a simplified approach; full weapon passive effects are complex (see register_weapon.py)

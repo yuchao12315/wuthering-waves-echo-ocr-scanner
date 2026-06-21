@@ -12,12 +12,18 @@ export interface InherentBuff {
   value: number
 }
 
+export interface ChainStat {
+  type: 'atkPct' | 'critRate' | 'critDmg' | 'elemDmg' | 'hpPct' | 'defPct'
+  value: number
+}
+
 export interface CharacterBase {
   baseAtk: number
   weaponType: string
   element: string
   ascensionStat: { type: string; value: number }
   inherentBuffs: InherentBuff[]
+  chainStats: ChainStat[]   // 8 resonance chain stat nodes (tree 9-16), always active at Lv90
   weaponPassiveMultiplier: Record<string, number>
   skills: Skill[]
 }
