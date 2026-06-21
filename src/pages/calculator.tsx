@@ -127,10 +127,15 @@ export function CalculatorPage() {
     const weapon = weaponList.find(w => w.name === weaponName)
     if (!weapon) return 0
     const result = calcDamage(charBase, weapon, weaponRefine, loadoutEchoes, -1, 10, 90, 89, 0.1, chainLevel)
-    if (activeSkillTypes.size === 0) return result.totalExpected
-    return result.skills
-      .filter(sk => activeSkillTypes.has(sk.skillType))
-      .reduce((s, sk) => s + sk.expected, 0)
+    if (activeSkillTypes.size > 0) {
+      return result.skills
+        .filter(sk => activeSkillTypes.has(sk.skillType))
+        .reduce((s, sk) => s + sk.expected, 0)
+    }
+    // 默认按共鸣解放伤害最高期望排序
+    const libSkills = result.skills.filter(sk => sk.skillType === '共鸣解放')
+    if (libSkills.length > 0) return Math.max(...libSkills.map(sk => sk.expected))
+    return result.totalExpected
   }, [charBase, weaponName, weaponRefine, activeSkillTypes, chainLevel])
 
   const sortedResults = useMemo(() => {
@@ -444,7 +449,7 @@ export function CalculatorPage() {
           <h3 className="font-medium text-sm text-zinc-300">
             Top {results.length} 搭配
             {selectedCharacter && <span className="text-zinc-500 ml-2">— {selectedCharacter.name}</span>}
-            {rankMode === 'damage' && <span className="text-purple-400 ml-2 text-xs">(按伤害排序)</span>}
+            {rankMode === 'damage' && <span className="text-purple-400 ml-2 text-xs">(按共鸣解放伤害排序)</span>}
           </h3>
           {results.map((r, i) => {
             const dmg = rankMode === 'damage' ? calcLoadoutDamage(r.echoes) : 0
@@ -463,7 +468,7 @@ export function CalculatorPage() {
                   </span>
                   {rankMode === 'damage' && dmg > 0 && (
                     <span className="text-xs text-orange-400 font-mono">
-                      {activeSkillTypes.size > 0 ? '筛选' : '总'}伤害: {dmg.toLocaleString()}
+                      {activeSkillTypes.size > 0 ? '筛选伤害' : '共鸣解放期望'}: {dmg.toLocaleString()}
                     </span>
                   )}
                   <button
