@@ -219,14 +219,7 @@ export function calcDamage(
     if (v) { skillDmgBonuses[k] += v; addSrc(k as keyof typeof src, '套装效果', v) }
   }
 
-  // Ascension stat
-  const asc = character.ascensionStat
-  switch (asc.type) {
-    case 'atkPct': totalAtkPct += asc.value; addSrc('atk', '突破属性', asc.value); break
-    case 'critRate': totalCritRate += asc.value; addSrc('critRate', '突破属性', asc.value); break
-    case 'critDmg': totalCritDmg += asc.value; addSrc('critDmg', '突破属性', asc.value); break
-    case 'elemDmg': baseElemDmg += asc.value; addSrc('elemDmg', '突破属性', asc.value); break
-  }
+  // ascensionStat: 90级满突后已包含在baseAtk/基础暴击中，不再额外计算
 
   // Inherent buffs
   for (const buff of enabledBuffs) {
