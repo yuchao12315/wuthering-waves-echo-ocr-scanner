@@ -1,5 +1,5 @@
 import type { Echo } from '@/types/echo'
-import type { CharacterBase, Weapon, DamageResult, BuffType, SonataEffect, InherentBuff } from '@/types/damage'
+import type { CharacterBase, Weapon, DamageResult, BuffType, SonataEffect, InherentBuff, ChainEffect } from '@/types/damage'
 import SONATA_EFFECTS from '@/data/sonata-effects.json'
 
 const sonataEffects = SONATA_EFFECTS as Record<string, SonataEffect>
@@ -153,8 +153,9 @@ export function calcDamage(
   chainNodes = -1,
   skillLevel = 10,
   charLevel = 90,
-  enemyLevel = 90,
+  enemyLevel = 89,
   enemyResist = 0.1,
+  chainLevel = -1,
 ): DamageResult {
   const echoStats = collectEchoStats(echoes)
   const sonataBuff = collectSonataBuffs(echoes)
@@ -164,6 +165,19 @@ export function calcDamage(
   const baseAtk = character.baseAtk + weapon.baseAtk
   const enabledBuffs = character.inherentBuffs.filter(isBuffEnabled)
 
+  // Resolve active chain level (default -1 = max 6)
+  const activeChainLevel = chainLevel < 0 ? 6 : Math.min(6, chainLevel)
+
+  // Collect active chain effects based on sequence level
+  const activeChainEffects: ChainEffect[] = []
+  if (character.chainEffects) {
+    for (const eff of character.chainEffects) {
+      if (eff.sequence <= activeChainLevel) {
+        activeChainEffects.push(eff)
+      }
+    }
+  }
+
   // --- Collect global buffs ---
   let totalAtkPct = weapon.atkPct + echoStats.atkPct + sonataBuff.atkPct
   let totalCritRate = 0.05 + weapon.critRate + echoStats.critRate
@@ -171,6 +185,7 @@ export function calcDamage(
   let baseElemDmg = echoStats.elemDmg + sonataBuff.elemDmg
   let totalDefIgnore = 0
   let totalResReduce = 0
+  let globalDmgDeepen = 0
 
   const skillDmgBonuses: Record<string, number> = {
     normalAtk: echoStats.skillDmg.normalAtk + (sonataBuff.skillDmg.normalAtk ?? 0),
@@ -198,6 +213,7 @@ export function calcDamage(
       case 'elemDmg': baseElemDmg += buff.value; break
       case 'defIgnore': totalDefIgnore += buff.value; break
       case 'resReduce': totalResReduce += buff.value; break
+      case 'dmgDeepen': globalDmgDeepen += buff.value; break
       default: {
         // Global skill-type dmg buffs (no targetSkill = applies to all skills of that type)
         const key = BUFF_TO_DMG_KEY[buff.type]
@@ -206,7 +222,7 @@ export function calcDamage(
     }
   }
 
-  // Chain stats
+  // Chain stats (8 passive attribute nodes)
   const activeChainCount = chainNodes < 0 ? character.chainStats.length : chainNodes
   for (let i = 0; i < activeChainCount && i < character.chainStats.length; i++) {
     const cs = character.chainStats[i]
@@ -215,6 +231,24 @@ export function calcDamage(
       case 'critRate': totalCritRate += cs.value; break
       case 'critDmg': totalCritDmg += cs.value; break
       case 'elemDmg': baseElemDmg += cs.value; break
+    }
+  }
+
+  // Chain effects — global (no targetSkill)
+  for (const eff of activeChainEffects) {
+    if (eff.targetSkill) continue
+    switch (eff.type) {
+      case 'atkPct': totalAtkPct += eff.value; break
+      case 'critRate': totalCritRate += eff.value; break
+      case 'critDmg': totalCritDmg += eff.value; break
+      case 'elemDmg': baseElemDmg += eff.value; break
+      case 'defIgnore': totalDefIgnore += eff.value; break
+      case 'resReduce': totalResReduce += eff.value; break
+      case 'dmgDeepen': globalDmgDeepen += eff.value; break
+      default: {
+        const key = BUFF_TO_DMG_KEY[eff.type]
+        if (key) skillDmgBonuses[key] = (skillDmgBonuses[key] ?? 0) + eff.value
+      }
     }
   }
 
@@ -256,9 +290,11 @@ export function calcDamage(
 
   const skills = character.skills.map(skill => {
     const multiplierStr = skill.multipliers[levelIdx] ?? skill.multipliers[skill.multipliers.length - 1] ?? '0%'
-    const multiplier = parseMultiplierStr(multiplierStr)
+    let multiplier = parseMultiplierStr(multiplierStr)
 
     let dmgBonus = baseElemDmg + skill.bonusDmg
+    let skillDmgDeepen = globalDmgDeepen
+    let skillGuaranteedCrit = false
 
     // Per-skillType echo/sonata/global-inherent dmg bonuses
     const dmgKey = skill.isHeavy ? 'heavyAtk' : (SKILLTYPE_TO_DMG[skill.skillType] ?? '')
@@ -275,18 +311,47 @@ export function calcDamage(
     for (const buff of enabledBuffs) {
       if (!buff.targetSkill) continue
       if (!buffMatchesSkill(buff, skill.name)) continue
-      const buffKey = BUFF_TO_DMG_KEY[buff.type]
-      if (buffKey) {
-        dmgBonus += buff.value
-      } else {
-        // targeted atkPct/critRate etc — rare but possible
-        // These would need per-skill panel recalc, skip for now
+      switch (buff.type) {
+        case 'dmgDeepen': skillDmgDeepen += buff.value; break
+        default: {
+          const buffKey = BUFF_TO_DMG_KEY[buff.type]
+          if (buffKey) {
+            dmgBonus += buff.value
+          }
+        }
+      }
+    }
+
+    // Targeted chain effects (with targetSkill)
+    for (const eff of activeChainEffects) {
+      if (!eff.targetSkill) continue
+      if (!buffMatchesSkill(eff as unknown as InherentBuff, skill.name)) continue
+      switch (eff.type) {
+        case 'guaranteedCrit': skillGuaranteedCrit = true; break
+        case 'dmgDeepen': skillDmgDeepen += eff.value; break
+        case 'multiplierBoost': multiplier *= (1 + eff.value); break
+        default: {
+          const effKey = BUFF_TO_DMG_KEY[eff.type]
+          if (effKey) {
+            dmgBonus += eff.value
+          } else {
+            switch (eff.type) {
+              case 'atkPct': /* handled globally */ break
+              case 'critRate': /* handled globally */ break
+              case 'critDmg': /* handled globally */ break
+              case 'elemDmg': dmgBonus += eff.value; break
+            }
+          }
+        }
       }
     }
 
     const baseDmg = totalAtk * multiplier
-    const crit = baseDmg * (1 + dmgBonus) * (1 + totalCritDmg) * defMult * resMult
-    const expected = baseDmg * (1 + dmgBonus) * (1 + totalCritRate * totalCritDmg) * defMult * resMult
+    const deepenMult = 1 + skillDmgDeepen
+    const crit = baseDmg * (1 + dmgBonus) * deepenMult * (1 + totalCritDmg) * defMult * resMult
+    const expected = skillGuaranteedCrit
+      ? crit
+      : baseDmg * (1 + dmgBonus) * deepenMult * (1 + totalCritRate * totalCritDmg) * defMult * resMult
 
     return {
       name: skill.name,

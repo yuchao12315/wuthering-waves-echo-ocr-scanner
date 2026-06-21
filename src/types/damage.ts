@@ -14,7 +14,7 @@ export type BuffType =
   | 'hpPct' | 'defPct'
 
 export interface InherentBuff {
-  type: BuffType | 'defIgnore' | 'resReduce'
+  type: BuffType | 'defIgnore' | 'resReduce' | 'dmgDeepen'
   value: number
   condition?: string
   targetSkill?: string   // regex pattern matching skill name; omit = applies to all
@@ -26,6 +26,19 @@ export interface ChainStat {
   value: number
 }
 
+export interface ChainEffect {
+  /** Which sequence node unlocks this (1-6) */
+  sequence: number
+  /** Effect type */
+  type: BuffType | 'defIgnore' | 'resReduce' | 'dmgDeepen' | 'guaranteedCrit' | 'multiplierBoost'
+  /** Effect value (percentage as decimal, e.g. 0.30 = 30%) */
+  value: number
+  /** Description of the effect */
+  condition?: string
+  /** Regex pattern matching skill name; omit = applies to all skills */
+  targetSkill?: string
+}
+
 export interface CharacterBase {
   baseAtk: number
   weaponType: string
@@ -33,6 +46,7 @@ export interface CharacterBase {
   ascensionStat: { type: string; value: number }
   inherentBuffs: InherentBuff[]
   chainStats: ChainStat[]
+  chainEffects?: ChainEffect[]
   weaponPassiveMultiplier: Record<string, number>
   skills: Skill[]
 }

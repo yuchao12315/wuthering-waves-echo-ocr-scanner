@@ -6811,6 +6811,34 @@
         "type": "elemDmg",
         "value": 0.042
       }
+    ],
+    "chainEffects": [
+      {
+        "sequence": 1,
+        "type": "guaranteedCrit",
+        "value": 1,
+        "condition": "施放共鸣技能轰轰时必定暴击",
+        "targetSkill": "轰轰"
+      },
+      {
+        "sequence": 3,
+        "type": "dmgDeepen",
+        "value": 0.40,
+        "condition": "炽烈焰火对<50%HP目标伤害+40%",
+        "targetSkill": "炽烈焰火"
+      },
+      {
+        "sequence": 5,
+        "type": "atkPct",
+        "value": 0.30,
+        "condition": "加麻加辣满层时攻击额外+30%"
+      },
+      {
+        "sequence": 6,
+        "type": "normalAtkDmg",
+        "value": 0.25,
+        "condition": "轰轰后全队普攻伤害+25%"
+      }
     ]
   },
   "莫特斐": {
