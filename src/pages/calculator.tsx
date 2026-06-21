@@ -48,10 +48,12 @@ export function CalculatorPage() {
   const [weaponRefine, setWeaponRefine] = useState(1)
   const [activeSkillTypes, setActiveSkillTypes] = useState<Set<string>>(new Set())
   const [chainNodes, setChainNodes] = useState(-1)
+  const [chainLevel, setChainLevel] = useState(0)
   const progressTimerRef = useRef<number | null>(null)
 
   const charBase = selectedCharacter ? charsBase[selectedCharacter.name] : null
   const totalChainNodes = charBase?.chainStats?.length ?? 0
+  const hasChainEffects = (charBase?.chainEffects?.length ?? 0) > 0
   const availableWeapons = useMemo(() =>
     charBase ? weaponList.filter(w => w.type === charBase.weaponType) : []
   , [charBase])
@@ -126,12 +128,12 @@ export function CalculatorPage() {
     if (!charBase) return 0
     const weapon = weaponList.find(w => w.name === weaponName)
     if (!weapon) return 0
-    const result = calcDamage(charBase, weapon, weaponRefine, loadoutEchoes, chainNodes)
+    const result = calcDamage(charBase, weapon, weaponRefine, loadoutEchoes, chainNodes, 10, 90, 89, 0.1, chainLevel)
     if (activeSkillTypes.size === 0) return result.totalExpected
     return result.skills
       .filter(sk => activeSkillTypes.has(sk.skillType))
       .reduce((s, sk) => s + sk.expected, 0)
-  }, [charBase, weaponName, weaponRefine, activeSkillTypes, chainNodes])
+  }, [charBase, weaponName, weaponRefine, activeSkillTypes, chainNodes, chainLevel])
 
   const sortedResults = useMemo(() => {
     if (rankMode !== 'damage' || !charBase) return computeResults
@@ -288,6 +290,22 @@ export function CalculatorPage() {
                     type="button"
                     onClick={() => setChainNodes(n)}
                     className={`w-6 h-6 text-xs rounded ${(chainNodes < 0 ? totalChainNodes : chainNodes) === n ? 'bg-purple-600 text-white' : 'bg-zinc-800 text-zinc-400'}`}
+                  >
+                    {n}
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {hasChainEffects && (
+              <div className="flex items-center gap-1.5 mb-2">
+                <span className="text-xs text-zinc-500">命座:</span>
+                {[0, 1, 2, 3, 4, 5, 6].map(n => (
+                  <button
+                    key={n}
+                    type="button"
+                    onClick={() => setChainLevel(n)}
+                    className={`w-6 h-6 text-xs rounded ${chainLevel === n ? 'bg-purple-600 text-white' : 'bg-zinc-800 text-zinc-400'}`}
                   >
                     {n}
                   </button>

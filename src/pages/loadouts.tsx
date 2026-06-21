@@ -108,6 +108,7 @@ function DamagePanel({ loadout }: { loadout: SavedLoadout }) {
   const [refine, setRefine] = useState(1)
   const [activeTypes, setActiveTypes] = useState<Set<string>>(new Set())
   const [chainNodes, setChainNodes] = useState(charBase?.chainStats?.length ?? 0)
+  const [chainLevel, setChainLevel] = useState(0)
 
   if (!charBase) {
     return <p className="text-xs text-zinc-500 mt-2">暂无该角色的伤害数据</p>
@@ -117,7 +118,8 @@ function DamagePanel({ loadout }: { loadout: SavedLoadout }) {
   if (!weapon) return null
 
   const totalChainNodes = charBase.chainStats?.length ?? 0
-  const result = calcDamage(charBase, weapon, refine, loadout.echoes, chainNodes)
+  const hasChainEffects = (charBase.chainEffects?.length ?? 0) > 0
+  const result = calcDamage(charBase, weapon, refine, loadout.echoes, chainNodes, 10, 90, 89, 0.1, chainLevel)
 
   const allSkillTypes = useMemo(() => {
     const seen = new Set<string>()
@@ -157,6 +159,22 @@ function DamagePanel({ loadout }: { loadout: SavedLoadout }) {
               type="button"
               onClick={() => setChainNodes(n)}
               className={`w-6 h-6 text-xs rounded ${chainNodes === n ? 'bg-purple-600 text-white' : 'bg-zinc-800 text-zinc-400'}`}
+            >
+              {n}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {hasChainEffects && (
+        <div className="flex items-center gap-1.5 mb-3">
+          <span className="text-xs text-zinc-500">命座:</span>
+          {[0, 1, 2, 3, 4, 5, 6].map(n => (
+            <button
+              key={n}
+              type="button"
+              onClick={() => setChainLevel(n)}
+              className={`w-6 h-6 text-xs rounded ${chainLevel === n ? 'bg-purple-600 text-white' : 'bg-zinc-800 text-zinc-400'}`}
             >
               {n}
             </button>

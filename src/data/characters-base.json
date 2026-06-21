@@ -7209,22 +7209,19 @@
         "type": "dmgDeepen",
         "value": 0.4,
         "condition": "炽烈焰火对<50%HP目标伤害+40%",
-        "targetSkill": "炽烈焰火",
-        "enabled": false
+        "targetSkill": "炽烈焰火"
       },
       {
         "sequence": 5,
         "type": "atkPct",
         "value": 0.3,
-        "condition": "加麻加辣满层时攻击额外+30%",
-        "enabled": false
+        "condition": "加麻加辣满层时攻击额外+30%"
       },
       {
         "sequence": 6,
         "type": "normalAtkDmg",
         "value": 0.25,
-        "condition": "轰轰后全队普攻伤害+25%",
-        "enabled": false
+        "condition": "轰轰后全队普攻伤害+25%"
       }
     ]
   },
