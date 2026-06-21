@@ -81,6 +81,11 @@ const MAX_SUB: Record<string, number> = {
   '攻击': 60, '生命': 580, '防御': 70, '共鸣效率': 12.4,
   '普攻伤害加成': 11.6, '重击伤害加成': 11.6, '共鸣技能伤害加成': 11.6, '共鸣解放伤害加成': 11.6,
 };
+const SEC_STAT_CN: Record<number, Record<string, number>> = {
+  1: { '生命': 2280 },
+  3: { '攻击': 100 },
+  4: { '攻击': 150 },
+};
 const SKILL_IDX: Record<string, number> = {
   '普攻伤害加成': 0, '重击伤害加成': 1, '共鸣技能伤害加成': 2, '共鸣解放伤害加成': 3,
 };
@@ -159,7 +164,16 @@ function calcEchoScoreMax(echo: Echo, calc: CalcJson): number {
 
   const subSum = validSubScores.reduce((s, v) => s + v, 0);
 
-  return bestMain + subSum;
+  let bestSec = 0;
+  const secFixed = SEC_STAT_CN[cost];
+  if (secFixed) {
+    for (const [cn, val] of Object.entries(secFixed)) {
+      const w = mp[cn] ?? 0;
+      if (val * w > bestSec) bestSec = val * w;
+    }
+  }
+
+  return bestMain + bestSec + subSum;
 }
 
 function scoreEcho(echo: Echo, calc: CalcJson): number {

@@ -132,7 +132,17 @@ function calcEchoScoreMax(echo: Echo, calc: CalcJson): number {
 
   const subSum = validSubScores.reduce((s, v) => s + v, 0)
 
-  return bestMain + subSum
+  // 副属性(secondaryStat)理论最大贡献
+  let bestSec = 0
+  const secFixed = SEC_STAT_CN_VALUES[cost]
+  if (secFixed) {
+    for (const [cn, val] of Object.entries(secFixed)) {
+      const w = mainProps[cn] ?? 0
+      if (val * w > bestSec) bestSec = val * w
+    }
+  }
+
+  return bestMain + bestSec + subSum
 }
 
 function getSubWeight(statType: StatType, calc: CalcJson): number {
