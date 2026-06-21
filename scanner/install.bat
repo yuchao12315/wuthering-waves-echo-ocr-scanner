@@ -1,51 +1,132 @@
-@echo off
+﻿@echo off
 chcp 65001 >nul
-echo ══════════════════════════════════════════════════
-echo   鸣潮声骸扫描工具 - 依赖安装
-echo ══════════════════════════════════════════════════
+setlocal EnableDelayedExpansion
+
+echo =================================================
+echo   Wuthering Waves Echo Scanner - Installer
+echo =================================================
 echo.
 
-REM 检查Python
+echo [1/3] Checking Python 3.11 environment...
+
+set "PY_CMD="
+
+py -3.11 --version >nul 2>&1
+if not errorlevel 1 (
+    set "PY_CMD=py -3.11"
+    goto :PY_FOUND
+)
+
 python --version >nul 2>&1
-if errorlevel 1 (
-    echo [错误] 未检测到Python，请先安装Python 3.9+
-    echo 下载地址: https://www.python.org/downloads/
+if errorlevel 1 goto :NO_PYTHON
+
+for /f "tokens=2 delims= " %%v in ('python --version 2^>^&1') do set "PY_FULL_VER=%%v"
+for /f "tokens=1,2 delims=." %%a in ("!PY_FULL_VER!") do (
+    set "PY_MAJOR=%%a"
+    set "PY_MINOR=%%b"
+)
+
+if "!PY_MAJOR!"=="3" if "!PY_MINOR!"=="11" (
+    set "PY_CMD=python"
+    goto :PY_FOUND
+)
+
+echo [!] Found Python !PY_FULL_VER!, but PaddlePaddle requires Python 3.11
+echo     Will download and install Python 3.11 automatically...
+echo.
+goto :INSTALL_PYTHON
+
+:NO_PYTHON
+echo [!] Python not found, will download and install Python 3.11 automatically...
+echo.
+
+:INSTALL_PYTHON
+set "PY_INSTALLER=%TEMP%\python-3.11.9-amd64.exe"
+set "PY_URL=https://www.python.org/ftp/python/3.11.9/python-3.11.9-amd64.exe"
+
+echo [*] Downloading Python 3.11.9 installer...
+
+curl --version >nul 2>&1
+if not errorlevel 1 (
+    curl -L -o "!PY_INSTALLER!" "!PY_URL!"
+) else (
+    certutil -urlcache -split -f "!PY_URL!" "!PY_INSTALLER!"
+)
+
+if not exist "!PY_INSTALLER!" (
+    echo [ERROR] Failed to download Python. Please install Python 3.11 manually:
+    echo         https://www.python.org/downloads/release/python-3119/
+    echo         Make sure to check "Add Python to PATH" during installation.
     pause
     exit /b 1
 )
 
-echo [1/3] 升级pip...
-python -m pip install --upgrade pip
+echo [*] Installing Python 3.11.9 (silent install, please wait)...
+"!PY_INSTALLER!" /passive InstallAllUsers=0 PrependPath=1 Include_launcher=1 Include_pip=1
 
-echo.
-echo [2/3] 安装基础依赖...
-pip install --user mss>=9.0 pyautogui>=0.9 psutil>=5.9 Pillow>=10.0 numpy>=1.24 pywin32>=306
-
-echo.
-echo [3/3] 安装PaddlePaddle和PaddleOCR（较大，请耐心等待）...
-echo      如果出现权限错误，请以管理员身份运行此脚本
-pip install --user "paddlepaddle>=2.5,<3.0" "paddleocr>=2.7,<3.0" -f https://www.paddlepaddle.org.cn/whl/windows/cpu-mkl-avx/stable.html
-
-echo.
 if errorlevel 1 (
-    echo ──────────────────────────────────────────────────
-    echo [提示] 如果安装失败，请尝试以下方法：
-    echo.
-    echo   方法1: 以管理员身份运行此脚本
-    echo          右键 install.bat → 以管理员身份运行
-    echo.
-    echo   方法2: 手动逐个安装
-    echo          pip install --user paddlepaddle
-    echo          pip install --user paddleocr
-    echo.
-    echo   方法3: 如果是路径过长问题，启用Windows长路径支持
-    echo          以管理员运行PowerShell执行:
-    echo          New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force
-    echo ──────────────────────────────────────────────────
-) else (
-    echo ══════════════════════════════════════════════════
-    echo   安装完成！运行扫描工具：python -m scanner
-    echo ══════════════════════════════════════════════════
+    echo [ERROR] Python installation failed. Please install manually:
+    echo         https://www.python.org/downloads/release/python-3119/
+    pause
+    exit /b 1
 )
 
+del "!PY_INSTALLER!" >nul 2>&1
+
+set "PATH=%LOCALAPPDATA%\Programs\Python\Python311\;%LOCALAPPDATA%\Programs\Python\Python311\Scripts\;%PATH%"
+
+py -3.11 --version >nul 2>&1
+if not errorlevel 1 (
+    set "PY_CMD=py -3.11"
+) else (
+    python --version >nul 2>&1
+    if not errorlevel 1 (
+        set "PY_CMD=python"
+    ) else (
+        echo [ERROR] Python installed but not recognized. Please close this window and run again.
+        pause
+        exit /b 1
+    )
+)
+
+echo [OK] Python 3.11 installed successfully
+echo.
+
+:PY_FOUND
+for /f "tokens=*" %%v in ('!PY_CMD! --version 2^>^&1') do echo [OK] Using %%v
+echo.
+
+echo [2/3] Upgrading pip...
+!PY_CMD! -m pip install --upgrade pip
+echo.
+
+echo [3/3] Installing dependencies (includes PaddlePaddle, may take a while)...
+!PY_CMD! -m pip install --user -r "%~dp0requirements.txt"
+
+if errorlevel 1 goto :INSTALL_FAIL
+
+echo.
+echo =================================================
+echo   Installation complete!
+echo.
+echo   Run scanner:  !PY_CMD! -m scanner
+echo =================================================
+goto :END
+
+:INSTALL_FAIL
+echo.
+echo -------------------------------------------------
+echo [HINT] Installation failed. Common fixes:
+echo.
+echo   1. Network issue - just re-run this script
+echo.
+echo   2. Permission denied - right-click install.bat
+echo      and select "Run as administrator"
+echo.
+echo   3. Manual install:
+echo      !PY_CMD! -m pip install --user -r requirements.txt
+echo -------------------------------------------------
+
+:END
+echo.
 pause

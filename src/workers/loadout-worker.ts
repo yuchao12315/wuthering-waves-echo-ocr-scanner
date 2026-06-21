@@ -83,39 +83,35 @@ const MAX_SUB: Record<string, number> = {
   '普攻伤害加成': 11.6, '重击伤害加成': 11.6, '共鸣技能伤害加成': 11.6, '共鸣解放伤害加成': 11.6,
 };
 
-const smCache = new Map<string, number[]>();
+function calcEchoScoreMax(echo: Echo, calc: CalcJson): number {
+  const cost = echo.cost;
+  const mp = calc.main_props[String(cost)] ?? {};
+  const sp = calc.sub_props;
 
-function calcScoreMax(cost: number, calc: CalcJson): number {
-  const key = (calc as any).name + '_' + cost;
-  if (smCache.has(key)) return smCache.get(key)![cost === 1 ? 0 : cost === 3 ? 1 : 2];
+  const mainCn = CN_TO_STAT[echo.mainStat.type];
+  const bestMain = mainCn ? ((MAIN_STAT_CN[cost] ?? {})[mainCn] ?? 0) * (mp[mainCn] ?? 0) : 0;
 
-  const res = [0, 0, 0];
-  for (const c of [1, 3, 4]) {
-    const mp = calc.main_props[String(c)] ?? {};
-    const sp = calc.sub_props;
-    let bestMain = 0;
-    for (const [cn, w] of Object.entries(mp)) {
-      const v = (MAIN_STAT_CN[c] ?? {})[cn];
-      if (v !== undefined) bestMain = Math.max(bestMain, v * w);
+  let bestSec = 0;
+  if (echo.secondaryStat) {
+    const secCn = CN_TO_STAT[echo.secondaryStat.type];
+    if (secCn) {
+      bestSec = ((SEC_STAT_CN[cost] ?? {})[secCn] ?? 0) * (mp[secCn] ?? 0);
     }
-    let bestSec = 0;
-    for (const [cn, v] of Object.entries(SEC_STAT_CN[c] ?? {})) {
-      bestSec = Math.max(bestSec, v * (mp[cn] ?? 0));
-    }
-    const ss: number[] = [];
-    for (const [cn, mv] of Object.entries(MAX_SUB)) {
-      const w = sp[cn] ?? 0;
-      if (w > 0) ss.push(mv * w);
-    }
-    ss.sort((a, b) => b - a);
-    res[c === 1 ? 0 : c === 3 ? 1 : 2] = bestMain + bestSec + ss.slice(0, 5).reduce((a, b) => a + b, 0);
   }
-  smCache.set(key, res);
-  return res[cost === 1 ? 0 : cost === 3 ? 1 : 2];
+
+  let subSum = 0;
+  for (const sub of echo.substats) {
+    const cn = CN_TO_STAT[sub.type];
+    if (cn) {
+      subSum += (MAX_SUB[cn] ?? 0) * (sp[cn] ?? 0);
+    }
+  }
+
+  return bestMain + bestSec + subSum;
 }
 
 function scoreEcho(echo: Echo, calc: CalcJson): number {
-  const scoreMax = calcScoreMax(echo.cost, calc);
+  const scoreMax = calcEchoScoreMax(echo, calc);
   if (scoreMax <= 0) return 0;
   let rawScore = 0;
 

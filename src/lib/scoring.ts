@@ -40,56 +40,39 @@ const MAX_SUB_VALUES: Record<string, number> = {
   '共鸣技能伤害加成': 11.6, '共鸣解放伤害加成': 11.6,
 }
 
-// score_max缓存
-const scoreMaxCache = new Map<string, [number, number, number]>()
-
 /**
- * 动态计算 score_max = 最优主词条 + 最优副属性 + 5个最优副词条
+ * 基于声骸实际词条计算 score_max
+ * = 该声骸主词条固定值×权重 + 副属性固定值×权重 + 该声骸实际5条副词条各自的(理论最大值×权重)之和
  */
-function calcScoreMax(cost: number, calc: CalcJson): number {
-  const cacheKey = calc.name + '_' + cost
-  const cached = scoreMaxCache.get(cacheKey)
-  if (cached) return cached[costToIndex(cost as 1 | 3 | 4)]
+function calcEchoScoreMax(echo: Echo, calc: CalcJson): number {
+  const cost = echo.cost
+  const mainProps = calc.main_props[String(cost)] ?? {}
+  const subProps = calc.sub_props
 
-  const result: [number, number, number] = [0, 0, 0]
-  for (const c of [1, 3, 4] as const) {
-    const mainProps = calc.main_props[String(c)] ?? {}
-    const subProps = calc.sub_props
+  const mainCn = Object.entries(CN_TO_STAT).find(([_, v]) => v === echo.mainStat.type)?.[0]
+  const mainFixed = MAIN_STAT_CN_VALUES[cost] ?? {}
+  const bestMain = mainCn ? (mainFixed[mainCn] ?? 0) * (mainProps[mainCn] ?? 0) : 0
 
-    // 1. 最优主词条: max(固定值 × main_weight)
-    let bestMain = 0
-    const mainFixed = MAIN_STAT_CN_VALUES[c] ?? {}
-    for (const [statCn, weight] of Object.entries(mainProps)) {
-      const val = mainFixed[statCn]
-      if (val !== undefined) {
-        bestMain = Math.max(bestMain, val * weight)
-      }
+  let bestSec = 0
+  if (echo.secondaryStat) {
+    const secCn = Object.entries(CN_TO_STAT).find(([_, v]) => v === echo.secondaryStat!.type)?.[0]
+    const secFixed = SEC_STAT_CN_VALUES[cost] ?? {}
+    if (secCn) {
+      bestSec = (secFixed[secCn] ?? 0) * (mainProps[secCn] ?? 0)
     }
-
-    // 2. 最优副属性: 固定值 × main_props权重
-    let bestSec = 0
-    const secFixed = SEC_STAT_CN_VALUES[c] ?? {}
-    for (const [statCn, val] of Object.entries(secFixed)) {
-      const w = mainProps[statCn] ?? 0
-      bestSec = Math.max(bestSec, val * w)
-    }
-
-    // 3. 最优5个副词条: 按(最大值 × sub_weight)排序取top5
-    const subScores: number[] = []
-    for (const [statCn, maxVal] of Object.entries(MAX_SUB_VALUES)) {
-      const w = subProps[statCn] ?? 0
-      if (w > 0) {
-        subScores.push(maxVal * w)
-      }
-    }
-    subScores.sort((a, b) => b - a)
-    const top5Sum = subScores.slice(0, 5).reduce((s, v) => s + v, 0)
-
-    result[costToIndex(c)] = bestMain + bestSec + top5Sum
   }
 
-  scoreMaxCache.set(cacheKey, result)
-  return result[costToIndex(cost as 1 | 3 | 4)]
+  let subSum = 0
+  for (const sub of (echo.substats ?? [])) {
+    const cn = Object.entries(CN_TO_STAT).find(([_, v]) => v === sub.type)?.[0]
+    if (cn) {
+      const maxVal = MAX_SUB_VALUES[cn] ?? 0
+      const w = subProps[cn] ?? 0
+      subSum += maxVal * w
+    }
+  }
+
+  return bestMain + bestSec + subSum
 }
 
 function getSubWeight(statType: StatType, calc: CalcJson): number {
@@ -108,8 +91,7 @@ function getMainWeight(statType: StatType, cost: number, calc: CalcJson): number
 }
 
 export function scoreEcho(echo: Echo, calc: CalcJson): number {
-  // 动态计算score_max
-  const scoreMax = calcScoreMax(echo.cost, calc)
+  const scoreMax = calcEchoScoreMax(echo, calc)
   if (!scoreMax || scoreMax === 0) return 0
 
   let rawScore = 0
