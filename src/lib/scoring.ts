@@ -62,40 +62,64 @@ function calcEchoScoreMax(echo: Echo, calc: CalcJson): number {
     bestMain = mainCn ? (mainFixed[mainCn] ?? 0) * (mainProps[mainCn] ?? 0) : 0
   }
 
-  let bestSec = 0
-  if (echo.secondaryStat) {
-    const secCn = Object.entries(CN_TO_STAT).find(([_, v]) => v === echo.secondaryStat!.type)?.[0]
-    const secFixed = SEC_STAT_CN_VALUES[cost] ?? {}
-    if (secCn) {
-      bestSec = (secFixed[secCn] ?? 0) * (mainProps[secCn] ?? 0)
+  // 泛型技能伤害加成: WW 用 "技能伤害加成" base_weight × maxVal × max(skill_weight)
+  // 从 individual skill weights 反推 base_weight (e.g. 重击0.605/0.55=1.1)
+  const skillWeight = calc.skill_weight ?? [0, 0, 0, 0]
+  const maxSW = Math.max(...skillWeight, 0)
+  let genericSkillContrib = 0
+  for (const [cn, si] of Object.entries(SKILL_INDEX)) {
+    const indW = subProps[cn] ?? 0
+    const sw = skillWeight[si] ?? 0
+    if (indW > 0 && sw > 0) {
+      const baseW = indW / sw
+      genericSkillContrib = 11.6 * baseW * maxSW
+      break
     }
   }
 
+  const maxSubProps = calc.max_sub_props ?? []
+  const hasGenericSkill = maxSubProps.includes('技能伤害加成')
+
   const usedCns = new Set<string>()
   const validSubScores: number[] = []
+  let genericUsed = false
   for (const sub of (echo.substats ?? [])) {
     const cn = Object.entries(CN_TO_STAT).find(([_, v]) => v === sub.type)?.[0]
-    if (cn) {
+    if (!cn) continue
+
+    const si = SKILL_INDEX[cn]
+    if (si != null && hasGenericSkill) {
+      // 技能副词条 → 映射到泛型 "技能伤害加成"
+      if (!maxSubProps.includes('技能伤害加成')) continue
+      usedCns.add(cn)
+      if (!genericUsed && genericSkillContrib > 0) {
+        genericUsed = true
+        validSubScores.push(genericSkillContrib)
+      }
+    } else {
+      // 非技能词条: 必须在 max_sub_props 中
+      if (!maxSubProps.includes(cn)) continue
       usedCns.add(cn)
       const maxVal = MAX_SUB_VALUES[cn] ?? 0
       const w = subProps[cn] ?? 0
-      if (w > 0) {
-        const si = SKILL_INDEX[cn]
-        const ratio = si != null ? (calc.skill_weight?.[si] ?? 1) : 1
-        validSubScores.push(maxVal * w * ratio)
-      }
+      if (w > 0) validSubScores.push(maxVal * w)
     }
   }
 
   if (validSubScores.length < 5) {
     const candidates: number[] = []
-    for (const [cn, maxVal] of Object.entries(MAX_SUB_VALUES)) {
-      if (!usedCns.has(cn)) {
+    // 只从 max_sub_props 中选取候选
+    for (const cn of maxSubProps) {
+      if (usedCns.has(cn)) continue
+      if (cn === '技能伤害加成') {
+        if (!genericUsed && genericSkillContrib > 0) {
+          candidates.push(genericSkillContrib)
+        }
+      } else {
         const w = subProps[cn] ?? 0
-        if (w > 0) {
-          const si = SKILL_INDEX[cn]
-          const ratio = si != null ? (calc.skill_weight?.[si] ?? 1) : 1
-          candidates.push(maxVal * w * ratio)
+        const maxVal = MAX_SUB_VALUES[cn] ?? 0
+        if (w > 0 && maxVal > 0) {
+          candidates.push(maxVal * w)
         }
       }
     }
@@ -108,7 +132,7 @@ function calcEchoScoreMax(echo: Echo, calc: CalcJson): number {
 
   const subSum = validSubScores.reduce((s, v) => s + v, 0)
 
-  return bestMain + bestSec + subSum
+  return bestMain + subSum
 }
 
 function getSubWeight(statType: StatType, calc: CalcJson): number {

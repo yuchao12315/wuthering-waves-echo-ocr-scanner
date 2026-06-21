@@ -31,6 +31,7 @@ interface CalcJson {
   name: string;
   main_props: Record<string, Record<string, number>>;
   sub_props: Record<string, number>;
+  max_sub_props: string[];
   skill_weight: [number, number, number, number];
   score_max: [number, number, number];
 }
@@ -75,9 +76,6 @@ const MAIN_STAT_CN: Record<number, Record<string, number>> = {
   3: { '攻击%': 30.0, '生命%': 30.0, '防御%': 38.0, '属性伤害加成': 30.0, '共鸣效率': 32.0, '攻击': 100 },
   4: { '攻击%': 33.0, '生命%': 33.0, '防御%': 41.5, '暴击': 22.0, '暴击伤害': 44.0, '治疗效果加成': 26.4, '攻击': 150 },
 };
-const SEC_STAT_CN: Record<number, Record<string, number>> = {
-  1: { '生命': 2280 }, 3: { '攻击': 100 }, 4: { '攻击': 150 },
-};
 const MAX_SUB: Record<string, number> = {
   '暴击': 10.5, '暴击伤害': 21.0, '攻击%': 11.6, '生命%': 11.6, '防御%': 14.7,
   '攻击': 60, '生命': 580, '防御': 70, '共鸣效率': 12.4,
@@ -98,38 +96,57 @@ function calcEchoScoreMax(echo: Echo, calc: CalcJson): number {
     bestMain = mainCn ? ((MAIN_STAT_CN[cost] ?? {})[mainCn] ?? 0) * (mp[mainCn] ?? 0) : 0;
   }
 
-  let bestSec = 0;
-  if (echo.secondaryStat) {
-    const secCn = CN_TO_STAT[echo.secondaryStat.type];
-    if (secCn) {
-      bestSec = ((SEC_STAT_CN[cost] ?? {})[secCn] ?? 0) * (mp[secCn] ?? 0);
+  // 泛型技能伤害加成
+  const skillWeight = calc.skill_weight ?? [0, 0, 0, 0];
+  const maxSW = Math.max(...skillWeight, 0);
+  let genericSkillContrib = 0;
+  for (const [cn, si] of Object.entries(SKILL_IDX)) {
+    const indW = sp[cn] ?? 0;
+    const sw = skillWeight[si] ?? 0;
+    if (indW > 0 && sw > 0) {
+      genericSkillContrib = 11.6 * (indW / sw) * maxSW;
+      break;
     }
   }
 
+  const maxSubProps = calc.max_sub_props ?? [];
+  const hasGenericSkill = maxSubProps.includes('技能伤害加成');
+
   const usedCns = new Set<string>();
   const validSubScores: number[] = [];
+  let genericUsed = false;
   for (const sub of echo.substats) {
     const cn = CN_TO_STAT[sub.type];
-    if (cn) {
+    if (!cn) continue;
+
+    const si = SKILL_IDX[cn];
+    if (si != null && hasGenericSkill) {
+      usedCns.add(cn);
+      if (!genericUsed && genericSkillContrib > 0) {
+        genericUsed = true;
+        validSubScores.push(genericSkillContrib);
+      }
+    } else {
+      if (!maxSubProps.includes(cn)) continue;
       usedCns.add(cn);
       const w = sp[cn] ?? 0;
-      if (w > 0) {
-        const si = SKILL_IDX[cn];
-        const ratio = si != null ? (calc.skill_weight?.[si] ?? 1) : 1;
-        validSubScores.push((MAX_SUB[cn] ?? 0) * w * ratio);
-      }
+      if (w > 0) validSubScores.push((MAX_SUB[cn] ?? 0) * w);
     }
   }
 
   if (validSubScores.length < 5) {
     const candidates: number[] = [];
-    for (const [cn, maxVal] of Object.entries(MAX_SUB)) {
-      if (!usedCns.has(cn)) {
+    for (const cn of maxSubProps) {
+      if (usedCns.has(cn)) continue;
+      if (cn === '技能伤害加成') {
+        if (!genericUsed && genericSkillContrib > 0) {
+          candidates.push(genericSkillContrib);
+        }
+      } else {
         const w = sp[cn] ?? 0;
-        if (w > 0) {
-          const si = SKILL_IDX[cn];
-          const ratio = si != null ? (calc.skill_weight?.[si] ?? 1) : 1;
-          candidates.push(maxVal * w * ratio);
+        const maxVal = MAX_SUB[cn] ?? 0;
+        if (w > 0 && maxVal > 0) {
+          candidates.push(maxVal * w);
         }
       }
     }
@@ -142,7 +159,7 @@ function calcEchoScoreMax(echo: Echo, calc: CalcJson): number {
 
   const subSum = validSubScores.reduce((s, v) => s + v, 0);
 
-  return bestMain + bestSec + subSum;
+  return bestMain + subSum;
 }
 
 function scoreEcho(echo: Echo, calc: CalcJson): number {
