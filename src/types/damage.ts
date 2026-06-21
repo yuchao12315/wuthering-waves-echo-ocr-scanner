@@ -14,9 +14,11 @@ export type BuffType =
   | 'hpPct' | 'defPct'
 
 export interface InherentBuff {
-  type: BuffType
+  type: BuffType | 'defIgnore' | 'resReduce'
   value: number
   condition?: string
+  targetSkill?: string   // regex pattern matching skill name; omit = applies to all
+  enabled?: boolean      // default true; set false to mark as conditional/off by default
 }
 
 export interface ChainStat {

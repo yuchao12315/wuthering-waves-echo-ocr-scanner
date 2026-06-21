@@ -5205,6 +5205,11 @@
         "type": "elemDmg",
         "value": 0.2,
         "condition": "固有热熔增伤"
+      },
+      {
+        "type": "defIgnore",
+        "value": 0.15,
+        "condition": "固有·忽视15%防御"
       }
     ],
     "weaponPassiveMultiplier": {
@@ -6379,12 +6384,14 @@
       {
         "type": "resonanceSkillDmg",
         "value": 0.5,
-        "condition": "灼热弹匣·轰轰伤害+50%"
+        "condition": "灼热弹匣·轰轰伤害+50%",
+        "targetSkill": "轰轰"
       },
       {
         "type": "atkPct",
         "value": 0.3,
-        "condition": "加麻加辣·热压弹满层+30%攻击"
+        "condition": "加麻加辣·热压弹满层+30%攻击",
+        "enabled": true
       }
     ],
     "weaponPassiveMultiplier": {
@@ -7975,6 +7982,11 @@
       {
         "type": "atkPct",
         "value": 0.12
+      },
+      {
+        "type": "resReduce",
+        "value": 0.09,
+        "condition": "固有·降低热熔抗性9%"
       }
     ],
     "weaponPassiveMultiplier": {

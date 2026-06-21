@@ -1,5 +1,5 @@
 import type { Echo } from '@/types/echo'
-import type { CharacterBase, Weapon, DamageResult, BuffType, SonataEffect } from '@/types/damage'
+import type { CharacterBase, Weapon, DamageResult, BuffType, SonataEffect, InherentBuff } from '@/types/damage'
 import SONATA_EFFECTS from '@/data/sonata-effects.json'
 
 const sonataEffects = SONATA_EFFECTS as Record<string, SonataEffect>
@@ -15,6 +15,7 @@ const SKILLTYPE_TO_DMG: Record<string, string> = {
   '常态攻击': 'normalAtk',
   '共鸣技能': 'resonanceSkill',
   '共鸣解放': 'resonanceLiberation',
+  '共鸣回路': 'resonanceSkill',
 }
 
 const BUFF_TO_DMG_KEY: Record<string, string> = {
@@ -131,6 +132,19 @@ export function parseMultiplierStr(str: string): number {
   return total
 }
 
+function isBuffEnabled(buff: InherentBuff): boolean {
+  return buff.enabled !== false
+}
+
+function buffMatchesSkill(buff: InherentBuff, skillName: string): boolean {
+  if (!buff.targetSkill) return true
+  try {
+    return new RegExp(buff.targetSkill).test(skillName)
+  } catch {
+    return skillName.includes(buff.targetSkill)
+  }
+}
+
 export function calcDamage(
   character: CharacterBase,
   weapon: Weapon,
@@ -148,14 +162,16 @@ export function calcDamage(
   const levelIdx = Math.max(0, Math.min(18, skillLevel - 1))
 
   const baseAtk = character.baseAtk + weapon.baseAtk
+  const enabledBuffs = character.inherentBuffs.filter(isBuffEnabled)
 
-  // --- Collect all flat buffs ---
+  // --- Collect global buffs ---
   let totalAtkPct = weapon.atkPct + echoStats.atkPct + sonataBuff.atkPct
   let totalCritRate = 0.05 + weapon.critRate + echoStats.critRate
   let totalCritDmg = 1.50 + weapon.critDmg + echoStats.critDmg
   let baseElemDmg = echoStats.elemDmg + sonataBuff.elemDmg
+  let totalDefIgnore = 0
+  let totalResReduce = 0
 
-  // Per-skillType dmg bonuses (from echo substats + sonata)
   const skillDmgBonuses: Record<string, number> = {
     normalAtk: echoStats.skillDmg.normalAtk + (sonataBuff.skillDmg.normalAtk ?? 0),
     heavyAtk: echoStats.skillDmg.heavyAtk + (sonataBuff.skillDmg.heavyAtk ?? 0),
@@ -163,18 +179,30 @@ export function calcDamage(
     resonanceLiberation: echoStats.skillDmg.resonanceLiberation + (sonataBuff.skillDmg.resonanceLiberation ?? 0),
   }
 
-  // Ascension stat
-  if (character.ascensionStat.type === 'critRate') totalCritRate += character.ascensionStat.value
-  if (character.ascensionStat.type === 'critDmg') totalCritDmg += character.ascensionStat.value
+  // Ascension stat — handle ALL types
+  const asc = character.ascensionStat
+  switch (asc.type) {
+    case 'atkPct': totalAtkPct += asc.value; break
+    case 'critRate': totalCritRate += asc.value; break
+    case 'critDmg': totalCritDmg += asc.value; break
+    case 'elemDmg': baseElemDmg += asc.value; break
+  }
 
-  // Inherent buffs (global ones: atkPct, critRate, critDmg, elemDmg)
-  for (const buff of character.inherentBuffs) {
+  // Inherent buffs — global (no targetSkill) non-skill-dmg types
+  for (const buff of enabledBuffs) {
+    if (buff.targetSkill) continue
     switch (buff.type) {
       case 'atkPct': totalAtkPct += buff.value; break
       case 'critRate': totalCritRate += buff.value; break
       case 'critDmg': totalCritDmg += buff.value; break
       case 'elemDmg': baseElemDmg += buff.value; break
-      default: break // per-skill buffs handled later
+      case 'defIgnore': totalDefIgnore += buff.value; break
+      case 'resReduce': totalResReduce += buff.value; break
+      default: {
+        // Global skill-type dmg buffs (no targetSkill = applies to all skills of that type)
+        const key = BUFF_TO_DMG_KEY[buff.type]
+        if (key) skillDmgBonuses[key] = (skillDmgBonuses[key] ?? 0) + buff.value
+      }
     }
   }
 
@@ -190,7 +218,7 @@ export function calcDamage(
     }
   }
 
-  // Weapon passive effects (structured)
+  // Weapon passive effects
   const weaponDmgBonuses: Record<string, number> = {}
   if (weapon.passiveEffects) {
     for (const eff of weapon.passiveEffects) {
@@ -217,48 +245,42 @@ export function calcDamage(
   }
 
   const totalAtk = baseAtk * (1 + totalAtkPct) + echoStats.flatAtk
-  const defMult = (100 + charLevel) / (199 + charLevel + enemyLevel)
-  const resMult = 1 - enemyResist
+
+  // Defense multiplier with ignore
+  const effectiveEnemyDef = 1 - totalDefIgnore
+  const defMult = (100 + charLevel) / ((100 + charLevel) + (100 + enemyLevel) * effectiveEnemyDef)
+
+  // Resistance multiplier with reduce
+  const effectiveResist = Math.max(0, enemyResist - totalResReduce)
+  const resMult = 1 - effectiveResist
 
   const skills = character.skills.map(skill => {
     const multiplierStr = skill.multipliers[levelIdx] ?? skill.multipliers[skill.multipliers.length - 1] ?? '0%'
     const multiplier = parseMultiplierStr(multiplierStr)
 
-    // Start with base elem dmg + skill-specific bonusDmg
     let dmgBonus = baseElemDmg + skill.bonusDmg
 
-    // Add per-skillType echo/sonata dmg bonuses
+    // Per-skillType echo/sonata/global-inherent dmg bonuses
     const dmgKey = skill.isHeavy ? 'heavyAtk' : (SKILLTYPE_TO_DMG[skill.skillType] ?? '')
     if (dmgKey && skillDmgBonuses[dmgKey]) {
       dmgBonus += skillDmgBonuses[dmgKey]
     }
-    // Heavy attacks also benefit from heavy attack dmg
-    if (skill.isHeavy && skillDmgBonuses.heavyAtk) {
-      // Already added above
-    }
 
-    // Add weapon passive per-skill dmg
+    // Weapon passive per-skill dmg
     if (dmgKey && weaponDmgBonuses[dmgKey]) {
       dmgBonus += weaponDmgBonuses[dmgKey]
     }
 
-    // Add inherent buffs that apply to specific skill types
-    for (const buff of character.inherentBuffs) {
+    // Targeted inherent buffs (with targetSkill)
+    for (const buff of enabledBuffs) {
+      if (!buff.targetSkill) continue
+      if (!buffMatchesSkill(buff, skill.name)) continue
       const buffKey = BUFF_TO_DMG_KEY[buff.type]
-      if (buffKey && buffKey === dmgKey) {
+      if (buffKey) {
         dmgBonus += buff.value
-      }
-    }
-
-    // weaponPassiveMultiplier (legacy: extra weapon passive elem dmg multiplier per tag)
-    const extraWeaponMult = character.weaponPassiveMultiplier?.[skill.tag] ?? 0
-    if (extraWeaponMult > 0) {
-      // Find the elemDmg passive value
-      const elemPassive = weapon.passiveEffects?.find(e => e.type === 'elemDmg' && e.condition === 'always')
-      if (elemPassive) {
-        const paramArr = weapon.passive?.param?.[elemPassive.paramIdx]
-        const val = parseParamValue(paramArr?.[refineIdx] ?? '')
-        dmgBonus += val * extraWeaponMult
+      } else {
+        // targeted atkPct/critRate etc — rare but possible
+        // These would need per-skill panel recalc, skip for now
       }
     }
 
