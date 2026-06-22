@@ -187,7 +187,7 @@ function EchoForm() {
         <div className="flex items-center gap-2 text-xs text-purple-300 bg-purple-900/20 border border-purple-700/40 rounded px-3 py-1.5">
           <span>🔮 梦魇声骸: {getNightmareBonus(monsterName)!.elemType}伤害+{(getNightmareBonus(monsterName)!.elemDmg * 100).toFixed(0)}% {
             getNightmareBonus(monsterName)!.secondValue > 0
-              ? `${({ resonanceSkillDmg: '共鸣技能', resonanceLiberationDmg: '共鸣解放', normalAtkDmg: '普攻', heavyAtkDmg: '重击', phantomDmg: '声骸技能', coordinatedDmg: '协同攻击', aeroDmg: '气动' } as Record<string, string>)[getNightmareBonus(monsterName)!.secondType] ?? ''}伤害+${(getNightmareBonus(monsterName)!.secondValue * 100).toFixed(0)}%`
+              ? `${({ resonanceSkillDmg: '共鸣技能', resonanceLiberationDmg: '共鸣解放', normalAtkDmg: '普攻', heavyAtkDmg: '重击', phantomDmg: '声骸技能', coordinatedDmg: '协同攻击', aeroDmg: '气动' , energyRegen: '共鸣效率'} as Record<string, string>)[getNightmareBonus(monsterName)!.secondType] ?? ''}伤害+${(getNightmareBonus(monsterName)!.secondValue * 100).toFixed(0)}%`
               : ''
           }</span>
         </div>

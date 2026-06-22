@@ -117,6 +117,7 @@ export function EchoCard({ echo, calc, onRemove }: Props) {
                 phantomDmg: '声骸技能',
                 coordinatedDmg: '协同攻击',
                 aeroDmg: '气动',
+                energyRegen: '共鸣效率',
               }[echo.nightmareBonus.secondType] ?? echo.nightmareBonus.secondType}
               伤害+{(echo.nightmareBonus.secondValue * 100).toFixed(0)}%
             </>
