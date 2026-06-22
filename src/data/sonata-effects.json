@@ -116,8 +116,8 @@
   },
   "wishes_of_quiet_snowfall": {
     "name": "雪落无声之愿",
-    "set2": { "type": "atkPct", "value": 0.10 },
-    "set5": null
+    "set2": { "type": "elemDmg", "value": 0.10 },
+    "set5": { "type": "elemDmg", "value": 0.10 }
   },
   "reel_of_spliced_memories": {
     "name": "剪心辑梦之影",
