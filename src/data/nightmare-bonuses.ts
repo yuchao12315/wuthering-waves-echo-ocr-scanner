@@ -12,6 +12,7 @@
  *   - phantomDmg: 声骸技能伤害加成
  *   - coordinatedDmg: 协同攻击伤害加成
  *   - aeroDmg: 气动伤害加成
+ *   - energyRegen ： 共鸣效率
  * secondValue: 第二加成数值 (小数)
  */
 
@@ -23,6 +24,7 @@ export type NightmareSecondType =
   | 'phantomDmg'
   | 'coordinatedDmg'
   | 'aeroDmg'
+  | 'energyRegen'
 
 export interface NightmareBonus {
   elemDmg: number
@@ -38,6 +40,11 @@ export const NIGHTMARE_BONUS_MAP: Record<string, NightmareBonus> = {
   '梦魇·赫卡忒': {
     elemDmg: 0.12, elemType: '湮灭',
     secondType: 'phantomDmg', secondValue: 0.20,
+  },
+
+  '共鸣回响·鸣式·利维亚坦': {
+    elemDmg: 0.12, elemType: '湮灭',
+    secondType: 'resonanceLiberationDmg', secondValue: 0.12,
   },
 
   // 冷凝 - 气动伤害+12%
@@ -96,6 +103,17 @@ export const NIGHTMARE_BONUS_MAP: Record<string, NightmareBonus> = {
   '梦魇·飞廉之猩': {
     elemDmg: 0.12, elemType: '气动',
     secondType: 'heavyAtkDmg', secondValue: 0.12,
+  },
+  '共鸣回响·芬莱克': {
+    elemDmg: 0.12, elemType: '气动',
+    secondType: 'heavyAtkDmg', secondValue: 0.12,
+  },
+  '无铭探索者': {
+    elemDmg: 0.12, elemType: '气动',
+    secondType: 'phantomDmg', secondValue: 0.20,
+  },
+  '炉芯机骸': {
+    secondType: 'energy_regen', secondValue: 0.10, //共鸣效率
   },
 }
 
