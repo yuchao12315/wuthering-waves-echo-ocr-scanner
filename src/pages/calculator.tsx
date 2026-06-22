@@ -17,6 +17,21 @@ const weaponList = WEAPONS as Weapon[]
 
 let globalWorker: Worker | null = null
 
+/** Lightweight: sum echo substats for crit rate and energy regen (base 5% crit) */
+function getEchoPanelStats(echoes: Echo[]) {
+  let critRate = 0.05
+  let energyRegen = 0
+  for (const echo of echoes) {
+    const entries = [echo.mainStat, echo.secondaryStat, ...echo.substats].filter(Boolean)
+    for (const e of entries) {
+      if (!e) continue
+      if (e.type === 'CRIT_RATE') critRate += e.value / 100
+      if (e.type === 'ENERGY_REGEN') energyRegen += e.value / 100
+    }
+  }
+  return { critRate, energyRegen }
+}
+
 function formatTime(ms: number): string {
   const sec = Math.ceil(ms / 1000)
   if (sec >= 60) {
@@ -48,6 +63,8 @@ export function CalculatorPage() {
   const [weaponRefine, setWeaponRefine] = useState(1)
   const [activeSkillTypes, setActiveSkillTypes] = useState<Set<string>>(new Set())
   const [chainLevel, setChainLevel] = useState(0)
+  const [minCritRate, setMinCritRate] = useState('')
+  const [minEnergyRegen, setMinEnergyRegen] = useState('')
   const progressTimerRef = useRef<number | null>(null)
 
   const charBase = selectedCharacter ? charsBase[selectedCharacter.name] : null
@@ -223,7 +240,23 @@ export function CalculatorPage() {
   }
 
   const calc = selectedCharacter?.calc ?? null
-  const results = sortedResults
+
+  const critThreshold = minCritRate ? parseFloat(minCritRate) / 100 : 0
+  const energyThreshold = minEnergyRegen ? parseFloat(minEnergyRegen) / 100 : 0
+  const hasThresholds = critThreshold > 0 || energyThreshold > 0
+
+  const filteredResults = useMemo(() => {
+    if (!hasThresholds) return sortedResults
+    return sortedResults.filter(r => {
+      const stats = getEchoPanelStats(r.echoes)
+      if (critThreshold > 0 && stats.critRate < critThreshold) return false
+      if (energyThreshold > 0 && stats.energyRegen < energyThreshold) return false
+      return true
+    })
+  }, [sortedResults, critThreshold, energyThreshold, hasThresholds])
+
+  const results = filteredResults
+  const belowThresholdCount = hasThresholds ? sortedResults.length - filteredResults.length : 0
 
   return (
     <div>
@@ -327,6 +360,39 @@ export function CalculatorPage() {
                 )}
               </div>
             )}
+
+            <div className="flex items-center gap-3 mb-2 mt-2">
+              <span className="text-xs text-zinc-500">阈值筛选:</span>
+              <label className="text-xs text-zinc-400">暴击率≥
+                <input
+                  type="number"
+                  step="0.1"
+                  value={minCritRate}
+                  onChange={e => setMinCritRate(e.target.value)}
+                  placeholder="%"
+                  className="bg-zinc-800 border border-zinc-700 rounded px-2 py-1 w-16 text-zinc-300 ml-1"
+                />%
+              </label>
+              <label className="text-xs text-zinc-400">共鸣效率≥
+                <input
+                  type="number"
+                  step="0.1"
+                  value={minEnergyRegen}
+                  onChange={e => setMinEnergyRegen(e.target.value)}
+                  placeholder="%"
+                  className="bg-zinc-800 border border-zinc-700 rounded px-2 py-1 w-16 text-zinc-300 ml-1"
+                />%
+              </label>
+              {(minCritRate || minEnergyRegen) && (
+                <button
+                  type="button"
+                  onClick={() => { setMinCritRate(''); setMinEnergyRegen('') }}
+                  className="text-xs text-red-400 hover:text-red-300"
+                >
+                  清除
+                </button>
+              )}
+            </div>
           </>
         )}
       </div>
@@ -439,12 +505,21 @@ export function CalculatorPage() {
         </div>
       )}
 
+      {hasThresholds && results.length === 0 && sortedResults.length > 0 && (
+        <p className="text-orange-400 text-sm text-center py-4">
+          当前没有组合能满足阈值 (共 {sortedResults.length} 套, 全部低于阈值)
+        </p>
+      )}
+
       {results.length > 0 && (
         <div className="space-y-4">
           <h3 className="font-medium text-sm text-zinc-300">
             Top {results.length} 搭配
             {selectedCharacter && <span className="text-zinc-500 ml-2">— {selectedCharacter.name}</span>}
             {rankMode === 'damage' && <span className="text-purple-400 ml-2 text-xs">(按伤害排序)</span>}
+            {hasThresholds && belowThresholdCount > 0 && (
+              <span className="text-zinc-500 ml-2 text-xs font-normal">已过滤 {belowThresholdCount} 套</span>
+            )}
           </h3>
           {results.map((r, i) => {
             const dmg = rankMode === 'damage' ? calcLoadoutDamage(r.echoes) : 0
@@ -466,6 +541,19 @@ export function CalculatorPage() {
                       {activeSkillTypes.size > 0 ? '筛选' : '总'}伤害: {dmg.toLocaleString()}
                     </span>
                   )}
+                  {(() => {
+                    const ps = getEchoPanelStats(r.echoes)
+                    return (
+                      <>
+                        <span className={`text-xs font-mono ${critThreshold > 0 && ps.critRate < critThreshold ? 'text-red-400' : 'text-zinc-400'}`}>
+                          暴击{(ps.critRate * 100).toFixed(1)}%
+                        </span>
+                        <span className={`text-xs font-mono ${energyThreshold > 0 && ps.energyRegen < energyThreshold ? 'text-red-400' : 'text-zinc-400'}`}>
+                          效率{(ps.energyRegen * 100).toFixed(1)}%
+                        </span>
+                      </>
+                    )
+                  })()}
                   <button
                     type="button"
                     onClick={() => saveLoadout(r)}
