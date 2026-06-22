@@ -360,40 +360,40 @@ export function CalculatorPage() {
                 )}
               </div>
             )}
-
-            <div className="flex items-center gap-3 mb-2 mt-2">
-              <span className="text-xs text-zinc-500">阈值筛选:</span>
-              <label className="text-xs text-zinc-400">暴击率≥
-                <input
-                  type="number"
-                  step="0.1"
-                  value={minCritRate}
-                  onChange={e => setMinCritRate(e.target.value)}
-                  placeholder="%"
-                  className="bg-zinc-800 border border-zinc-700 rounded px-2 py-1 w-16 text-zinc-300 ml-1"
-                />%
-              </label>
-              <label className="text-xs text-zinc-400">共鸣效率≥
-                <input
-                  type="number"
-                  step="0.1"
-                  value={minEnergyRegen}
-                  onChange={e => setMinEnergyRegen(e.target.value)}
-                  placeholder="%"
-                  className="bg-zinc-800 border border-zinc-700 rounded px-2 py-1 w-16 text-zinc-300 ml-1"
-                />%
-              </label>
-              {(minCritRate || minEnergyRegen) && (
-                <button
-                  type="button"
-                  onClick={() => { setMinCritRate(''); setMinEnergyRegen('') }}
-                  className="text-xs text-red-400 hover:text-red-300"
-                >
-                  清除
-                </button>
-              )}
-            </div>
           </>
+        )}
+      </div>
+
+      <div className="flex items-center gap-3 mb-4">
+        <span className="text-xs text-zinc-500">阈值筛选:</span>
+        <label className="text-xs text-zinc-400">暴击率≥
+          <input
+            type="number"
+            step="0.1"
+            value={minCritRate}
+            onChange={e => setMinCritRate(e.target.value)}
+            placeholder="%"
+            className="bg-zinc-800 border border-zinc-700 rounded px-2 py-1 w-16 text-zinc-300 ml-1"
+          />%
+        </label>
+        <label className="text-xs text-zinc-400">共鸣效率≥
+          <input
+            type="number"
+            step="0.1"
+            value={minEnergyRegen}
+            onChange={e => setMinEnergyRegen(e.target.value)}
+            placeholder="%"
+            className="bg-zinc-800 border border-zinc-700 rounded px-2 py-1 w-16 text-zinc-300 ml-1"
+          />%
+        </label>
+        {(minCritRate || minEnergyRegen) && (
+          <button
+            type="button"
+            onClick={() => { setMinCritRate(''); setMinEnergyRegen('') }}
+            className="text-xs text-red-400 hover:text-red-300"
+          >
+            清除
+          </button>
         )}
       </div>
 
