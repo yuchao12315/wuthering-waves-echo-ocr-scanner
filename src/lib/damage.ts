@@ -2,6 +2,8 @@ import type { Echo } from '@/types/echo'
 import type { CharacterBase, Weapon, DamageResult, BuffType, SonataEffect, InherentBuff, ChainEffect } from '@/types/damage'
 import SONATA_EFFECTS from '@/data/sonata-effects.json'
 
+import { getNightmareBonus } from '@/data/nightmare-bonuses'
+
 const sonataEffects = SONATA_EFFECTS as Record<string, SonataEffect>
 
 const SKILL_DMG_MAP: Record<string, string> = {
@@ -79,11 +81,13 @@ function collectEchoStats(echoes: Echo[]): EchoStats {
       }
     }
 
-    if (echo.nightmareBonus) {
-      stats.nightmareElemDmg += echo.nightmareBonus.elemDmg
-      if (echo.nightmareBonus.secondValue > 0) {
-        stats.nightmareSecondType = echo.nightmareBonus.secondType
-        stats.nightmareSecondValue += echo.nightmareBonus.secondValue
+    // Nightmare bonus: use stored field or auto-match by name
+    const nmBonus = echo.nightmareBonus ?? getNightmareBonus(echo.monsterName)
+    if (nmBonus) {
+      stats.nightmareElemDmg += nmBonus.elemDmg
+      if (nmBonus.secondValue > 0) {
+        stats.nightmareSecondType = nmBonus.secondType
+        stats.nightmareSecondValue += nmBonus.secondValue
       }
     }
   }
@@ -223,7 +227,6 @@ export function calcDamage(
   if (echoStats.critRate) { totalCritRate += echoStats.critRate; addSrc('critRate', '声骸暴击率', echoStats.critRate) }
   if (echoStats.critDmg) { totalCritDmg += echoStats.critDmg; addSrc('critDmg', '声骸暴击伤害', echoStats.critDmg) }
   if (echoStats.elemDmg) { baseElemDmg += echoStats.elemDmg; addSrc('elemDmg', '声骸属性伤害', echoStats.elemDmg) }
-  if (echoStats.nightmareElemDmg) { baseElemDmg += echoStats.nightmareElemDmg; addSrc('elemDmg', '梦魇声骸属性伤害', echoStats.nightmareElemDmg) }
 
   // Sonata
   if (sonataBuff.atkPct) { totalAtkPct += sonataBuff.atkPct; addSrc('atk', '套装效果', sonataBuff.atkPct) }
