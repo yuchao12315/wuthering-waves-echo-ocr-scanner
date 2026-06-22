@@ -26,6 +26,21 @@ const TAG_COLORS: Record<string, string> = {
 const charsBase = CHARACTERS_BASE as Record<string, CharacterBase>
 const weapons = WEAPONS as Weapon[]
 
+/** Lightweight: sum echo substats for crit rate and energy regen (base 5% crit) */
+function getEchoPanelStats(echoes: Echo[]) {
+  let critRate = 0.05
+  let energyRegen = 0
+  for (const echo of echoes) {
+    const entries = [echo.mainStat, echo.secondaryStat, ...echo.substats].filter(Boolean)
+    for (const e of entries) {
+      if (!e) continue
+      if (e.type === 'CRIT_RATE') critRate += e.value / 100
+      if (e.type === 'ENERGY_REGEN') energyRegen += e.value / 100
+    }
+  }
+  return { critRate, energyRegen }
+}
+
 function EchoPickerModal({ cost, calc, onPick, onClose }: {
   cost: number
   calc: CalcJson | null
@@ -145,11 +160,15 @@ function PanelDisplay({ result }: { result: DamageResult }) {
   const bd = result.breakdown
   return (
     <>
-      <div className="grid grid-cols-4 gap-2 mb-3">
+      <div className="grid grid-cols-5 gap-2 mb-3">
         <StatCard label="攻击力" value={result.panel.atk.toFixed(1)} sources={bd.atk.sources} isAtk baseAtk={bd.atk.baseAtk} />
         <StatCard label="暴击率" value={`${(result.panel.critRate * 100).toFixed(1)}%`} sources={bd.critRate.sources} />
         <StatCard label="暴击伤害" value={`${(result.panel.critDmg * 100).toFixed(1)}%`} sources={bd.critDmg.sources} />
         <StatCard label="属性增伤" value={`${(result.panel.elemDmg * 100).toFixed(1)}%`} sources={bd.elemDmg.sources} />
+        <div className="bg-zinc-800 rounded p-2 text-center">
+          <div className="text-xs text-zinc-500">共鸣效率</div>
+          <div className="text-sm font-medium">{(result.panel.energyRegen * 100).toFixed(1)}%</div>
+        </div>
       </div>
       {(result.panel.resonanceSkillDmg > 0 || result.panel.resonanceLiberationDmg > 0 || result.panel.normalAtkDmg > 0 || result.panel.heavyAtkDmg > 0) && (
         <div className="grid grid-cols-4 gap-2 mb-3">
@@ -445,20 +464,37 @@ export function LoadoutsPage() {
   const { loadouts } = useLoadoutStore()
   const [filterChar, setFilterChar] = useState<string>('all')
   const [, forceUpdate] = useState(0)
+  const [minCritRate, setMinCritRate] = useState('')
+  const [minEnergyRegen, setMinEnergyRegen] = useState('')
 
   const savedCharNames = useMemo(() => {
     const names = new Set(loadouts.map(l => l.characterName))
     return Array.from(names).sort()
   }, [loadouts])
 
+  const critThreshold = minCritRate ? parseFloat(minCritRate) / 100 : 0
+  const energyThreshold = minEnergyRegen ? parseFloat(minEnergyRegen) / 100 : 0
+  const hasThresholds = critThreshold > 0 || energyThreshold > 0
+
   const filtered = useMemo(() => {
-    if (filterChar === 'all') return loadouts
-    return loadouts.filter(l => l.characterName === filterChar)
-  }, [loadouts, filterChar])
+    let result = filterChar === 'all' ? loadouts : loadouts.filter(l => l.characterName === filterChar)
+    if (hasThresholds) {
+      result = result.filter(l => {
+        const stats = getEchoPanelStats(l.echoes)
+        if (critThreshold > 0 && stats.critRate < critThreshold) return false
+        if (energyThreshold > 0 && stats.energyRegen < energyThreshold) return false
+        return true
+      })
+    }
+    return result
+  }, [loadouts, filterChar, critThreshold, energyThreshold, hasThresholds])
+
+  const allFiltered = filterChar === 'all' ? loadouts : loadouts.filter(l => l.characterName === filterChar)
+  const belowThresholdCount = hasThresholds ? allFiltered.length - filtered.length : 0
 
   return (
     <div>
-      <div className="flex items-center gap-4 mb-4">
+      <div className="flex items-center gap-4 mb-4 flex-wrap">
         <h3 className="text-sm font-medium text-zinc-300">已保存套装</h3>
         {savedCharNames.length > 1 && (
           <select
@@ -474,12 +510,41 @@ export function LoadoutsPage() {
             ))}
           </select>
         )}
+        <div className="flex items-center gap-2 text-xs">
+          <label className="text-zinc-500">暴击率≥
+            <input
+              type="number"
+              step="0.1"
+              value={minCritRate}
+              onChange={e => setMinCritRate(e.target.value)}
+              placeholder="%"
+              className="bg-zinc-800 border border-zinc-700 rounded px-2 py-1 w-16 text-zinc-300 ml-1"
+            />%
+          </label>
+          <label className="text-zinc-500">共鸣效率≥
+            <input
+              type="number"
+              step="0.1"
+              value={minEnergyRegen}
+              onChange={e => setMinEnergyRegen(e.target.value)}
+              placeholder="%"
+              className="bg-zinc-800 border border-zinc-700 rounded px-2 py-1 w-16 text-zinc-300 ml-1"
+            />%
+          </label>
+        </div>
       </div>
 
-      {filtered.length === 0 ? (
+      {hasThresholds && filtered.length === 0 && allFiltered.length > 0 ? (
+        <p className="text-orange-400 text-sm text-center py-8">
+          当前没有组合能满足 (共 {allFiltered.length} 套, 全部低于阈值)
+        </p>
+      ) : filtered.length === 0 ? (
         <p className="text-zinc-500 text-sm text-center py-8">暂无保存的套装，请在搭配计算页保存</p>
       ) : (
         <div className="space-y-4">
+          {hasThresholds && belowThresholdCount > 0 && (
+            <p className="text-xs text-zinc-500">已过滤 {belowThresholdCount} 套低于阈值的方案</p>
+          )}
           {filtered.map(l => (
             <LoadoutCard key={l.id} loadout={l} onUpdate={() => forceUpdate(n => n + 1)} />
           ))}

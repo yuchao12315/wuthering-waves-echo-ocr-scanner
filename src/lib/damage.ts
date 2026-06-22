@@ -40,6 +40,7 @@ interface EchoStats {
   critRate: number
   critDmg: number
   elemDmg: number
+  energyRegen: number
   skillDmg: Record<string, number>
   nightmareElemDmg: number
   nightmareSecondType: string
@@ -49,7 +50,7 @@ interface EchoStats {
 function collectEchoStats(echoes: Echo[]): EchoStats {
   const stats: EchoStats = {
     atkPct: 0, flatAtk: 0, hpPct: 0, flatHp: 0,
-    critRate: 0, critDmg: 0, elemDmg: 0,
+    critRate: 0, critDmg: 0, elemDmg: 0, energyRegen: 0,
     skillDmg: { normalAtk: 0, heavyAtk: 0, resonanceSkill: 0, resonanceLiberation: 0 },
     nightmareElemDmg: 0,
     nightmareSecondType: '',
@@ -74,6 +75,7 @@ function collectEchoStats(echoes: Echo[]): EchoStats {
         case 'CRIT_RATE': stats.critRate += value / 100; break
         case 'CRIT_DMG': stats.critDmg += value / 100; break
         case 'ELEM_DMG': stats.elemDmg += value / 100; break
+        case 'ENERGY_REGEN': stats.energyRegen += value / 100; break
         default: {
           const key = SKILL_DMG_MAP[type]
           if (key) stats.skillDmg[key] += value / 100
@@ -447,6 +449,7 @@ export function calcDamage(
       critRate: totalCritRate,
       critDmg: totalCritDmg,
       elemDmg: baseElemDmg,
+      energyRegen: echoStats.energyRegen,
       resonanceSkillDmg: rSkill,
       resonanceLiberationDmg: rLib,
       normalAtkDmg: nAtk,
