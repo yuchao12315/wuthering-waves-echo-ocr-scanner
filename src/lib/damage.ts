@@ -25,6 +25,11 @@ const BUFF_TO_DMG_KEY: Record<string, string> = {
   resonanceLiberationDmg: 'resonanceLiberation',
 }
 
+/** Round to 5 decimal places (ATK and all multipliers) */
+const round5 = (v: number) => Math.round(v * 1e5) / 1e5
+/** Round to 9 decimal places (defense multiplier) */
+const round9 = (v: number) => Math.round(v * 1e9) / 1e9
+
 interface EchoStats {
   atkPct: number
   flatAtk: number
@@ -34,6 +39,8 @@ interface EchoStats {
   critDmg: number
   elemDmg: number
   skillDmg: Record<string, number>
+  nightmareElemDmg: number
+  nightmareSkillDmg: number
 }
 
 function collectEchoStats(echoes: Echo[]): EchoStats {
@@ -41,6 +48,8 @@ function collectEchoStats(echoes: Echo[]): EchoStats {
     atkPct: 0, flatAtk: 0, hpPct: 0, flatHp: 0,
     critRate: 0, critDmg: 0, elemDmg: 0,
     skillDmg: { normalAtk: 0, heavyAtk: 0, resonanceSkill: 0, resonanceLiberation: 0 },
+    nightmareElemDmg: 0,
+    nightmareSkillDmg: 0,
   }
 
   for (const echo of echoes) {
@@ -66,6 +75,11 @@ function collectEchoStats(echoes: Echo[]): EchoStats {
           if (key) stats.skillDmg[key] += value / 100
         }
       }
+    }
+
+    if (echo.nightmareBonus) {
+      stats.nightmareElemDmg += echo.nightmareBonus.elemDmg
+      stats.nightmareSkillDmg += echo.nightmareBonus.skillDmg
     }
   }
 
@@ -204,6 +218,7 @@ export function calcDamage(
   if (echoStats.critRate) { totalCritRate += echoStats.critRate; addSrc('critRate', '声骸暴击率', echoStats.critRate) }
   if (echoStats.critDmg) { totalCritDmg += echoStats.critDmg; addSrc('critDmg', '声骸暴击伤害', echoStats.critDmg) }
   if (echoStats.elemDmg) { baseElemDmg += echoStats.elemDmg; addSrc('elemDmg', '声骸属性伤害', echoStats.elemDmg) }
+  if (echoStats.nightmareElemDmg) { baseElemDmg += echoStats.nightmareElemDmg; addSrc('elemDmg', '梦魇声骸属性伤害', echoStats.nightmareElemDmg) }
 
   // Sonata
   if (sonataBuff.atkPct) { totalAtkPct += sonataBuff.atkPct; addSrc('atk', '套装效果', sonataBuff.atkPct) }
@@ -213,6 +228,13 @@ export function calcDamage(
   // Echo skill dmg substats
   for (const [k, v] of Object.entries(echoStats.skillDmg)) {
     if (v) { skillDmgBonuses[k] += v; addSrc(k as keyof typeof src, '声骸技能增伤', v) }
+  }
+  // Nightmare echo fixed skill dmg bonus (applies to all skill types)
+  if (echoStats.nightmareSkillDmg) {
+    for (const key of ['normalAtk', 'heavyAtk', 'resonanceSkill', 'resonanceLiberation'] as const) {
+      skillDmgBonuses[key] += echoStats.nightmareSkillDmg
+      addSrc(key, '梦魇声骸技能增伤', echoStats.nightmareSkillDmg)
+    }
   }
   // Sonata skill dmg
   for (const [k, v] of Object.entries(sonataBuff.skillDmg)) {
@@ -288,12 +310,13 @@ export function calcDamage(
 
   if (echoStats.flatAtk) addSrc('atk', '声骸固定攻击', echoStats.flatAtk)
 
-  const totalAtk = baseAtk * (1 + totalAtkPct) + echoStats.flatAtk
+  const totalAtk = round5(baseAtk * (1 + totalAtkPct) + echoStats.flatAtk)
 
-  const effectiveEnemyDef = 1 - totalDefIgnore
-  const defMult = (100 + charLevel) / ((100 + charLevel) + (100 + enemyLevel) * effectiveEnemyDef)
+  const defReduce = totalDefIgnore
+  const defPen = 0
+  const defMult = round9((100 + charLevel) / ((99 + enemyLevel) + (100 + charLevel) * (1 - defReduce - defPen)))
   const effectiveResist = Math.max(0, enemyResist - totalResReduce)
-  const resMult = 1 - effectiveResist
+  const resMult = round5(1 - effectiveResist)
 
   const skills = character.skills.map(skill => {
     const multiplierStr = skill.multipliers[levelIdx] ?? skill.multipliers[skill.multipliers.length - 1] ?? '0%'
@@ -353,12 +376,14 @@ export function calcDamage(
       }
     }
 
-    const baseDmg = totalAtk * multiplier
-    const deepenMult = 1 + skillDmgDeepen
-    const crit = baseDmg * (1 + dmgBonus) * deepenMult * (1 + totalCritDmg) * defMult * resMult
+    const baseDmg = round5(totalAtk * multiplier)
+    const deepenMult = round5(1 + skillDmgDeepen)
+    const dmgBonusTotal = round5(1 + dmgBonus)
+    const critMult = skillGuaranteedCrit ? totalCritDmg : round5(1 + totalCritRate * (totalCritDmg - 1))
+    const crit = round5(round5(round5(round5(baseDmg * dmgBonusTotal) * deepenMult) * round5(totalCritDmg)) * defMult) * resMult
     const expected = skillGuaranteedCrit
       ? crit
-      : baseDmg * (1 + dmgBonus) * deepenMult * (1 + totalCritRate * totalCritDmg) * defMult * resMult
+      : round5(round5(round5(round5(baseDmg * dmgBonusTotal) * deepenMult) * critMult) * defMult) * resMult
 
     return {
       name: skill.name,

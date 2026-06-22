@@ -52,4 +52,5 @@ export interface Echo {
   mainStat: StatEntry
   secondaryStat: StatEntry | null
   substats: StatEntry[]
+  nightmareBonus?: { elemDmg: number; skillDmg: number }
 }
