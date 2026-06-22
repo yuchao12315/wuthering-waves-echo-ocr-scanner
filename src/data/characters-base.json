@@ -5465,6 +5465,11 @@
         "condition": "固有攻击加成"
       },
       {
+        "type": "critRate",
+        "value": 0.08,
+        "condition": "固有天赋·暴击"
+      },
+      {
         "type": "elemDmg",
         "value": 0.2,
         "condition": "固有热熔增伤"
@@ -10718,8 +10723,14 @@
     },
     "inherentBuffs": [
       {
-        "type": "elemDmg",
-        "value": 0.15
+        "type": "critRate",
+        "value": 0.08,
+        "condition": "固有天赋·暴击"
+      },
+      {
+        "type": "atkPct",
+        "value": 0.12,
+        "condition": "固有天赋·攻击"
       }
     ],
     "weaponPassiveMultiplier": {
