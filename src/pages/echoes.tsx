@@ -3,6 +3,7 @@ import type { Echo, StatType, SonataType, Cost } from '@/types/echo'
 import { useEchoStore } from '@/store/echo-store'
 import { useAppStore } from '@/store/app-store'
 import { SONATA_NAMES, VALID_MAIN_STATS } from '@/lib/constants'
+import { getNightmareBonus } from '@/data/nightmare-bonuses'
 import { CharacterPicker } from '@/components/character-picker'
 import { EchoCard } from '@/components/echo-card'
 import { scoreEcho } from '@/lib/scoring'
@@ -48,6 +49,7 @@ function EchoForm() {
       mainStat: { type: mainStatType, value: Number(mainStatValue) || 0 },
       secondaryStat: cost >= 3 ? { type: secondaryType, value: Number(secondaryValue) || 0 } : null,
       substats: substats.map(s => ({ type: s.type, value: Number(s.value) || 0 })),
+      ...(getNightmareBonus(monsterName) ? { nightmareBonus: getNightmareBonus(monsterName)! } : {}),
     }
     add(echo)
     setSubstats([])
@@ -180,6 +182,12 @@ function EchoForm() {
           </button>
         )}
       </div>
+
+      {getNightmareBonus(monsterName) && (
+        <div className="flex items-center gap-2 text-xs text-purple-300 bg-purple-900/20 border border-purple-700/40 rounded px-3 py-1.5">
+          <span>🔮 梦魇声骸: 属性伤害+{(getNightmareBonus(monsterName)!.elemDmg * 100).toFixed(0)}% 技能伤害+{(getNightmareBonus(monsterName)!.skillDmg * 100).toFixed(0)}%</span>
+        </div>
+      )}
 
       <button type="submit" className="bg-purple-600 hover:bg-purple-500 text-white px-4 py-2 rounded text-sm">
         添加

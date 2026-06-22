@@ -103,6 +103,12 @@ export function EchoCard({ echo, calc, onRemove }: Props) {
         </>
       )}
 
+      {echo.nightmareBonus && (
+        <div className="mt-1.5 px-2 py-1 bg-purple-900/30 border border-purple-700/50 rounded text-xs text-purple-300">
+          梦魇: 属性伤害+{(echo.nightmareBonus.elemDmg * 100).toFixed(1)}% 技能伤害+{(echo.nightmareBonus.skillDmg * 100).toFixed(1)}%
+        </div>
+      )}
+
       {onRemove && (
         <button
           onClick={() => onRemove(echo.id)}

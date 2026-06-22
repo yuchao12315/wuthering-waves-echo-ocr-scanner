@@ -25,6 +25,7 @@ interface Echo {
   mainStat: { type: string; value: number };
   secondaryStat: { type: string; value: number } | null;
   substats: { type: string; value: number }[];
+  nightmareBonus?: { elemDmg: number; skillDmg: number };
 }
 
 interface CalcJson {
@@ -192,6 +193,14 @@ function scoreEcho(echo: Echo, calc: CalcJson): number {
 
   for (const sub of echo.substats) {
     rawScore += sub.value * getSubWeight(sub.type, calc);
+  }
+
+  // Nightmare bonus: fixed damage bonus independent of substats
+  if (echo.nightmareBonus) {
+    const elemWeight = calc.sub_props['属性伤害加成'] ?? 0;
+    const skillWeight = calc.sub_props['共鸣技能伤害加成'] ?? 0;
+    rawScore += echo.nightmareBonus.elemDmg * 100 * elemWeight;
+    rawScore += echo.nightmareBonus.skillDmg * 100 * skillWeight;
   }
 
   return scoreMax > 0 ? (rawScore / scoreMax) * 50 : 0;
