@@ -360,6 +360,13 @@ function LoadoutCard({ loadout, onUpdate }: {
         newScore += scoreEcho(e, calc)
       }
     }
+    console.log('[套装替换]', {
+      slotIndex,
+      oldEcho: loadout.echoes[slotIndex]?.monsterName,
+      newEcho: newEcho.monsterName,
+      oldScore: loadout.score,
+      newScore,
+    })
     update(loadout.id, { echoes: newEchoes, score: newScore })
     onUpdate()
   }

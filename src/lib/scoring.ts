@@ -8,6 +8,7 @@
 import type { Echo, StatType } from '@/types/echo'
 import type { CalcJson } from '@/types/character'
 import { CN_TO_STAT } from './constants'
+import { getNightmareBonus } from '@/data/nightmare-bonuses'
 
 // 满级(Lv25)各Cost主词条固定数值
 const MAIN_STAT_VALUES: Record<number, Record<string, number>> = {
@@ -181,6 +182,26 @@ export function scoreEcho(echo: Echo, calc: CalcJson): number {
   for (const sub of (echo.substats ?? [])) {
     if (sub && sub.type && typeof sub.value === 'number') {
       rawScore += sub.value * getSubWeight(sub.type, calc)
+    }
+  }
+
+  // 梦魇声骸固定加成评分 (stored field or auto-match by name)
+  const nmBonus = echo.nightmareBonus ?? getNightmareBonus(echo.monsterName)
+  if (nmBonus) {
+    const elemCnKey = `${nmBonus.elemType}伤害加成`
+    const elemWeight = calc.sub_props[elemCnKey] ?? 0
+    rawScore += nmBonus.elemDmg * 100 * elemWeight
+    if (nmBonus.secondValue > 0) {
+      const secondCnMap: Record<string, string> = {
+        resonanceSkillDmg: '共鸣技能伤害加成',
+        resonanceLiberationDmg: '共鸣解放伤害加成',
+        normalAtkDmg: '普攻伤害加成',
+        heavyAtkDmg: '重击伤害加成',
+      }
+      const secondCnKey = secondCnMap[nmBonus.secondType]
+      if (secondCnKey) {
+        rawScore += nmBonus.secondValue * 100 * (calc.sub_props[secondCnKey] ?? 0)
+      }
     }
   }
 
