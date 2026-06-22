@@ -146,7 +146,7 @@ function PanelDisplay({ result }: { result: DamageResult }) {
   return (
     <>
       <div className="grid grid-cols-4 gap-2 mb-3">
-        <StatCard label="攻击力" value={String(result.panel.atk)} sources={bd.atk.sources} isAtk baseAtk={bd.atk.baseAtk} />
+        <StatCard label="攻击力" value={result.panel.atk.toFixed(1)} sources={bd.atk.sources} isAtk baseAtk={bd.atk.baseAtk} />
         <StatCard label="暴击率" value={`${(result.panel.critRate * 100).toFixed(1)}%`} sources={bd.critRate.sources} />
         <StatCard label="暴击伤害" value={`${(result.panel.critDmg * 100).toFixed(1)}%`} sources={bd.critDmg.sources} />
         <StatCard label="属性增伤" value={`${(result.panel.elemDmg * 100).toFixed(1)}%`} sources={bd.elemDmg.sources} />

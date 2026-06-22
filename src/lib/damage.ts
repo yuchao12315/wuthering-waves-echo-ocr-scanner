@@ -328,6 +328,21 @@ export function calcDamage(
   const effectiveResist = Math.max(0, enemyResist - totalResReduce)
   const resMult = round5(1 - effectiveResist)
 
+  // Damage calculation log
+  console.log('[伤害计算] 基础参数', {
+    baseAtk,
+    weapon: weapon.name,
+    totalAtkPct: round5(totalAtkPct),
+    flatAtk: echoStats.flatAtk,
+    totalAtk,
+    critRate: totalCritRate,
+    critDmg: totalCritDmg,
+    baseElemDmg,
+    nightmare: echoStats.nightmareElemDmg > 0 ? { elemDmg: echoStats.nightmareElemDmg, secondType: echoStats.nightmareSecondType, secondValue: echoStats.nightmareSecondValue } : null,
+    defMult,
+    resMult,
+  })
+
   const skills = character.skills.map(skill => {
     const multiplierStr = skill.multipliers[levelIdx] ?? skill.multipliers[skill.multipliers.length - 1] ?? '0%'
     let multiplier = parseMultiplierStr(multiplierStr)
@@ -395,6 +410,19 @@ export function calcDamage(
       ? crit
       : round5(round5(round5(round5(baseDmg * dmgBonusTotal) * deepenMult) * critMult) * defMult) * resMult
 
+    console.log(`[伤害计算] ${skill.name}`, {
+      multiplier: `${multiplierStr} → ${multiplier}`,
+      baseDmg,
+      dmgBonus: round5(dmgBonus),
+      dmgBonusTotal,
+      deepenMult,
+      critMult: skillGuaranteedCrit ? `${totalCritDmg}(必暴)` : critMult,
+      defMult,
+      resMult,
+      expected: Math.round(expected),
+      crit: Math.round(crit),
+    })
+
     return {
       name: skill.name,
       tag: skill.tag,
@@ -415,7 +443,7 @@ export function calcDamage(
 
   return {
     panel: {
-      atk: Math.round(totalAtk),
+      atk: parseFloat(totalAtk.toFixed(1)),
       critRate: totalCritRate,
       critDmg: totalCritDmg,
       elemDmg: baseElemDmg,
@@ -425,7 +453,7 @@ export function calcDamage(
       heavyAtkDmg: hAtk,
     },
     breakdown: {
-      atk: { total: Math.round(totalAtk), baseAtk, sources: src.atk },
+      atk: { total: parseFloat(totalAtk.toFixed(1)), baseAtk, sources: src.atk },
       critRate: { total: totalCritRate, sources: src.critRate },
       critDmg: { total: totalCritDmg, sources: src.critDmg },
       elemDmg: { total: baseElemDmg, sources: src.elemDmg },
