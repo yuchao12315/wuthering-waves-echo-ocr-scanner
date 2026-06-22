@@ -40,7 +40,8 @@ interface EchoStats {
   elemDmg: number
   skillDmg: Record<string, number>
   nightmareElemDmg: number
-  nightmareSkillDmg: number
+  nightmareSecondType: string
+  nightmareSecondValue: number
 }
 
 function collectEchoStats(echoes: Echo[]): EchoStats {
@@ -49,7 +50,8 @@ function collectEchoStats(echoes: Echo[]): EchoStats {
     critRate: 0, critDmg: 0, elemDmg: 0,
     skillDmg: { normalAtk: 0, heavyAtk: 0, resonanceSkill: 0, resonanceLiberation: 0 },
     nightmareElemDmg: 0,
-    nightmareSkillDmg: 0,
+    nightmareSecondType: '',
+    nightmareSecondValue: 0,
   }
 
   for (const echo of echoes) {
@@ -79,7 +81,10 @@ function collectEchoStats(echoes: Echo[]): EchoStats {
 
     if (echo.nightmareBonus) {
       stats.nightmareElemDmg += echo.nightmareBonus.elemDmg
-      stats.nightmareSkillDmg += echo.nightmareBonus.skillDmg
+      if (echo.nightmareBonus.secondValue > 0) {
+        stats.nightmareSecondType = echo.nightmareBonus.secondType
+        stats.nightmareSecondValue += echo.nightmareBonus.secondValue
+      }
     }
   }
 
@@ -229,11 +234,13 @@ export function calcDamage(
   for (const [k, v] of Object.entries(echoStats.skillDmg)) {
     if (v) { skillDmgBonuses[k] += v; addSrc(k as keyof typeof src, '声骸技能增伤', v) }
   }
-  // Nightmare echo fixed skill dmg bonus (applies to all skill types)
-  if (echoStats.nightmareSkillDmg) {
-    for (const key of ['normalAtk', 'heavyAtk', 'resonanceSkill', 'resonanceLiberation'] as const) {
-      skillDmgBonuses[key] += echoStats.nightmareSkillDmg
-      addSrc(key, '梦魇声骸技能增伤', echoStats.nightmareSkillDmg)
+  // Nightmare echo fixed bonus: elemDmg to baseElemDmg, secondType to specific skill pool
+  if (echoStats.nightmareElemDmg) { baseElemDmg += echoStats.nightmareElemDmg; addSrc('elemDmg', '梦魇声骸属性伤害', echoStats.nightmareElemDmg) }
+  if (echoStats.nightmareSecondValue > 0) {
+    const nmKey = BUFF_TO_DMG_KEY[echoStats.nightmareSecondType]
+    if (nmKey && skillDmgBonuses[nmKey] !== undefined) {
+      skillDmgBonuses[nmKey] += echoStats.nightmareSecondValue
+      addSrc(nmKey as keyof typeof src, '梦魇声骸技能增伤', echoStats.nightmareSecondValue)
     }
   }
   // Sonata skill dmg

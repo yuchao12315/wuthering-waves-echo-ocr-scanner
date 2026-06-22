@@ -1,41 +1,98 @@
 /**
  * 梦魇声骸固定加成映射表
- * key: 声骸名称 (含"梦魇·"前缀)
- * value: { elemDmg: 属性伤害加成(小数), skillDmg: 技能伤害加成(小数) }
+ * 条件: 在首位装配该声骸技能时生效
  *
- * 所有梦魇声骸统一: 12%属性伤害 + 12%对应技能类型伤害
- * skillDmg 在 damage.ts 中会同时加到全部4个技能类型池
+ * elemDmg: 属性伤害加成 (对应元素类型)
+ * elemType: 属性类型 (热熔/导电/气动/冷凝/湮灭/衍射)
+ * secondType: 第二加成的技能类型键
+ *   - resonanceSkillDmg: 共鸣技能伤害加成
+ *   - resonanceLiberationDmg: 共鸣解放伤害加成
+ *   - normalAtkDmg: 普攻伤害加成
+ *   - heavyAtkDmg: 重击伤害加成
+ *   - phantomDmg: 声骸技能伤害加成
+ *   - coordinatedDmg: 协同攻击伤害加成
+ *   - aeroDmg: 气动伤害加成
+ * secondValue: 第二加成数值 (小数)
  */
+
+export type NightmareSecondType =
+  | 'resonanceSkillDmg'
+  | 'resonanceLiberationDmg'
+  | 'normalAtkDmg'
+  | 'heavyAtkDmg'
+  | 'phantomDmg'
+  | 'coordinatedDmg'
+  | 'aeroDmg'
 
 export interface NightmareBonus {
   elemDmg: number
-  skillDmg: number
+  elemType: string
+  secondType: NightmareSecondType
+  secondValue: number
 }
 
 export const NIGHTMARE_BONUS_MAP: Record<string, NightmareBonus> = {
-  // === 热熔 ===
-  '梦魇·燎照之骑': { elemDmg: 0.12, skillDmg: 0.12 },
+  // === Cost 4 ===
 
-  // === 导电 ===
-  '梦魇·朔雷之鳞': { elemDmg: 0.12, skillDmg: 0.12 },
-  '梦魇·云闪之鳞': { elemDmg: 0.12, skillDmg: 0.12 },
-  '梦魇·阿嗞嗞': { elemDmg: 0.12, skillDmg: 0.12 },
+  // 湮灭 - 声骸技能伤害+20%
+  '梦魇·赫卡忒': {
+    elemDmg: 0.12, elemType: '湮灭',
+    secondType: 'phantomDmg', secondValue: 0.20,
+  },
 
-  // === 气动 ===
-  '梦魇·飞廉之猩': { elemDmg: 0.12, skillDmg: 0.12 },
-  '梦魇·无常凶鹭': { elemDmg: 0.12, skillDmg: 0.12 },
+  // 冷凝 - 气动伤害+12%
+  '梦魇·凯尔匹': {
+    elemDmg: 0.12, elemType: '冷凝',
+    secondType: 'aeroDmg', secondValue: 0.12,
+  },
 
-  // === 冷凝 ===
-  '梦魇·辉萤军势': { elemDmg: 0.12, skillDmg: 0.12 },
-  '梦魇·巡徊猎手': { elemDmg: 0.12, skillDmg: 0.12 },
+  // 冷凝 - 协同攻击伤害+30%
+  '梦魇·辉萤军势': {
+    elemDmg: 0.12, elemType: '冷凝',
+    secondType: 'coordinatedDmg', secondValue: 0.30,
+  },
 
-  // === 湮灭 ===
-  '梦魇·无冠者': { elemDmg: 0.12, skillDmg: 0.12 },
-  '梦魇·刺玫菇': { elemDmg: 0.12, skillDmg: 0.12 },
+  // 衍射 - 仅属性伤害(无第二加成)
+  '梦魇·哀声鸷': {
+    elemDmg: 0.12, elemType: '衍射',
+    secondType: 'phantomDmg', secondValue: 0,
+  },
 
-  // === 衍射 ===
-  '梦魇·哀声鸷': { elemDmg: 0.12, skillDmg: 0.12 },
-  '梦魇·游弋蝶': { elemDmg: 0.12, skillDmg: 0.12 },
+  // 热熔 - 共鸣技能伤害+12%
+  '梦魇·燎照之骑': {
+    elemDmg: 0.12, elemType: '热熔',
+    secondType: 'resonanceSkillDmg', secondValue: 0.12,
+  },
+
+  // 湮灭 - 普攻伤害+12%
+  '梦魇·无冠者': {
+    elemDmg: 0.12, elemType: '湮灭',
+    secondType: 'normalAtkDmg', secondValue: 0.12,
+  },
+
+  // 导电 - 共鸣技能伤害+12%
+  '梦魇·朔雷之鳞': {
+    elemDmg: 0.12, elemType: '导电',
+    secondType: 'resonanceSkillDmg', secondValue: 0.12,
+  },
+
+  // 导电 - 共鸣解放伤害+12%
+  '梦魇·云闪之鳞': {
+    elemDmg: 0.12, elemType: '导电',
+    secondType: 'resonanceLiberationDmg', secondValue: 0.12,
+  },
+
+  // 湮灭 - 重击伤害+12%
+  '梦魇·无常凶鹭': {
+    elemDmg: 0.12, elemType: '湮灭',
+    secondType: 'heavyAtkDmg', secondValue: 0.12,
+  },
+
+  // 气动 - 重击伤害+12%
+  '梦魇·飞廉之猩': {
+    elemDmg: 0.12, elemType: '气动',
+    secondType: 'heavyAtkDmg', secondValue: 0.12,
+  },
 }
 
 /** 通用梦魇加成: 无 (不在映射表中的梦魇声骸不给予加成) */

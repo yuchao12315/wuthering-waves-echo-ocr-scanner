@@ -105,7 +105,22 @@ export function EchoCard({ echo, calc, onRemove }: Props) {
 
       {echo.nightmareBonus && (
         <div className="mt-1.5 px-2 py-1 bg-purple-900/30 border border-purple-700/50 rounded text-xs text-purple-300">
-          梦魇: 属性伤害+{(echo.nightmareBonus.elemDmg * 100).toFixed(1)}% 技能伤害+{(echo.nightmareBonus.skillDmg * 100).toFixed(1)}%
+          梦魇: {echo.nightmareBonus.elemType}伤害+{(echo.nightmareBonus.elemDmg * 100).toFixed(0)}%
+          {echo.nightmareBonus.secondValue > 0 && (
+            <>
+              {' '}
+              {{
+                resonanceSkillDmg: '共鸣技能',
+                resonanceLiberationDmg: '共鸣解放',
+                normalAtkDmg: '普攻',
+                heavyAtkDmg: '重击',
+                phantomDmg: '声骸技能',
+                coordinatedDmg: '协同攻击',
+                aeroDmg: '气动',
+              }[echo.nightmareBonus.secondType] ?? echo.nightmareBonus.secondType}
+              伤害+{(echo.nightmareBonus.secondValue * 100).toFixed(0)}%
+            </>
+          )}
         </div>
       )}
 

@@ -25,7 +25,7 @@ interface Echo {
   mainStat: { type: string; value: number };
   secondaryStat: { type: string; value: number } | null;
   substats: { type: string; value: number }[];
-  nightmareBonus?: { elemDmg: number; skillDmg: number };
+  nightmareBonus?: { elemDmg: number; elemType: string; secondType: string; secondValue: number };
 }
 
 interface CalcJson {
@@ -197,10 +197,20 @@ function scoreEcho(echo: Echo, calc: CalcJson): number {
 
   // Nightmare bonus: fixed damage bonus independent of substats
   if (echo.nightmareBonus) {
-    const elemWeight = calc.sub_props['属性伤害加成'] ?? 0;
-    const skillWeight = calc.sub_props['共鸣技能伤害加成'] ?? 0;
-    rawScore += echo.nightmareBonus.elemDmg * 100 * elemWeight;
-    rawScore += echo.nightmareBonus.skillDmg * 100 * skillWeight;
+    const elemCnKey = `${echo.nightmareBonus.elemType}伤害加成`;
+    rawScore += echo.nightmareBonus.elemDmg * 100 * (calc.sub_props[elemCnKey] ?? 0);
+    if (echo.nightmareBonus.secondValue > 0) {
+      const secondCnMap: Record<string, string> = {
+        resonanceSkillDmg: '共鸣技能伤害加成',
+        resonanceLiberationDmg: '共鸣解放伤害加成',
+        normalAtkDmg: '普攻伤害加成',
+        heavyAtkDmg: '重击伤害加成',
+      };
+      const secondCnKey = secondCnMap[echo.nightmareBonus.secondType];
+      if (secondCnKey) {
+        rawScore += echo.nightmareBonus.secondValue * 100 * (calc.sub_props[secondCnKey] ?? 0);
+      }
+    }
   }
 
   return scoreMax > 0 ? (rawScore / scoreMax) * 50 : 0;
