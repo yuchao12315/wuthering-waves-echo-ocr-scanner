@@ -51,6 +51,10 @@ export const NIGHTMARE_BONUS_MAP: Record<string, NightmareBonus> = {
     elemDmg: 0.12, elemType: '冷凝',
     secondType: 'coordinatedDmg', secondValue: 0.30,
   },
+  "共鸣回响·鸣式·虚造神型": {
+        elemDmg: 0.12, elemType: '冷凝',
+        secondType: 'resonanceLiberationDmg', secondValue: 0.12,
+   },
 
   // 衍射 - 仅属性伤害(无第二加成)
   '梦魇·哀声鸷': {
@@ -99,6 +103,5 @@ export const NIGHTMARE_BONUS_MAP: Record<string, NightmareBonus> = {
 
 /** 根据声骸名称查找梦魇加成, 不在映射表中或非梦魇返回 null */
 export function getNightmareBonus(name: string): NightmareBonus | null {
-  if (!name.includes('梦魇')) return null
   return NIGHTMARE_BONUS_MAP[name] ?? null
 }
