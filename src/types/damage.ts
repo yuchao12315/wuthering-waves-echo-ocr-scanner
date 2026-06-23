@@ -80,7 +80,7 @@ export interface Weapon {
 }
 
 export interface SonataSetEffect {
-  type: BuffType
+  type: BuffType | 'critRate' | 'critDmg'
   value: number
   condition?: string
   stacks?: number
@@ -88,8 +88,9 @@ export interface SonataSetEffect {
 
 export interface SonataEffect {
   name: string
-  set2: SonataSetEffect | null
-  set5: SonataSetEffect | null
+  set2: SonataSetEffect | SonataSetEffect[] | null
+  set3: SonataSetEffect | SonataSetEffect[] | null
+  set5: SonataSetEffect | SonataSetEffect[] | null
 }
 
 export interface StatSource {

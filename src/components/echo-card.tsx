@@ -105,22 +105,26 @@ export function EchoCard({ echo, calc, onRemove }: Props) {
 
       {echo.nightmareBonus && (
         <div className="mt-1.5 px-2 py-1 bg-purple-900/30 border border-purple-700/50 rounded text-xs text-purple-300">
-          梦魇: {echo.nightmareBonus.elemType}伤害+{(echo.nightmareBonus.elemDmg * 100).toFixed(0)}%
+          梦魇: {echo.nightmareBonus.elemType ? `${echo.nightmareBonus.elemType}伤害+${((echo.nightmareBonus.elemDmg ?? 0) * 100).toFixed(0)}%` : ''}
           {echo.nightmareBonus.secondValue > 0 && (
             <>
-              {' '}
+              {echo.nightmareBonus.elemType ? ' ' : ''}
               {{
-                resonanceSkillDmg: '共鸣技能',
-                resonanceLiberationDmg: '共鸣解放',
-                normalAtkDmg: '普攻',
-                heavyAtkDmg: '重击',
-                phantomDmg: '声骸技能',
-                coordinatedDmg: '协同攻击',
-                aeroDmg: '气动',
+                resonanceSkillDmg: '共鸣技能伤害',
+                resonanceLiberationDmg: '共鸣解放伤害',
+                normalAtkDmg: '普攻伤害',
+                heavyAtkDmg: '重击伤害',
+                phantomDmg: '声骸技能伤害',
+                coordinatedDmg: '协同攻击伤害',
+                aeroDmg: '气动伤害',
                 energyRegen: '共鸣效率',
+                critRate: '暴击率',
               }[echo.nightmareBonus.secondType] ?? echo.nightmareBonus.secondType}
-              伤害+{(echo.nightmareBonus.secondValue * 100).toFixed(0)}%
+              +{(echo.nightmareBonus.secondValue * 100).toFixed(0)}%
             </>
+          )}
+          {echo.nightmareBonus.requiredCharacters && (
+            <span className="text-orange-300 ml-1">(限{echo.nightmareBonus.requiredCharacters.join('/')})</span>
           )}
         </div>
       )}

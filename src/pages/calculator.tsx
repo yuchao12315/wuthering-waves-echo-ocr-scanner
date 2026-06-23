@@ -143,7 +143,7 @@ export function CalculatorPage() {
     if (!charBase) return 0
     const weapon = weaponList.find(w => w.name === weaponName)
     if (!weapon) return 0
-    const result = calcDamage(charBase, weapon, weaponRefine, loadoutEchoes, -1, 10, 90, 89, 0.1, chainLevel)
+    const result = calcDamage(charBase, weapon, weaponRefine, loadoutEchoes, -1, 10, 90, 89, 0.1, chainLevel, selectedCharacter?.name)
     if (activeSkillTypes.size === 0) return result.totalExpected
     return result.skills
       .filter(sk => activeSkillTypes.has(sk.skillType))

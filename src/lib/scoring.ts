@@ -188,9 +188,11 @@ export function scoreEcho(echo: Echo, calc: CalcJson): number {
   // 梦魇声骸固定加成评分 (stored field or auto-match by name)
   const nmBonus = echo.nightmareBonus ?? getNightmareBonus(echo.monsterName)
   if (nmBonus) {
-    const elemCnKey = `${nmBonus.elemType}伤害加成`
-    const elemWeight = calc.sub_props[elemCnKey] ?? 0
-    rawScore += nmBonus.elemDmg * 100 * elemWeight
+    if (nmBonus.elemDmg && nmBonus.elemType) {
+      const elemCnKey = `${nmBonus.elemType}伤害加成`
+      const elemWeight = calc.sub_props[elemCnKey] ?? 0
+      rawScore += nmBonus.elemDmg * 100 * elemWeight
+    }
     if (nmBonus.secondValue > 0) {
       const secondCnMap: Record<string, string> = {
         resonanceSkillDmg: '共鸣技能伤害加成',

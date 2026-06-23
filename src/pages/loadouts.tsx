@@ -191,7 +191,7 @@ function DamagePanel({ loadout }: { loadout: SavedLoadout }) {
   if (!weapon) return null
 
   const hasChainEffects = (charBase.chainEffects?.length ?? 0) > 0
-  const result = calcDamage(charBase, weapon, refine, loadout.echoes, -1, 10, 90, 89, 0.1, chainLevel)
+  const result = calcDamage(charBase, weapon, refine, loadout.echoes, -1, 10, 90, 89, 0.1, chainLevel, loadout.characterName)
 
   const allSkillTypes = useMemo(() => {
     const seen = new Set<string>()

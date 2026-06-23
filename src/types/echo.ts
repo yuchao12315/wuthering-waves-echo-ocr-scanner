@@ -1,3 +1,5 @@
+import type { NightmareBonus } from '@/data/nightmare-bonuses'
+
 export type Cost = 1 | 3 | 4
 
 export type SonataType =
@@ -52,5 +54,5 @@ export interface Echo {
   mainStat: StatEntry
   secondaryStat: StatEntry | null
   substats: StatEntry[]
-  nightmareBonus?: { elemDmg: number; elemType: string; secondType: string; secondValue: number }
+  nightmareBonus?: NightmareBonus
 }

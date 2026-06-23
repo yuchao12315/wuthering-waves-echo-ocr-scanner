@@ -12,8 +12,10 @@
  *   - phantomDmg: 声骸技能伤害加成
  *   - coordinatedDmg: 协同攻击伤害加成
  *   - aeroDmg: 气动伤害加成
- *   - energyRegen ： 共鸣效率
+ *   - energyRegen: 共鸣效率
+ *   - critRate: 暴击率
  * secondValue: 第二加成数值 (小数)
+ * requiredCharacters: 角色限制 (仅指定角色装备时生效, 不填=所有角色)
  */
 
 export type NightmareSecondType =
@@ -25,12 +27,14 @@ export type NightmareSecondType =
   | 'coordinatedDmg'
   | 'aeroDmg'
   | 'energyRegen'
+  | 'critRate'
 
 export interface NightmareBonus {
-  elemDmg: number
-  elemType: string
+  elemDmg?: number
+  elemType?: string
   secondType: NightmareSecondType
   secondValue: number
+  requiredCharacters?: string[]
 }
 
 export const NIGHTMARE_BONUS_MAP: Record<string, NightmareBonus> = {
@@ -42,6 +46,7 @@ export const NIGHTMARE_BONUS_MAP: Record<string, NightmareBonus> = {
     secondType: 'phantomDmg', secondValue: 0.20,
   },
 
+  // 湮灭 - 共鸣解放+12%
   '共鸣回响·鸣式·利维亚坦': {
     elemDmg: 0.12, elemType: '湮灭',
     secondType: 'resonanceLiberationDmg', secondValue: 0.12,
@@ -58,10 +63,19 @@ export const NIGHTMARE_BONUS_MAP: Record<string, NightmareBonus> = {
     elemDmg: 0.12, elemType: '冷凝',
     secondType: 'coordinatedDmg', secondValue: 0.30,
   },
-  "共鸣回响·鸣式·虚造神型": {
-        elemDmg: 0.12, elemType: '冷凝',
-        secondType: 'resonanceLiberationDmg', secondValue: 0.12,
-   },
+
+  // 冷凝 - 共鸣解放+12%
+  '共鸣回响·鸣式·虚造神型': {
+    elemDmg: 0.12, elemType: '冷凝',
+    secondType: 'resonanceLiberationDmg', secondValue: 0.12,
+  },
+
+  // 衍射 - 暴击率+15% (角色限制: 露西/丽贝卡)
+  '共鸣回响·梦魇亚当·重锤': {
+    elemDmg: 0.12, elemType: '衍射',
+    secondType: 'critRate', secondValue: 0.15,
+    requiredCharacters: ['露西', '丽贝卡'],
+  },
 
   // 衍射 - 仅属性伤害(无第二加成)
   '梦魇·哀声鸷': {
@@ -104,22 +118,49 @@ export const NIGHTMARE_BONUS_MAP: Record<string, NightmareBonus> = {
     elemDmg: 0.12, elemType: '气动',
     secondType: 'heavyAtkDmg', secondValue: 0.12,
   },
+
+  // 气动 - 重击伤害+12%
   '共鸣回响·芬莱克': {
     elemDmg: 0.12, elemType: '气动',
     secondType: 'heavyAtkDmg', secondValue: 0.12,
   },
+
+  // 气动 - 声骸技能+20%
   '无铭探索者': {
     elemDmg: 0.12, elemType: '气动',
     secondType: 'phantomDmg', secondValue: 0.20,
   },
+
+  // 共鸣效率+10% (无角色限制)
   '炉芯机骸': {
-    secondType: 'energy_regen', secondValue: 0.10, //共鸣效率
+    secondType: 'energyRegen', secondValue: 0.10,
+  },
+
+  // 共鸣解放+25% (角色限制: 爱弥斯)
+  '辛吉勒姆': {
+    elemDmg: 0.12, elemType: '热熔',
+    secondType: 'resonanceLiberationDmg', secondValue: 0.25,
+    requiredCharacters: ['爱弥斯'],
+  },
+
+  // 共鸣回响·达妮娅 - 衍射
+  '共鸣回响·达妮娅': {
+    elemDmg: 0.12, elemType: '衍射',
+    secondType: 'phantomDmg', secondValue: 0.20,
   },
 }
 
 /** 通用梦魇加成: 无 (不在映射表中的梦魇声骸不给予加成) */
 
-/** 根据声骸名称查找梦魇加成, 不在映射表中或非梦魇返回 null */
-export function getNightmareBonus(name: string): NightmareBonus | null {
-  return NIGHTMARE_BONUS_MAP[name] ?? null
+/** 根据声骸名称查找梦魇加成, 不在映射表中返回 null */
+export function getNightmareBonus(name: string, characterName?: string): NightmareBonus | null {
+  const bonus = NIGHTMARE_BONUS_MAP[name]
+  if (!bonus) return null
+  // 有角色限制时检查是否匹配
+  if (bonus.requiredCharacters && bonus.requiredCharacters.length > 0) {
+    if (!characterName || !bonus.requiredCharacters.includes(characterName)) {
+      return null
+    }
+  }
+  return bonus
 }

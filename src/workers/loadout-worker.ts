@@ -25,7 +25,7 @@ interface Echo {
   mainStat: { type: string; value: number };
   secondaryStat: { type: string; value: number } | null;
   substats: { type: string; value: number }[];
-  nightmareBonus?: { elemDmg: number; elemType: string; secondType: string; secondValue: number };
+  nightmareBonus?: { elemDmg?: number; elemType?: string; secondType: string; secondValue: number };
 }
 
 interface CalcJson {
@@ -197,8 +197,10 @@ function scoreEcho(echo: Echo, calc: CalcJson): number {
 
   // Nightmare bonus: fixed damage bonus independent of substats
   if (echo.nightmareBonus) {
-    const elemCnKey = `${echo.nightmareBonus.elemType}伤害加成`;
-    rawScore += echo.nightmareBonus.elemDmg * 100 * (calc.sub_props[elemCnKey] ?? 0);
+    if (echo.nightmareBonus.elemDmg && echo.nightmareBonus.elemType) {
+      const elemCnKey = `${echo.nightmareBonus.elemType}伤害加成`;
+      rawScore += echo.nightmareBonus.elemDmg * 100 * (calc.sub_props[elemCnKey] ?? 0);
+    }
     if (echo.nightmareBonus.secondValue > 0) {
       const secondCnMap: Record<string, string> = {
         resonanceSkillDmg: '共鸣技能伤害加成',

@@ -2,126 +2,221 @@
   "freezing_frost": {
     "name": "凝夜白霜",
     "set2": { "type": "elemDmg", "value": 0.10 },
+    "set3": null,
     "set5": { "type": "elemDmg", "value": 0.30, "stacks": 3, "condition": "普攻/重击命中叠加" }
   },
   "molten_rift": {
     "name": "熔山裂谷",
     "set2": { "type": "elemDmg", "value": 0.10 },
+    "set3": null,
     "set5": { "type": "elemDmg", "value": 0.30, "condition": "施放共鸣技能后15秒" }
   },
   "void_thunder": {
     "name": "彻空冥雷",
     "set2": { "type": "elemDmg", "value": 0.10 },
+    "set3": null,
     "set5": { "type": "elemDmg", "value": 0.15, "stacks": 2, "condition": "施放共鸣解放后叠加" }
   },
   "sierra_gale": {
     "name": "啸谷长风",
     "set2": { "type": "elemDmg", "value": 0.10 },
+    "set3": null,
     "set5": { "type": "elemDmg", "value": 0.30, "condition": "施放共鸣解放后15秒" }
   },
   "celestial_light": {
     "name": "浮星祛暗",
     "set2": { "type": "elemDmg", "value": 0.10 },
+    "set3": null,
     "set5": { "type": "elemDmg", "value": 0.30, "condition": "施放变奏技能后15秒" }
   },
   "havoc_eclipse": {
     "name": "沉日劫明",
     "set2": { "type": "elemDmg", "value": 0.10 },
+    "set3": null,
     "set5": { "type": "elemDmg", "value": 0.075, "stacks": 4, "condition": "普攻/重击命中叠加" }
   },
   "rejuvenating_glow": {
     "name": "隐世回光",
     "set2": { "type": "atkPct", "value": 0.10 },
+    "set3": null,
     "set5": { "type": "atkPct", "value": 0.155, "condition": "施放共鸣技能后全队" }
   },
   "moonlit_clouds": {
     "name": "轻云出月",
     "set2": { "type": "atkPct", "value": 0.10 },
+    "set3": null,
     "set5": { "type": "atkPct", "value": 0.225, "condition": "施放延奏技能后全队" }
   },
   "lingering_tunes": {
     "name": "不绝余音",
     "set2": { "type": "atkPct", "value": 0.10 },
+    "set3": null,
     "set5": { "type": "atkPct", "value": 0.05, "stacks": 5, "condition": "普攻命中叠加" }
   },
   "frosty_resolve": {
-    "name": "凌冽决断",
+    "name": "凌冽决断之心",
     "set2": { "type": "resonanceSkillDmg", "value": 0.12 },
-    "set5": { "type": "resonanceSkillDmg", "value": 0.18, "condition": "施放共鸣技能后攻击命中" }
+    "set3": null,
+    "set5": [
+      { "type": "elemDmg", "value": 0.225, "condition": "施放共鸣技能时自身冷凝伤害提升" },
+      { "type": "resonanceSkillDmg", "value": 0.18, "stacks": 2, "condition": "施放共鸣解放时共鸣技能伤害提升" }
+    ]
   },
   "eternal_radiance": {
     "name": "此间永驻之光",
-    "set2": { "type": "atkPct", "value": 0.10 },
-    "set5": null
+    "set2": { "type": "elemDmg", "value": 0.10 },
+    "set3": null,
+    "set5": [
+      { "type": "critRate", "value": 0.20, "condition": "角色为敌人添加光噪效应时" },
+      { "type": "elemDmg", "value": 0.15, "condition": "攻击存在10层光噪效应的敌人" }
+    ]
   },
   "midnight_veil": {
-    "name": "幽夜隐匿",
-    "set2": { "type": "atkPct", "value": 0.10 },
-    "set5": null
+    "name": "幽夜隐匿之帷",
+    "set2": { "type": "elemDmg", "value": 0.10 },
+    "set3": null,
+    "set5": { "type": "elemDmg", "value": 0.15, "condition": "触发延奏技能离场后下一个登场角色湮灭伤害提升" }
   },
   "empyrean_anthem": {
     "name": "高天共奏之曲",
     "set2": { "type": "atkPct", "value": 0.10 },
+    "set3": null,
     "set5": null
   },
   "tidebreaking_courage": {
-    "name": "破浪无惧",
+    "name": "无惧浪涛之勇",
     "set2": { "type": "atkPct", "value": 0.10 },
+    "set3": null,
     "set5": null
   },
   "gusts_of_welkin": {
     "name": "流云逝尽之空",
-    "set2": { "type": "atkPct", "value": 0.10 },
-    "set5": null
+    "set2": { "type": "elemDmg", "value": 0.10 },
+    "set3": null,
+    "set5": [
+      { "type": "elemDmg", "value": 0.15, "condition": "队伍中角色气动伤害提升" },
+      { "type": "elemDmg", "value": 0.15, "condition": "自身气动伤害额外提升" }
+    ]
   },
   "windward_pilgrimage": {
     "name": "愿戴荣光之旅",
-    "set2": { "type": "atkPct", "value": 0.10 },
-    "set5": null
+    "set2": { "type": "elemDmg", "value": 0.10 },
+    "set3": null,
+    "set5": [
+      { "type": "critRate", "value": 0.10, "condition": "攻击命中存在风蚀效应的敌人时" },
+      { "type": "elemDmg", "value": 0.30, "condition": "攻击命中存在风蚀效应的敌人时" }
+    ]
   },
   "flaming_clawprint": {
     "name": "奔狼燎原之焰",
-    "set2": { "type": "atkPct", "value": 0.10 },
-    "set5": null
+    "set2": { "type": "elemDmg", "value": 0.10 },
+    "set3": null,
+    "set5": [
+      { "type": "elemDmg", "value": 0.15, "condition": "施放共鸣解放时队伍热熔伤害提升" },
+      { "type": "resonanceLiberationDmg", "value": 0.20, "condition": "自身共鸣解放伤害提升" }
+    ]
   },
   "pact_of_neonlight_leap": {
     "name": "逆光跃彩之约",
-    "set2": { "type": "atkPct", "value": 0.10 },
-    "set5": null
+    "set2": { "type": "elemDmg", "value": 0.10 },
+    "set3": null,
+    "set5": { "type": "atkPct", "value": 0.15, "condition": "施放延奏技能后下一个变奏登场角色攻击提升" }
   },
   "halo_of_starry_radiance": {
     "name": "星构寻辉之环",
-    "set2": { "type": "atkPct", "value": 0.10 },
-    "set5": null
+    "set2": { "type": "healBonus", "value": 0.10 },
+    "set3": null,
+    "set5": { "type": "atkPct", "value": 0.25, "condition": "为队伍提供治疗时基于偏谐值累积效率" }
   },
   "rite_of_gilded_revelation": {
     "name": "流金溯真之式",
-    "set2": { "type": "atkPct", "value": 0.10 },
-    "set5": null
+    "set2": { "type": "elemDmg", "value": 0.10 },
+    "set3": null,
+    "set5": [
+      { "type": "elemDmg", "value": 0.10, "stacks": 3, "condition": "造成普攻伤害时衍射伤害叠加" },
+      { "type": "normalAtkDmg", "value": 0.40, "condition": "叠至3层施放共鸣解放时普攻伤害加成提升" }
+    ]
   },
   "trailblazing_star": {
     "name": "长路启航之星",
-    "set2": { "type": "atkPct", "value": 0.10 },
-    "set5": null
+    "set2": { "type": "elemDmg", "value": 0.10 },
+    "set3": null,
+    "set5": [
+      { "type": "critRate", "value": 0.20, "condition": "角色为敌人添加聚爆效应或震谐偏移时" },
+      { "type": "elemDmg", "value": 0.20, "condition": "自身热熔伤害提升" }
+    ]
   },
   "chromatic_foam": {
     "name": "斑驳粉饰之沫",
-    "set2": { "type": "atkPct", "value": 0.10 },
-    "set5": null
+    "set2": { "type": "elemDmg", "value": 0.10 },
+    "set3": null,
+    "set5": { "type": "elemDmg", "value": 0.10, "condition": "角色为敌人添加聚爆效应时热熔伤害提升" }
   },
   "sound_of_true_name": {
     "name": "听唤语义之愿",
-    "set2": { "type": "atkPct", "value": 0.10 },
-    "set5": null
+    "set2": { "type": "elemDmg", "value": 0.10 },
+    "set3": null,
+    "set5": [
+      { "type": "elemDmg", "value": 0.15, "condition": "造成声骸技能伤害时自身气动伤害提升" }
+    ]
   },
   "wishes_of_quiet_snowfall": {
     "name": "雪落无声之愿",
     "set2": { "type": "elemDmg", "value": 0.10 },
-    "set5": { "type": "elemDmg", "value": 0.10 }
+    "set3": null,
+    "set5": [
+      { "type": "elemDmg", "value": 0.10, "condition": "角色为敌人添加霜渐效应时" },
+      { "type": "critRate", "value": 0.25, "condition": "拥有落雪效果时造成共鸣解放伤害清除落雪" }
+    ]
   },
   "reel_of_spliced_memories": {
     "name": "剪心辑梦之影",
     "set2": { "type": "atkPct", "value": 0.10 },
+    "set3": null,
+    "set5": null
+  },
+  "dream_of_the_lost": {
+    "name": "碎梦亡鬼之魇",
+    "set2": null,
+    "set3": [
+      { "type": "normalAtkDmg", "value": 0.35, "condition": "角色为敌人添加骇破偏移时普攻伤害加成提升" },
+      { "type": "heavyAtkDmg", "value": 0.35, "condition": "角色为敌人添加骇破偏移时重击伤害加成提升" }
+    ],
+    "set5": null
+  },
+  "law_of_harmony": {
+    "name": "失序彼岸之梦",
+    "set2": null,
+    "set3": [
+      { "type": "critRate", "value": 0.20, "condition": "角色共鸣能量为0时" },
+      { "type": "phantomDmg", "value": 0.35, "condition": "角色共鸣能量为0时声骸技能伤害加成提升" }
+    ],
+    "set5": null
+  },
+  "crown_of_valor": {
+    "name": "荣斗铸锋之冠",
+    "set2": null,
+    "set3": [
+      { "type": "atkPct", "value": 0.06, "stacks": 5, "condition": "角色获得护盾时攻击提升" },
+      { "type": "critDmg", "value": 0.04, "stacks": 5, "condition": "角色获得护盾时暴击伤害提升" }
+    ],
+    "set5": null
+  },
+  "flamewings_shadow": {
+    "name": "焚羽猎魔之影",
+    "set2": null,
+    "set3": [
+      { "type": "elemDmg", "value": 0.16, "condition": "同时拥有重击暴击和声骸技能暴击时热熔伤害提升" }
+    ],
+    "set5": null
+  },
+  "thread_of_severed_fate": {
+    "name": "命理崩毁之弦",
+    "set2": null,
+    "set3": [
+      { "type": "atkPct", "value": 0.20, "condition": "角色为敌人添加虚湮效应时" },
+      { "type": "resonanceLiberationDmg", "value": 0.30, "condition": "角色为敌人添加虚湮效应时共鸣解放伤害提升" }
+    ],
     "set5": null
   }
 }

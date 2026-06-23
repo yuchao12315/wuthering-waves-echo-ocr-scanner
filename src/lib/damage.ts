@@ -1,5 +1,5 @@
 import type { Echo } from '@/types/echo'
-import type { CharacterBase, Weapon, DamageResult, BuffType, SonataEffect, InherentBuff, ChainEffect } from '@/types/damage'
+import type { CharacterBase, Weapon, DamageResult, SonataEffect, InherentBuff, ChainEffect } from '@/types/damage'
 import SONATA_EFFECTS from '@/data/sonata-effects.json'
 
 import { getNightmareBonus } from '@/data/nightmare-bonuses'
@@ -25,6 +25,7 @@ const BUFF_TO_DMG_KEY: Record<string, string> = {
   heavyAtkDmg: 'heavyAtk',
   resonanceSkillDmg: 'resonanceSkill',
   resonanceLiberationDmg: 'resonanceLiberation',
+  phantomDmg: 'phantom',
 }
 
 /** Round to 5 decimal places (ATK and all multipliers) */
@@ -47,11 +48,11 @@ interface EchoStats {
   nightmareSecondValue: number
 }
 
-function collectEchoStats(echoes: Echo[]): EchoStats {
+function collectEchoStats(echoes: Echo[], characterName?: string): EchoStats {
   const stats: EchoStats = {
     atkPct: 0, flatAtk: 0, hpPct: 0, flatHp: 0,
     critRate: 0, critDmg: 0, elemDmg: 0, energyRegen: 0,
-    skillDmg: { normalAtk: 0, heavyAtk: 0, resonanceSkill: 0, resonanceLiberation: 0 },
+    skillDmg: { normalAtk: 0, heavyAtk: 0, resonanceSkill: 0, resonanceLiberation: 0, phantom: 0 },
     nightmareElemDmg: 0,
     nightmareSecondType: '',
     nightmareSecondValue: 0,
@@ -83,10 +84,10 @@ function collectEchoStats(echoes: Echo[]): EchoStats {
       }
     }
 
-    // Nightmare bonus: use stored field or auto-match by name
-    const nmBonus = echo.nightmareBonus ?? getNightmareBonus(echo.monsterName)
+    // Nightmare bonus: use stored field or auto-match by name (with character filter)
+    const nmBonus = echo.nightmareBonus ?? getNightmareBonus(echo.monsterName, characterName)
     if (nmBonus) {
-      stats.nightmareElemDmg += nmBonus.elemDmg
+      stats.nightmareElemDmg += nmBonus.elemDmg ?? 0
       if (nmBonus.secondValue > 0) {
         stats.nightmareSecondType = nmBonus.secondType
         stats.nightmareSecondValue += nmBonus.secondValue
@@ -97,7 +98,7 @@ function collectEchoStats(echoes: Echo[]): EchoStats {
   return stats
 }
 
-function collectSonataBuffs(echoes: Echo[]): { atkPct: number; elemDmg: number; skillDmg: Record<string, number> } {
+function collectSonataBuffs(echoes: Echo[]): { atkPct: number; elemDmg: number; critRate: number; critDmg: number; skillDmg: Record<string, number> } {
   const counts: Record<string, number> = {}
   for (const e of echoes) {
     if (e.sonata) counts[e.sonata] = (counts[e.sonata] ?? 0) + 1
@@ -105,6 +106,8 @@ function collectSonataBuffs(echoes: Echo[]): { atkPct: number; elemDmg: number; 
 
   let atkPct = 0
   let elemDmg = 0
+  let critRate = 0
+  let critDmg = 0
   const skillDmg: Record<string, number> = {}
 
   for (const [sonata, count] of Object.entries(counts)) {
@@ -112,25 +115,40 @@ function collectSonataBuffs(echoes: Echo[]): { atkPct: number; elemDmg: number; 
     if (!effect) continue
 
     if (count >= 2 && effect.set2) {
-      const val = effect.set2.stacks ? effect.set2.value * effect.set2.stacks : effect.set2.value
-      applyBuff(effect.set2.type, val)
+      const effects = Array.isArray(effect.set2) ? effect.set2 : [effect.set2]
+      for (const eff of effects) {
+        const val = eff.stacks ? eff.value * eff.stacks : eff.value
+        applyBuff(eff.type, val)
+      }
+    }
+    if (count >= 3 && effect.set3) {
+      const effects = Array.isArray(effect.set3) ? effect.set3 : [effect.set3]
+      for (const eff of effects) {
+        const val = eff.stacks ? eff.value * eff.stacks : eff.value
+        applyBuff(eff.type, val)
+      }
     }
     if (count >= 5 && effect.set5) {
-      const val = effect.set5.stacks ? effect.set5.value * effect.set5.stacks : effect.set5.value
-      applyBuff(effect.set5.type, val)
+      const effects = Array.isArray(effect.set5) ? effect.set5 : [effect.set5]
+      for (const eff of effects) {
+        const val = eff.stacks ? eff.value * eff.stacks : eff.value
+        applyBuff(eff.type, val)
+      }
     }
   }
 
-  function applyBuff(type: BuffType, value: number) {
+  function applyBuff(type: string, value: number) {
     if (type === 'atkPct') atkPct += value
     else if (type === 'elemDmg') elemDmg += value
+    else if (type === 'critRate') critRate += value
+    else if (type === 'critDmg') critDmg += value
     else {
       const key = BUFF_TO_DMG_KEY[type]
       if (key) skillDmg[key] = (skillDmg[key] ?? 0) + value
     }
   }
 
-  return { atkPct, elemDmg, skillDmg }
+  return { atkPct, elemDmg, critRate, critDmg, skillDmg }
 }
 
 function parseParamValue(paramStr: string): number {
@@ -181,8 +199,9 @@ export function calcDamage(
   enemyLevel = 89,
   enemyResist = 0.1,
   chainLevel = 0,
+  characterName?: string,
 ): DamageResult {
-  const echoStats = collectEchoStats(echoes)
+  const echoStats = collectEchoStats(echoes, characterName)
   const sonataBuff = collectSonataBuffs(echoes)
   const refineIdx = Math.max(0, Math.min(4, weaponRefine - 1))
   const levelIdx = Math.max(0, Math.min(18, skillLevel - 1))
@@ -233,19 +252,28 @@ export function calcDamage(
   // Sonata
   if (sonataBuff.atkPct) { totalAtkPct += sonataBuff.atkPct; addSrc('atk', '套装效果', sonataBuff.atkPct) }
   if (sonataBuff.elemDmg) { baseElemDmg += sonataBuff.elemDmg; addSrc('elemDmg', '套装效果', sonataBuff.elemDmg) }
+  if (sonataBuff.critRate) { totalCritRate += sonataBuff.critRate; addSrc('critRate', '套装效果', sonataBuff.critRate) }
+  if (sonataBuff.critDmg) { totalCritDmg += sonataBuff.critDmg; addSrc('critDmg', '套装效果', sonataBuff.critDmg) }
 
-  const skillDmgBonuses: Record<string, number> = { normalAtk: 0, heavyAtk: 0, resonanceSkill: 0, resonanceLiberation: 0 }
+  const skillDmgBonuses: Record<string, number> = { normalAtk: 0, heavyAtk: 0, resonanceSkill: 0, resonanceLiberation: 0, phantom: 0 }
   // Echo skill dmg substats
   for (const [k, v] of Object.entries(echoStats.skillDmg)) {
     if (v) { skillDmgBonuses[k] += v; addSrc(k as keyof typeof src, '声骸技能增伤', v) }
   }
-  // Nightmare echo fixed bonus: elemDmg to baseElemDmg, secondType to specific skill pool
+  // Nightmare echo fixed bonus: elemDmg to baseElemDmg, secondType to specific pool
   if (echoStats.nightmareElemDmg) { baseElemDmg += echoStats.nightmareElemDmg; addSrc('elemDmg', '梦魇声骸属性伤害', echoStats.nightmareElemDmg) }
   if (echoStats.nightmareSecondValue > 0) {
-    const nmKey = BUFF_TO_DMG_KEY[echoStats.nightmareSecondType]
-    if (nmKey && skillDmgBonuses[nmKey] !== undefined) {
-      skillDmgBonuses[nmKey] += echoStats.nightmareSecondValue
-      addSrc(nmKey as keyof typeof src, '梦魇声骸技能增伤', echoStats.nightmareSecondValue)
+    if (echoStats.nightmareSecondType === 'critRate') {
+      totalCritRate += echoStats.nightmareSecondValue
+      addSrc('critRate', '梦魇声骸暴击率', echoStats.nightmareSecondValue)
+    } else if (echoStats.nightmareSecondType === 'energyRegen') {
+      // energyRegen doesn't affect damage calculation, tracked in panel only
+    } else {
+      const nmKey = BUFF_TO_DMG_KEY[echoStats.nightmareSecondType]
+      if (nmKey && skillDmgBonuses[nmKey] !== undefined) {
+        skillDmgBonuses[nmKey] += echoStats.nightmareSecondValue
+        addSrc(nmKey as keyof typeof src, '梦魇声骸技能增伤', echoStats.nightmareSecondValue)
+      }
     }
   }
   // Sonata skill dmg
