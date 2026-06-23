@@ -434,8 +434,8 @@ export function calcDamage(
     const baseDmg = round5(totalAtk * multiplier)
     const deepenMult = round5(1 + skillDmgDeepen)
     const dmgBonusTotal = round5(1 + dmgBonus)
-    const critMult = skillGuaranteedCrit ? totalCritDmg : round5(1 + totalCritRate * (totalCritDmg - 1))
-    const crit = round5(round5(round5(round5(baseDmg * dmgBonusTotal) * deepenMult) * round5(totalCritDmg)) * defMult) * resMult
+    const critMult = skillGuaranteedCrit ? totalCritDmg : round5(totalCritRate * totalCritDmg)
+    const crit = round5(round5(round5(round5(baseDmg * dmgBonusTotal) * deepenMult) * totalCritDmg) * defMult) * resMult
     const expected = skillGuaranteedCrit
       ? crit
       : round5(round5(round5(round5(baseDmg * dmgBonusTotal) * deepenMult) * critMult) * defMult) * resMult

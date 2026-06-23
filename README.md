@@ -264,7 +264,7 @@ npm run dev
 
 ### 功能说明
 
-Web计算器有三个主要页面，通过顶部标签切换：
+Web计算器有四个主要页面，通过顶部标签切换：
 
 #### 声骸管理
 
@@ -279,7 +279,13 @@ Web计算器有三个主要页面，通过顶部标签切换：
 3. 选择主词条类型，输入数值
 4. 填写副属性（Cost3/4有）
 5. 添加副词条（最多5条），逐条选择类型并输入数值
-6. 点击「添加声骸」
+6. 输入梦魇声骸名称（如"梦魇·燎照之骑"），自动匹配加成效果
+7. 点击「添加声骸」
+
+**梦魇声骸**：
+- 名称含"梦魇"或"共鸣回响"时自动匹配固定加成（属性伤害+技能类型加成）
+- 部分梦魇声骸有角色限制（如"共鸣回响·梦魇亚当·重锤"仅限露西/丽贝卡），非限定角色装备时加成不生效
+- 声骸卡片以紫色标签显示加成效果，有角色限制时显示橙色提示
 
 **库存浏览**：
 - 所有声骸以卡片形式展示
@@ -293,11 +299,19 @@ Web计算器有三个主要页面，通过顶部标签切换：
 
 #### 搭配计算
 
-1. **选择角色**（必选）— 决定评分权重
+1. **选择角色**（必选）— 决定评分权重和伤害计算参数
 2. **选择套装偏好**（可选）— 决定计算模式
-3. 点击**「开始计算」**
-4. 等待计算完成（通常<3秒）
-5. 查看**Top-10最优搭配**结果
+3. **设置阈值筛选**（可选）— 暴击率/共鸣效率最低要求
+4. 点击**「开始计算」**
+5. 等待计算完成（通常<3秒）
+6. 查看**Top-10最优搭配**结果
+
+**阈值筛选**：
+- 可设置暴击率≥X%和共鸣效率≥X%的最低要求
+- 填两个阈值→两个都满足才保留；填一个→只检查那一个；不填→不过滤
+- 满足阈值的组合≥1时，隐藏低于阈值的方案并显示"已过滤 N 套"
+- 满足阈值的组合=0时，显示橙色提示"当前没有组合能满足阈值"
+- 每个结果卡片显示暴击率和共鸣效率数值，低于阈值时标红
 
 每个搭配结果显示：
 - 5件声骸的详细属性
@@ -305,6 +319,21 @@ Web计算器有三个主要页面，通过顶部标签切换：
 - 5件总评分（满分250）
 - 评级标签（C/B/A/S/SS/SSS）
 - Cost分配模式
+- 暴击率和共鸣效率面板值
+
+#### 已保存套装
+
+- 从搭配计算结果中保存的声骸组合
+- 支持替换单个声骸（悬停卡片显示"替换"按钮）
+- 每个套装显示伤害计算面板：
+  - 攻击力（1位小数）、暴击率、暴击伤害、属性增伤、共鸣效率
+  - 按技能分类的期望伤害和暴击伤害明细表
+  - 武器选择 + 精炼等级（R1-R5）
+  - 命座选择（0-6命）
+  - 技能类型筛选（只看特定类型技能的伤害）
+- 伤害计算包含完整公式：ATK × 倍率 × 增伤 × 加深 × 暴击 × 防御 × 抗性
+- 梦魇声骸加成自动计入对应伤害池（含角色限制过滤）
+- Console 输出完整计算日志（`[伤害计算]`前缀）
 
 #### 角色数据库
 
@@ -470,22 +499,41 @@ OCR导出和Web导出的JSON格式统一：
 
 ### 套装枚举
 
-| 枚举值 | 中文名 |
-|--------|--------|
-| `freezing_frost` | 凝夜白霜 |
-| `molten_rift` | 熔山裂谷 |
-| `void_thunder` | 彻空冥雷 |
-| `sierra_gale` | 啸谷长风 |
-| `celestial_light` | 浮星祛暗 |
-| `havoc_eclipse` | 沉日劫明 |
-| `rejuvenating_glow` | 隐世回光 |
-| `moonlit_clouds` | 轻云出月 |
-| `lingering_tunes` | 不绝余音 |
-| `frosty_resolve` | 凌冽决断 |
-| `eternal_radiance` | 永夜辉光 |
-| `midnight_veil` | 幽夜隐匿 |
-| `empyrean_anthem` | 天穹鸣歌 |
-| `tidebreaking_courage` | 破浪无惧 |
+| 枚举值 | 中文名 | 件数 |
+|--------|--------|------|
+| `freezing_frost` | 凝夜白霜 | 2/5 |
+| `molten_rift` | 熔山裂谷 | 2/5 |
+| `void_thunder` | 彻空冥雷 | 2/5 |
+| `sierra_gale` | 啸谷长风 | 2/5 |
+| `celestial_light` | 浮星祛暗 | 2/5 |
+| `havoc_eclipse` | 沉日劫明 | 2/5 |
+| `rejuvenating_glow` | 隐世回光 | 2/5 |
+| `moonlit_clouds` | 轻云出月 | 2/5 |
+| `lingering_tunes` | 不绝余音 | 2/5 |
+| `frosty_resolve` | 凌冽决断之心 | 2/5 |
+| `eternal_radiance` | 此间永驻之光 | 2/5 |
+| `midnight_veil` | 幽夜隐匿之帷 | 2/5 |
+| `empyrean_anthem` | 高天共奏之曲 | 2 |
+| `tidebreaking_courage` | 无惧浪涛之勇 | 2 |
+| `gusts_of_welkin` | 流云逝尽之空 | 2/5 |
+| `windward_pilgrimage` | 愿戴荣光之旅 | 2/5 |
+| `flaming_clawprint` | 奔狼燎原之焰 | 2/5 |
+| `pact_of_neonlight_leap` | 逆光跃彩之约 | 2/5 |
+| `halo_of_starry_radiance` | 星构寻辉之环 | 2/5 |
+| `rite_of_gilded_revelation` | 流金溯真之式 | 2/5 |
+| `trailblazing_star` | 长路启航之星 | 2/5 |
+| `chromatic_foam` | 斑驳粉饰之沫 | 2/5 |
+| `sound_of_true_name` | 听唤语义之愿 | 2/5 |
+| `wishes_of_quiet_snowfall` | 雪落无声之愿 | 2/5 |
+| `reel_of_spliced_memories` | 剪心辑梦之影 | 2 |
+| `dream_of_the_lost` | 碎梦亡鬼之魇 | 3 |
+| `law_of_harmony` | 失序彼岸之梦 | 3 |
+| `crown_of_valor` | 荣斗铸锋之冠 | 3 |
+| `flamewings_shadow` | 焚羽猎魔之影 | 3 |
+| `thread_of_severed_fate` | 命理崩毁之弦 | 3 |
+
+> 部分5件套效果为条件性加成（如施放技能后限时生效），当前伤害计算中无条件计入。
+> 3件套为特殊套装，仅在装备3件同名套装时生效。
 
 ### 数据可移植性
 
@@ -580,11 +628,29 @@ ww/
 │   ├── progress.py         # 中断续扫
 │   └── requirements.txt    # Python依赖
 ├── src/                     # Web前端源码
-│   ├── lib/scoring.ts      # 评分引擎
-│   ├── workers/            # Web Worker（搭配计算）
+│   ├── lib/
+│   │   ├── damage.ts       # 伤害计算引擎
+│   │   ├── scoring.ts      # 声骸评分引擎
+│   │   └── constants.ts    # 常量定义
+│   ├── data/
+│   │   ├── sonata-effects.json    # 31套套装效果数据
+│   │   ├── nightmare-bonuses.ts   # 梦魇声骸加成映射
+│   │   ├── characters-base.json   # 角色伤害基础属性
+│   │   └── weapons.json           # 武器数据
+│   ├── types/
+│   │   ├── echo.ts         # 声骸类型定义
+│   │   ├── damage.ts       # 伤害计算类型
+│   │   └── character.ts    # 角色类型
+│   ├── workers/
+│   │   └── loadout-worker.ts  # Web Worker（搭配计算+评分）
 │   ├── store/              # 状态管理（Zustand）
 │   ├── pages/              # 页面组件
+│   │   ├── echoes.tsx      # 声骸管理
+│   │   ├── calculator.tsx  # 搭配计算
+│   │   ├── loadouts.tsx    # 已保存套装（含伤害面板）
+│   │   └── characters.tsx  # 角色数据库
 │   └── components/         # UI组件
+│       └── echo-card.tsx   # 声骸卡片（含梦魇标签）
 ├── public/data/
 │   └── characters.json     # 56个角色权重数据
 ├── dist/                    # 构建产物（Web应用）
@@ -592,6 +658,23 @@ ww/
 ├── scripts/                 # ETL脚本（数据更新用）
 ├── package.json
 └── README.md               # 本文件
+```
+
+### 伤害计算公式
+
+```
+期望伤害 = ATK × 倍率 × (1+增伤) × (1+加深) × 暴击系数 × 防御倍率 × 抗性倍率
+
+其中:
+  ATK        = (角色基础攻击+武器基础攻击) × (1+攻击%) + 固定攻击
+  暴击系数   = critDmg (必暴) 或 critRate×critDmg (期望)
+  防御倍率   = (100+角色Lv) / ((99+怪物Lv) + (100+角色Lv)×(1-减防-穿透))
+  抗性倍率   = 1 - max(0, 敌人抗性-减抗)
+  增伤       = 属性伤害 + 技能类型伤害 (同池加和)
+
+精度规则:
+  ATK及乘数: 5位小数 (parseFloat(x.toFixed(5)))
+  防御倍率:  9位小数 (parseFloat(x.toFixed(9)))
 ```
 
 ### 性能指标
