@@ -1,0 +1,60 @@
+<!--pages/characters/characters.wxml-->
+<view class="page">
+  <!-- 标题栏 -->
+  <view class="header">
+    <text class="title">角色列表</text>
+    <text class="count">{{characterList.length}} 个角色</text>
+    <input
+      class="search-input"
+      value="{{search}}"
+      bindinput="onSearchInput"
+      placeholder="搜索角色..."
+      placeholder-class="placeholder"
+    />
+  </view>
+
+  <!-- 空状态 -->
+  <view wx:if="{{loading}}" class="empty">
+    <text class="empty-text">加载中...</text>
+  </view>
+
+  <view wx:elif="{{filtered.length === 0}}" class="empty">
+    <text class="empty-text">无匹配角色</text>
+  </view>
+
+  <!-- 角色卡片网格 -->
+  <view class="grid" wx:else>
+    <view
+      wx:for="{{filtered}}"
+      wx:key="name"
+      class="card {{selectedChar === item.name ? 'card-selected' : ''}}"
+      bindtap="onSelectChar"
+      data-name="{{item.name}}"
+    >
+      <!-- 角色名 + 元素 -->
+      <view class="card-top">
+        <text class="char-name">{{item.name}}</text>
+        <view class="tag-row">
+          <text class="tag tag-element tag-{{item.element}}">{{item.element}}</text>
+          <text class="tag tag-weapon">{{item.weaponType}}</text>
+        </view>
+      </view>
+
+      <!-- 权重摘要（前3个高权重词条） -->
+      <view class="sub-row" wx:if="{{item.topSubs.length > 0}}">
+        <text
+          wx:for="{{item.topSubs}}"
+          wx:for-item="sub"
+          wx:key="name"
+          class="sub-tag"
+        >{{sub.cn}} {{sub.weight}}</text>
+      </view>
+
+      <!-- 词条分级 -->
+      <view class="grade-row" wx:if="{{item.gradeSummary}}">
+        <text class="grade-s" wx:if="{{item.gradeSummary.s}}">S {{item.gradeSummary.s}}</text>
+        <text class="grade-a" wx:if="{{item.gradeSummary.a}}">A {{item.gradeSummary.a}}</text>
+      </view>
+    </view>
+  </view>
+</view>

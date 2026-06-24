@@ -1,0 +1,244 @@
+<!--pages/calculator/calculator.wxml-->
+<view class="page">
+
+  <!-- 角色选择 -->
+  <view class="section">
+    <view class="section-row">
+      <text class="label">当前角色:</text>
+      <text class="char-name" wx:if="{{selectedChar}}">{{selectedChar.name}}</text>
+      <text class="char-name dim" wx:else>未选择</text>
+      <navigator url="/pages/characters/characters" class="link">切换</navigator>
+    </view>
+  </view>
+
+  <!-- 排序模式 -->
+  <view class="section">
+    <view class="section-row">
+      <text class="label">排序方式:</text>
+      <view
+        class="btn {{rankMode === 'score' ? 'btn-active' : 'btn-inactive'}}"
+        bindtap="setRankMode"
+        data-mode="score"
+      >评分最高</view>
+      <view
+        class="btn {{rankMode === 'damage' ? 'btn-active' : 'btn-inactive'}} {{!hasCharBase ? 'btn-disabled' : ''}}"
+        bindtap="setRankMode"
+        data-mode="damage"
+      >伤害最高</view>
+    </view>
+
+    <!-- 伤害模式配置 -->
+    <block wx:if="{{rankMode === 'damage' && hasCharBase}}">
+      <!-- 武器选择 -->
+      <view class="section-row mt16">
+        <picker
+          mode="selector"
+          range="{{weaponNames}}"
+          value="{{weaponIndex}}"
+          bindchange="onWeaponChange"
+        >
+          <view class="picker-btn">
+            <text>{{weaponName || '选择武器'}}</text>
+            <text class="arrow">▾</text>
+          </view>
+        </picker>
+        <view class="refine-row">
+          <view
+            wx:for="{{[1,2,3,4,5]}}"
+            wx:key="*this"
+            class="btn-sm {{weaponRefine === item ? 'btn-active' : 'btn-inactive'}}"
+            bindtap="setRefine"
+            data-refine="{{item}}"
+          >{{item}}</view>
+        </view>
+      </view>
+
+      <!-- 命座 -->
+      <view class="section-row mt12" wx:if="{{hasChainEffects}}">
+        <text class="label-sm">命座:</text>
+        <view
+          wx:for="{{[0,1,2,3,4,5,6]}}"
+          wx:key="*this"
+          class="btn-sm {{chainLevel === item ? 'btn-active' : 'btn-inactive'}}"
+          bindtap="setChainLevel"
+          data-level="{{item}}"
+        >{{item}}</view>
+      </view>
+
+      <!-- 技能筛选 -->
+      <view class="section-row mt12" wx:if="{{skillTypes.length > 1}}">
+        <text class="label-sm">技能筛选:</text>
+        <view
+          wx:for="{{skillTypes}}"
+          wx:key="*this"
+          class="btn-sm {{activeSkillTypes[item] ? 'btn-active' : (activeSkillTypeCount === 0 ? 'btn-inactive' : 'btn-dim')}}"
+          bindtap="toggleSkillType"
+          data-type="{{item}}"
+        >{{skillTypeLabels[item] || item}}</view>
+        <text
+          class="clear-link"
+          wx:if="{{activeSkillTypeCount > 0}}"
+          bindtap="clearSkillTypes"
+        >清除</text>
+      </view>
+    </block>
+  </view>
+
+  <!-- 阈值筛选（两种模式都显示） -->
+  <view class="section">
+    <view class="section-row">
+      <text class="label-sm">阈值筛选:</text>
+      <view class="threshold-group">
+        <text class="threshold-label">暴击率≥</text>
+        <input
+          class="threshold-input"
+          type="digit"
+          value="{{minCritRate}}"
+          bindinput="onMinCritInput"
+          placeholder="%"
+          placeholder-class="placeholder"
+        />
+        <text class="threshold-pct">%</text>
+      </view>
+      <view class="threshold-group">
+        <text class="threshold-label">共鸣效率≥</text>
+        <input
+          class="threshold-input"
+          type="digit"
+          value="{{minEnergyRegen}}"
+          bindinput="onMinEnergyInput"
+          placeholder="%"
+          placeholder-class="placeholder"
+        />
+        <text class="threshold-pct">%</text>
+      </view>
+      <text
+        class="clear-link"
+        wx:if="{{minCritRate || minEnergyRegen}}"
+        bindtap="clearThresholds"
+      >清除</text>
+    </view>
+  </view>
+
+  <!-- 套装选择 -->
+  <view class="section">
+    <view class="section-row">
+      <text class="label">选择套装</text>
+      <text class="hint">(最多2个，不选=散件模式)</text>
+      <text class="clear-link" wx:if="{{sonatas.length > 0}}" bindtap="clearSonatas">清除</text>
+    </view>
+    <view class="sonata-grid">
+      <view
+        wx:for="{{allSonatas}}"
+        wx:key="key"
+        class="sonata-tag {{sonatas.indexOf(item.key) >= 0 ? 'sonata-active' : 'sonata-inactive'}}"
+        bindtap="toggleSonata"
+        data-key="{{item.key}}"
+      >{{item.name}}</view>
+    </view>
+  </view>
+
+  <!-- Cost分配 -->
+  <view class="section">
+    <view class="section-row">
+      <text class="label-sm">Cost分配:</text>
+      <view
+        wx:for="{{costOptions}}"
+        wx:key="value"
+        class="btn-sm {{costFilter === item.value ? 'btn-active' : 'btn-inactive'}}"
+        bindtap="setCostFilter"
+        data-value="{{item.value}}"
+      >{{item.label}}</view>
+    </view>
+  </view>
+
+  <!-- 排除已保存套装 -->
+  <view class="section" wx:if="{{savedLoadouts.length > 0}}">
+    <view class="section-row">
+      <text class="label-sm">排除已有套装的声骸:</text>
+    </view>
+    <view class="exclude-row">
+      <view
+        wx:for="{{savedLoadouts}}"
+        wx:key="id"
+        class="exclude-tag {{excludedIds[item.id] ? 'exclude-active' : 'exclude-inactive'}}"
+        bindtap="toggleExclude"
+        data-id="{{item.id}}"
+      >{{item.name}} ({{item.characterName}})</view>
+    </view>
+  </view>
+
+  <!-- 计算按钮 -->
+  <button
+    class="calc-btn {{computing || !selectedChar ? 'calc-btn-disabled' : ''}}"
+    disabled="{{computing || !selectedChar}}"
+    bindtap="onCalculate"
+  >{{computing ? '计算中...' : '开始计算'}}</button>
+
+  <!-- 进度条 -->
+  <view class="progress-section" wx:if="{{computing}}">
+    <view class="progress-info">
+      <text class="progress-text">正在计算最优搭配...</text>
+      <text class="progress-time">{{countdown}}</text>
+      <text class="progress-pct">{{computeProgress}}%</text>
+    </view>
+    <view class="progress-bar">
+      <view class="progress-fill" style="width: {{computeProgress}}%"></view>
+    </view>
+  </view>
+
+  <!-- 过滤提示 -->
+  <view class="filter-warning" wx:if="{{hasThresholds && filteredResults.length === 0 && sortedResults.length > 0}}">
+    <text>当前没有组合能满足阈值 (共 {{sortedResults.length}} 套, 全部低于阈值)</text>
+  </view>
+
+  <!-- 结果列表 -->
+  <view class="results" wx:if="{{filteredResults.length > 0}}">
+    <view class="results-header">
+      <text class="results-title">Top {{filteredResults.length}} 搭配</text>
+      <text class="results-sub" wx:if="{{selectedChar}}">— {{selectedChar.name}}</text>
+      <text class="results-tag" wx:if="{{rankMode === 'damage'}}">(按伤害排序)</text>
+      <text class="results-filtered" wx:if="{{hasThresholds && belowCount > 0}}">已过滤 {{belowCount}} 套</text>
+    </view>
+
+    <view
+      wx:for="{{filteredResults}}"
+      wx:key="index"
+      class="result-card"
+    >
+      <!-- 卡片头部: 排名 + 评分 + 伤害 -->
+      <view class="result-top">
+        <text class="rank">#{{index + 1}}</text>
+        <text class="score">总分: {{item.scoreDisplay}}</text>
+        <text class="grade grade-{{item.gradeClass}}">{{item.grade}}</text>
+        <text class="dmg" wx:if="{{rankMode === 'damage' && item.damage > 0}}">
+          {{item.damageLabel}}伤害: {{item.damageDisplay}}
+        </text>
+        <view class="save-btn" bindtap="onSaveLoadout" data-index="{{index}}">保存套装</view>
+      </view>
+
+      <!-- 暴击率 + 共鸣效率 -->
+      <view class="result-stats">
+        <text class="stat {{item.critRateBelow ? 'stat-warn' : ''}}">暴击 {{item.critRateDisplay}}</text>
+        <text class="stat {{item.energyBelow ? 'stat-warn' : ''}}">效率 {{item.energyDisplay}}</text>
+        <text class="stat dim">{{item.costPattern}}</text>
+      </view>
+
+      <!-- 声骸卡片列表 -->
+      <scroll-view scroll-x class="echo-scroll">
+        <view class="echo-row">
+          <view
+            wx:for="{{item.echoes}}"
+            wx:for-item="echo"
+            wx:key="id"
+            class="echo-mini"
+          >
+            <view class="echo-cost echo-cost-{{echo.cost}}">C{{echo.cost}}</view>
+            <text class="echo-name">{{echo.shortName}}</text>
+            <text class="echo-score">{{echo.scoreDisplay}}</text>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+</view>

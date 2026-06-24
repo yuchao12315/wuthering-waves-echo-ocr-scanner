@@ -1,0 +1,176 @@
+<!--pages/loadouts/loadouts.wxml-->
+<view class="page">
+  <!-- 标题 + 角色筛选 -->
+  <view class="header">
+    <text class="title">已保存套装</text>
+    <picker wx:if="{{charOptions.length > 1}}" mode="selector" range="{{charOptions}}" range-key="label" value="{{filterCharIdx}}" bindchange="onFilterCharChange">
+      <view class="filter-picker">{{charOptions[filterCharIdx].label}} ▾</view>
+    </picker>
+  </view>
+
+  <!-- 空状态 -->
+  <view wx:if="{{filtered.length === 0}}" class="empty">
+    <text>暂无保存的套装，请在搭配计算页保存</text>
+  </view>
+
+  <!-- 套装卡片列表 -->
+  <view wx:for="{{filtered}}" wx:key="id" class="loadout-card">
+    <!-- 卡片头部 -->
+    <view class="card-header">
+      <!-- 名称（可编辑） -->
+      <view wx:if="{{editingId === item.id}}" class="edit-row">
+        <input class="edit-input" value="{{editName}}" bindinput="onEditNameInput" bindconfirm="onEditConfirm" data-id="{{item.id}}" focus="{{true}}" />
+      </view>
+      <view wx:else class="name-row" bindtap="onStartEdit" data-id="{{item.id}}" data-name="{{item.name}}">
+        <text class="loadout-name">{{item.name}}</text>
+      </view>
+
+      <text class="char-label">{{item.characterName}}</text>
+      <text class="score-label">总分: {{item._scoreDisplay}}</text>
+      <text class="grade grade-{{item._gradeClass}}">{{item._grade}}</text>
+
+      <view wx:if="{{item._hasDamageData}}" class="dmg-toggle" bindtap="toggleDamage" data-id="{{item.id}}">
+        {{item._showDamage ? '收起伤害' : '伤害计算'}}
+      </view>
+
+      <view class="delete-btn" bindtap="onDeleteLoadout" data-id="{{item.id}}">删除</view>
+    </view>
+
+    <!-- 声骸卡片列表 -->
+    <scroll-view scroll-x class="echo-scroll">
+      <view class="echo-row">
+        <view wx:for="{{item.echoes}}" wx:for-item="echo" wx:for-index="echoIdx" wx:key="id" class="echo-slot">
+          <view class="echo-card">
+            <view class="echo-header">
+              <view class="echo-cost echo-cost-{{echo.cost}}">C{{echo.cost}}</view>
+              <text class="echo-name">{{echo._shortName}}</text>
+            </view>
+            <view class="echo-sonata">{{echo._sonataName}}</view>
+            <view class="echo-main" wx:if="{{echo.mainStat}}">{{echo._mainLabel}} {{echo.mainStat.value}}</view>
+            <view class="echo-subs">
+              <text wx:for="{{echo._subLabels}}" wx:for-item="sub" wx:key="*this" class="sub-tag">{{sub}}</text>
+            </view>
+          </view>
+          <view class="replace-btn" bindtap="onStartReplace" data-loadout-id="{{item.id}}" data-slot="{{echoIdx}}">替换</view>
+        </view>
+      </view>
+    </scroll-view>
+
+    <!-- 伤害计算面板 -->
+    <view wx:if="{{item._showDamage}}" class="damage-panel">
+      <!-- 命座 -->
+      <view wx:if="{{item._hasChainEffects}}" class="panel-row">
+        <text class="panel-label">命座:</text>
+        <view wx:for="{{[0,1,2,3,4,5,6]}}" wx:key="*this"
+          class="btn-sm {{item._chainLevel === this ? 'btn-active' : 'btn-inactive'}}"
+          bindtap="setChainLevel" data-id="{{item.id}}" data-level="{{this}}">{{this}}</view>
+      </view>
+
+      <!-- 技能筛选 -->
+      <view wx:if="{{item._skillTypes.length > 1}}" class="panel-row">
+        <text class="panel-label">技能筛选:</text>
+        <view wx:for="{{item._skillTypes}}" wx:key="*this"
+          class="btn-sm {{item._activeSkillTypes[this] ? 'btn-active' : (item._activeSkillTypeCount === 0 ? 'btn-inactive' : 'btn-dim')}}"
+          bindtap="toggleSkillType" data-id="{{item.id}}" data-type="{{this}}">{{item._skillTypeLabels[this] || this}}</view>
+        <text wx:if="{{item._activeSkillTypeCount > 0}}" class="clear-link" bindtap="clearSkillTypes" data-id="{{item.id}}">清除</text>
+      </view>
+
+      <!-- 武器选择 -->
+      <view class="panel-row">
+        <picker mode="selector" range="{{item._weaponNames}}" value="{{item._weaponIndex}}" bindchange="onWeaponChange" data-id="{{item.id}}">
+          <view class="weapon-picker">{{item._weaponNames[item._weaponIndex] || '选择武器'}} ▾</view>
+        </picker>
+        <view class="refine-row">
+          <view wx:for="{{[1,2,3,4,5]}}" wx:key="*this"
+            class="btn-sm {{item._refine === this ? 'btn-active' : 'btn-inactive'}}"
+            bindtap="setRefine" data-id="{{item.id}}" data-refine="{{this}}">{{this}}</view>
+        </view>
+      </view>
+
+      <!-- 面板属性 -->
+      <view wx:if="{{item._damageResult}}" class="stat-grid">
+        <view class="stat-card">
+          <text class="stat-label">攻击力</text>
+          <text class="stat-value">{{item._damageResult.panel.atk}}</text>
+        </view>
+        <view class="stat-card">
+          <text class="stat-label">暴击率</text>
+          <text class="stat-value">{{item._damageResult._critRateDisplay}}</text>
+        </view>
+        <view class="stat-card">
+          <text class="stat-label">暴击伤害</text>
+          <text class="stat-value">{{item._damageResult._critDmgDisplay}}</text>
+        </view>
+        <view class="stat-card">
+          <text class="stat-label">属性增伤</text>
+          <text class="stat-value">{{item._damageResult._elemDmgDisplay}}</text>
+        </view>
+        <view class="stat-card">
+          <text class="stat-label">共鸣效率</text>
+          <text class="stat-value">{{item._damageResult._energyDisplay}}</text>
+        </view>
+      </view>
+
+      <!-- 技能伤害表 -->
+      <view wx:if="{{item._damageResult}}" class="dmg-table">
+        <view class="dmg-thead">
+          <text class="dmg-th dmg-th-name">技能</text>
+          <text class="dmg-th dmg-th-tag">类型</text>
+          <text class="dmg-th dmg-th-right">倍率</text>
+          <text class="dmg-th dmg-th-right">期望</text>
+          <text class="dmg-th dmg-th-right">暴击</text>
+        </view>
+        <view wx:for="{{item._damageResult._filteredSkills}}" wx:for-item="sk" wx:key="name" class="dmg-row">
+          <text class="dmg-td dmg-td-name">{{sk.name}}</text>
+          <text class="dmg-td dmg-td-tag">
+            <text class="tag tag-{{sk.tag}}">{{sk.tag}}</text>
+          </text>
+          <text class="dmg-td dmg-td-right">{{sk.multiplierStr}}</text>
+          <text class="dmg-td dmg-td-right dmg-td-expected">{{sk._expectedDisplay}}</text>
+          <text class="dmg-td dmg-td-right dmg-td-crit">{{sk._critDisplay}}</text>
+        </view>
+        <view class="dmg-footer">
+          <text class="dmg-footer-label">{{item._activeSkillTypeCount > 0 ? '筛选期望' : '总期望'}}</text>
+          <text class="dmg-footer-value">{{item._filteredTotalDisplay}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 替换弹窗 -->
+  <view wx:if="{{replaceSlot !== null}}" class="modal-mask" bindtap="onCloseReplace">
+    <view class="modal-content" catchtap="">
+      <view class="modal-header">
+        <text class="modal-title">选择 C{{replaceCost}} 声骸替换</text>
+        <text class="modal-close" bindtap="onCloseReplace">✕</text>
+      </view>
+
+      <!-- 套装筛选 -->
+      <view class="modal-filter">
+        <picker mode="selector" range="{{replaceSonataOptions}}" range-key="label" value="{{replaceSonataIdx}}" bindchange="onReplaceSonataChange">
+          <view class="filter-picker">{{replaceSonataOptions[replaceSonataIdx].label}} ▾</view>
+        </picker>
+        <text class="modal-count">{{replaceEchoes.length}} 个声骸</text>
+      </view>
+
+      <view wx:if="{{replaceEchoes.length === 0}}" class="modal-empty">
+        <text>无匹配声骸</text>
+      </view>
+
+      <scroll-view scroll-y class="modal-list" wx:else>
+        <view wx:for="{{replaceEchoes}}" wx:key="id" class="modal-echo-card" bindtap="onPickEcho" data-index="{{index}}">
+          <view class="echo-header">
+            <view class="echo-cost echo-cost-{{item.cost}}">C{{item.cost}}</view>
+            <text class="echo-name">{{item.monsterName}}</text>
+            <text class="echo-score" wx:if="{{item._score}}">{{item._score}}</text>
+          </view>
+          <view class="echo-sonata">{{item._sonataName}}</view>
+          <view class="echo-main" wx:if="{{item.mainStat}}">{{item._mainLabel}} {{item.mainStat.value}}</view>
+          <view class="echo-subs">
+            <text wx:for="{{item._subLabels}}" wx:for-item="sub" wx:key="*this" class="sub-tag">{{sub}}</text>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+</view>

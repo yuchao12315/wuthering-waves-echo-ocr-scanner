@@ -1,0 +1,134 @@
+<!--pages/echoes/echoes.wxml-->
+<view class="page">
+  <!-- 顶部操作栏 -->
+  <view class="toolbar">
+    <navigator url="/pages/characters/characters" class="link">切换角色</navigator>
+    <view class="link" bindtap="onImport">导入JSON</view>
+    <view class="link" bindtap="onExport">导出JSON</view>
+    <view class="link link-danger" wx:if="{{echoes.length > 0}}" bindtap="onClearAll">清空全部</view>
+  </view>
+
+  <!-- 导入提示 -->
+  <view wx:if="{{importMsg}}" class="import-msg {{importMsgType}}">
+    <text>{{importMsg}}</text>
+  </view>
+
+  <!-- 添加声骸表单 -->
+  <view class="form-card">
+    <text class="form-title">添加声骸</text>
+
+    <!-- 名称 + Cost + 套装 -->
+    <view class="form-row">
+      <input class="input-name" value="{{monsterName}}" bindinput="onNameInput" placeholder="声骸名称" />
+      <view class="cost-row">
+        <view wx:for="{{[1,3,4]}}" wx:key="*this"
+          class="btn-sm {{formCost === item ? 'btn-active' : 'btn-inactive'}}"
+          bindtap="setCost" data-cost="{{item}}">{{item}}</view>
+      </view>
+      <picker mode="selector" range="{{sonataNames}}" value="{{sonataIndex}}" bindchange="onSonataChange">
+        <view class="picker-btn">{{sonataNames[sonataIndex]}} ▾</view>
+      </picker>
+    </view>
+
+    <!-- 主词条 -->
+    <view class="form-row">
+      <picker mode="selector" range="{{mainStatLabels}}" value="{{mainStatIndex}}" bindchange="onMainStatChange">
+        <view class="picker-btn">{{mainStatLabels[mainStatIndex]}} ▾</view>
+      </picker>
+      <input class="input-value" type="digit" value="{{mainStatValue}}" bindinput="onMainValueInput" placeholder="主属性值" />
+    </view>
+
+    <!-- 副属性 (Cost>=3) -->
+    <view class="form-row" wx:if="{{formCost >= 3}}">
+      <text class="form-label">副属性:</text>
+      <picker mode="selector" range="{{subStatLabels}}" value="{{secStatIndex}}" bindchange="onSecStatChange">
+        <view class="picker-btn">{{subStatLabels[secStatIndex]}} ▾</view>
+      </picker>
+      <input class="input-value" type="digit" value="{{secStatValue}}" bindinput="onSecValueInput" placeholder="值" />
+    </view>
+
+    <!-- 词条列表 -->
+    <view class="sub-section">
+      <text class="form-label">词条:</text>
+      <view wx:for="{{substats}}" wx:key="index" class="sub-row">
+        <picker mode="selector" range="{{subStatLabels}}" value="{{item.typeIdx}}" bindchange="onSubTypeChange" data-idx="{{index}}">
+          <view class="picker-btn-sm">{{subStatLabels[item.typeIdx]}} ▾</view>
+        </picker>
+        <input class="input-sub" type="digit" value="{{item.value}}" bindinput="onSubValueInput" data-idx="{{index}}" placeholder="值" />
+        <text class="remove-btn" bindtap="removeSub" data-idx="{{index}}">✕</text>
+      </view>
+      <view wx:if="{{substats.length < 5}}" class="add-sub" bindtap="addSub">+ 添加词条</view>
+    </view>
+
+    <!-- 梦魇提示 -->
+    <view wx:if="{{nightmareInfo}}" class="nightmare-hint">
+      <text>🔮 梦魇声骸: {{nightmareInfo}}</text>
+    </view>
+
+    <button class="submit-btn" bindtap="onSubmit">添加</button>
+  </view>
+
+  <!-- 筛选面板 -->
+  <view wx:if="{{echoes.length > 0}}" class="filter-panel">
+    <view class="filter-row">
+      <text class="filter-label">筛选:</text>
+
+      <!-- 套装筛选 -->
+      <picker mode="selector" range="{{filterSonataOptions}}" range-key="label" value="{{filterSonataIdx}}" bindchange="onFilterSonataChange">
+        <view class="filter-picker">{{filterSonataOptions[filterSonataIdx].label}} ▾</view>
+      </picker>
+
+      <!-- Cost筛选 -->
+      <view class="cost-filter-row">
+        <view wx:for="{{[0,1,3,4]}}" wx:key="*this"
+          class="btn-sm {{filterCost === item ? 'btn-active' : 'btn-inactive'}}"
+          bindtap="setFilterCost" data-cost="{{item}}">{{item === 0 ? '全部' : 'C' + item}}</view>
+      </view>
+
+      <!-- 有主词条 -->
+      <view class="checkbox-row" bindtap="toggleFilterMain">
+        <view class="checkbox {{filterHasMain ? 'checkbox-on' : ''}}"></view>
+        <text class="checkbox-label">有主词条</text>
+      </view>
+
+      <!-- 排序 -->
+      <picker mode="selector" range="{{['默认排序','按评分排序']}}" value="{{sortIdx}}" bindchange="onSortChange">
+        <view class="filter-picker">{{sortIdx === 0 ? '默认排序' : '按评分排序'}} ▾</view>
+      </picker>
+
+      <text class="filter-count">{{filteredEchoes.length}}/{{echoes.length}}</text>
+    </view>
+  </view>
+
+  <!-- 声骸卡片列表 -->
+  <view class="echo-grid" wx:if="{{filteredEchoes.length > 0}}">
+    <view wx:for="{{filteredEchoes}}" wx:key="id" class="echo-card">
+      <view class="echo-header">
+        <view class="echo-cost echo-cost-{{item.cost}}">C{{item.cost}}</view>
+        <text class="echo-name">{{item.monsterName}}</text>
+        <text class="echo-score" wx:if="{{item._score}}">{{item._score}}</text>
+        <text class="echo-remove" bindtap="onRemoveEcho" data-id="{{item.id}}">删除</text>
+      </view>
+      <view class="echo-sonata">{{item._sonataName}}</view>
+      <view class="echo-main" wx:if="{{item.mainStat}}">
+        <text>{{item._mainLabel}} {{item.mainStat.value}}</text>
+      </view>
+      <view class="echo-secondary" wx:if="{{item.secondaryStat}}">
+        <text class="dim">{{item._secLabel}} {{item.secondaryStat.value}}</text>
+      </view>
+      <view class="echo-subs">
+        <text wx:for="{{item._subLabels}}" wx:for-item="sub" wx:key="*this" class="sub-tag">{{sub}}</text>
+      </view>
+      <view wx:if="{{item.nightmareBonus}}" class="echo-nightmare">
+        <text>🔮 {{item._nightmareLabel}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{echoes.length === 0}}" class="empty">
+    <text>暂无声骸，请添加或导入</text>
+  </view>
+  <view wx:elif="{{filteredEchoes.length === 0}}" class="empty">
+    <text>当前筛选条件下无声骸</text>
+  </view>
+</view>

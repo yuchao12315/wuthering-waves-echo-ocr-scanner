@@ -1,0 +1,107 @@
+/* pages/loadouts/loadouts.wxss */
+.page { padding: 24rpx; background: #18181b; min-height: 100vh; }
+
+.header { display: flex; align-items: center; gap: 16rpx; margin-bottom: 24rpx; }
+.title { font-size: 28rpx; font-weight: 500; color: #d4d4d8; }
+.filter-picker { background: #27272a; border: 1rpx solid #3f3f46; border-radius: 8rpx; padding: 8rpx 16rpx; font-size: 24rpx; color: #d4d4d8; }
+
+.empty { text-align: center; padding: 60rpx 0; color: #71717a; font-size: 28rpx; }
+
+/* 套装卡片 */
+.loadout-card { background: #18181b; border: 1rpx solid #27272a; border-radius: 16rpx; padding: 24rpx; margin-bottom: 20rpx; }
+
+.card-header { display: flex; align-items: center; gap: 12rpx; margin-bottom: 16rpx; flex-wrap: wrap; }
+.name-row { cursor: pointer; }
+.loadout-name { font-size: 28rpx; font-weight: 500; color: #e4e4e7; }
+.edit-row { flex: 1; }
+.edit-input { background: #27272a; border: 1rpx solid #3f3f46; border-radius: 8rpx; padding: 6rpx 12rpx; font-size: 26rpx; color: #d4d4d8; width: 240rpx; }
+
+.char-label { font-size: 22rpx; color: #71717a; }
+.score-label { font-size: 26rpx; color: #d4d4d8; }
+.grade { font-size: 26rpx; font-weight: 700; }
+.grade-SSS { color: #f87171; } .grade-SS { color: #fb923c; } .grade-S { color: #fbbf24; }
+.grade-A { color: #c084fc; } .grade-B { color: #60a5fa; } .grade-C { color: #a1a1aa; }
+
+.dmg-toggle { font-size: 22rpx; color: #c084fc; padding: 4rpx 12rpx; }
+.delete-btn { font-size: 22rpx; color: #71717a; margin-left: auto; }
+
+/* 声骸横向滚动 */
+.echo-scroll { white-space: nowrap; margin: 0 -24rpx; padding: 0 24rpx; }
+.echo-row { display: inline-flex; gap: 12rpx; }
+.echo-slot { display: inline-block; position: relative; width: 200rpx; }
+.echo-card { background: #27272a; border-radius: 12rpx; padding: 12rpx; }
+
+.echo-header { display: flex; align-items: center; gap: 6rpx; margin-bottom: 6rpx; }
+.echo-cost { font-size: 18rpx; font-weight: 600; padding: 2rpx 8rpx; border-radius: 4rpx; }
+.echo-cost-1 { background: #3f3f46; color: #a1a1aa; }
+.echo-cost-3 { background: #1e3a5f; color: #93c5fd; }
+.echo-cost-4 { background: #4c1d95; color: #c4b5fd; }
+.echo-name { font-size: 20rpx; color: #e4e4e7; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; }
+.echo-sonata { font-size: 18rpx; color: #71717a; margin-bottom: 4rpx; }
+.echo-main { font-size: 20rpx; color: #d4d4d8; margin-bottom: 4rpx; }
+.echo-subs { display: flex; flex-wrap: wrap; gap: 4rpx; }
+.sub-tag { font-size: 16rpx; background: #3f3f46; color: #a1a1aa; padding: 2rpx 6rpx; border-radius: 3rpx; }
+
+.replace-btn { position: absolute; top: 4rpx; right: 4rpx; background: rgba(63, 63, 70, 0.9); color: #d4d4d8; font-size: 18rpx; padding: 4rpx 10rpx; border-radius: 6rpx; }
+
+/* 伤害面板 */
+.damage-panel { border-top: 1rpx solid #27272a; padding-top: 20rpx; margin-top: 16rpx; }
+
+.panel-row { display: flex; align-items: center; gap: 8rpx; margin-bottom: 12rpx; flex-wrap: wrap; }
+.panel-label { font-size: 22rpx; color: #71717a; }
+
+.btn-sm { width: 44rpx; height: 44rpx; font-size: 22rpx; border-radius: 6rpx; display: flex; align-items: center; justify-content: center; }
+.btn-active { background: #9333ea; color: #fff; }
+.btn-inactive { background: #27272a; color: #a1a1aa; }
+.btn-dim { background: #27272a; color: #52525b; }
+
+.clear-link { font-size: 22rpx; color: #f87171; }
+
+.weapon-picker { background: #27272a; border: 1rpx solid #3f3f46; border-radius: 8rpx; padding: 8rpx 14rpx; font-size: 22rpx; color: #d4d4d8; }
+.refine-row { display: flex; gap: 6rpx; }
+
+/* 面板属性 */
+.stat-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8rpx; margin-bottom: 16rpx; }
+.stat-card { background: #27272a; border-radius: 8rpx; padding: 10rpx; text-align: center; }
+.stat-label { font-size: 20rpx; color: #71717a; display: block; }
+.stat-value { font-size: 26rpx; font-weight: 500; color: #e4e4e7; display: block; }
+
+/* 伤害表格 */
+.dmg-table { font-size: 22rpx; }
+.dmg-thead { display: flex; border-bottom: 1rpx solid #27272a; padding: 8rpx 0; }
+.dmg-th { color: #71717a; font-weight: normal; }
+.dmg-th-name { flex: 2; }
+.dmg-th-tag { width: 80rpx; text-align: center; }
+.dmg-th-right { width: 120rpx; text-align: right; }
+
+.dmg-row { display: flex; padding: 8rpx 0; border-bottom: 1rpx solid rgba(39, 39, 42, 0.5); }
+.dmg-td { color: #d4d4d8; }
+.dmg-td-name { flex: 2; }
+.dmg-td-tag { width: 80rpx; text-align: center; }
+.dmg-td-right { width: 120rpx; text-align: right; }
+.dmg-td-expected { color: #e4e4e7; font-family: monospace; }
+.dmg-td-crit { color: #fbbf24; font-family: monospace; }
+
+.tag { font-size: 18rpx; padding: 2rpx 8rpx; border-radius: 4rpx; }
+.tag-E { background: rgba(30, 58, 138, 0.5); color: #93c5fd; }
+.tag-Q { background: rgba(124, 45, 18, 0.5); color: #fdba74; }
+.tag-变奏 { background: rgba(20, 83, 45, 0.5); color: #86efac; }
+
+.dmg-footer { display: flex; justify-content: space-between; border-top: 1rpx solid #3f3f46; padding: 10rpx 0; }
+.dmg-footer-label { font-size: 22rpx; color: #a1a1aa; }
+.dmg-footer-value { font-size: 24rpx; color: #e4e4e7; font-family: monospace; font-weight: 500; }
+
+/* 替换弹窗 */
+.modal-mask { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 100; display: flex; align-items: center; justify-content: center; }
+.modal-content { background: #18181b; border: 1rpx solid #3f3f46; border-radius: 16rpx; padding: 24rpx; width: 90%; max-height: 80vh; }
+.modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16rpx; }
+.modal-title { font-size: 28rpx; font-weight: 500; color: #d4d4d8; }
+.modal-close { font-size: 28rpx; color: #71717a; padding: 8rpx; }
+
+.modal-filter { display: flex; align-items: center; gap: 12rpx; margin-bottom: 16rpx; }
+.modal-count { font-size: 22rpx; color: #71717a; }
+.modal-empty { text-align: center; padding: 32rpx; color: #71717a; font-size: 24rpx; }
+
+.modal-list { max-height: 60vh; }
+.modal-echo-card { background: #27272a; border-radius: 12rpx; padding: 16rpx; margin-bottom: 12rpx; }
+.echo-score { font-size: 20rpx; color: #71717a; font-family: monospace; }

@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "echo-card": "/components/echo-card/echo-card"
+  },
+  "navigationBarTitleText": "搭配计算",
+  "navigationBarBackgroundColor": "#18181b",
+  "navigationBarTextStyle": "white"
+}
