@@ -1,0 +1,59 @@
+<!--components/echo-card/echo-card.wxml-->
+<view class="echo-card">
+  <!-- 头部: Cost + 名称 + 评分 -->
+  <view class="card-top">
+    <view class="cost cost-{{echo.cost}}">C{{echo.cost}}</view>
+    <text class="name">{{echo.monsterName || '未命名'}}</text>
+    <view wx:if="{{score !== null}}" class="score-row">
+      <text class="score {{gradeClass}}">{{scoreDisplay}}</text>
+      <text class="grade {{gradeClass}}">{{grade}}</text>
+    </view>
+  </view>
+
+  <!-- 套装 -->
+  <view class="sonata" wx:if="{{sonataName}}">
+    <text>{{sonataName}}</text>
+  </view>
+
+  <!-- 详细评分模式 -->
+  <block wx:if="{{detailed}}">
+    <view wx:for="{{details}}" wx:key="index" class="detail-row">
+      <view class="detail-info">
+        <text class="detail-field {{item.fieldClass}}">{{item.field}}</text>
+        <text class="detail-label">{{item.label}} {{item.value}}</text>
+      </view>
+      <view class="detail-score">
+        <text class="{{item.pct >= 80 ? 'score-high' : item.pct >= 60 ? 'score-mid' : 'score-low'}}">{{item.scoreDisplay}}</text>
+        <text class="score-max">/{{item.maxDisplay}}</text>
+      </view>
+      <view class="detail-bar">
+        <view class="detail-bar-fill {{item.pct >= 80 ? 'bar-high' : item.pct >= 60 ? 'bar-mid' : 'bar-low'}}" style="width: {{item.pct}}%"></view>
+      </view>
+    </view>
+    <view wx:if="{{details.length > 0}}" class="detail-footer">
+      <text class="footer-label">合计 <text class="footer-max">score_max={{scoreMaxDisplay}}</text></text>
+      <text class="footer-total">{{totalDisplay}}<text class="footer-max">/50.00</text></text>
+    </view>
+  </block>
+
+  <!-- 简单模式 -->
+  <block wx:else>
+    <!-- 主词条 -->
+    <view wx:if="{{mainLabel}}" class="main-stat">
+      <text>{{mainLabel}} {{echo.mainStat.value}}</text>
+    </view>
+    <!-- 副属性 -->
+    <view wx:if="{{secLabel}}" class="sec-stat">
+      <text class="dim">{{secLabel}} {{echo.secondaryStat.value}}</text>
+    </view>
+    <!-- 词条 -->
+    <view wx:if="{{subLabels.length > 0}}" class="subs">
+      <text wx:for="{{subLabels}}" wx:key="*this" class="sub-tag">{{item}}</text>
+    </view>
+  </block>
+
+  <!-- 梦魇加成 -->
+  <view wx:if="{{nightmareLabel}}" class="nightmare">
+    <text>🔮 {{nightmareLabel}}</text>
+  </view>
+</view>

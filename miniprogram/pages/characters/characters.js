@@ -10,6 +10,16 @@ const STAT_CN = {
   'RESONANCE_SKILL_DMG': '技能', 'RESONANCE_LIBERATION_DMG': '解放',
 }
 
+// 元素 → 英文CSS class
+const ELEM_CLASS_MAP = {
+  '热熔': 'tag-elem-fire',
+  '导电': 'tag-elem-electric',
+  '气动': 'tag-elem-wind',
+  '冷凝': 'tag-elem-ice',
+  '湮灭': 'tag-elem-dark',
+  '衍射': 'tag-elem-light',
+}
+
 Page({
   data: {
     characterList: [],   // 完整角色列表（含权重信息）
@@ -56,7 +66,7 @@ Page({
           }
         }
 
-        return { ...char, topSubs, gradeSummary }
+        return { ...char, topSubs, gradeSummary, elemClass: ELEM_CLASS_MAP[char.element] || '' }
       })
 
       this.setData({

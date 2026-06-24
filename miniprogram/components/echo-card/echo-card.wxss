@@ -1,0 +1,179 @@
+/* components/echo-card/echo-card.wxss */
+
+.echo-card {
+  background: #18181b;
+  border: 1rpx solid #27272a;
+  border-radius: 12rpx;
+  padding: 16rpx;
+}
+
+.card-top {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  margin-bottom: 8rpx;
+}
+
+.cost {
+  font-size: 20rpx;
+  font-weight: 600;
+  padding: 2rpx 10rpx;
+  border-radius: 4rpx;
+}
+
+.cost-1 { background: #3f3f46; color: #a1a1aa; }
+.cost-3 { background: #1e3a5f; color: #93c5fd; }
+.cost-4 { background: #4c1d95; color: #c4b5fd; }
+
+.name {
+  font-size: 24rpx;
+  color: #e4e4e7;
+  font-weight: 500;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.score-row {
+  display: flex;
+  align-items: center;
+  gap: 6rpx;
+}
+
+.score {
+  font-size: 22rpx;
+  font-family: monospace;
+}
+
+.grade {
+  font-size: 22rpx;
+  font-weight: 700;
+}
+
+.g-sss { color: #f87171; }
+.g-ss { color: #fb923c; }
+.g-s { color: #fbbf24; }
+.g-a { color: #c084fc; }
+.g-b { color: #60a5fa; }
+.g-c { color: #a1a1aa; }
+
+.sonata {
+  font-size: 20rpx;
+  color: #71717a;
+  margin-bottom: 6rpx;
+}
+
+/* 主/副属性 */
+.main-stat {
+  font-size: 22rpx;
+  color: #d4d4d8;
+  margin-bottom: 4rpx;
+}
+
+.sec-stat {
+  font-size: 20rpx;
+  margin-bottom: 4rpx;
+}
+
+.dim { color: #a1a1aa; }
+
+.subs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6rpx;
+  margin-top: 6rpx;
+}
+
+.sub-tag {
+  font-size: 18rpx;
+  background: #27272a;
+  color: #a1a1aa;
+  padding: 2rpx 8rpx;
+  border-radius: 4rpx;
+}
+
+/* 梦魇 */
+.nightmare {
+  font-size: 18rpx;
+  color: #d8b4fe;
+  margin-top: 8rpx;
+  background: rgba(88, 28, 135, 0.2);
+  border: 1rpx solid rgba(126, 34, 206, 0.4);
+  border-radius: 6rpx;
+  padding: 6rpx 10rpx;
+}
+
+/* 详细评分模式 */
+.detail-row {
+  margin-bottom: 8rpx;
+}
+
+.detail-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rpx;
+}
+
+.detail-field {
+  font-size: 20rpx;
+  color: #a1a1aa;
+}
+
+.detail-label {
+  font-size: 20rpx;
+  color: #d4d4d8;
+}
+
+.detail-score {
+  font-size: 20rpx;
+  font-family: monospace;
+}
+
+.score-high { color: #f87171; }
+.score-mid { color: #fb923c; }
+.score-low { color: #d4d4d8; }
+.score-max { color: #52525b; }
+
+.detail-bar {
+  width: 100%;
+  height: 6rpx;
+  background: #27272a;
+  border-radius: 3rpx;
+  overflow: hidden;
+}
+
+.detail-bar-fill {
+  height: 100%;
+  border-radius: 3rpx;
+}
+
+.bar-high { background: #ef4444; }
+.bar-mid { background: #f97316; }
+.bar-low { background: #52525b; }
+
+.detail-footer {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1rpx solid #27272a;
+  padding-top: 8rpx;
+  margin-top: 4rpx;
+}
+
+.footer-label {
+  font-size: 20rpx;
+  color: #a1a1aa;
+}
+
+.footer-total {
+  font-size: 22rpx;
+  color: #e4e4e7;
+  font-family: monospace;
+  font-weight: 500;
+}
+
+.footer-max {
+  font-size: 18rpx;
+  color: #52525b;
+}

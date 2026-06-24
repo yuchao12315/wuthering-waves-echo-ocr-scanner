@@ -35,7 +35,7 @@
       <view class="card-top">
         <text class="char-name">{{item.name}}</text>
         <view class="tag-row">
-          <text class="tag tag-element tag-{{item.element}}">{{item.element}}</text>
+          <text class="tag tag-element {{item.elemClass}}">{{item.element}}</text>
           <text class="tag tag-weapon">{{item.weaponType}}</text>
         </view>
       </view>

@@ -108,12 +108,12 @@
   color: #e4e4e7;
 }
 
-.tag-热熔 { background: #7f1d1d; color: #fca5a5; }
-.tag-导电 { background: #4c1d95; color: #c4b5fd; }
-.tag-气动 { background: #064e3b; color: #6ee7b7; }
-.tag-冷凝 { background: #1e3a5f; color: #93c5fd; }
-.tag-湮灭 { background: #3b0764; color: #d8b4fe; }
-.tag-衍射 { background: #713f12; color: #fde68a; }
+.tag-elem-fire { background: #7f1d1d; color: #fca5a5; }
+.tag-elem-electric { background: #4c1d95; color: #c4b5fd; }
+.tag-elem-wind { background: #064e3b; color: #6ee7b7; }
+.tag-elem-ice { background: #1e3a5f; color: #93c5fd; }
+.tag-elem-dark { background: #3b0764; color: #d8b4fe; }
+.tag-elem-light { background: #713f12; color: #fde68a; }
 
 .tag-weapon {
   background: #27272a;
