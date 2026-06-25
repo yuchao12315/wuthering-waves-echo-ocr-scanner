@@ -1,5 +1,5 @@
 // pages/loadouts/loadouts.js
-const SONATA_EFFECTS = require('../../data/sonata-effects.json')
+import SONATA_EFFECTS from '../../data/sonata-effects.json'
 
 const SONATA_NAMES = {}
 for (const [key, val] of Object.entries(SONATA_EFFECTS)) {

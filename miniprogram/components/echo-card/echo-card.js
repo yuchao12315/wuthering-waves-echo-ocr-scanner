@@ -1,4 +1,5 @@
 // components/echo-card/echo-card.js
+import SONATA_EFFECTS from '../../data/sonata-effects.json'
 
 const STAT_DISPLAY = {
   FLAT_ATK: '攻击', ATK_PCT: '攻击%', FLAT_HP: '生命', HP_PCT: '生命%',
@@ -8,7 +9,6 @@ const STAT_DISPLAY = {
   RESONANCE_SKILL_DMG: '共鸣技能伤害', RESONANCE_LIBERATION_DMG: '共鸣解放伤害',
 }
 
-const SONATA_EFFECTS = require('../../data/sonata-effects.json')
 const SONATA_NAMES = {}
 for (const [key, val] of Object.entries(SONATA_EFFECTS)) {
   SONATA_NAMES[key] = val.name

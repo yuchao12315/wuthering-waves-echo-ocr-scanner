@@ -1,6 +1,6 @@
 // pages/echoes/echoes.js
-const SONATA_EFFECTS = require('../../data/sonata-effects.json')
-const { getNightmareBonus } = require('../../data/nightmare-bonuses')
+import SONATA_EFFECTS from '../../data/sonata-effects.json'
+import { getNightmareBonus } from '../../data/nightmare-bonuses'
 
 const STAT_DISPLAY = {
   FLAT_ATK: '攻击', ATK_PCT: '攻击%', FLAT_HP: '生命', HP_PCT: '生命%',

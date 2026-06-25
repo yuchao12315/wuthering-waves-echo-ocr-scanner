@@ -1,0 +1,41 @@
+{
+  "pages": [
+    "pages/calculator/calculator",
+    "pages/echoes/echoes",
+    "pages/loadouts/loadouts",
+    "pages/characters/characters"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#18181b",
+    "navigationBarTitleText": "声骸计算器",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#18181b",
+    "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "color": "#71717a",
+    "selectedColor": "#c084fc",
+    "backgroundColor": "#18181b",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/calculator/calculator",
+        "text": "搭配"
+      },
+      {
+        "pagePath": "pages/echoes/echoes",
+        "text": "声骸"
+      },
+      {
+        "pagePath": "pages/loadouts/loadouts",
+        "text": "套装"
+      },
+      {
+        "pagePath": "pages/characters/characters",
+        "text": "角色"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

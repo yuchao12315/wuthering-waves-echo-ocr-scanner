@@ -1,8 +1,8 @@
 // pages/calculator/calculator.js
-const { getCharacterDetail, getWeapons } = require('../../services/data-service')
+import { getCharacterDetail, getWeapons } from '../../services/data-service'
 
 // 套装数据（本地打包）
-const SONATA_EFFECTS = require('../../data/sonata-effects.json')
+import SONATA_EFFECTS from '../../data/sonata-effects.json'
 
 // 技能类型中文映射
 const SKILL_TYPE_LABELS = {
