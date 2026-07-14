@@ -1,5 +1,4 @@
 // pages/calculator/calculator.js
-const { getCharacterDetail, getWeapons } = require('../../services/data-service.js')
 const {
   isAdQuotaEnabled,
   getQuotaSummary,
@@ -12,6 +11,7 @@ const {
 
 // 套装数据（本地打包）
 const SONATA_EFFECTS = require('../../data/sonata-effects.js')
+const WEAPONS = require('../../data/weapons.js')
 
 // 技能类型中文映射
 const SKILL_TYPE_LABELS = {
@@ -34,6 +34,11 @@ function getGrade(score) {
   if (score >= 150) return { grade: 'A', gradeClass: 'A' }
   if (score >= 120) return { grade: 'B', gradeClass: 'B' }
   return { grade: 'C', gradeClass: 'C' }
+}
+
+function getWeapons(weaponType) {
+  const weapons = weaponType ? WEAPONS.filter(w => w.type === weaponType) : WEAPONS
+  return Promise.resolve(weapons)
 }
 
 Page({
