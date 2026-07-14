@@ -88,6 +88,7 @@
   <view class="section">
     <view class="section-row">
       <text class="label-sm">阈值筛选:</text>
+      <text class="quota-tag" wx:if="{{adQuotaEnabled}}">高级剩余 {{advancedThresholdLeft}} 次</text>
       <view class="threshold-group">
         <text class="threshold-label">暴击率≥</text>
         <input
@@ -174,6 +175,10 @@
     disabled="{{computing || !selectedChar}}"
     bindtap="onCalculate"
   >{{computing ? '计算中...' : '开始计算'}}</button>
+  <view class="quota-row" wx:if="{{adQuotaEnabled}}">
+    <text>今日免费/解锁计算剩余 {{calculateLeft}} 次</text>
+    <text wx:if="{{hasThresholds}}">，本次将额外消耗高级筛选 1 次</text>
+  </view>
 
   <!-- 进度条 -->
   <view class="progress-section" wx:if="{{computing}}">

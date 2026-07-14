@@ -1,34 +1,35 @@
 /* components/echo-card/echo-card.wxss */
 
 .echo-card {
-  background: #18181b;
-  border: 1rpx solid #27272a;
+  background: #ffffff;
+  border: 1rpx solid #e1e7f0;
   border-radius: 12rpx;
-  padding: 16rpx;
+  padding: 18rpx;
+  box-shadow: 0 8rpx 22rpx rgba(24, 32, 51, 0.05);
 }
 
 .card-top {
   display: flex;
   align-items: center;
   gap: 8rpx;
-  margin-bottom: 8rpx;
+  margin-bottom: 10rpx;
 }
 
 .cost {
   font-size: 20rpx;
-  font-weight: 600;
-  padding: 2rpx 10rpx;
-  border-radius: 4rpx;
+  font-weight: 700;
+  padding: 3rpx 10rpx;
+  border-radius: 6rpx;
 }
 
-.cost-1 { background: #3f3f46; color: #a1a1aa; }
-.cost-3 { background: #1e3a5f; color: #93c5fd; }
-.cost-4 { background: #4c1d95; color: #c4b5fd; }
+.cost-1 { background: #eef2f7; color: #526071; }
+.cost-3 { background: #dbeafe; color: #1d4ed8; }
+.cost-4 { background: #ede9fe; color: #5b21b6; }
 
 .name {
-  font-size: 24rpx;
-  color: #e4e4e7;
-  font-weight: 500;
+  font-size: 25rpx;
+  color: #182033;
+  font-weight: 700;
   flex: 1;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -44,136 +45,131 @@
 .score {
   font-size: 22rpx;
   font-family: monospace;
+  color: #3f4b5f;
 }
 
 .grade {
   font-size: 22rpx;
-  font-weight: 700;
+  font-weight: 800;
 }
 
-.g-sss { color: #f87171; }
-.g-ss { color: #fb923c; }
-.g-s { color: #fbbf24; }
-.g-a { color: #c084fc; }
-.g-b { color: #60a5fa; }
-.g-c { color: #a1a1aa; }
+.g-sss { color: #be123c; }
+.g-ss { color: #ea580c; }
+.g-s { color: #ca8a04; }
+.g-a { color: #2563eb; }
+.g-b { color: #0891b2; }
+.g-c { color: #7a8499; }
 
 .sonata {
-  font-size: 20rpx;
-  color: #71717a;
-  margin-bottom: 6rpx;
+  font-size: 21rpx;
+  color: #7a8499;
+  margin-bottom: 8rpx;
 }
 
-/* 主/副属性 */
 .main-stat {
-  font-size: 22rpx;
-  color: #d4d4d8;
-  margin-bottom: 4rpx;
+  font-size: 23rpx;
+  color: #182033;
+  margin-bottom: 5rpx;
 }
 
 .sec-stat {
-  font-size: 20rpx;
-  margin-bottom: 4rpx;
+  font-size: 21rpx;
+  margin-bottom: 5rpx;
 }
 
-.dim { color: #a1a1aa; }
+.dim { color: #667085; }
 
 .subs {
   display: flex;
   flex-wrap: wrap;
   gap: 6rpx;
-  margin-top: 6rpx;
+  margin-top: 8rpx;
 }
 
 .sub-tag {
-  font-size: 18rpx;
-  background: #27272a;
-  color: #a1a1aa;
-  padding: 2rpx 8rpx;
-  border-radius: 4rpx;
-}
-
-/* 梦魇 */
-.nightmare {
-  font-size: 18rpx;
-  color: #d8b4fe;
-  margin-top: 8rpx;
-  background: rgba(88, 28, 135, 0.2);
-  border: 1rpx solid rgba(126, 34, 206, 0.4);
+  font-size: 19rpx;
+  background: #f1f5f9;
+  color: #4b5565;
+  padding: 4rpx 8rpx;
   border-radius: 6rpx;
-  padding: 6rpx 10rpx;
 }
 
-/* 详细评分模式 */
+.nightmare {
+  font-size: 19rpx;
+  color: #5b21b6;
+  margin-top: 10rpx;
+  background: #f5f3ff;
+  border: 1rpx solid #ddd6fe;
+  border-radius: 8rpx;
+  padding: 8rpx 10rpx;
+}
+
 .detail-row {
-  margin-bottom: 8rpx;
+  margin-bottom: 10rpx;
 }
 
 .detail-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rpx;
+  margin-bottom: 4rpx;
+  gap: 8rpx;
 }
 
-.detail-field {
-  font-size: 20rpx;
-  color: #a1a1aa;
-}
-
-.detail-label {
-  font-size: 20rpx;
-  color: #d4d4d8;
-}
-
+.detail-field,
+.detail-label,
 .detail-score {
   font-size: 20rpx;
-  font-family: monospace;
 }
 
-.score-high { color: #f87171; }
-.score-mid { color: #fb923c; }
-.score-low { color: #d4d4d8; }
-.score-max { color: #52525b; }
+.detail-field { color: #7a8499; }
+.detail-label { color: #3f4b5f; }
+.detail-score { font-family: monospace; }
+
+.score-high { color: #be123c; }
+.score-mid { color: #ea580c; }
+.score-low { color: #3f4b5f; }
+.score-max { color: #98a2b3; }
 
 .detail-bar {
   width: 100%;
-  height: 6rpx;
-  background: #27272a;
-  border-radius: 3rpx;
+  height: 8rpx;
+  background: #e8edf5;
+  border-radius: 999rpx;
   overflow: hidden;
 }
 
 .detail-bar-fill {
   height: 100%;
-  border-radius: 3rpx;
+  border-radius: 999rpx;
 }
 
-.bar-high { background: #ef4444; }
+.bar-high { background: #dc2626; }
 .bar-mid { background: #f97316; }
-.bar-low { background: #52525b; }
+.bar-low { background: #94a3b8; }
 
 .detail-footer {
   display: flex;
   justify-content: space-between;
-  border-top: 1rpx solid #27272a;
-  padding-top: 8rpx;
-  margin-top: 4rpx;
+  border-top: 1rpx solid #e4e9f2;
+  padding-top: 10rpx;
+  margin-top: 8rpx;
+  gap: 8rpx;
 }
 
 .footer-label {
   font-size: 20rpx;
-  color: #a1a1aa;
+  color: #667085;
 }
 
 .footer-total {
   font-size: 22rpx;
-  color: #e4e4e7;
+  color: #182033;
   font-family: monospace;
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .footer-max {
   font-size: 18rpx;
-  color: #52525b;
+  color: #98a2b3;
 }

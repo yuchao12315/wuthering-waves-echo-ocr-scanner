@@ -1,5 +1,14 @@
 // pages/calculator/calculator.js
 import { getCharacterDetail, getWeapons } from '../../services/data-service'
+import {
+  isAdQuotaEnabled,
+  getQuotaSummary,
+  useCalculateQuota,
+  useAdvancedThresholdQuota,
+  refundAdvancedThresholdQuota,
+  unlockCalculateByAd,
+  unlockAdvancedThresholdByAd,
+} from '../../services/ad-quota-service'
 
 // 套装数据（本地打包）
 import SONATA_EFFECTS from '../../data/sonata-effects.json'
@@ -56,6 +65,9 @@ Page({
     minCritRate: '',
     minEnergyRegen: '',
     hasThresholds: false,
+    adQuotaEnabled: false,
+    calculateLeft: 3,
+    advancedThresholdLeft: 0,
 
     // 套装
     allSonatas: [],
@@ -97,6 +109,9 @@ Page({
 
     // 加载已保存的套装
     this.loadSavedLoadouts()
+
+    // 加载广告配额
+    this.refreshQuota()
   },
 
   onShow() {
@@ -153,6 +168,16 @@ Page({
       const loadouts = wx.getStorageSync('loadouts') || []
       this.setData({ savedLoadouts: loadouts })
     } catch (e) {}
+  },
+
+  /** 刷新本地广告配额 */
+  refreshQuota() {
+    const quota = getQuotaSummary()
+    this.setData({
+      adQuotaEnabled: isAdQuotaEnabled(),
+      calculateLeft: quota.calculateLeft,
+      advancedThresholdLeft: quota.advancedThresholdLeft,
+    })
   },
 
   // ====== 事件处理 ======
@@ -250,7 +275,7 @@ Page({
 
   // ====== 计算 ======
 
-  onCalculate() {
+  async onCalculate() {
     if (!this.data.selectedChar || this.data.computing) return
 
     if (this._echoes.length === 0) {
@@ -258,10 +283,56 @@ Page({
       return
     }
 
+    const quotaReady = await this.ensureCalculationQuota()
+    if (!quotaReady) return
+
     this.setData({ computing: true, computeProgress: 0, countdown: '计算中...' })
 
     // 使用 setTimeout 让 UI 有时间更新
     setTimeout(() => this.runCalculation(), 100)
+  },
+
+  /** 计算前检查基础计算次数和高级阈值筛选次数 */
+  async ensureCalculationQuota() {
+    let usedAdvancedQuota = false
+
+    if (this.data.hasThresholds) {
+      let advancedQuota = useAdvancedThresholdQuota()
+      if (!advancedQuota.ok) {
+        const unlocked = await unlockAdvancedThresholdByAd()
+        if (!unlocked.ok) {
+          this.refreshQuota()
+          return false
+        }
+
+        advancedQuota = useAdvancedThresholdQuota()
+        if (!advancedQuota.ok) {
+          this.refreshQuota()
+          return false
+        }
+      }
+      usedAdvancedQuota = true
+    }
+
+    let calcQuota = useCalculateQuota()
+    if (!calcQuota.ok) {
+      const unlocked = await unlockCalculateByAd()
+      if (!unlocked.ok) {
+        if (usedAdvancedQuota) refundAdvancedThresholdQuota()
+        this.refreshQuota()
+        return false
+      }
+
+      calcQuota = useCalculateQuota()
+      if (!calcQuota.ok) {
+        if (usedAdvancedQuota) refundAdvancedThresholdQuota()
+        this.refreshQuota()
+        return false
+      }
+    }
+
+    this.refreshQuota()
+    return true
   },
 
   /** 执行搭配计算（主线程） */

@@ -6,17 +6,17 @@
     "pages/characters/characters"
   ],
   "window": {
-    "navigationBarBackgroundColor": "#18181b",
+    "navigationBarBackgroundColor": "#ffffff",
     "navigationBarTitleText": "声骸计算器",
-    "navigationBarTextStyle": "white",
-    "backgroundColor": "#18181b",
-    "backgroundTextStyle": "light"
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f4f6fb",
+    "backgroundTextStyle": "dark"
   },
   "tabBar": {
-    "color": "#71717a",
-    "selectedColor": "#c084fc",
-    "backgroundColor": "#18181b",
-    "borderStyle": "black",
+    "color": "#7a8499",
+    "selectedColor": "#2563eb",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
     "list": [
       {
         "pagePath": "pages/calculator/calculator",

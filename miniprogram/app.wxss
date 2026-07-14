@@ -1,8 +1,26 @@
 /* app.wxss - 全局样式 */
 
 page {
-  background-color: #18181b;
-  color: #e4e4e7;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  min-height: 100vh;
+  background: #f4f6fb;
+  color: #182033;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   font-size: 28rpx;
+}
+
+view,
+text,
+input,
+button,
+picker,
+scroll-view {
+  box-sizing: border-box;
+}
+
+input {
+  min-height: 72rpx;
+}
+
+button {
+  line-height: 1.3;
 }
