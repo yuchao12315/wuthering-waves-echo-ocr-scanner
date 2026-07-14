@@ -1,26 +1,25 @@
 // pages/calculator/calculator.js
-const {
-  isAdQuotaEnabled,
-  getQuotaSummary,
-  useCalculateQuota,
-  useAdvancedThresholdQuota,
-  refundAdvancedThresholdQuota,
-  unlockCalculateByAd,
-  unlockAdvancedThresholdByAd,
-} = require('../../services/ad-quota-service.js')
+var adQuotaService = require('../../services/ad-quota-service.js')
+var isAdQuotaEnabled = adQuotaService.isAdQuotaEnabled
+var getQuotaSummary = adQuotaService.getQuotaSummary
+var useCalculateQuota = adQuotaService.useCalculateQuota
+var useAdvancedThresholdQuota = adQuotaService.useAdvancedThresholdQuota
+var refundAdvancedThresholdQuota = adQuotaService.refundAdvancedThresholdQuota
+var unlockCalculateByAd = adQuotaService.unlockCalculateByAd
+var unlockAdvancedThresholdByAd = adQuotaService.unlockAdvancedThresholdByAd
 
 // 套装数据（本地打包）
-const SONATA_EFFECTS = require('../../data/sonata-effects.js')
-const WEAPONS = require('../../data/weapons.js')
+var SONATA_EFFECTS = require('../../data/sonata-effects.js')
+var WEAPONS = require('../../data/weapons.js')
 
 // 技能类型中文映射
-const SKILL_TYPE_LABELS = {
+var SKILL_TYPE_LABELS = {
   '常态攻击': '普攻', '共鸣技能': '技能', '共鸣解放': '解放',
   '变奏技能': '变奏', '共鸣回路': '回路',
 }
 
 // Cost分配选项
-const COST_OPTIONS = [
+var COST_OPTIONS = [
   { label: '全部', value: 'all' },
   { label: '4+3+3+1+1', value: '4+3+3+1+1' },
   { label: '4+4+1+1+1', value: '4+4+1+1+1' },
@@ -37,7 +36,7 @@ function getGrade(score) {
 }
 
 function getWeapons(weaponType) {
-  const weapons = weaponType ? WEAPONS.filter(w => w.type === weaponType) : WEAPONS
+  var weapons = weaponType ? WEAPONS.filter(function (w) { return w.type === weaponType }) : WEAPONS
   return Promise.resolve(weapons)
 }
 
@@ -108,10 +107,12 @@ Page({
 
   onLoad() {
     // 初始化套装列表
-    const allSonatas = Object.entries(SONATA_EFFECTS).map(([key, val]) => ({
-      key,
-      name: val.name,
-    }))
+    var allSonatas = Object.keys(SONATA_EFFECTS).map(function (key) {
+      return {
+        key: key,
+        name: SONATA_EFFECTS[key].name,
+      }
+    })
     this.setData({ allSonatas })
 
     // 加载已保存的套装
@@ -123,7 +124,7 @@ Page({
 
   onShow() {
     // 每次显示时检查全局角色选择
-    const app = getApp()
+    var app = getApp()
     if (app.globalData.selectedCharacter) {
       this.setCharacter(app.globalData.selectedCharacter)
     }
@@ -142,18 +143,18 @@ Page({
 
     // 加载武器列表
     try {
-      const weapons = await getWeapons(detail.weaponType)
+      var weapons = await getWeapons(detail.weaponType)
       this._weapons = weapons
-      const weaponNames = weapons.map(w => w.name)
+      var weaponNames = weapons.map(function (w) { return w.name })
 
       // 提取技能类型
-      const skillTypeSet = new Set()
+      var skillTypeSet = new Set()
       if (detail.base && detail.base.skills) {
-        detail.base.skills.forEach(s => {
+        detail.base.skills.forEach(function (s) {
           if (s.skillType) skillTypeSet.add(s.skillType)
         })
       }
-      const skillTypes = Array.from(skillTypeSet)
+      var skillTypes = Array.from(skillTypeSet)
 
       this.setData({
         selectedChar: { name: detail.name, element: detail.element, weaponType: detail.weaponType },
@@ -180,7 +181,7 @@ Page({
 
   /** 刷新本地广告配额 */
   refreshQuota() {
-    const quota = getQuotaSummary()
+    var quota = getQuotaSummary()
     this.setData({
       adQuotaEnabled: isAdQuotaEnabled(),
       calculateLeft: quota.calculateLeft,
@@ -199,19 +200,19 @@ Page({
   },
 
   onCharacterPicked(e) {
-    const detail = e.detail.character
+    var detail = e.detail.character
     this.setData({ showCharacterPicker: false })
     this.setCharacter(detail)
   },
 
   setRankMode(e) {
-    const mode = e.currentTarget.dataset.mode
+    var mode = e.currentTarget.dataset.mode
     if (mode === 'damage' && !this.data.hasCharBase) return
     this.setData({ rankMode: mode })
   },
 
   onWeaponChange(e) {
-    const idx = parseInt(e.detail.value)
+    var idx = parseInt(e.detail.value)
     this.setData({
       weaponIndex: idx,
       weaponName: this.data.weaponNames[idx] || '',
@@ -227,8 +228,8 @@ Page({
   },
 
   toggleSkillType(e) {
-    const type = e.currentTarget.dataset.type
-    const active = { ...this.data.activeSkillTypes }
+    var type = e.currentTarget.dataset.type
+    var active = Object.assign({}, this.data.activeSkillTypes)
     if (active[type]) {
       delete active[type]
     } else {
@@ -245,7 +246,7 @@ Page({
   },
 
   onMinCritInput(e) {
-    const val = e.detail.value
+    var val = e.detail.value
     this.setData({
       minCritRate: val,
       hasThresholds: !!(val || this.data.minEnergyRegen),
@@ -253,7 +254,7 @@ Page({
   },
 
   onMinEnergyInput(e) {
-    const val = e.detail.value
+    var val = e.detail.value
     this.setData({
       minEnergyRegen: val,
       hasThresholds: !!(this.data.minCritRate || val),
@@ -265,9 +266,9 @@ Page({
   },
 
   toggleSonata(e) {
-    const key = e.currentTarget.dataset.key
-    const sonatas = [...this.data.sonatas]
-    const idx = sonatas.indexOf(key)
+    var key = e.currentTarget.dataset.key
+    var sonatas = this.data.sonatas.slice()
+    var idx = sonatas.indexOf(key)
     if (idx >= 0) {
       sonatas.splice(idx, 1)
     } else if (sonatas.length < 2) {
@@ -285,8 +286,8 @@ Page({
   },
 
   toggleExclude(e) {
-    const id = e.currentTarget.dataset.id
-    const excluded = { ...this.data.excludedIds }
+    var id = e.currentTarget.dataset.id
+    var excluded = Object.assign({}, this.data.excludedIds)
     if (excluded[id]) {
       delete excluded[id]
     } else {
@@ -311,7 +312,8 @@ Page({
     this.setData({ computing: true, computeProgress: 0, countdown: '计算中...' })
 
     // 使用 setTimeout 让 UI 有时间更新
-    setTimeout(() => this.runCalculation(), 100)
+    var self = this
+    setTimeout(function () { self.runCalculation() }, 100)
   },
 
   /** 计算前检查基础计算次数和高级阈值筛选次数 */
@@ -321,7 +323,7 @@ Page({
     if (this.data.hasThresholds) {
       let advancedQuota = useAdvancedThresholdQuota()
       if (!advancedQuota.ok) {
-        const unlocked = await unlockAdvancedThresholdByAd()
+        var unlocked = await unlockAdvancedThresholdByAd()
         if (!unlocked.ok) {
           this.refreshQuota()
           return false
@@ -338,7 +340,7 @@ Page({
 
     let calcQuota = useCalculateQuota()
     if (!calcQuota.ok) {
-      const unlocked = await unlockCalculateByAd()
+      var unlocked = await unlockCalculateByAd()
       if (!unlocked.ok) {
         if (usedAdvancedQuota) refundAdvancedThresholdQuota()
         this.refreshQuota()
@@ -362,7 +364,7 @@ Page({
     try {
       // TODO: 实际计算逻辑需要从 loadout-worker.ts 移植
       // 这里先用模拟数据演示 UI 结构
-      const mockResults = this.generateMockResults()
+      var mockResults = this.generateMockResults()
       this._results = mockResults
 
       // 处理结果
@@ -381,57 +383,60 @@ Page({
 
   /** 处理计算结果：排序、过滤、格式化 */
   processResults(results) {
-    const { rankMode, activeSkillTypes, activeSkillTypeCount,
-            minCritRate, minEnergyRegen, hasThresholds } = this.data
+    var rankMode = this.data.rankMode
+    var activeSkillTypeCount = this.data.activeSkillTypeCount
+    var minCritRate = this.data.minCritRate
+    var minEnergyRegen = this.data.minEnergyRegen
+    var hasThresholds = this.data.hasThresholds
 
-    const critThreshold = minCritRate ? parseFloat(minCritRate) / 100 : 0
-    const energyThreshold = minEnergyRegen ? parseFloat(minEnergyRegen) / 100 : 0
+    var critThreshold = minCritRate ? parseFloat(minCritRate) / 100 : 0
+    var energyThreshold = minEnergyRegen ? parseFloat(minEnergyRegen) / 100 : 0
 
     // 排序
-    let sorted = [...results]
+    var sorted = results.slice()
     if (rankMode === 'damage' && this._charBase) {
       // TODO: 按伤害排序需要调用 calcDamage
-      // sorted.sort((a, b) => calcDamage(b) - calcDamage(a))
+      // 这里保留真实伤害排序接入点。
     }
 
     // 格式化 + 过滤
-    const formatted = sorted.map((r, i) => {
-      const { grade, gradeClass } = getGrade(r.score)
+    var formatted = sorted.map(function (r) {
+      var gradeInfo = getGrade(r.score)
 
       // 计算暴击率和共鸣效率
-      const stats = this.calcEchoStats(r.echoes)
-      const critRateBelow = critThreshold > 0 && stats.critRate < critThreshold
-      const energyBelow = energyThreshold > 0 && stats.energyRegen < energyThreshold
+      var stats = this.calcEchoStats(r.echoes)
+      var critRateBelow = critThreshold > 0 && stats.critRate < critThreshold
+      var energyBelow = energyThreshold > 0 && stats.energyRegen < energyThreshold
 
-      return {
-        ...r,
+      return Object.assign({}, r, {
         scoreDisplay: r.score.toFixed(2),
-        grade,
-        gradeClass,
+        grade: gradeInfo.grade,
+        gradeClass: gradeInfo.gradeClass,
         critRateDisplay: (stats.critRate * 100).toFixed(1) + '%',
         energyDisplay: (stats.energyRegen * 100).toFixed(1) + '%',
         critRateBelow,
         energyBelow,
-        costPattern: r.echoes.map(e => 'C' + e.cost).join('+'),
+        costPattern: r.echoes.map(function (e) { return 'C' + e.cost }).join('+'),
         damage: r.damage || 0,
         damageDisplay: r.damage ? r.damage.toLocaleString() : '',
         damageLabel: activeSkillTypeCount > 0 ? '筛选' : '总',
-        echoes: r.echoes.map(echo => ({
-          ...echo,
+        echoes: r.echoes.map(function (echo) {
+          return Object.assign({}, echo, {
           shortName: echo.monsterName.length > 4
             ? echo.monsterName.substring(0, 4) + '..'
             : echo.monsterName,
           scoreDisplay: echo._score ? echo._score.toFixed(2) : '',
-        })),
-      }
-    })
+          })
+        }),
+      })
+    }, this)
 
     // 阈值过滤
     let filtered = formatted
     let belowCount = 0
     if (hasThresholds) {
-      const before = filtered.length
-      filtered = filtered.filter(r => !r.critRateBelow && !r.energyBelow)
+      var before = filtered.length
+      filtered = filtered.filter(function (r) { return !r.critRateBelow && !r.energyBelow })
       belowCount = before - filtered.length
     }
 
@@ -447,11 +452,13 @@ Page({
     let critRate = 0.05  // 基础暴击率
     let energyRegen = 0
 
-    for (const echo of echoes) {
-      const entries = [echo.mainStat, echo.secondaryStat, ...(echo.substats || [])].filter(Boolean)
-      for (const e of entries) {
-        if (e.type === 'CRIT_RATE') critRate += e.value / 100
-        if (e.type === 'ENERGY_REGEN') energyRegen += e.value / 100
+    for (var i = 0; i < echoes.length; i++) {
+      var echo = echoes[i]
+      var entries = [echo.mainStat, echo.secondaryStat].concat(echo.substats || []).filter(Boolean)
+      for (var j = 0; j < entries.length; j++) {
+        var entry = entries[j]
+        if (entry.type === 'CRIT_RATE') critRate += entry.value / 100
+        if (entry.type === 'ENERGY_REGEN') energyRegen += entry.value / 100
       }
     }
 
@@ -460,23 +467,23 @@ Page({
 
   /** 生成模拟结果（TODO: 替换为真实计算） */
   generateMockResults() {
-    const results = []
-    const echoes = this._echoes
+    var results = []
+    var echoes = this._echoes
 
     if (echoes.length < 5) return results
 
     // 随机组合5个声骸作为演示
     for (let i = 0; i < Math.min(10, Math.floor(echoes.length / 5)); i++) {
-      const selected = []
-      const used = new Set()
+      var selected = []
+      var used = new Set()
       while (selected.length < 5 && used.size < echoes.length) {
-        const idx = Math.floor(Math.random() * echoes.length)
+        var idx = Math.floor(Math.random() * echoes.length)
         if (!used.has(idx)) {
           used.add(idx)
-          selected.push({ ...echoes[idx], _score: 20 + Math.random() * 25 })
+          selected.push(Object.assign({}, echoes[idx], { _score: 20 + Math.random() * 25 }))
         }
       }
-      const totalScore = selected.reduce((s, e) => s + (e._score || 0), 0)
+      var totalScore = selected.reduce(function (s, e) { return s + (e._score || 0) }, 0)
       results.push({
         echoes: selected,
         score: totalScore,
@@ -484,27 +491,28 @@ Page({
       })
     }
 
-    results.sort((a, b) => b.score - a.score)
+    results.sort(function (a, b) { return b.score - a.score })
     return results
   },
 
   /** 保存套装 */
   onSaveLoadout(e) {
-    const idx = e.currentTarget.dataset.index
-    const result = this._results[idx]
+    var self = this
+    var idx = e.currentTarget.dataset.index
+    var result = this._results[idx]
     if (!result) return
 
     wx.showModal({
       title: '保存套装',
       editable: true,
       placeholderText: '输入套装名称',
-      success: (res) => {
+      success: function (res) {
         if (res.confirm && res.content) {
-          const loadout = {
-            id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+          var loadout = {
+            id: Date.now() + '-' + Math.random().toString(36).substr(2, 9),
             name: res.content,
-            characterName: this.data.selectedChar.name,
-            echoes: result.echoes.map(e => ({
+            characterName: self.data.selectedChar.name,
+            echoes: result.echoes.map(function (e) { return {
               id: e.id,
               monsterId: e.monsterId,
               monsterName: e.monsterName,
@@ -517,16 +525,16 @@ Page({
               secondaryStat: e.secondaryStat,
               substats: e.substats,
               nightmareBonus: e.nightmareBonus,
-            })),
+            } }),
             score: result.score,
             savedAt: Date.now(),
           }
 
           try {
-            const loadouts = wx.getStorageSync('loadouts') || []
+            var loadouts = wx.getStorageSync('loadouts') || []
             loadouts.unshift(loadout)
             wx.setStorageSync('loadouts', loadouts)
-            this.loadSavedLoadouts()
+            self.loadSavedLoadouts()
             wx.showToast({ title: '已保存', icon: 'success' })
           } catch (e) {
             wx.showToast({ title: '保存失败', icon: 'none' })

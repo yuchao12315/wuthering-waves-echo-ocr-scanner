@@ -1,6 +1,7 @@
 // pages/echoes/echoes.js
-const SONATA_EFFECTS = require('../../data/sonata-effects.js')
-const { getNightmareBonus } = require('../../data/nightmare-bonuses.js')
+var SONATA_EFFECTS = require('../../data/sonata-effects.js')
+var NIGHTMARE = require('../../data/nightmare-bonuses.js')
+var getNightmareBonus = NIGHTMARE.getNightmareBonus
 
 const STAT_DISPLAY = {
   FLAT_ATK: '攻击', ATK_PCT: '攻击%', FLAT_HP: '生命', HP_PCT: '生命%',
@@ -31,9 +32,9 @@ const NM_SECOND_LABELS = {
 
 // 套装 key → 中文名
 const SONATA_NAMES = {}
-for (const [key, val] of Object.entries(SONATA_EFFECTS)) {
-  SONATA_NAMES[key] = val.name
-}
+Object.keys(SONATA_EFFECTS).forEach(function(key) {
+  SONATA_NAMES[key] = SONATA_EFFECTS[key].name
+})
 
 Page({
   data: {
@@ -50,7 +51,7 @@ Page({
     mainStatTypes: [],
     mainStatIndex: 0,
     mainStatValue: '',
-    subStatLabels: ALL_SUBSTATS.map(s => STAT_DISPLAY[s] || s),
+    subStatLabels: ALL_SUBSTATS.map(function(s) { return STAT_DISPLAY[s] || s }),
     secStatIndex: 0,
     secStatValue: '',
     substats: [],
@@ -109,16 +110,16 @@ Page({
   /** 初始化表单选项 */
   initForm() {
     const sonataKeys = Object.keys(SONATA_NAMES)
-    const sonataNames = sonataKeys.map(k => SONATA_NAMES[k])
+    const sonataNames = sonataKeys.map(function(k) { return SONATA_NAMES[k] })
     const mainTypes = VALID_MAIN_STATS[4]
-    const mainLabels = mainTypes.map(s => STAT_DISPLAY[s] || s)
-    const subLabels = ALL_SUBSTATS.map(s => STAT_DISPLAY[s] || s)
+    const mainLabels = mainTypes.map(function(s) { return STAT_DISPLAY[s] || s })
+    const subLabels = ALL_SUBSTATS.map(function(s) { return STAT_DISPLAY[s] || s })
 
     // 筛选套装选项
     const filterOptions = [{ key: '', label: '全部套装' }, { key: '__empty__', label: '未识别套装' }]
-    for (const [k, v] of Object.entries(SONATA_NAMES)) {
-      filterOptions.push({ key: k, label: v })
-    }
+    Object.keys(SONATA_NAMES).forEach(function(k) {
+      filterOptions.push({ key: k, label: SONATA_NAMES[k] })
+    })
 
     this.setData({
       sonataKeys, sonataNames, sonataIndex: 0,
@@ -140,15 +141,19 @@ Page({
 
   /** 格式化声骸列表（添加显示用的辅助字段） */
   formatEchoes(echoes) {
-    const formatted = echoes.map(e => ({
-      ...e,
-      _sonataName: SONATA_NAMES[e.sonata] || e.sonata || '',
-      _mainLabel: e.mainStat ? (STAT_DISPLAY[e.mainStat.type] || e.mainStat.type) : '',
-      _secLabel: e.secondaryStat ? (STAT_DISPLAY[e.secondaryStat.type] || e.secondaryStat.type) : '',
-      _subLabels: (e.substats || []).map(s => `${STAT_DISPLAY[s.type] || s.type} ${s.value}`),
-      _nightmareLabel: this.formatNightmare(e.nightmareBonus),
-      _score: this._calc ? this.calcScore(e).toFixed(2) : '',
-    }))
+    const self = this
+    const formatted = echoes.map(function(e) {
+      const item = Object.assign({}, e)
+      item._sonataName = SONATA_NAMES[e.sonata] || e.sonata || ''
+      item._mainLabel = e.mainStat ? (STAT_DISPLAY[e.mainStat.type] || e.mainStat.type) : ''
+      item._secLabel = e.secondaryStat ? (STAT_DISPLAY[e.secondaryStat.type] || e.secondaryStat.type) : ''
+      item._subLabels = (e.substats || []).map(function(s) {
+        return (STAT_DISPLAY[s.type] || s.type) + ' ' + s.value
+      })
+      item._nightmareLabel = self.formatNightmare(e.nightmareBonus)
+      item._score = self._calc ? self.calcScore(e).toFixed(2) : ''
+      return item
+    })
 
     this.setData({ echoes: formatted })
     this.applyFilters()
@@ -157,16 +162,16 @@ Page({
   /** 格式化梦魇显示 */
   formatNightmare(nm) {
     if (!nm) return ''
-    let parts = []
+    const parts = []
     if (nm.elemType && nm.elemDmg) {
-      parts.push(`${nm.elemType}伤害+${(nm.elemDmg * 100).toFixed(0)}%`)
+      parts.push(nm.elemType + '伤害+' + (nm.elemDmg * 100).toFixed(0) + '%')
     }
     if (nm.secondValue > 0) {
       const label = NM_SECOND_LABELS[nm.secondType] || nm.secondType
-      parts.push(`${label}+${(nm.secondValue * 100).toFixed(0)}%`)
+      parts.push(label + '+' + (nm.secondValue * 100).toFixed(0) + '%')
     }
     if (nm.requiredCharacters) {
-      parts.push(`(限${nm.requiredCharacters.join('/')})`)
+      parts.push('(限' + nm.requiredCharacters.join('/') + ')')
     }
     return parts.join(' ')
   },
@@ -179,26 +184,33 @@ Page({
 
   /** 应用筛选和排序 */
   applyFilters() {
-    const { echoes, filterSonataIdx, filterCost, filterHasMain, sortIdx, filterSonataOptions } = this.data
-    let list = [...echoes]
+    const data = this.data
+    const echoes = data.echoes
+    const filterSonataIdx = data.filterSonataIdx
+    const filterCost = data.filterCost
+    const filterHasMain = data.filterHasMain
+    const sortIdx = data.sortIdx
+    const filterSonataOptions = data.filterSonataOptions
+    let list = echoes.slice()
 
-    const sonataKey = filterSonataOptions[filterSonataIdx]?.key || ''
+    const sonataOption = filterSonataOptions[filterSonataIdx]
+    const sonataKey = sonataOption ? sonataOption.key : ''
     if (sonataKey === '__empty__') {
-      list = list.filter(e => !e.sonata)
+      list = list.filter(function(e) { return !e.sonata })
     } else if (sonataKey) {
-      list = list.filter(e => e.sonata === sonataKey)
+      list = list.filter(function(e) { return e.sonata === sonataKey })
     }
 
     if (filterCost > 0) {
-      list = list.filter(e => e.cost === filterCost)
+      list = list.filter(function(e) { return e.cost === filterCost })
     }
 
     if (filterHasMain) {
-      list = list.filter(e => e.mainStat != null)
+      list = list.filter(function(e) { return e.mainStat != null })
     }
 
     if (sortIdx === 1 && this._calc) {
-      list.sort((a, b) => parseFloat(b._score || 0) - parseFloat(a._score || 0))
+      list.sort(function(a, b) { return parseFloat(b._score || 0) - parseFloat(a._score || 0) })
     }
 
     this.setData({ filteredEchoes: list })
@@ -218,7 +230,7 @@ Page({
   setCost(e) {
     const cost = e.currentTarget.dataset.cost
     const mainTypes = VALID_MAIN_STATS[cost] || VALID_MAIN_STATS[4]
-    const mainLabels = mainTypes.map(s => STAT_DISPLAY[s] || s)
+    const mainLabels = mainTypes.map(function(s) { return STAT_DISPLAY[s] || s })
     this.setData({ formCost: cost, mainStatTypes: mainTypes, mainStatLabels: mainLabels, mainStatIndex: 0 })
   },
 
@@ -245,35 +257,45 @@ Page({
   onSubTypeChange(e) {
     const idx = e.currentTarget.dataset.idx
     const typeIdx = parseInt(e.detail.value)
-    const substats = [...this.data.substats]
-    substats[idx] = { ...substats[idx], typeIdx }
+    const substats = this.data.substats.slice()
+    substats[idx] = Object.assign({}, substats[idx], { typeIdx: typeIdx })
     this.setData({ substats })
   },
 
   onSubValueInput(e) {
     const idx = e.currentTarget.dataset.idx
-    const substats = [...this.data.substats]
-    substats[idx] = { ...substats[idx], value: e.detail.value }
+    const substats = this.data.substats.slice()
+    substats[idx] = Object.assign({}, substats[idx], { value: e.detail.value })
     this.setData({ substats })
   },
 
   addSub() {
-    const substats = [...this.data.substats, { typeIdx: 0, value: '' }]
+    const substats = this.data.substats.slice()
+    substats.push({ typeIdx: 0, value: '' })
     this.setData({ substats })
   },
 
   removeSub(e) {
     const idx = e.currentTarget.dataset.idx
-    const substats = this.data.substats.filter((_, i) => i !== idx)
+    const substats = this.data.substats.filter(function(_, i) { return i !== idx })
     this.setData({ substats })
   },
 
   onSubmit() {
-    const { monsterName, formCost, sonataKeys, sonataIndex, mainStatTypes, mainStatIndex,
-            mainStatValue, secStatIndex, secStatValue, substats } = this.data
+    const data = this.data
+    const monsterName = data.monsterName
+    const formCost = data.formCost
+    const sonataKeys = data.sonataKeys
+    const sonataIndex = data.sonataIndex
+    const mainStatTypes = data.mainStatTypes
+    const mainStatIndex = data.mainStatIndex
+    const mainStatValue = data.mainStatValue
+    const secStatIndex = data.secStatIndex
+    const secStatValue = data.secStatValue
+    const substats = data.substats
 
     const echo = {
-      id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+      id: Date.now() + '-' + Math.random().toString(36).substr(2, 9),
       monsterId: 0,
       monsterName: monsterName || '未命名',
       cost: formCost,
@@ -288,10 +310,12 @@ Page({
       secondaryStat: formCost >= 3
         ? { type: ALL_SUBSTATS[secStatIndex], value: parseFloat(secStatValue) || 0 }
         : null,
-      substats: substats.map(s => ({
-        type: ALL_SUBSTATS[s.typeIdx],
-        value: parseFloat(s.value) || 0,
-      })),
+      substats: substats.map(function(s) {
+        return {
+          type: ALL_SUBSTATS[s.typeIdx],
+          value: parseFloat(s.value) || 0,
+        }
+      }),
     }
 
     // 梦魇加成
@@ -341,15 +365,16 @@ Page({
 
   onRemoveEcho(e) {
     const id = e.currentTarget.dataset.id
+    const self = this
     wx.showModal({
       title: '确认', content: '删除该声骸？',
-      success: (res) => {
+      success: function(res) {
         if (res.confirm) {
           try {
             const echoes = wx.getStorageSync('echoes') || []
-            const filtered = echoes.filter(e => e.id !== id)
+            const filtered = echoes.filter(function(e) { return e.id !== id })
             wx.setStorageSync('echoes', filtered)
-            this.loadEchoes()
+            self.loadEchoes()
           } catch (e) {}
         }
       }
@@ -357,11 +382,12 @@ Page({
   },
 
   onImport() {
+    const self = this
     wx.chooseMessageFile({
       count: 1,
       type: 'file',
       extension: ['json'],
-      success: (res) => {
+      success: function(res) {
         const filePath = res.tempFiles[0].path
         const fs = wx.getFileSystemManager()
         try {
@@ -378,22 +404,25 @@ Page({
           }
 
           if (echoList.length === 0) {
-            this.setData({ importMsg: '文件中未找到声骸数据', importMsgType: 'warn' })
+            self.setData({ importMsg: '文件中未找到声骸数据', importMsgType: 'warn' })
             return
           }
 
-          const valid = echoList.filter(e => e.mainStat || (e.substats && e.substats.length > 0) || e.monsterName)
+          const valid = echoList.filter(function(e) {
+            return e.mainStat || (e.substats && e.substats.length > 0) || e.monsterName
+          })
           const echoes = wx.getStorageSync('echoes') || []
-          echoes.unshift(...valid)
+          Array.prototype.unshift.apply(echoes, valid)
           wx.setStorageSync('echoes', echoes)
 
-          this.setData({
-            importMsg: `成功导入 ${valid.length} 个声骸${valid.length < echoList.length ? ` (跳过${echoList.length - valid.length}个无效)` : ''}`,
+          const skipped = echoList.length - valid.length
+          self.setData({
+            importMsg: '成功导入 ' + valid.length + ' 个声骸' + (skipped > 0 ? ' (跳过' + skipped + '个无效)' : ''),
             importMsgType: 'success',
           })
-          this.loadEchoes()
+          self.loadEchoes()
         } catch (e) {
-          this.setData({ importMsg: `导入失败: ${e.message || '文件格式错误'}`, importMsgType: 'error' })
+          self.setData({ importMsg: '导入失败: ' + (e.message || '文件格式错误'), importMsgType: 'error' })
         }
       }
     })
@@ -406,31 +435,32 @@ Page({
       return
     }
     const content = JSON.stringify(echoes, null, 2)
-    const filePath = `${wx.env.USER_DATA_PATH}/echoes.json`
+    const filePath = wx.env.USER_DATA_PATH + '/echoes.json'
     const fs = wx.getFileSystemManager()
     fs.writeFile({
       filePath,
       data: content,
       encoding: 'utf-8',
-      success: () => {
+      success: function() {
         wx.shareFileMessage({
           filePath,
           fileName: 'echoes.json',
-          success: () => {},
-          fail: (e) => { wx.showToast({ title: '分享失败', icon: 'none' }) }
+          success: function() {},
+          fail: function() { wx.showToast({ title: '分享失败', icon: 'none' }) }
         })
       },
-      fail: () => { wx.showToast({ title: '导出失败', icon: 'none' }) }
+      fail: function() { wx.showToast({ title: '导出失败', icon: 'none' }) }
     })
   },
 
   onClearAll() {
+    const self = this
     wx.showModal({
-      title: '确认', content: `确定删除全部 ${this.data.echoes.length} 个声骸？`,
-      success: (res) => {
+      title: '确认', content: '确定删除全部 ' + this.data.echoes.length + ' 个声骸？',
+      success: function(res) {
         if (res.confirm) {
           wx.setStorageSync('echoes', [])
-          this.loadEchoes()
+          self.loadEchoes()
         }
       }
     })

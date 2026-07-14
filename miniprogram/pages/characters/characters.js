@@ -1,23 +1,23 @@
 // pages/characters/characters.js
-const CHARACTER_BASE = require('../../data/characters-base.js')
-const CHARACTER_WEIGHTS = require('../../data/character-weights.js')
+var CHARACTER_BASE = require('../../data/characters-base.js')
+var CHARACTER_WEIGHTS = require('../../data/character-weights.js')
 
-const CACHE_TTL = 7 * 24 * 3600 * 1000
+var CACHE_TTL = 7 * 24 * 3600 * 1000
 
 function buildCharacterList() {
   return Object.keys(CHARACTER_BASE)
-    .map(name => {
-      const base = CHARACTER_BASE[name]
-      const weights = CHARACTER_WEIGHTS[name]
+    .map(function (name) {
+      var base = CHARACTER_BASE[name]
+      var weights = CHARACTER_WEIGHTS[name]
       return {
-        name,
+        name: name,
         element: base.element,
         weaponType: base.weaponType,
         hasWeights: !!weights,
       }
     })
-    .filter(char => char.element && char.weaponType && char.hasWeights)
-    .sort((a, b) => a.name.localeCompare(b.name, 'zh-Hans-CN'))
+    .filter(function (char) { return char.element && char.weaponType && char.hasWeights })
+    .sort(function (a, b) { return a.name.localeCompare(b.name, 'zh-Hans-CN') })
 }
 
 function getCharacterList() {
@@ -27,14 +27,14 @@ function getCharacterList() {
 function getCharacterDetail(name) {
   if (!name) return Promise.reject(new Error('缺少角色名称'))
 
-  const app = getApp()
+  var app = getApp()
   if (app.globalData.characterCache && app.globalData.characterCache[name]) {
     return Promise.resolve(app.globalData.characterCache[name])
   }
 
   try {
-    const cacheKey = 'char_' + name
-    const cached = wx.getStorageSync(cacheKey)
+    var cacheKey = 'char_' + name
+    var cached = wx.getStorageSync(cacheKey)
     if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
       if (!app.globalData.characterCache) app.globalData.characterCache = {}
       app.globalData.characterCache[name] = cached.data
@@ -42,12 +42,12 @@ function getCharacterDetail(name) {
     }
   } catch (e) {}
 
-  const base = CHARACTER_BASE[name]
-  const weights = CHARACTER_WEIGHTS[name]
+  var base = CHARACTER_BASE[name]
+  var weights = CHARACTER_WEIGHTS[name]
   if (!base || !weights) return Promise.reject(new Error('缺少角色数据'))
 
-  const detail = {
-    name,
+  var detail = {
+    name: name,
     element: base.element,
     weaponType: base.weaponType,
     base,
@@ -65,7 +65,7 @@ function getCharacterDetail(name) {
 }
 
 // 词条类型中文映射
-const STAT_CN = {
+var STAT_CN = {
   'ATK_PCT': '攻击%', 'FLAT_ATK': '攻击', 'CRIT_RATE': '暴击率', 'CRIT_DMG': '暴击伤害',
   'ENERGY_REGEN': '共鸣效率', 'ELEM_DMG': '属性伤害', 'HP_PCT': '生命%', 'FLAT_HP': '生命',
   'NORMAL_ATK_DMG': '普攻', 'HEAVY_ATK_DMG': '重击',
@@ -73,7 +73,7 @@ const STAT_CN = {
 }
 
 // 元素 → 英文CSS class
-const ELEM_CLASS_MAP = {
+var ELEM_CLASS_MAP = {
   '热熔': 'tag-elem-fire',
   '导电': 'tag-elem-electric',
   '气动': 'tag-elem-wind',
@@ -96,8 +96,8 @@ Page({
   },
 
   onShow() {
-    const app = getApp()
-    const selected = app.globalData.selectedCharacter
+    var app = getApp()
+    var selected = app.globalData.selectedCharacter
     if (selected && selected.name) {
       this.setData({ selectedChar: selected.name })
     }
@@ -106,37 +106,43 @@ Page({
   /** 从云端加载角色列表 */
   async loadCharacters() {
     try {
-      const list = await getCharacterList()
+      var list = await getCharacterList()
 
       // 合并权重摘要信息
-      const characterList = list.map(char => {
+      var characterList = list.map(function (char) {
         // 尝试从本地缓存获取权重数据
-        let topSubs = []
-        let gradeSummary = null
+        var topSubs = []
+        var gradeSummary = null
 
-        const cached = wx.getStorageSync(`char_${char.name}`)
+        var cached = wx.getStorageSync('char_' + char.name)
         if (cached && cached.data && cached.data.weights) {
-          const subProps = cached.data.weights.sub_props || {}
-          topSubs = Object.entries(subProps)
-            .filter(([, v]) => v > 0)
-            .sort(([, a], [, b]) => b - a)
+          var subProps = cached.data.weights.sub_props || {}
+          topSubs = Object.keys(subProps)
+            .filter(function (key) { return subProps[key] > 0 })
+            .sort(function (a, b) { return subProps[b] - subProps[a] })
             .slice(0, 3)
-            .map(([name, weight]) => ({
-              name,
-              cn: STAT_CN[name] || name,
-              weight: weight.toFixed(2),
-            }))
+            .map(function (name) {
+              return {
+                name: name,
+                cn: STAT_CN[name] || name,
+                weight: subProps[name].toFixed(2),
+              }
+            })
 
-          const grade = cached.data.weights.grade
+          var grade = cached.data.weights.grade
           if (grade) {
             gradeSummary = {
-              s: (grade.valid_s || []).map(s => STAT_CN[s] || s).join('/'),
-              a: (grade.valid_a || []).map(s => STAT_CN[s] || s).join('/'),
+              s: (grade.valid_s || []).map(function (s) { return STAT_CN[s] || s }).join('/'),
+              a: (grade.valid_a || []).map(function (s) { return STAT_CN[s] || s }).join('/'),
             }
           }
         }
 
-        return { ...char, topSubs, gradeSummary, elemClass: ELEM_CLASS_MAP[char.element] || '' }
+        return Object.assign({}, char, {
+          topSubs: topSubs,
+          gradeSummary: gradeSummary,
+          elemClass: ELEM_CLASS_MAP[char.element] || '',
+        })
       })
 
       this.setData({
@@ -161,45 +167,45 @@ Page({
     try {
       await getCharacterDetail(name)
     } catch (e) {
-      console.warn(`预加载 ${name} 失败:`, e)
+      console.warn('预加载 ' + name + ' 失败:', e)
     }
   },
 
   /** 搜索输入 */
   onSearchInput(e) {
-    const search = e.detail.value.trim()
-    const filtered = search
-      ? this.data.characterList.filter(c =>
-          c.name.includes(search) || c.weaponType.includes(search) || c.element.includes(search)
-        )
+    var search = e.detail.value.trim()
+    var filtered = search
+      ? this.data.characterList.filter(function (c) {
+          return c.name.includes(search) || c.weaponType.includes(search) || c.element.includes(search)
+        })
       : this.data.characterList
 
-    this.setData({ search, filtered })
+    this.setData({ search: search, filtered: filtered })
   },
 
   /** 选择角色 */
   async onSelectChar(e) {
-    const name = e.currentTarget.dataset.name
+    var name = e.currentTarget.dataset.name
     this.setData({ selectedChar: name })
 
     // 加载角色详情
     wx.showLoading({ title: '加载中...' })
     try {
-      const detail = await getCharacterDetail(name)
+      var detail = await getCharacterDetail(name)
       wx.hideLoading()
 
       // 存入全局供其他页面使用
-      const app = getApp()
+      var app = getApp()
       app.globalData.selectedCharacter = detail
 
       // 更新该角色的权重摘要
       this.refreshCharSummary(name, detail)
 
-      wx.showToast({ title: `已选择 ${name}`, icon: 'none', duration: 1000 })
+      wx.showToast({ title: '已选择 ' + name, icon: 'none', duration: 1000 })
       wx.switchTab({ url: '/pages/calculator/calculator' })
     } catch (e) {
       wx.hideLoading()
-      console.error(`加载 ${name} 失败:`, e)
+      console.error('加载 ' + name + ' 失败:', e)
       wx.showToast({ title: '加载失败', icon: 'none' })
     }
   },
@@ -208,31 +214,33 @@ Page({
   refreshCharSummary(name, detail) {
     if (!detail || !detail.weights) return
 
-    const subProps = detail.weights.sub_props || {}
-    const topSubs = Object.entries(subProps)
-      .filter(([, v]) => v > 0)
-      .sort(([, a], [, b]) => b - a)
+    var subProps = detail.weights.sub_props || {}
+    var topSubs = Object.keys(subProps)
+      .filter(function (key) { return subProps[key] > 0 })
+      .sort(function (a, b) { return subProps[b] - subProps[a] })
       .slice(0, 3)
-      .map(([key, weight]) => ({
-        name: key,
-        cn: STAT_CN[key] || key,
-        weight: weight.toFixed(2),
-      }))
+      .map(function (key) {
+        return {
+          name: key,
+          cn: STAT_CN[key] || key,
+          weight: subProps[key].toFixed(2),
+        }
+      })
 
-    const grade = detail.weights.grade
-    const gradeSummary = grade ? {
-      s: (grade.valid_s || []).map(s => STAT_CN[s] || s).join('/'),
-      a: (grade.valid_a || []).map(s => STAT_CN[s] || s).join('/'),
+    var grade = detail.weights.grade
+    var gradeSummary = grade ? {
+      s: (grade.valid_s || []).map(function (s) { return STAT_CN[s] || s }).join('/'),
+      a: (grade.valid_a || []).map(function (s) { return STAT_CN[s] || s }).join('/'),
     } : null
 
     // 更新列表中对应角色的数据
-    const idx = this.data.characterList.findIndex(c => c.name === name)
+    var idx = this.data.characterList.findIndex(function (c) { return c.name === name })
     if (idx >= 0) {
-      const key = `characterList[${idx}]`
-      this.setData({
-        [`${key}.topSubs`]: topSubs,
-        [`${key}.gradeSummary`]: gradeSummary,
-      })
+      var key = 'characterList[' + idx + ']'
+      var patch = {}
+      patch[key + '.topSubs'] = topSubs
+      patch[key + '.gradeSummary'] = gradeSummary
+      this.setData(patch)
     }
   },
 })

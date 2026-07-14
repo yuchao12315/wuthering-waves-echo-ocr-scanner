@@ -1,23 +1,23 @@
 // services/ad-quota-service.js
 // 本地广告配额管理。正式发布前把 AD_UNIT_ID 替换为真实激励视频广告位 ID。
 
-const STORAGE_KEY = 'adQuota'
-const AD_UNIT_ID = ''
+var STORAGE_KEY = 'adQuota'
+var AD_UNIT_ID = ''
 
-const DAILY_CALCULATE_FREE = 3
-const REWARD_CALCULATE_COUNT = 5
-const REWARD_ADVANCED_THRESHOLD_COUNT = 1
-const UNLIMITED_QUOTA = 9999
+var DAILY_CALCULATE_FREE = 3
+var REWARD_CALCULATE_COUNT = 5
+var REWARD_ADVANCED_THRESHOLD_COUNT = 1
+var UNLIMITED_QUOTA = 9999
 
-let rewardedVideoAd = null
-let loadingReward = false
+var rewardedVideoAd = null
+var loadingReward = false
 
 function todayKey() {
-  const now = new Date()
-  const y = now.getFullYear()
-  const m = String(now.getMonth() + 1)
-  const d = String(now.getDate())
-  return `${y}-${m.length < 2 ? '0' + m : m}-${d.length < 2 ? '0' + d : d}`
+  var now = new Date()
+  var y = now.getFullYear()
+  var m = String(now.getMonth() + 1)
+  var d = String(now.getDate())
+  return y + '-' + (m.length < 2 ? '0' + m : m) + '-' + (d.length < 2 ? '0' + d : d)
 }
 
 function defaultQuota() {
@@ -33,7 +33,7 @@ function isAdQuotaEnabled() {
 }
 
 function normalizeQuota(raw) {
-  const fresh = defaultQuota()
+  var fresh = defaultQuota()
   if (!raw || raw.date !== fresh.date) return fresh
   return Object.assign({}, fresh, raw, {
     calculateLeft: Math.max(0, Number(raw.calculateLeft) || 0),
@@ -50,7 +50,7 @@ function getQuota() {
 }
 
 function saveQuota(quota) {
-  const normalized = normalizeQuota(quota)
+  var normalized = normalizeQuota(quota)
   try {
     wx.setStorageSync(STORAGE_KEY, normalized)
   } catch (e) {}
@@ -71,7 +71,7 @@ function getQuotaSummary() {
 function useCalculateQuota() {
   if (!isAdQuotaEnabled()) return { ok: true, quota: getQuotaSummary() }
 
-  const quota = getQuota()
+  var quota = getQuota()
   if (quota.calculateLeft <= 0) return { ok: false, quota }
   quota.calculateLeft -= 1
   return { ok: true, quota: saveQuota(quota) }
@@ -80,20 +80,20 @@ function useCalculateQuota() {
 function useAdvancedThresholdQuota() {
   if (!isAdQuotaEnabled()) return { ok: true, quota: getQuotaSummary() }
 
-  const quota = getQuota()
+  var quota = getQuota()
   if (quota.advancedThresholdLeft <= 0) return { ok: false, quota }
   quota.advancedThresholdLeft -= 1
   return { ok: true, quota: saveQuota(quota) }
 }
 
 function addCalculateReward() {
-  const quota = getQuota()
+  var quota = getQuota()
   quota.calculateLeft += REWARD_CALCULATE_COUNT
   return saveQuota(quota)
 }
 
 function addAdvancedThresholdReward() {
-  const quota = getQuota()
+  var quota = getQuota()
   quota.advancedThresholdLeft += REWARD_ADVANCED_THRESHOLD_COUNT
   return saveQuota(quota)
 }
@@ -101,20 +101,20 @@ function addAdvancedThresholdReward() {
 function refundAdvancedThresholdQuota() {
   if (!isAdQuotaEnabled()) return getQuotaSummary()
 
-  const quota = getQuota()
+  var quota = getQuota()
   quota.advancedThresholdLeft += 1
   return saveQuota(quota)
 }
 
 function showConfirm(title, content) {
-  return new Promise(resolve => {
+  return new Promise(function (resolve) {
     wx.showModal({
-      title,
-      content,
+      title: title,
+      content: content,
       confirmText: '看视频',
       cancelText: '取消',
-      success: res => resolve(!!res.confirm),
-      fail: () => resolve(false),
+      success: function (res) { resolve(!!res.confirm) },
+      fail: function () { resolve(false) },
     })
   })
 }
@@ -123,7 +123,7 @@ function getRewardedVideoAd() {
   if (!AD_UNIT_ID || !wx.createRewardedVideoAd) return null
   if (!rewardedVideoAd) {
     rewardedVideoAd = wx.createRewardedVideoAd({ adUnitId: AD_UNIT_ID })
-    rewardedVideoAd.onError(err => {
+    rewardedVideoAd.onError(function (err) {
       console.warn('激励视频广告错误:', err)
     })
   }
@@ -131,7 +131,7 @@ function getRewardedVideoAd() {
 }
 
 function showRewardedVideo() {
-  const ad = getRewardedVideoAd()
+  var ad = getRewardedVideoAd()
 
   if (!ad) {
     console.warn('未配置激励视频广告位 ID，开发环境直接发放广告奖励')
@@ -141,32 +141,34 @@ function showRewardedVideo() {
   if (loadingReward) return Promise.resolve(false)
   loadingReward = true
 
-  return new Promise(resolve => {
-    let settled = false
-    const finish = ok => {
+  return new Promise(function (resolve) {
+    var settled = false
+    var finish = function (ok) {
       if (settled) return
       settled = true
       loadingReward = false
       ad.offClose(onClose)
       resolve(ok)
     }
-    const onClose = res => {
+    var onClose = function (res) {
       finish(!!(res && res.isEnded))
     }
 
     ad.onClose(onClose)
-    ad.show().catch(() => ad.load().then(() => ad.show())).catch(() => finish(false))
+    ad.show().catch(function () {
+      return ad.load().then(function () { return ad.show() })
+    }).catch(function () { finish(false) })
   })
 }
 
 async function unlockCalculateByAd() {
   if (!isAdQuotaEnabled()) return { ok: true, quota: getQuotaSummary() }
 
-  const confirmed = await showConfirm('计算次数已用完', `看完视频可解锁 ${REWARD_CALCULATE_COUNT} 次基础计算。`)
+  var confirmed = await showConfirm('计算次数已用完', '看完视频可解锁 ' + REWARD_CALCULATE_COUNT + ' 次基础计算。')
   if (!confirmed) return { ok: false, quota: getQuota() }
 
   wx.showLoading({ title: '加载广告...' })
-  const completed = await showRewardedVideo()
+  var completed = await showRewardedVideo()
   wx.hideLoading()
 
   if (!completed) {
@@ -174,19 +176,19 @@ async function unlockCalculateByAd() {
     return { ok: false, quota: getQuota() }
   }
 
-  const quota = addCalculateReward()
-  wx.showToast({ title: `已解锁 ${REWARD_CALCULATE_COUNT} 次`, icon: 'none' })
-  return { ok: true, quota }
+  var quota = addCalculateReward()
+  wx.showToast({ title: '已解锁 ' + REWARD_CALCULATE_COUNT + ' 次', icon: 'none' })
+  return { ok: true, quota: quota }
 }
 
 async function unlockAdvancedThresholdByAd() {
   if (!isAdQuotaEnabled()) return { ok: true, quota: getQuotaSummary() }
 
-  const confirmed = await showConfirm('高级筛选需解锁', '自定义暴击率/共鸣效率阈值每次看视频解锁 1 次使用。')
+  var confirmed = await showConfirm('高级筛选需解锁', '自定义暴击率/共鸣效率阈值每次看视频解锁 1 次使用。')
   if (!confirmed) return { ok: false, quota: getQuota() }
 
   wx.showLoading({ title: '加载广告...' })
-  const completed = await showRewardedVideo()
+  var completed = await showRewardedVideo()
   wx.hideLoading()
 
   if (!completed) {
@@ -194,9 +196,9 @@ async function unlockAdvancedThresholdByAd() {
     return { ok: false, quota: getQuota() }
   }
 
-  const quota = addAdvancedThresholdReward()
+  var quota = addAdvancedThresholdReward()
   wx.showToast({ title: '已解锁高级筛选 1 次', icon: 'none' })
-  return { ok: true, quota }
+  return { ok: true, quota: quota }
 }
 
 module.exports = {

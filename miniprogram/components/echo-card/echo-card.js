@@ -1,7 +1,7 @@
 // components/echo-card/echo-card.js
-import SONATA_EFFECTS from '../../data/sonata-effects.json'
+var SONATA_EFFECTS = require('../../data/sonata-effects.js')
 
-const STAT_DISPLAY = {
+var STAT_DISPLAY = {
   FLAT_ATK: '攻击', ATK_PCT: '攻击%', FLAT_HP: '生命', HP_PCT: '生命%',
   FLAT_DEF: '防御', DEF_PCT: '防御%', CRIT_RATE: '暴击率', CRIT_DMG: '暴击伤害',
   ENERGY_REGEN: '共鸣效率', ELEM_DMG: '属性伤害', HEAL_BONUS: '治疗加成',
@@ -9,12 +9,13 @@ const STAT_DISPLAY = {
   RESONANCE_SKILL_DMG: '共鸣技能伤害', RESONANCE_LIBERATION_DMG: '共鸣解放伤害',
 }
 
-const SONATA_NAMES = {}
-for (const [key, val] of Object.entries(SONATA_EFFECTS)) {
+var SONATA_NAMES = {}
+Object.keys(SONATA_EFFECTS).forEach(function (key) {
+  var val = SONATA_EFFECTS[key]
   SONATA_NAMES[key] = val.name
-}
+})
 
-const NM_SECOND_LABELS = {
+var NM_SECOND_LABELS = {
   resonanceSkillDmg: '共鸣技能伤害', resonanceLiberationDmg: '共鸣解放伤害',
   normalAtkDmg: '普攻伤害', heavyAtkDmg: '重击伤害',
   phantomDmg: '声骸技能伤害', coordinatedDmg: '协同攻击伤害',
@@ -32,16 +33,16 @@ function getGrade(score) {
 
 function formatNightmare(nm) {
   if (!nm) return ''
-  let parts = []
+  var parts = []
   if (nm.elemType && nm.elemDmg) {
-    parts.push(`${nm.elemType}伤害+${(nm.elemDmg * 100).toFixed(0)}%`)
+    parts.push(nm.elemType + '伤害+' + (nm.elemDmg * 100).toFixed(0) + '%')
   }
   if (nm.secondValue > 0) {
-    const label = NM_SECOND_LABELS[nm.secondType] || nm.secondType
-    parts.push(`${label}+${(nm.secondValue * 100).toFixed(0)}%`)
+    var label = NM_SECOND_LABELS[nm.secondType] || nm.secondType
+    parts.push(label + '+' + (nm.secondValue * 100).toFixed(0) + '%')
   }
   if (nm.requiredCharacters) {
-    parts.push(`(限${nm.requiredCharacters.join('/')})`)
+    parts.push('(限' + nm.requiredCharacters.join('/') + ')')
   }
   return parts.join(' ')
 }
@@ -57,37 +58,47 @@ Component({
     'echo, calc, showScore': function (echo, calc, showScore) {
       if (!echo || !echo.cost) return
 
-      const sonataName = SONATA_NAMES[echo.sonata] || echo.sonata || ''
-      const mainLabel = echo.mainStat ? (STAT_DISPLAY[echo.mainStat.type] || echo.mainStat.type) : ''
-      const secLabel = echo.secondaryStat ? (STAT_DISPLAY[echo.secondaryStat.type] || echo.secondaryStat.type) : ''
-      const subLabels = (echo.substats || []).map(s => `${STAT_DISPLAY[s.type] || s.type} ${s.value}`)
-      const nightmareLabel = formatNightmare(echo.nightmareBonus)
+      var sonataName = SONATA_NAMES[echo.sonata] || echo.sonata || ''
+      var mainLabel = echo.mainStat ? (STAT_DISPLAY[echo.mainStat.type] || echo.mainStat.type) : ''
+      var secLabel = echo.secondaryStat ? (STAT_DISPLAY[echo.secondaryStat.type] || echo.secondaryStat.type) : ''
+      var subLabels = (echo.substats || []).map(function (s) { return (STAT_DISPLAY[s.type] || s.type) + ' ' + s.value })
+      var nightmareLabel = formatNightmare(echo.nightmareBonus)
 
       // 评分
-      let score = null
-      let scoreDisplay = ''
-      let grade = ''
-      let gradeClass = ''
-      let detailed = false
-      let details = []
-      let scoreMaxDisplay = ''
-      let totalDisplay = ''
+      var score = null
+      var scoreDisplay = ''
+      var grade = ''
+      var gradeClass = ''
+      var detailed = false
+      var details = []
+      var scoreMaxDisplay = ''
+      var totalDisplay = ''
 
       if (showScore && calc && echo.mainStat) {
         // TODO: 接入 scoring.ts 的 scoreEcho / scoreEchoDetailed
         // 目前用简单估算
-        const estimated = 20 + Math.random() * 25
+        var estimated = 20 + Math.random() * 25
         score = estimated
         scoreDisplay = estimated.toFixed(2)
-        const g = getGrade(estimated)
+        var g = getGrade(estimated)
         grade = g.grade
         gradeClass = g.gradeClass
       }
 
       this.setData({
-        sonataName, mainLabel, secLabel, subLabels, nightmareLabel,
-        score, scoreDisplay, grade, gradeClass,
-        detailed, details, scoreMaxDisplay, totalDisplay,
+        sonataName: sonataName,
+        mainLabel: mainLabel,
+        secLabel: secLabel,
+        subLabels: subLabels,
+        nightmareLabel: nightmareLabel,
+        score: score,
+        scoreDisplay: scoreDisplay,
+        grade: grade,
+        gradeClass: gradeClass,
+        detailed: detailed,
+        details: details,
+        scoreMaxDisplay: scoreMaxDisplay,
+        totalDisplay: totalDisplay,
       })
     }
   },
