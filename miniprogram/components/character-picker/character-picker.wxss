@@ -1,0 +1,135 @@
+/* components/character-picker/character-picker.wxss */
+
+.picker-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 200;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.46);
+  padding: 24rpx;
+}
+
+.picker-panel {
+  width: 100%;
+  max-height: 78vh;
+  background: #ffffff;
+  border: 1rpx solid #e1e7f0;
+  border-radius: 18rpx;
+  padding: 22rpx;
+  box-shadow: 0 18rpx 46rpx rgba(24, 32, 51, 0.18);
+}
+
+.picker-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16rpx;
+}
+
+.picker-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #182033;
+}
+
+.picker-close {
+  width: 56rpx;
+  height: 56rpx;
+  line-height: 52rpx;
+  text-align: center;
+  border-radius: 50%;
+  background: #f1f5f9;
+  color: #667085;
+  font-size: 40rpx;
+}
+
+.picker-search {
+  width: 100%;
+  height: 72rpx;
+  background: #f8fafc;
+  border: 1rpx solid #dbe3ef;
+  border-radius: 10rpx;
+  padding: 0 22rpx;
+  font-size: 26rpx;
+  color: #182033;
+  margin-bottom: 16rpx;
+}
+
+.picker-placeholder {
+  color: #98a2b3;
+}
+
+.picker-list {
+  max-height: 58vh;
+}
+
+.picker-empty {
+  text-align: center;
+  color: #7a8499;
+  font-size: 26rpx;
+  padding: 72rpx 0;
+}
+
+.picker-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14rpx;
+  min-height: 104rpx;
+  padding: 16rpx 4rpx;
+  border-bottom: 1rpx solid #edf2f7;
+}
+
+.picker-item-active {
+  background: #f8fbff;
+}
+
+.picker-main {
+  min-width: 0;
+}
+
+.picker-name {
+  display: block;
+  font-size: 29rpx;
+  font-weight: 700;
+  color: #182033;
+  margin-bottom: 10rpx;
+}
+
+.picker-tags {
+  display: flex;
+  gap: 8rpx;
+  flex-wrap: wrap;
+}
+
+.picker-tag,
+.picker-selected {
+  min-height: 34rpx;
+  line-height: 34rpx;
+  padding: 0 10rpx;
+  border-radius: 6rpx;
+  font-size: 20rpx;
+}
+
+.picker-weapon {
+  background: #eef2f7;
+  color: #526071;
+}
+
+.picker-selected {
+  color: #2563eb;
+  background: #eff6ff;
+  white-space: nowrap;
+}
+
+.elem-fire { background: #fee2e2; color: #b42318; }
+.elem-electric { background: #ede9fe; color: #5b21b6; }
+.elem-wind { background: #dcfce7; color: #166534; }
+.elem-ice { background: #dbeafe; color: #1d4ed8; }
+.elem-dark { background: #f3e8ff; color: #7e22ce; }
+.elem-light { background: #fef3c7; color: #92400e; }

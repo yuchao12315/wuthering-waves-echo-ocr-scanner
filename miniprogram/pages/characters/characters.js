@@ -1,5 +1,69 @@
 // pages/characters/characters.js
-const { getCharacterList, getCharacterDetail } = require('../../services/data-service.js')
+const CHARACTER_BASE = require('../../data/characters-base.js')
+const CHARACTER_WEIGHTS = require('../../data/character-weights.js')
+
+const CACHE_TTL = 7 * 24 * 3600 * 1000
+
+function buildCharacterList() {
+  return Object.keys(CHARACTER_BASE)
+    .map(name => {
+      const base = CHARACTER_BASE[name]
+      const weights = CHARACTER_WEIGHTS[name]
+      return {
+        name,
+        element: base.element,
+        weaponType: base.weaponType,
+        hasWeights: !!weights,
+      }
+    })
+    .filter(char => char.element && char.weaponType && char.hasWeights)
+    .sort((a, b) => a.name.localeCompare(b.name, 'zh-Hans-CN'))
+}
+
+function getCharacterList() {
+  return Promise.resolve(buildCharacterList())
+}
+
+function getCharacterDetail(name) {
+  if (!name) return Promise.reject(new Error('缺少角色名称'))
+
+  const app = getApp()
+  if (app.globalData.characterCache && app.globalData.characterCache[name]) {
+    return Promise.resolve(app.globalData.characterCache[name])
+  }
+
+  try {
+    const cacheKey = 'char_' + name
+    const cached = wx.getStorageSync(cacheKey)
+    if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
+      if (!app.globalData.characterCache) app.globalData.characterCache = {}
+      app.globalData.characterCache[name] = cached.data
+      return Promise.resolve(cached.data)
+    }
+  } catch (e) {}
+
+  const base = CHARACTER_BASE[name]
+  const weights = CHARACTER_WEIGHTS[name]
+  if (!base || !weights) return Promise.reject(new Error('缺少角色数据'))
+
+  const detail = {
+    name,
+    element: base.element,
+    weaponType: base.weaponType,
+    base,
+    weights,
+  }
+
+  if (!app.globalData.characterCache) app.globalData.characterCache = {}
+  app.globalData.characterCache[name] = detail
+
+  try {
+    wx.setStorageSync('char_' + name, { data: detail, timestamp: Date.now() })
+  } catch (e) {}
+
+  return Promise.resolve(detail)
+}
+
 // 词条类型中文映射
 const STAT_CN = {
   'ATK_PCT': '攻击%', 'FLAT_ATK': '攻击', 'CRIT_RATE': '暴击率', 'CRIT_DMG': '暴击伤害',
@@ -29,6 +93,14 @@ Page({
 
   onLoad() {
     this.loadCharacters()
+  },
+
+  onShow() {
+    const app = getApp()
+    const selected = app.globalData.selectedCharacter
+    if (selected && selected.name) {
+      this.setData({ selectedChar: selected.name })
+    }
   },
 
   /** 从云端加载角色列表 */
@@ -124,6 +196,7 @@ Page({
       this.refreshCharSummary(name, detail)
 
       wx.showToast({ title: `已选择 ${name}`, icon: 'none', duration: 1000 })
+      wx.switchTab({ url: '/pages/calculator/calculator' })
     } catch (e) {
       wx.hideLoading()
       console.error(`加载 ${name} 失败:`, e)

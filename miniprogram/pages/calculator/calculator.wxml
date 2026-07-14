@@ -7,7 +7,7 @@
       <text class="label">当前角色:</text>
       <text class="char-name" wx:if="{{selectedChar}}">{{selectedChar.name}}</text>
       <text class="char-name dim" wx:else>未选择</text>
-      <navigator url="/pages/characters/characters" class="link">切换</navigator>
+      <view class="link" bindtap="openCharacterPicker">切换</view>
     </view>
   </view>
 
@@ -246,4 +246,11 @@
       </scroll-view>
     </view>
   </view>
+
+  <character-picker
+    visible="{{showCharacterPicker}}"
+    selected-name="{{selectedCharName}}"
+    bindselect="onCharacterPicked"
+    bindclose="closeCharacterPicker"
+  />
 </view>

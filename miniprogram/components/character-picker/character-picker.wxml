@@ -1,0 +1,39 @@
+<!--components/character-picker/character-picker.wxml-->
+<view wx:if="{{visible}}" class="picker-mask" bindtap="onMaskTap">
+  <view class="picker-panel" catchtap="noop">
+    <view class="picker-header">
+      <text class="picker-title">选择角色</text>
+      <text class="picker-close" bindtap="onClose">×</text>
+    </view>
+
+    <input
+      class="picker-search"
+      value="{{search}}"
+      bindinput="onSearchInput"
+      placeholder="搜索角色 / 武器 / 属性"
+      placeholder-class="picker-placeholder"
+    />
+
+    <scroll-view scroll-y class="picker-list">
+      <view wx:if="{{filtered.length === 0}}" class="picker-empty">
+        <text>无匹配角色</text>
+      </view>
+      <view
+        wx:for="{{filtered}}"
+        wx:key="name"
+        class="picker-item {{selectedName === item.name ? 'picker-item-active' : ''}}"
+        data-name="{{item.name}}"
+        bindtap="onSelect"
+      >
+        <view class="picker-main">
+          <text class="picker-name">{{item.name}}</text>
+          <view class="picker-tags">
+            <text class="picker-tag {{item.elemClass}}">{{item.element}}</text>
+            <text class="picker-tag picker-weapon">{{item.weaponType}}</text>
+          </view>
+        </view>
+        <text class="picker-selected" wx:if="{{selectedName === item.name}}">当前</text>
+      </view>
+    </scroll-view>
+  </view>
+</view>

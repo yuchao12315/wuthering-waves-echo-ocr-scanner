@@ -1,5 +1,7 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "character-picker": "/components/character-picker/character-picker"
+  },
   "navigationBarTitleText": "声骸管理",
   "navigationBarBackgroundColor": "#18181b",
   "navigationBarTextStyle": "white"

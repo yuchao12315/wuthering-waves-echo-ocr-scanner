@@ -2,7 +2,10 @@
 <view class="page">
   <!-- 顶部操作栏 -->
   <view class="toolbar">
-    <navigator url="/pages/characters/characters" class="link">切换角色</navigator>
+    <view class="link" bindtap="openCharacterPicker">
+      <text wx:if="{{selectedCharName}}">切换角色: {{selectedCharName}}</text>
+      <text wx:else>切换角色</text>
+    </view>
     <view class="link" bindtap="onImport">导入JSON</view>
     <view class="link" bindtap="onExport">导出JSON</view>
     <view class="link link-danger" wx:if="{{echoes.length > 0}}" bindtap="onClearAll">清空全部</view>
@@ -131,4 +134,11 @@
   <view wx:elif="{{filteredEchoes.length === 0}}" class="empty">
     <text>当前筛选条件下无声骸</text>
   </view>
+
+  <character-picker
+    visible="{{showCharacterPicker}}"
+    selected-name="{{selectedCharName}}"
+    bindselect="onCharacterPicked"
+    bindclose="closeCharacterPicker"
+  />
 </view>

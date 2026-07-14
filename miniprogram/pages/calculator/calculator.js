@@ -45,8 +45,10 @@ Page({
   data: {
     // 角色
     selectedChar: null,
+    selectedCharName: '',
     hasCharBase: false,
     hasChainEffects: false,
+    showCharacterPicker: false,
 
     // 排序模式
     rankMode: 'score',
@@ -155,6 +157,7 @@ Page({
 
       this.setData({
         selectedChar: { name: detail.name, element: detail.element, weaponType: detail.weaponType },
+        selectedCharName: detail.name,
         hasCharBase: true,
         hasChainEffects: (detail.base.chainEffects || []).length > 0,
         weaponNames,
@@ -186,6 +189,20 @@ Page({
   },
 
   // ====== 事件处理 ======
+
+  openCharacterPicker() {
+    this.setData({ showCharacterPicker: true })
+  },
+
+  closeCharacterPicker() {
+    this.setData({ showCharacterPicker: false })
+  },
+
+  onCharacterPicked(e) {
+    const detail = e.detail.character
+    this.setData({ showCharacterPicker: false })
+    this.setCharacter(detail)
+  },
 
   setRankMode(e) {
     const mode = e.currentTarget.dataset.mode

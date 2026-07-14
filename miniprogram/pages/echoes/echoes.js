@@ -1,6 +1,6 @@
 // pages/echoes/echoes.js
-import SONATA_EFFECTS from '../../data/sonata-effects.json'
-import { getNightmareBonus } from '../../data/nightmare-bonuses'
+const SONATA_EFFECTS = require('../../data/sonata-effects.js')
+const { getNightmareBonus } = require('../../data/nightmare-bonuses.js')
 
 const STAT_DISPLAY = {
   FLAT_ATK: '攻击', ATK_PCT: '攻击%', FLAT_HP: '生命', HP_PCT: '生命%',
@@ -68,6 +68,8 @@ Page({
     // 导入
     importMsg: '',
     importMsgType: '',
+    selectedCharName: '',
+    showCharacterPicker: false,
   },
 
   _calc: null,
@@ -81,7 +83,26 @@ Page({
     const app = getApp()
     if (app.globalData.selectedCharacter && app.globalData.selectedCharacter.weights) {
       this._calc = app.globalData.selectedCharacter.weights
+      this.setData({ selectedCharName: app.globalData.selectedCharacter.name })
     }
+    this.loadEchoes()
+  },
+
+  openCharacterPicker() {
+    this.setData({ showCharacterPicker: true })
+  },
+
+  closeCharacterPicker() {
+    this.setData({ showCharacterPicker: false })
+  },
+
+  onCharacterPicked(e) {
+    const detail = e.detail.character
+    this._calc = detail.weights
+    this.setData({
+      selectedCharName: detail.name,
+      showCharacterPicker: false,
+    })
     this.loadEchoes()
   },
 
