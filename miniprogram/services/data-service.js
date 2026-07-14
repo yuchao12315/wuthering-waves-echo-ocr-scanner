@@ -1,18 +1,18 @@
-// services/data-service.ts
+// services/data-service.js
 // 本地静态数据优先，Storage/内存缓存加速；云函数仅作为可选兜底。
 
-import CHARACTER_BASE from '../data/characters-base.json'
-import CHARACTER_WEIGHTS from '../data/character-weights.json'
-import WEAPONS from '../data/weapons.json'
+const CHARACTER_BASE = require('../data/characters-base.json')
+const CHARACTER_WEIGHTS = require('../data/character-weights.json')
+const WEAPONS = require('../data/weapons.json')
 
 const CACHE_TTL = 7 * 24 * 3600 * 1000
 
 const app = getApp()
-const characterBaseMap = CHARACTER_BASE as Record<string, any>
-const characterWeightsMap = CHARACTER_WEIGHTS as Record<string, any>
-const weapons = WEAPONS as any[]
+const characterBaseMap = CHARACTER_BASE
+const characterWeightsMap = CHARACTER_WEIGHTS
+const weapons = WEAPONS
 
-function readFreshStorage(key: string) {
+function readFreshStorage(key) {
   try {
     const cached = wx.getStorageSync(key)
     if (cached && Date.now() - cached.timestamp < CACHE_TTL) return cached.data
@@ -20,7 +20,7 @@ function readFreshStorage(key: string) {
   return null
 }
 
-function writeStorage(key: string, data: any) {
+function writeStorage(key, data) {
   try {
     wx.setStorageSync(key, { data, timestamp: Date.now() })
   } catch (e) {}
@@ -30,7 +30,7 @@ function canUseCloud() {
   return !!(wx.cloud && typeof wx.cloud.callFunction === 'function')
 }
 
-function callCloudFunction(name: string, data?: Record<string, any>) {
+function callCloudFunction(name, data) {
   if (!canUseCloud()) return Promise.reject(new Error('未启用云开发'))
   return wx.cloud.callFunction({ name, data: data || {} }).then(res => {
     if (res.result && res.result.code === 0) return res.result.data
@@ -39,8 +39,9 @@ function callCloudFunction(name: string, data?: Record<string, any>) {
 }
 
 function buildCharacterList() {
-  return Object.entries(characterBaseMap)
-    .map(([name, base]) => {
+  return Object.keys(characterBaseMap)
+    .map(name => {
+      const base = characterBaseMap[name]
       const weight = characterWeightsMap[name]
       return {
         name,
@@ -53,7 +54,7 @@ function buildCharacterList() {
     .sort((a, b) => a.name.localeCompare(b.name, 'zh-Hans-CN'))
 }
 
-function buildCharacterDetail(name: string) {
+function buildCharacterDetail(name) {
   const base = characterBaseMap[name]
   const weights = characterWeightsMap[name]
   if (!base) throw new Error(`缺少角色基础数据: ${name}`)
@@ -68,10 +69,6 @@ function buildCharacterDetail(name: string) {
   }
 }
 
-/**
- * 获取角色列表。
- * @returns {Promise<Array<{name, element, weaponType}>>}
- */
 function getCharacterList() {
   if (app.globalData.characterList) {
     return Promise.resolve(app.globalData.characterList)
@@ -97,12 +94,7 @@ function getCharacterList() {
   })
 }
 
-/**
- * 获取单个角色的完整数据（base + weights）。
- * @param {string} name 角色名
- * @returns {Promise<Object>} { name, element, weaponType, base, weights }
- */
-function getCharacterDetail(name: string) {
+function getCharacterDetail(name) {
   if (!name) return Promise.reject(new Error('缺少角色名称'))
 
   if (app.globalData.characterCache && app.globalData.characterCache[name]) {
@@ -123,7 +115,7 @@ function getCharacterDetail(name: string) {
     app.globalData.characterCache[name] = detail
     writeStorage(cacheKey, detail)
     return Promise.resolve(detail)
-  } catch {
+  } catch (e) {
     return callCloudFunction('getCharacterDetail', { name }).then(data => {
       if (!app.globalData.characterCache) app.globalData.characterCache = {}
       app.globalData.characterCache[name] = data
@@ -133,12 +125,7 @@ function getCharacterDetail(name: string) {
   }
 }
 
-/**
- * 获取武器列表（按类型过滤）。
- * @param {string} [weaponType] 武器类型，不传返回全部
- * @returns {Promise<Array>}
- */
-function getWeapons(weaponType?: string) {
+function getWeapons(weaponType) {
   const cacheKey = weaponType ? 'weapons_' + weaponType : 'weapons_all'
 
   if (app.globalData.weaponsCache && app.globalData.weaponsCache[cacheKey]) {
@@ -168,4 +155,8 @@ function getWeapons(weaponType?: string) {
   })
 }
 
-export { getCharacterList, getCharacterDetail, getWeapons }
+module.exports = {
+  getCharacterList,
+  getCharacterDetail,
+  getWeapons,
+}

@@ -15,9 +15,9 @@ let loadingReward = false
 function todayKey() {
   const now = new Date()
   const y = now.getFullYear()
-  const m = String(now.getMonth() + 1).padStart(2, '0')
-  const d = String(now.getDate()).padStart(2, '0')
-  return `${y}-${m}-${d}`
+  const m = String(now.getMonth() + 1)
+  const d = String(now.getDate())
+  return `${y}-${m.length < 2 ? '0' + m : m}-${d.length < 2 ? '0' + d : d}`
 }
 
 function defaultQuota() {
@@ -35,12 +35,10 @@ function isAdQuotaEnabled() {
 function normalizeQuota(raw) {
   const fresh = defaultQuota()
   if (!raw || raw.date !== fresh.date) return fresh
-  return {
-    ...fresh,
-    ...raw,
+  return Object.assign({}, fresh, raw, {
     calculateLeft: Math.max(0, Number(raw.calculateLeft) || 0),
     advancedThresholdLeft: Math.max(0, Number(raw.advancedThresholdLeft) || 0),
-  }
+  })
 }
 
 function getQuota() {
@@ -61,15 +59,13 @@ function saveQuota(quota) {
 
 function getQuotaSummary() {
   if (!isAdQuotaEnabled()) {
-    return {
-      ...defaultQuota(),
+    return Object.assign({}, defaultQuota(), {
       unlimited: true,
-    }
+    })
   }
-  return {
-    ...getQuota(),
+  return Object.assign({}, getQuota(), {
     unlimited: false,
-  }
+  })
 }
 
 function useCalculateQuota() {
@@ -203,7 +199,7 @@ async function unlockAdvancedThresholdByAd() {
   return { ok: true, quota }
 }
 
-export {
+module.exports = {
   isAdQuotaEnabled,
   getQuotaSummary,
   useCalculateQuota,

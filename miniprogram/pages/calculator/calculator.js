@@ -1,6 +1,6 @@
 // pages/calculator/calculator.js
-import { getCharacterDetail, getWeapons } from '../../services/data-service'
-import {
+const { getCharacterDetail, getWeapons } = require('../../services/data-service')
+const {
   isAdQuotaEnabled,
   getQuotaSummary,
   useCalculateQuota,
@@ -8,10 +8,10 @@ import {
   refundAdvancedThresholdQuota,
   unlockCalculateByAd,
   unlockAdvancedThresholdByAd,
-} from '../../services/ad-quota-service'
+} = require('../../services/ad-quota-service')
 
 // 套装数据（本地打包）
-import SONATA_EFFECTS from '../../data/sonata-effects.json'
+const SONATA_EFFECTS = require('../../data/sonata-effects.json')
 
 // 技能类型中文映射
 const SKILL_TYPE_LABELS = {

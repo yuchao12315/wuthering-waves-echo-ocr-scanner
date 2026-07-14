@@ -1,5 +1,5 @@
 // pages/characters/characters.js
-import { getCharacterList, getCharacterDetail } from '../../services/data-service'
+const { getCharacterList, getCharacterDetail } = require('../../services/data-service')
 // 词条类型中文映射
 const STAT_CN = {
   'ATK_PCT': '攻击%', 'FLAT_ATK': '攻击', 'CRIT_RATE': '暴击率', 'CRIT_DMG': '暴击伤害',

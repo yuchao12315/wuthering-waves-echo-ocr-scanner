@@ -148,9 +148,10 @@
 .dmg-td-crit { color: #b54708; font-family: monospace; }
 
 .tag { font-size: 18rpx; padding: 3rpx 8rpx; border-radius: 5rpx; }
-.tag-E { background: #dbeafe; color: #1d4ed8; }
-.tag-Q { background: #ffedd5; color: #c2410c; }
-.tag-变奏 { background: #dcfce7; color: #166534; }
+.skill-e { background: #dbeafe; color: #1d4ed8; }
+.skill-q { background: #ffedd5; color: #c2410c; }
+.skill-intro { background: #dcfce7; color: #166534; }
+.skill-other { background: #eef2f7; color: #4b5565; }
 
 .dmg-footer { justify-content: space-between; border-top: 1rpx solid #dbe3ef; padding: 12rpx; background: #f8fafc; }
 .dmg-footer-label { font-size: 22rpx; color: #667085; }

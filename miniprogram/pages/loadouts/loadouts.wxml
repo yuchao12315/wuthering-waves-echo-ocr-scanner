@@ -123,7 +123,7 @@
         <view wx:for="{{item._damageResult._filteredSkills}}" wx:for-item="sk" wx:key="name" class="dmg-row">
           <text class="dmg-td dmg-td-name">{{sk.name}}</text>
           <text class="dmg-td dmg-td-tag">
-            <text class="tag tag-{{sk.tag}}">{{sk.tag}}</text>
+            <text class="tag {{sk.tagClass}}">{{sk.tag}}</text>
           </text>
           <text class="dmg-td dmg-td-right">{{sk.multiplierStr}}</text>
           <text class="dmg-td dmg-td-right dmg-td-expected">{{sk._expectedDisplay}}</text>

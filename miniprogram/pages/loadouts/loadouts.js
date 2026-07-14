@@ -28,6 +28,15 @@ function getGrade(score) {
   return { grade: 'C', gradeClass: 'C' }
 }
 
+function getSkillTagClass(tag) {
+  const map = {
+    E: 'skill-e',
+    Q: 'skill-q',
+    '变奏': 'skill-intro',
+  }
+  return map[tag] || 'skill-other'
+}
+
 Page({
   data: {
     loadouts: [],
@@ -212,6 +221,7 @@ Page({
     const mockSkills = (charBase.skills || []).slice(0, 5).map(s => ({
       name: s.name,
       tag: s.tag || 'E',
+      tagClass: getSkillTagClass(s.tag || 'E'),
       skillType: s.skillType || '',
       multiplierStr: (s.multipliers && s.multipliers[9]) || '100%',
       _expectedDisplay: '—',
