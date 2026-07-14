@@ -1,5 +1,5 @@
 // pages/calculator/calculator.js
-const { getCharacterDetail, getWeapons } = require('../../services/data-service')
+const { getCharacterDetail, getWeapons } = require('../../services/data-service.js')
 const {
   isAdQuotaEnabled,
   getQuotaSummary,
@@ -8,10 +8,10 @@ const {
   refundAdvancedThresholdQuota,
   unlockCalculateByAd,
   unlockAdvancedThresholdByAd,
-} = require('../../services/ad-quota-service')
+} = require('../../services/ad-quota-service.js')
 
 // 套装数据（本地打包）
-const SONATA_EFFECTS = require('../../data/sonata-effects.json')
+const SONATA_EFFECTS = require('../../data/sonata-effects.js')
 
 // 技能类型中文映射
 const SKILL_TYPE_LABELS = {

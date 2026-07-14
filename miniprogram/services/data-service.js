@@ -1,9 +1,9 @@
 // services/data-service.js
 // 本地静态数据优先，Storage/内存缓存加速；云函数仅作为可选兜底。
 
-const CHARACTER_BASE = require('../data/characters-base.json')
-const CHARACTER_WEIGHTS = require('../data/character-weights.json')
-const WEAPONS = require('../data/weapons.json')
+const CHARACTER_BASE = require('../data/characters-base.js')
+const CHARACTER_WEIGHTS = require('../data/character-weights.js')
+const WEAPONS = require('../data/weapons.js')
 
 const CACHE_TTL = 7 * 24 * 3600 * 1000
 
