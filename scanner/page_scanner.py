@@ -536,12 +536,16 @@ class PageScanner:
         #   - 消除 secondary/sub1 边界不精确导致副词条被误分配为副属性的问题
         #   - 消除 sub5 zone 上界过紧导致最后一条副词条丢失的问题
         #   - 用 Y 近邻聚类自动分行，不依赖固定的 sub1~sub5 zone 边界
+        zone_ranges = self.config.get('detail_zones', {
+            'name': (110, 180),
+            'level': (180, 250),
+            'cost': (250, 370),
+            'main': (445, 496),
+            'all_subs': (496, 810),
+        })
         zones = {
-            'name': (110, 180, []),       # 143
-            'level': (180, 250, []),      # 213
-            'cost': (250, 370, []),       # 264
-            'main': (445, 496, []),       # 474
-            'all_subs': (496, 810, []),   # 519~743+ 副属性+副词条统一收集
+            name: (bounds[0], bounds[1], [])
+            for name, bounds in zone_ranges.items()
         }
 
         for line in all_lines:
@@ -611,11 +615,12 @@ class PageScanner:
         all_subs_lines.sort(key=lambda x: x[0])
 
         # Y 近邻聚类：同一行的属性名(左)和数值(右)y相近但x不同
-        # 20px阈值 < 行间距(~45px)的一半，能合并同行不会混相邻行
+        # 1080p 下 20px 阈值 < 行间距(~45px)的一半；其他分辨率按高度缩放。
         # groups: [[items], max_y]，items: [(x, text)]
         groups = []
+        row_merge_threshold = self.config.get('detail_row_merge_threshold', 20)
         for cy, cx, text in all_subs_lines:
-            if groups and cy - groups[-1][1] <= 20:
+            if groups and cy - groups[-1][1] <= row_merge_threshold:
                 groups[-1][0].append((cx, text))
                 groups[-1][1] = max(groups[-1][1], cy)
             else:
@@ -728,4 +733,3 @@ class PageScanner:
         for _ in range(steps):
             mouse_scroll(gx + sx, gy + sy, -1)
             time.sleep(0.03)
-

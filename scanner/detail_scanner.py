@@ -195,25 +195,33 @@ class DetailScanner:
         import re
 
         # 收集各区域文本
-        main_texts = []        # 主词条区域
+        main_texts = []        # 主词条区域: [(x, text)]
         all_subs_lines = []    # 副属性+副词条区域
+        zone_ranges = cfg.get('detail_zones', {
+            'name': (110, 180),
+            'level': (180, 250),
+            'cost': (250, 370),
+            'main': (445, 496),
+            'all_subs': (496, 810),
+        })
 
         for line in all_lines:
             bbox = line[0]
             text = line[1][0]
             conf = line[1][1]
+            cx = int((bbox[0][0] + bbox[2][0]) / 2)
             cy = int((bbox[0][1] + bbox[2][1]) / 2)
 
             if conf < 0.6:
                 continue
 
             # 名称区域 (y: 110-180, 实测中心y≈143)
-            if 110 <= cy <= 180:
+            if zone_ranges['name'][0] <= cy <= zone_ranges['name'][1]:
                 if len(text) >= 2 and not text.isdigit():
                     data['monsterName'] = text.strip()
 
             # 等级区域 (y: 180-250, 实测中心y≈213)
-            elif 180 <= cy <= 250:
+            elif zone_ranges['level'][0] <= cy <= zone_ranges['level'][1]:
                 nums = re.findall(r'\d+', text)
                 for n in nums:
                     v = int(n)
@@ -222,7 +230,7 @@ class DetailScanner:
                         break
 
             # Cost区域 (y: 250-370, 实测中心y≈264)
-            elif 250 <= cy <= 370:
+            elif zone_ranges['cost'][0] <= cy <= zone_ranges['cost'][1]:
                 if 'COST' in text.upper():
                     nums = re.findall(r'\d+', text)
                     for n in nums:
@@ -236,12 +244,12 @@ class DetailScanner:
                             data['cost'] = int(n)
 
             # 主词条区域 (y: 445-496, 实测中心y≈474)
-            elif 445 <= cy <= 496:
-                main_texts.append(text.strip())
+            elif zone_ranges['main'][0] <= cy <= zone_ranges['main'][1]:
+                main_texts.append((cx, text.strip()))
 
             # 副属性+副词条统一收集 (y: 496-780)
             # 副属性+副词条统一收集 (y: 496-780)，记录(y, x, text)
-            elif 496 <= cy <= 780:
+            elif zone_ranges['all_subs'][0] <= cy <= zone_ranges['all_subs'][1]:
                 all_subs_lines.append((cy, cx, text.strip()))
 
         # 主词条解析（按x排序合并）
@@ -255,8 +263,9 @@ class DetailScanner:
         # Y 近邻聚类 + x排序合并
         all_subs_lines.sort(key=lambda x: x[0])
         groups = []  # [[items], max_y]，items: [(x, text)]
+        row_merge_threshold = cfg.get('detail_row_merge_threshold', 20)
         for cy, cx, text in all_subs_lines:
-            if groups and cy - groups[-1][1] <= 20:
+            if groups and cy - groups[-1][1] <= row_merge_threshold:
                 groups[-1][0].append((cx, text))
                 groups[-1][1] = max(groups[-1][1], cy)
             else:

@@ -15,7 +15,7 @@ from .screen_capture import capture_region
 from .ocr_engine import ocr_image
 from . import input_control
 from .input_control import ensure_admin, activate_window
-from .config import get_config, TIMING
+from .config import get_config, get_resolution_support, TIMING
 
 
 def ensure_sort_by_level(game_rect):
@@ -90,6 +90,8 @@ def main():
     hwnd, game_rect = window
     gx, gy, gw, gh = game_rect
     print(f"  窗口分辨率: {gw}x{gh}")
+    support = get_resolution_support((gw, gh))
+    print(f"  分辨率适配: {support['message']}")
 
     # 初始化输入控制（传入游戏窗口句柄）
     input_control.init(hwnd)
