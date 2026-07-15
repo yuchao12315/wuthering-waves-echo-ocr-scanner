@@ -35568,4 +35568,8 @@ module.exports = {
       }
     ]
   }
+,
+  "漂泊者·导电": {"baseAtk":437,"weaponType":"迅刀","element":"导电","ascensionStat":{"type":"critRate","value":0.08},"inherentBuffs":[],"chainStats":[],"chainEffects":[],"weaponPassiveMultiplier":{"E":0,"Q":0,"变奏":0},"skills":[]},
+  "秧秧·玄翎": {"baseAtk":412,"weaponType":"迅刀","element":"湮灭","ascensionStat":{"type":"critRate","value":0.08},"inherentBuffs":[],"chainStats":[],"chainEffects":[],"weaponPassiveMultiplier":{"E":0,"Q":0,"变奏":0},"skills":[]},
+  "穗穗": {"baseAtk":375,"weaponType":"音感仪","element":"冷凝","ascensionStat":{"type":"critRate","value":0.08},"inherentBuffs":[],"chainStats":[],"chainEffects":[],"weaponPassiveMultiplier":{"E":0,"Q":0,"变奏":0},"skills":[]}
 }

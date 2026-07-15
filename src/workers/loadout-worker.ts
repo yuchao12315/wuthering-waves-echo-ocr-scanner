@@ -51,7 +51,11 @@ interface Loadout {
 function getSubWeight(statType: string, calc: CalcJson): number {
   const cnKey = CN_TO_STAT[statType];
   if (!cnKey) return 0;
-  return calc.sub_props[cnKey] ?? 0;
+  const direct = calc.sub_props[cnKey];
+  if (direct != null) return direct;
+  const skillIndex = SKILL_IDX[cnKey];
+  if (skillIndex == null) return 0;
+  return (calc.sub_props['技能伤害加成'] ?? 0) * (calc.skill_weight?.[skillIndex] ?? 0);
 }
 
 /** 主词条权重（从 main_props[cost] 查找） */
@@ -71,114 +75,16 @@ const MAIN_STAT_VALUES: Record<number, Record<string, number>> = {
   4: { ATK_PCT: 33.0, HP_PCT: 33.0, DEF_PCT: 41.5, CRIT_RATE: 22.0, CRIT_DMG: 44.0, HEAL_BONUS: 26.4, FLAT_ATK: 150 },
 };
 
-// 中文key版本（用于score_max计算）
-const MAIN_STAT_CN: Record<number, Record<string, number>> = {
-  1: { '攻击%': 18.0, '生命%': 22.8, '防御%': 18.0, '生命': 2280 },
-  3: { '攻击%': 30.0, '生命%': 30.0, '防御%': 38.0, '属性伤害加成': 30.0, '共鸣效率': 32.0, '攻击': 100 },
-  4: { '攻击%': 33.0, '生命%': 33.0, '防御%': 41.5, '暴击': 22.0, '暴击伤害': 44.0, '治疗效果加成': 26.4, '攻击': 150 },
-};
-const MAX_SUB: Record<string, number> = {
-  '暴击': 10.5, '暴击伤害': 21.0, '攻击%': 11.6, '生命%': 11.6, '防御%': 14.7,
-  '攻击': 60, '生命': 580, '防御': 70, '共鸣效率': 12.4,
-  '普攻伤害加成': 11.6, '重击伤害加成': 11.6, '共鸣技能伤害加成': 11.6, '共鸣解放伤害加成': 11.6,
-};
-const SEC_STAT_CN: Record<number, Record<string, number>> = {
-  1: { '生命': 2280 },
-  3: { '攻击': 100 },
-  4: { '攻击': 150 },
-};
 const SKILL_IDX: Record<string, number> = {
   '普攻伤害加成': 0, '重击伤害加成': 1, '共鸣技能伤害加成': 2, '共鸣解放伤害加成': 3,
 };
 
-function calcEchoScoreMax(echo: Echo, calc: CalcJson): number {
-  const cost = echo.cost;
-  const mp = calc.main_props[String(cost)] ?? {};
-  const sp = calc.sub_props;
-
-  let bestMain = 0;
-  if (echo.mainStat) {
-    const mainCn = CN_TO_STAT[echo.mainStat.type];
-    bestMain = mainCn ? ((MAIN_STAT_CN[cost] ?? {})[mainCn] ?? 0) * (mp[mainCn] ?? 0) : 0;
-  }
-
-  // 泛型技能伤害加成
-  const skillWeight = calc.skill_weight ?? [0, 0, 0, 0];
-  const maxSW = Math.max(...skillWeight, 0);
-  let genericSkillContrib = 0;
-  for (const [cn, si] of Object.entries(SKILL_IDX)) {
-    const indW = sp[cn] ?? 0;
-    const sw = skillWeight[si] ?? 0;
-    if (indW > 0 && sw > 0) {
-      genericSkillContrib = 11.6 * (indW / sw) * maxSW;
-      break;
-    }
-  }
-
-  const maxSubProps = calc.max_sub_props ?? [];
-  const hasGenericSkill = maxSubProps.includes('技能伤害加成');
-
-  const usedCns = new Set<string>();
-  const validSubScores: number[] = [];
-  let genericUsed = false;
-  for (const sub of echo.substats) {
-    const cn = CN_TO_STAT[sub.type];
-    if (!cn) continue;
-
-    const si = SKILL_IDX[cn];
-    if (si != null && hasGenericSkill) {
-      usedCns.add(cn);
-      if (!genericUsed && genericSkillContrib > 0) {
-        genericUsed = true;
-        validSubScores.push(genericSkillContrib);
-      }
-    } else {
-      if (!maxSubProps.includes(cn)) continue;
-      usedCns.add(cn);
-      const w = sp[cn] ?? 0;
-      if (w > 0) validSubScores.push((MAX_SUB[cn] ?? 0) * w);
-    }
-  }
-
-  if (validSubScores.length < 5) {
-    const candidates: number[] = [];
-    for (const cn of maxSubProps) {
-      if (usedCns.has(cn)) continue;
-      if (cn === '技能伤害加成') {
-        if (!genericUsed && genericSkillContrib > 0) {
-          candidates.push(genericSkillContrib);
-        }
-      } else {
-        const w = sp[cn] ?? 0;
-        const maxVal = MAX_SUB[cn] ?? 0;
-        if (w > 0 && maxVal > 0) {
-          candidates.push(maxVal * w);
-        }
-      }
-    }
-    candidates.sort((a, b) => b - a);
-    for (const c of candidates) {
-      if (validSubScores.length >= 5) break;
-      validSubScores.push(c);
-    }
-  }
-
-  const subSum = validSubScores.reduce((s, v) => s + v, 0);
-
-  let bestSec = 0;
-  const secFixed = SEC_STAT_CN[cost];
-  if (secFixed) {
-    for (const [cn, val] of Object.entries(secFixed)) {
-      const w = mp[cn] ?? 0;
-      if (val * w > bestSec) bestSec = val * w;
-    }
-  }
-
-  return bestMain + bestSec + subSum;
+function costToIndex(cost: number): number {
+  return cost === 1 ? 0 : cost === 3 ? 1 : 2;
 }
 
 function scoreEcho(echo: Echo, calc: CalcJson): number {
-  const scoreMax = calcEchoScoreMax(echo, calc);
+  const scoreMax = calc.score_max?.[costToIndex(echo.cost)] ?? 0;
   if (scoreMax <= 0) return 0;
   let rawScore = 0;
 

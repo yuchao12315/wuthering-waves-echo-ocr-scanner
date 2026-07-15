@@ -3508,5 +3508,31 @@
         "condition": "always"
       }
     ]
-  }
+  },
+  {"name":"天之苍苍","type":"迅刀","rarity":5,"baseAtk":587,"atkPct":0,"critRate":0.243,"critDmg":0,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
+  {"name":"宙算仪轨","type":"长刃","rarity":5,"baseAtk":587,"atkPct":0,"critRate":0,"critDmg":0,"energyRegen":0.518,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
+  {"name":"星序协响","type":"音感仪","rarity":5,"baseAtk":587,"atkPct":0,"critRate":0,"critDmg":0,"energyRegen":0.518,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
+  {"name":"翼锋","type":"迅刀","rarity":4,"baseAtk":412,"atkPct":0,"critRate":0.204,"critDmg":0,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
+  {"name":"曜光","type":"音感仪","rarity":4,"baseAtk":412,"atkPct":0,"critRate":0,"critDmg":0.408,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
+  {"name":"凌空","type":"臂铠","rarity":4,"baseAtk":412,"atkPct":0,"critRate":0,"critDmg":0.408,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
+  {"name":"阳焰","type":"手枪","rarity":4,"baseAtk":412,"atkPct":0,"critRate":0.204,"critDmg":0,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
+  {"name":"金穹","type":"长刃","rarity":4,"baseAtk":412,"atkPct":0,"critRate":0,"critDmg":0.408,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
+  {"name":"不灭航路","type":"迅刀","rarity":5,"baseAtk":587,"atkPct":0,"critRate":0,"critDmg":0,"energyRegen":0.518,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
+  {"name":"大海的馈赠","type":"音感仪","rarity":4,"baseAtk":412,"atkPct":0.306,"critRate":0,"critDmg":0,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
+  {"name":"虚饰的华尔兹","type":"音感仪","rarity":4,"baseAtk":412,"atkPct":0.306,"critRate":0,"critDmg":0,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
+  {"name":"叙别的罗曼史","type":"手枪","rarity":4,"baseAtk":412,"atkPct":0.306,"critRate":0,"critDmg":0,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
+  {"name":"酩酊的英雄志","type":"臂铠","rarity":4,"baseAtk":412,"atkPct":0.306,"critRate":0,"critDmg":0,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
+  {"name":"风流的寓言诗","type":"迅刀","rarity":4,"baseAtk":412,"atkPct":0.306,"critRate":0,"critDmg":0,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
+  {"name":"容赦的沉思录","type":"长刃","rarity":4,"baseAtk":412,"atkPct":0.306,"critRate":0,"critDmg":0,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
+  {"name":"悲喜剧","type":"臂铠","rarity":5,"baseAtk":587,"atkPct":0,"critRate":0.243,"critDmg":0,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
+  {"name":"渊海回声","type":"音感仪","rarity":4,"baseAtk":412,"atkPct":0,"critRate":0,"critDmg":0,"energyRegen":0.388,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
+  {"name":"心之锚","type":"迅刀","rarity":4,"baseAtk":412,"atkPct":0.306,"critRate":0,"critDmg":0,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
+  {"name":"凋亡频移","type":"长刃","rarity":4,"baseAtk":412,"atkPct":0.306,"critRate":0,"critDmg":0,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
+  {"name":"悖论喷流","type":"手枪","rarity":4,"baseAtk":412,"atkPct":0.306,"critRate":0,"critDmg":0,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
+  {"name":"尘云旋臂","type":"臂铠","rarity":4,"baseAtk":412,"atkPct":0.306,"critRate":0,"critDmg":0,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
+  {"name":"核熔星盘","type":"音感仪","rarity":4,"baseAtk":412,"atkPct":0.306,"critRate":0,"critDmg":0,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
+  {"name":"飞景","type":"迅刀","rarity":4,"baseAtk":412,"atkPct":0.306,"critRate":0,"critDmg":0,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
+  {"name":"华彩乐段","type":"手枪","rarity":4,"baseAtk":412,"atkPct":0,"critRate":0,"critDmg":0,"energyRegen":0.388,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
+  {"name":"不归孤军","type":"迅刀","rarity":4,"baseAtk":412,"atkPct":0.306,"critRate":0,"critDmg":0,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
+  {"name":"无眠烈火","type":"手枪","rarity":4,"baseAtk":412,"atkPct":0.306,"critRate":0,"critDmg":0,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]}
 ]

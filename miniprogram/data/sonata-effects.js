@@ -459,4 +459,9 @@ module.exports = {
     ],
     "set5": null
   }
+,
+  "lamp_of_nightbound_path": {"name":"冥途夜行之灯","set2":null,"set3":null,"set5":null},
+  "heart_of_cleansing_evil": {"name":"清邪荡煞之心","set2":null,"set3":null,"set5":null},
+  "song_of_fallen_feathers": {"name":"羽落空尘之歌","set2":null,"set3":null,"set5":null},
+  "law_of_worldly_synchrony": {"name":"息界同调之律","set2":null,"set3":null,"set5":null}
 }

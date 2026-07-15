@@ -129,6 +129,58 @@ const NIGHTMARE_BONUS_MAP = {
     elemDmg: 0.12, elemType: '衍射',
     secondType: 'phantomDmg', secondValue: 0.20,
   },
+  // Wiki 已收录但固定加成数值未公开；识别为梦魇声骸，不参与评分加成。
+  '共鸣回响·冠顶苍隼': {
+    secondType: 'phantomDmg', secondValue: 0,
+  },
+  '共鸣回响·芙露德莉斯': {
+    secondType: 'phantomDmg', secondValue: 0,
+  },
+  '梦魇·刺玫菇': {
+    secondType: 'phantomDmg', secondValue: 0,
+  },
+  '梦魇·绿熔蜥': {
+    secondType: 'phantomDmg', secondValue: 0,
+  },
+  '梦魇·青羽鹭': {
+    secondType: 'phantomDmg', secondValue: 0,
+  },
+  '梦魇·紫羽鹭': {
+    secondType: 'phantomDmg', secondValue: 0,
+  },
+  '梦魇·振铎乐师': {
+    secondType: 'phantomDmg', secondValue: 0,
+  },
+  '梦魇·呜咔咔': {
+    secondType: 'phantomDmg', secondValue: 0,
+  },
+  '梦魇·侏侏鸵': {
+    secondType: 'phantomDmg', secondValue: 0,
+  },
+  '梦魇·刺玫菇（稚形）': {
+    secondType: 'phantomDmg', secondValue: 0,
+  },
+  '梦魇·绿熔蜥（稚形）': {
+    secondType: 'phantomDmg', secondValue: 0,
+  },
+  '梦魇·惊蛰猎手': {
+    secondType: 'phantomDmg', secondValue: 0,
+  },
+  '梦魇·巡徊猎手': {
+    secondType: 'phantomDmg', secondValue: 0,
+  },
+  '梦魇·啾啾河豚': {
+    secondType: 'phantomDmg', secondValue: 0,
+  },
+  '梦魇·咕咕河豚': {
+    secondType: 'phantomDmg', secondValue: 0,
+  },
+  '梦魇·审判战士': {
+    secondType: 'phantomDmg', secondValue: 0,
+  },
+  '梦魇·破霜猎手': {
+    secondType: 'phantomDmg', secondValue: 0,
+  },
 }
 
 /** 通用梦魇加成: 无 (不在映射表中的梦魇声骸不给予加成) */

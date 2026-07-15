@@ -185,7 +185,7 @@ function EchoForm() {
 
       {getNightmareBonus(monsterName) && (
         <div className="flex items-center gap-2 text-xs text-purple-300 bg-purple-900/20 border border-purple-700/40 rounded px-3 py-1.5">
-          <span>🔮 梦魇声骸: {getNightmareBonus(monsterName)!.elemType ? `${getNightmareBonus(monsterName)!.elemType}伤害+${((getNightmareBonus(monsterName)!.elemDmg ?? 0) * 100).toFixed(0)}%` : ''} {
+          <span>🔮 梦魇声骸: {getNightmareBonus(monsterName)!.elemType ? `${getNightmareBonus(monsterName)!.elemType}伤害+${((getNightmareBonus(monsterName)!.elemDmg ?? 0) * 100).toFixed(0)}%` : '已识别'} {
             getNightmareBonus(monsterName)!.secondValue > 0
               ? `${({ resonanceSkillDmg: '共鸣技能伤害', resonanceLiberationDmg: '共鸣解放伤害', normalAtkDmg: '普攻伤害', heavyAtkDmg: '重击伤害', phantomDmg: '声骸技能伤害', coordinatedDmg: '协同攻击伤害', aeroDmg: '气动伤害', energyRegen: '共鸣效率', critRate: '暴击率'} as Record<string, string>)[getNightmareBonus(monsterName)!.secondType] ?? ''}+${(getNightmareBonus(monsterName)!.secondValue * 100).toFixed(0)}%`
               : ''

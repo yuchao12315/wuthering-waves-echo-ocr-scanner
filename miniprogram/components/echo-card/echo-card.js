@@ -44,7 +44,7 @@ function formatNightmare(nm) {
   if (nm.requiredCharacters) {
     parts.push('(限' + nm.requiredCharacters.join('/') + ')')
   }
-  return parts.join(' ')
+  return parts.length > 0 ? parts.join(' ') : '已识别'
 }
 
 Component({
