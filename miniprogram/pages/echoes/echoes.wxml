@@ -8,6 +8,7 @@
     </view>
     <view class="link" bindtap="onImport">导入JSON</view>
     <view class="link" bindtap="onExport">导出JSON</view>
+    <view class="link link-guide" bindtap="onOpenGuide">使用教程</view>
     <view class="link link-danger" wx:if="{{echoes.length > 0}}" bindtap="onClearAll">清空全部</view>
   </view>
 

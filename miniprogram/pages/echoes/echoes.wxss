@@ -20,6 +20,7 @@
 }
 
 .link-danger { color: #b42318; background: #fff1f2; }
+.link-guide { color: #475467; background: #f8fafc; border: 1rpx solid #dbe3ef; }
 
 .import-msg {
   font-size: 24rpx;

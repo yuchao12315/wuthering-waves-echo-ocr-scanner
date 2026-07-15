@@ -453,6 +453,15 @@ Page({
     })
   },
 
+  onOpenGuide() {
+    wx.showModal({
+      title: '使用教程',
+      content: '这里预留导入、导出 JSON 和手动录入声骸的使用教程入口，后续可接入图文教程页。',
+      showCancel: false,
+      confirmText: '知道了',
+    })
+  },
+
   onClearAll() {
     const self = this
     wx.showModal({
