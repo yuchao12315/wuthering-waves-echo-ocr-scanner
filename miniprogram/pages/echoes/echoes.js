@@ -69,6 +69,8 @@ Page({
     // 导入
     importMsg: '',
     importMsgType: '',
+    showImportPanel: false,
+    importText: '',
     selectedCharName: '',
     showCharacterPicker: false,
   },
@@ -92,6 +94,8 @@ Page({
   openCharacterPicker() {
     this.setData({ showCharacterPicker: true })
   },
+
+  noop() {},
 
   closeCharacterPicker() {
     this.setData({ showCharacterPicker: false })
@@ -381,51 +385,128 @@ Page({
     })
   },
 
+  openImportPanel() {
+    this.setData({ showImportPanel: true })
+  },
+
+  closeImportPanel() {
+    this.setData({ showImportPanel: false })
+  },
+
   onImport() {
-    const self = this
+    this.chooseSystemImportFile()
+  },
+
+  chooseSystemImportFile() {
+    if (!wx.chooseExternalFile) {
+      this.setData({
+        importMsg: '当前微信版本不支持手机文件选择器，请粘贴JSON或使用聊天文件备用入口',
+        importMsgType: 'warn',
+        showImportPanel: true,
+      })
+      return
+    }
+
+    var self = this
+    wx.chooseExternalFile({
+      count: 1,
+      type: 'file',
+      extension: ['json'],
+      success: function(res) {
+        var file = res.tempFiles && res.tempFiles[0]
+        var filePath = file && (file.path || file.tempFilePath)
+        if (!filePath) {
+          self.setData({ importMsg: '未获取到文件路径', importMsgType: 'error' })
+          return
+        }
+        self.importJsonFile(filePath)
+      },
+      fail: function(err) {
+        var message = (err && err.errMsg) || '未选择文件'
+        self.setData({ importMsg: '选择文件失败: ' + message, importMsgType: 'warn' })
+      }
+    })
+  },
+
+  onImportTextInput(e) {
+    this.setData({ importText: e.detail.value })
+  },
+
+  onPasteImportConfirm() {
+    var content = (this.data.importText || '').trim()
+    if (!content) {
+      this.setData({ importMsg: '请先粘贴JSON内容', importMsgType: 'warn' })
+      return
+    }
+
+    try {
+      var data = JSON.parse(content)
+      this.importEchoData(data, true)
+    } catch (e) {
+      this.setData({ importMsg: '导入失败: ' + (e.message || 'JSON格式错误'), importMsgType: 'error' })
+    }
+  },
+
+  onImportFromMessageFile() {
+    var self = this
     wx.chooseMessageFile({
       count: 1,
       type: 'file',
       extension: ['json'],
       success: function(res) {
-        const filePath = res.tempFiles[0].path
-        const fs = wx.getFileSystemManager()
-        try {
-          const content = fs.readFileSync(filePath, 'utf-8')
-          const data = JSON.parse(content)
-
-          let echoList = []
-          if (Array.isArray(data)) {
-            echoList = data
-          } else if (Array.isArray(data.echoes)) {
-            echoList = data.echoes
-          } else if (Array.isArray(data.scanned_echoes)) {
-            echoList = data.scanned_echoes
-          }
-
-          if (echoList.length === 0) {
-            self.setData({ importMsg: '文件中未找到声骸数据', importMsgType: 'warn' })
-            return
-          }
-
-          const valid = echoList.filter(function(e) {
-            return e.mainStat || (e.substats && e.substats.length > 0) || e.monsterName
-          })
-          const echoes = wx.getStorageSync('echoes') || []
-          Array.prototype.unshift.apply(echoes, valid)
-          wx.setStorageSync('echoes', echoes)
-
-          const skipped = echoList.length - valid.length
-          self.setData({
-            importMsg: '成功导入 ' + valid.length + ' 个声骸' + (skipped > 0 ? ' (跳过' + skipped + '个无效)' : ''),
-            importMsgType: 'success',
-          })
-          self.loadEchoes()
-        } catch (e) {
-          self.setData({ importMsg: '导入失败: ' + (e.message || '文件格式错误'), importMsgType: 'error' })
-        }
+        var filePath = res.tempFiles[0].path
+        self.importJsonFile(filePath)
       }
     })
+  },
+
+  importJsonFile(filePath) {
+    var fs = wx.getFileSystemManager()
+    try {
+      var content = fs.readFileSync(filePath, 'utf-8')
+      var data = JSON.parse(content)
+      this.importEchoData(data, true)
+    } catch (e) {
+      this.setData({ importMsg: '导入失败: ' + (e.message || '文件格式错误'), importMsgType: 'error' })
+    }
+  },
+
+  extractImportEchoList(data) {
+    if (Array.isArray(data)) return data
+    if (data && Array.isArray(data.echoes)) return data.echoes
+    if (data && Array.isArray(data.scanned_echoes)) return data.scanned_echoes
+    return []
+  },
+
+  importEchoData(data, closePanel) {
+    var echoList = this.extractImportEchoList(data)
+
+    if (echoList.length === 0) {
+      this.setData({ importMsg: 'JSON中未找到声骸数据', importMsgType: 'warn' })
+      return
+    }
+
+    var valid = echoList.filter(function(e) {
+      return e.mainStat || (e.substats && e.substats.length > 0) || e.monsterName
+    })
+
+    if (valid.length === 0) {
+      this.setData({ importMsg: 'JSON中没有可导入的有效声骸', importMsgType: 'warn' })
+      return
+    }
+
+    var echoes = wx.getStorageSync('echoes') || []
+    Array.prototype.unshift.apply(echoes, valid)
+    wx.setStorageSync('echoes', echoes)
+
+    var skipped = echoList.length - valid.length
+    this.setData({
+      importMsg: '成功导入 ' + valid.length + ' 个声骸' + (skipped > 0 ? ' (跳过' + skipped + '个无效)' : ''),
+      importMsgType: 'success',
+      importText: '',
+      showImportPanel: closePanel ? false : this.data.showImportPanel,
+    })
+    this.loadEchoes()
   },
 
   onExport() {
@@ -434,9 +515,36 @@ Page({
       wx.showToast({ title: '无声骸可导出', icon: 'none' })
       return
     }
-    const content = JSON.stringify(echoes, null, 2)
-    const filePath = wx.env.USER_DATA_PATH + '/echoes.json'
-    const fs = wx.getFileSystemManager()
+    var self = this
+    wx.showActionSheet({
+      itemList: ['复制JSON内容', '分享JSON文件到聊天'],
+      success: function(res) {
+        if (res.tapIndex === 0) {
+          self.copyExportJson(echoes)
+        } else if (res.tapIndex === 1) {
+          self.shareExportJsonFile(echoes)
+        }
+      }
+    })
+  },
+
+  copyExportJson(echoes) {
+    var content = JSON.stringify(echoes, null, 2)
+    wx.setClipboardData({
+      data: content,
+      success: function() {
+        wx.showToast({ title: '已复制JSON', icon: 'none' })
+      },
+      fail: function() {
+        wx.showToast({ title: '复制失败', icon: 'none' })
+      },
+    })
+  },
+
+  shareExportJsonFile(echoes) {
+    var content = JSON.stringify(echoes, null, 2)
+    var filePath = wx.env.USER_DATA_PATH + '/echoes.json'
+    var fs = wx.getFileSystemManager()
     fs.writeFile({
       filePath,
       data: content,

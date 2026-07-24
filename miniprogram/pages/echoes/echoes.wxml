@@ -6,7 +6,7 @@
       <text wx:if="{{selectedCharName}}">切换角色: {{selectedCharName}}</text>
       <text wx:else>切换角色</text>
     </view>
-    <view class="link" bindtap="onImport">导入JSON</view>
+    <view class="link" bindtap="chooseSystemImportFile">导入JSON</view>
     <view class="link" bindtap="onExport">导出JSON</view>
     <view class="link link-guide" bindtap="onOpenGuide">使用教程</view>
     <view class="link link-danger" wx:if="{{echoes.length > 0}}" bindtap="onClearAll">清空全部</view>
@@ -15,6 +15,26 @@
   <!-- 导入提示 -->
   <view wx:if="{{importMsg}}" class="import-msg {{importMsgType}}">
     <text>{{importMsg}}</text>
+  </view>
+
+  <!-- JSON导入面板 -->
+  <view wx:if="{{showImportPanel}}" class="modal-mask" bindtap="closeImportPanel">
+    <view class="import-panel" catchtap="noop">
+      <view class="modal-title">导入JSON</view>
+      <view class="modal-desc">粘贴 OCR 或 Web 导出的 JSON 内容后导入。聊天文件导入作为备用入口。</view>
+      <textarea
+        class="json-textarea"
+        value="{{importText}}"
+        bindinput="onImportTextInput"
+        placeholder="粘贴 echoes 数组或包含 echoes/scanned_echoes 字段的 JSON"
+        maxlength="-1"
+      />
+      <view class="modal-actions">
+        <view class="modal-btn secondary" bindtap="closeImportPanel">取消</view>
+        <view class="modal-btn secondary" bindtap="onImportFromMessageFile">聊天文件</view>
+        <view class="modal-btn primary" bindtap="onPasteImportConfirm">导入</view>
+      </view>
+    </view>
   </view>
 
   <!-- 添加声骸表单 -->

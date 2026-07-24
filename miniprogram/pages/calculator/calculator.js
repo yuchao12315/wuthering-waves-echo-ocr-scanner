@@ -274,11 +274,28 @@ Page({
     } else if (sonatas.length < 2) {
       sonatas.push(key)
     }
-    this.setData({ sonatas })
+    this.refreshSonataSelection(sonatas)
   },
 
   clearSonatas() {
-    this.setData({ sonatas: [] })
+    this.refreshSonataSelection([])
+  },
+
+  refreshSonataSelection(sonatas) {
+    var selectedMap = {}
+    for (var i = 0; i < sonatas.length; i++) {
+      selectedMap[sonatas[i]] = true
+    }
+    var allSonatas = this.data.allSonatas.map(function (item) {
+      var key = item.key
+      return Object.assign({}, item, {
+        selected: selectedMap[key] === true,
+      })
+    })
+    this.setData({
+      sonatas: sonatas,
+      allSonatas: allSonatas,
+    })
   },
 
   setCostFilter(e) {

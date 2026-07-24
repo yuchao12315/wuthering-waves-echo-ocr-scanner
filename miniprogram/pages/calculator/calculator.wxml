@@ -132,7 +132,7 @@
       <view
         wx:for="{{allSonatas}}"
         wx:key="key"
-        class="sonata-tag {{sonatas.indexOf(item.key) >= 0 ? 'sonata-active' : 'sonata-inactive'}}"
+        class="sonata-tag {{item.selected ? 'sonata-active' : 'sonata-inactive'}}"
         bindtap="toggleSonata"
         data-key="{{item.key}}"
       >{{item.name}}</view>

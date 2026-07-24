@@ -35,6 +35,85 @@
 .import-msg.warn { color: #b54708; border-color: #fedf89; background: #fffbeb; }
 .import-msg.error { color: #b42318; border-color: #fecdd3; background: #fff1f2; }
 
+.modal-mask {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 50;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.38);
+  padding: 24rpx;
+  box-sizing: border-box;
+}
+
+.import-panel {
+  width: 100%;
+  max-height: 82vh;
+  padding: 24rpx;
+  background: #ffffff;
+  border-radius: 16rpx;
+  box-sizing: border-box;
+  box-shadow: 0 16rpx 42rpx rgba(24, 32, 51, 0.16);
+}
+
+.modal-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #182033;
+  margin-bottom: 8rpx;
+}
+
+.modal-desc {
+  font-size: 23rpx;
+  line-height: 1.5;
+  color: #667085;
+  margin-bottom: 16rpx;
+}
+
+.json-textarea {
+  width: 100%;
+  min-height: 320rpx;
+  padding: 16rpx;
+  box-sizing: border-box;
+  background: #f8fafc;
+  border: 1rpx solid #dbe3ef;
+  border-radius: 10rpx;
+  font-size: 22rpx;
+  color: #182033;
+  line-height: 1.45;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10rpx;
+  justify-content: flex-end;
+  margin-top: 18rpx;
+  flex-wrap: wrap;
+}
+
+.modal-btn {
+  min-width: 132rpx;
+  height: 64rpx;
+  line-height: 64rpx;
+  text-align: center;
+  border-radius: 9rpx;
+  font-size: 24rpx;
+}
+
+.modal-btn.primary {
+  color: #ffffff;
+  background: #2563eb;
+}
+
+.modal-btn.secondary {
+  color: #4b5565;
+  background: #f1f5f9;
+}
+
 .form-card,
 .filter-panel,
 .echo-card {
