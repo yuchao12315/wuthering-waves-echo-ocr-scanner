@@ -411,14 +411,21 @@
 .echo-mini {
   display: inline-flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 132rpx;
-  min-height: 126rpx;
-  padding: 10rpx 6rpx;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 286rpx;
+  min-height: 268rpx;
+  padding: 12rpx;
   background: #f8fafc;
   border: 1rpx solid #e4e9f2;
   border-radius: 10rpx;
+}
+
+.echo-mini-head {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  min-height: 42rpx;
 }
 
 .echo-cost {
@@ -426,7 +433,7 @@
   font-weight: 700;
   padding: 3rpx 10rpx;
   border-radius: 6rpx;
-  margin-bottom: 6rpx;
+  flex-shrink: 0;
 }
 
 .echo-cost-1 { background: #eef2f7; color: #526071; }
@@ -434,18 +441,76 @@
 .echo-cost-4 { background: #ede9fe; color: #5b21b6; }
 
 .echo-name {
-  max-width: 112rpx;
+  max-width: 190rpx;
   font-size: 20rpx;
   line-height: 1.25;
   color: #182033;
   overflow: hidden;
   text-overflow: ellipsis;
-  text-align: center;
+  white-space: nowrap;
+}
+
+.echo-score-line {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10rpx;
+  margin-top: 8rpx;
+  padding-bottom: 8rpx;
+  border-bottom: 1rpx solid #e4e9f2;
+}
+
+.echo-score-label {
+  font-size: 19rpx;
+  color: #7a8499;
 }
 
 .echo-score {
-  margin-top: 4rpx;
-  font-size: 19rpx;
-  color: #667085;
+  font-size: 22rpx;
+  color: #182033;
+  font-weight: 700;
   font-family: monospace;
 }
+
+.echo-detail-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+  margin-top: 8rpx;
+}
+
+.echo-detail-row {
+  display: flex;
+  align-items: center;
+  min-height: 28rpx;
+  gap: 6rpx;
+}
+
+.echo-detail-field {
+  width: 58rpx;
+  font-size: 17rpx;
+  color: #7a8499;
+  flex-shrink: 0;
+}
+
+.echo-detail-name {
+  flex: 1;
+  min-width: 0;
+  font-size: 17rpx;
+  color: #4b5565;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.echo-detail-score {
+  width: 54rpx;
+  text-align: right;
+  font-size: 17rpx;
+  font-family: monospace;
+  flex-shrink: 0;
+}
+
+.detail-high { color: #16a34a; }
+.detail-mid { color: #ca8a04; }
+.detail-low { color: #b42318; }

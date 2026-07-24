@@ -238,9 +238,26 @@
             wx:key="id"
             class="echo-mini"
           >
-            <view class="echo-cost echo-cost-{{echo.cost}}">C{{echo.cost}}</view>
-            <text class="echo-name">{{echo.shortName}}</text>
-            <text class="echo-score">{{echo.scoreDisplay}}</text>
+            <view class="echo-mini-head">
+              <view class="echo-cost echo-cost-{{echo.cost}}">C{{echo.cost}}</view>
+              <text class="echo-name">{{echo.shortName}}</text>
+            </view>
+            <view class="echo-score-line">
+              <text class="echo-score-label">评分</text>
+              <text class="echo-score">{{echo.scoreDisplay}}</text>
+            </view>
+            <view class="echo-detail-list" wx:if="{{echo.scoreDetails.length > 0}}">
+              <view
+                wx:for="{{echo.scoreDetails}}"
+                wx:for-item="detail"
+                wx:key="scoreKey"
+                class="echo-detail-row"
+              >
+                <text class="echo-detail-field">{{detail.field}}</text>
+                <text class="echo-detail-name">{{detail.label}} {{detail.valueDisplay}}</text>
+                <text class="echo-detail-score {{detail.scoreClass}}">{{detail.scoreDisplay}}</text>
+              </view>
+            </view>
           </view>
         </view>
       </scroll-view>

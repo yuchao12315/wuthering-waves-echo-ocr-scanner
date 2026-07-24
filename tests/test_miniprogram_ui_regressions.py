@@ -33,6 +33,21 @@ class MiniprogramUiRegressionTest(unittest.TestCase):
             self.assertNotIn('chooseMessageFile', direct_import.group('body'))
             self.assertIn('chooseSystemImportFile', direct_import.group('body'))
 
+    def test_calculator_result_echo_cards_show_per_entry_scores(self):
+        wxml = self.read('miniprogram/pages/calculator/calculator.wxml')
+        js = self.read('miniprogram/pages/calculator/calculator.js')
+
+        self.assertIn('wx:for="{{echo.scoreDetails}}"', wxml)
+        self.assertIn('{{detail.field}}', wxml)
+        self.assertIn('{{detail.label}} {{detail.valueDisplay}}', wxml)
+        self.assertIn('{{detail.scoreDisplay}}', wxml)
+        self.assertIn('wx:key="scoreKey"', wxml)
+
+        self.assertIn('scoreEchoDetailed(echo)', js)
+        self.assertIn('buildScoreDetail(field, stat, cost, scoreMax)', js)
+        self.assertIn('scoreKey:', js)
+        self.assertIn('scoreDetails:', js)
+
 
 if __name__ == '__main__':
     unittest.main()
