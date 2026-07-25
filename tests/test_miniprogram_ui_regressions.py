@@ -48,6 +48,33 @@ class MiniprogramUiRegressionTest(unittest.TestCase):
         self.assertIn('scoreKey:', js)
         self.assertIn('scoreDetails:', js)
 
+    def test_calculator_cost_filter_is_applied_when_generating_results(self):
+        js = self.read('miniprogram/pages/calculator/calculator.js')
+
+        self.assertIn('matchesCostFilter(echoes, costFilter)', js)
+        self.assertIn("costFilter === '4+3+3+1+1'", js)
+        self.assertRegex(js, r'counts\[1\]\s*===\s*2')
+        self.assertRegex(js, r'counts\[3\]\s*===\s*2')
+        self.assertRegex(js, r'counts\[4\]\s*===\s*1')
+        self.assertIn('var costFilter = this.data.costFilter', js)
+        self.assertIn('formatCostPattern(echoes)', js)
+        self.assertIn('return b.cost - a.cost', js)
+
+    def test_calculator_all_filters_are_connected_to_loadout_calculation(self):
+        js = self.read('miniprogram/pages/calculator/calculator.js')
+
+        self.assertIn('calculateLoadouts(echoes, calc, config, allEchoes)', js)
+        self.assertIn('buildExcludedEchoIds()', js)
+        self.assertIn('excludeEchoIds: this.buildExcludedEchoIds()', js)
+        self.assertIn("sonataConstraint = { type: 'single'", js)
+        self.assertIn("sonataConstraint = { type: 'dual'", js)
+        self.assertIn('findBestCombinations(bucket1, bucket3, bucket4, distributions, sonataConstraint)', js)
+        self.assertIn('hasDuplicateSameCostName(combined)', js)
+        self.assertIn('hasDoubleCrit(echo)', js)
+        self.assertIn("rankMode === 'damage'", js)
+        self.assertIn('calcLoadoutDamage(r.echoes)', js)
+        self.assertIn('activeSkillTypes', js)
+
 
 if __name__ == '__main__':
     unittest.main()

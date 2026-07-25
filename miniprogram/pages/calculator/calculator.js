@@ -83,6 +83,28 @@ var SKILL_INDEX = {
   '共鸣解放伤害加成': 3,
 }
 
+var SKILL_DMG_MAP = {
+  NORMAL_ATK_DMG: 'normalAtk',
+  HEAVY_ATK_DMG: 'heavyAtk',
+  RESONANCE_SKILL_DMG: 'resonanceSkill',
+  RESONANCE_LIBERATION_DMG: 'resonanceLiberation',
+}
+
+var SKILLTYPE_TO_DMG = {
+  '常态攻击': 'normalAtk',
+  '共鸣技能': 'resonanceSkill',
+  '共鸣解放': 'resonanceLiberation',
+  '共鸣回路': 'resonanceSkill',
+}
+
+var BUFF_TO_DMG_KEY = {
+  normalAtkDmg: 'normalAtk',
+  heavyAtkDmg: 'heavyAtk',
+  resonanceSkillDmg: 'resonanceSkill',
+  resonanceLiberationDmg: 'resonanceLiberation',
+  phantomDmg: 'phantom',
+}
+
 // Cost分配选项
 var COST_OPTIONS = [
   { label: '全部', value: 'all' },
@@ -114,6 +136,38 @@ function costToIndex(cost) {
 function roundScore(value) {
   if (!value || isNaN(value)) return 0
   return Math.round(value * 10000) / 10000
+}
+
+function round5(value) {
+  return Math.round(value * 100000) / 100000
+}
+
+function round9(value) {
+  return Math.round(value * 1000000000) / 1000000000
+}
+
+function parseParamValue(paramStr) {
+  if (!paramStr) return 0
+  var match = String(paramStr).match(/^([0-9.]+)(%?)$/)
+  if (!match) return 0
+  var val = parseFloat(match[1])
+  return match[2] === '%' ? val / 100 : val
+}
+
+function parseMultiplierStr(str) {
+  if (!str || String(str).indexOf('%') < 0) return 0
+  var parts = String(str).split('+')
+  var total = 0
+  for (var i = 0; i < parts.length; i++) {
+    var trimmed = parts[i].trim()
+    var match = trimmed.match(/^([0-9.]+)%(?:\*(\d+))?$/)
+    if (match) {
+      var pct = parseFloat(match[1]) / 100
+      var count = match[2] ? parseInt(match[2]) : 1
+      total += pct * count
+    }
+  }
+  return total
 }
 
 Page({
@@ -455,13 +509,17 @@ Page({
   /** 执行搭配计算（主线程） */
   runCalculation() {
     try {
-      // TODO: 实际计算逻辑需要从 loadout-worker.ts 移植
-      // 这里先用模拟数据演示 UI 结构
-      var mockResults = this.generateMockResults()
-      this._results = mockResults
+      var config = {
+        sonatas: this.data.sonatas,
+        costFilter: this.data.costFilter,
+        excludeEchoIds: this.buildExcludedEchoIds(),
+      }
+      var echoes = this.applyExcludedEchoes(this._echoes, config.excludeEchoIds)
+      var results = this.calculateLoadouts(echoes, this._calc, config, this._echoes)
+      this._results = results
 
       // 处理结果
-      this.processResults(mockResults)
+      this.processResults(results)
 
       this.setData({
         computing: false,
@@ -477,6 +535,7 @@ Page({
   /** 处理计算结果：排序、过滤、格式化 */
   processResults(results) {
     var rankMode = this.data.rankMode
+    var costFilter = this.data.costFilter
     var activeSkillTypeCount = this.data.activeSkillTypeCount
     var minCritRate = this.data.minCritRate
     var minEnergyRegen = this.data.minEnergyRegen
@@ -486,10 +545,17 @@ Page({
     var energyThreshold = minEnergyRegen ? parseFloat(minEnergyRegen) / 100 : 0
 
     // 排序
-    var sorted = results.slice()
+    var sorted = results.slice().filter(function (r) {
+      return this.matchesCostFilter(r.echoes, costFilter)
+    }, this)
     if (rankMode === 'damage' && this._charBase) {
-      // TODO: 按伤害排序需要调用 calcDamage
-      // 这里保留真实伤害排序接入点。
+      sorted = sorted.map(function (r) {
+        return Object.assign({}, r, {
+          damage: this.calcLoadoutDamage(r.echoes),
+        })
+      }, this).sort(function (a, b) {
+        return (b.damage || 0) - (a.damage || 0)
+      })
     }
 
     // 格式化 + 过滤
@@ -509,7 +575,7 @@ Page({
         energyDisplay: (stats.energyRegen * 100).toFixed(1) + '%',
         critRateBelow,
         energyBelow,
-        costPattern: r.echoes.map(function (e) { return 'C' + e.cost }).join('+'),
+        costPattern: this.formatCostPattern(r.echoes),
         damage: r.damage || 0,
         damageDisplay: r.damage ? r.damage.toLocaleString() : '',
         damageLabel: activeSkillTypeCount > 0 ? '筛选' : '总',
@@ -537,6 +603,7 @@ Page({
       filtered = filtered.filter(function (r) { return !r.critRateBelow && !r.energyBelow })
       belowCount = before - filtered.length
     }
+    this._results = filtered
 
     this.setData({
       sortedResults: formatted,
@@ -561,6 +628,282 @@ Page({
     }
 
     return { critRate, energyRegen }
+  },
+
+  buildExcludedEchoIds() {
+    var excluded = {}
+    var active = this.data.excludedIds || {}
+    var loadouts = this.data.savedLoadouts || []
+    for (var i = 0; i < loadouts.length; i++) {
+      var loadout = loadouts[i]
+      if (!active[loadout.id]) continue
+      var echoes = loadout.echoes || []
+      for (var j = 0; j < echoes.length; j++) {
+        if (echoes[j] && echoes[j].id) excluded[echoes[j].id] = true
+      }
+    }
+    return excluded
+  },
+
+  applyExcludedEchoes(echoes, excludeEchoIds) {
+    if (!excludeEchoIds || Object.keys(excludeEchoIds).length === 0) return echoes
+    return echoes.filter(function (echo) {
+      return !excludeEchoIds[echo.id]
+    })
+  },
+
+  hasDoubleCrit(echo) {
+    var substats = echo.substats || []
+    var hasCrit = false
+    var hasCritDmg = false
+    for (var i = 0; i < substats.length; i++) {
+      if (substats[i].type === 'CRIT_RATE') hasCrit = true
+      if (substats[i].type === 'CRIT_DMG') hasCritDmg = true
+    }
+    return hasCrit && hasCritDmg
+  },
+
+  countEchoCosts(echoes) {
+    var counts = { 1: 0, 3: 0, 4: 0 }
+    for (var i = 0; i < echoes.length; i++) {
+      var cost = echoes[i].cost
+      if (counts[cost] == null) counts[cost] = 0
+      counts[cost] += 1
+    }
+    return counts
+  },
+
+  formatCostPattern(echoes) {
+    return echoes.slice().sort(function (a, b) {
+      return b.cost - a.cost
+    }).map(function (e) { return 'C' + e.cost }).join('+')
+  },
+
+  matchesCostFilter(echoes, costFilter) {
+    if (!costFilter || costFilter === 'all') return true
+    if (!echoes || echoes.length !== 5) return false
+
+    var counts = this.countEchoCosts(echoes)
+    if (costFilter === '4+3+3+1+1') {
+      return counts[1] === 2 && counts[3] === 2 && counts[4] === 1
+    }
+    if (costFilter === '4+4+1+1+1') {
+      return counts[1] === 3 && counts[3] === 0 && counts[4] === 2
+    }
+    return true
+  },
+
+  getCostFilterTargets(costFilter) {
+    if (costFilter === '4+3+3+1+1') return [4, 3, 3, 1, 1]
+    if (costFilter === '4+4+1+1+1') return [4, 4, 1, 1, 1]
+    return null
+  },
+
+  getCostDistributions(totalCost) {
+    var results = []
+    for (var c4 = 0; c4 <= 5; c4++) {
+      for (var c3 = 0; c3 <= 5 - c4; c3++) {
+        var c1 = 5 - c4 - c3
+        if (c1 + c3 * 3 + c4 * 4 === totalCost) {
+          results.push([c1, c3, c4])
+        }
+      }
+    }
+    return results
+  },
+
+  getCostDistributionsLeq(maxCost) {
+    var results = []
+    for (var c4 = 0; c4 <= 5; c4++) {
+      for (var c3 = 0; c3 <= 5 - c4; c3++) {
+        var c1 = 5 - c4 - c3
+        var total = c1 + c3 * 3 + c4 * 4
+        if (total <= maxCost) results.push([c1, c3, c4])
+      }
+    }
+    return results
+  },
+
+  topK(echoes, k) {
+    return echoes.sort(function (a, b) { return b.score - a.score }).slice(0, k)
+  },
+
+  enumerateCombinations(arr, k) {
+    if (k === 0) return [[]]
+    if (k === 1) {
+      return arr.map(function (e) { return [e] })
+    }
+    var results = []
+    var n = arr.length
+    if (k === 2) {
+      for (var i = 0; i < n - 1; i++) {
+        for (var j = i + 1; j < n; j++) results.push([arr[i], arr[j]])
+      }
+      return results
+    }
+    if (k === 3) {
+      for (var a = 0; a < n - 2; a++) {
+        for (var b = a + 1; b < n - 1; b++) {
+          for (var c = b + 1; c < n; c++) results.push([arr[a], arr[b], arr[c]])
+        }
+      }
+      return results
+    }
+    if (k === 4) {
+      for (var p = 0; p < n - 3; p++) {
+        for (var q = p + 1; q < n - 2; q++) {
+          for (var r = q + 1; r < n - 1; r++) {
+            for (var s = r + 1; s < n; s++) results.push([arr[p], arr[q], arr[r], arr[s]])
+          }
+        }
+      }
+      return results
+    }
+    if (k === 5) {
+      for (var v = 0; v < n - 4; v++) {
+        for (var w = v + 1; w < n - 3; w++) {
+          for (var x = w + 1; x < n - 2; x++) {
+            for (var y = x + 1; y < n - 1; y++) {
+              for (var z = y + 1; z < n; z++) results.push([arr[v], arr[w], arr[x], arr[y], arr[z]])
+            }
+          }
+        }
+      }
+    }
+    return results
+  },
+
+  hasDuplicateSameCostName(echoes) {
+    var seen = {}
+    for (var i = 0; i < echoes.length; i++) {
+      var echo = echoes[i]
+      var key = echo.cost + ':' + (echo.monsterName || echo.monsterId || echo.id)
+      if (seen[key]) return true
+      seen[key] = true
+    }
+    return false
+  },
+
+  matchesSonataConstraint(echoes, sonataConstraint) {
+    if (!sonataConstraint || sonataConstraint.type === 'none') return true
+    if (sonataConstraint.type === 'single') {
+      for (var i = 0; i < echoes.length; i++) {
+        if (echoes[i].sonata !== sonataConstraint.sonata) return false
+      }
+      return true
+    }
+    if (sonataConstraint.type === 'dual') {
+      var s1 = sonataConstraint.sonatas[0]
+      var s2 = sonataConstraint.sonatas[1]
+      var countS1 = 0
+      var countS2 = 0
+      for (var j = 0; j < echoes.length; j++) {
+        if (echoes[j].sonata === s1) countS1++
+        if (echoes[j].sonata === s2) countS2++
+      }
+      return countS1 >= 2 && countS2 >= 2
+    }
+    return true
+  },
+
+  findBestCombinations(bucket1, bucket3, bucket4, distributions, sonataConstraint) {
+    var top10 = []
+    var minTopScore = -Infinity
+    for (var d = 0; d < distributions.length; d++) {
+      var dist = distributions[d]
+      var c1 = dist[0]
+      var c3 = dist[1]
+      var c4 = dist[2]
+      if (c1 > bucket1.length || c3 > bucket3.length || c4 > bucket4.length) continue
+
+      var picks1 = this.enumerateCombinations(bucket1, c1)
+      var picks3 = this.enumerateCombinations(bucket3, c3)
+      var picks4 = this.enumerateCombinations(bucket4, c4)
+      for (var i = 0; i < picks1.length; i++) {
+        for (var j = 0; j < picks3.length; j++) {
+          for (var k = 0; k < picks4.length; k++) {
+            var combined = picks1[i].concat(picks3[j], picks4[k])
+            if (this.hasDuplicateSameCostName(combined)) continue
+            if (!this.matchesSonataConstraint(combined, sonataConstraint)) continue
+
+            var totalScore = combined.reduce(function (sum, e) { return sum + e.score }, 0)
+            if (top10.length < 10 || totalScore > minTopScore) {
+              var loadout = {
+                echoes: combined.map(function (e) { return e.echo }),
+                score: totalScore,
+              }
+              top10.push(loadout)
+              top10.sort(function (a, b) { return b.score - a.score })
+              if (top10.length > 10) top10.length = 10
+              minTopScore = top10[top10.length - 1].score
+            }
+          }
+        }
+      }
+    }
+    return top10
+  },
+
+  calculateLoadouts(echoes, calc, config, allEchoes) {
+    if (!calc || !echoes || echoes.length < 5) return []
+    var sonatas = config.sonatas || []
+    var filtered = echoes
+    var sonataConstraint = { type: 'none' }
+
+    if (sonatas.length === 1) {
+      var single = sonatas[0]
+      var singleFiltered = echoes.filter(function (e) { return e.sonata === single })
+      if (singleFiltered.length >= 5) {
+        filtered = singleFiltered
+        sonataConstraint = { type: 'single', sonata: single }
+      }
+    } else if (sonatas.length === 2) {
+      var s1 = sonatas[0]
+      var s2 = sonatas[1]
+      var count1 = echoes.filter(function (e) { return e.sonata === s1 }).length
+      var count2 = echoes.filter(function (e) { return e.sonata === s2 }).length
+      if (count1 >= 2 && count2 >= 2) {
+        sonataConstraint = { type: 'dual', sonatas: [s1, s2] }
+      }
+    }
+
+    filtered = filtered.filter(function (echo) {
+      return this.hasDoubleCrit(echo)
+    }, this)
+
+    var scored = filtered.map(function (echo) {
+      var detail = this.scoreEchoDetailed(echo)
+      return {
+        id: echo.id,
+        echo: Object.assign({}, echo, {
+          _score: detail.total,
+          _scoreDetails: detail.details,
+          _scoreMax: detail.scoreMax,
+        }),
+        score: detail.total,
+        cost: echo.cost,
+        sonata: echo.sonata,
+        monsterName: echo.monsterName || '',
+      }
+    }, this)
+
+    var bucket1 = this.topK(scored.filter(function (e) { return e.cost === 1 }), 15)
+    var bucket3 = this.topK(scored.filter(function (e) { return e.cost === 3 }), 15)
+    var bucket4 = this.topK(scored.filter(function (e) { return e.cost === 4 }), 15)
+
+    var costFilter = config.costFilter || 'all'
+    var distributions
+    if (costFilter === '4+3+3+1+1') {
+      distributions = [[2, 2, 1]]
+    } else if (costFilter === '4+4+1+1+1') {
+      distributions = [[3, 0, 2]]
+    } else if (sonatas.length === 1 || sonatas.length === 2) {
+      distributions = this.getCostDistributions(12)
+    } else {
+      distributions = this.getCostDistributionsLeq(12)
+    }
+
+    return this.findBestCombinations(bucket1, bucket3, bucket4, distributions, sonataConstraint)
   },
 
   getScoreMax(echo) {
@@ -656,41 +999,262 @@ Page({
     }
   },
 
-  /** 生成模拟结果（TODO: 替换为真实计算） */
-  generateMockResults() {
-    var results = []
-    var echoes = this._echoes
-
-    if (echoes.length < 5) return results
-
-    // 随机组合5个声骸作为演示
-    for (let i = 0; i < Math.min(10, Math.floor(echoes.length / 5)); i++) {
-      var selected = []
-      var used = new Set()
-      while (selected.length < 5 && used.size < echoes.length) {
-        var idx = Math.floor(Math.random() * echoes.length)
-        if (!used.has(idx)) {
-          used.add(idx)
-          var sourceEcho = echoes[idx]
-          var detail = this.scoreEchoDetailed(sourceEcho)
-          var echoScore = detail.scoreMax ? detail.total : (20 + Math.random() * 25)
-          selected.push(Object.assign({}, sourceEcho, {
-            _score: echoScore,
-            _scoreDetails: detail.details,
-            _scoreMax: detail.scoreMax,
-          }))
+  collectDamageEchoStats(echoes) {
+    var stats = {
+      atkPct: 0,
+      flatAtk: 0,
+      critRate: 0,
+      critDmg: 0,
+      elemDmg: 0,
+      skillDmg: { normalAtk: 0, heavyAtk: 0, resonanceSkill: 0, resonanceLiberation: 0, phantom: 0 },
+    }
+    for (var i = 0; i < echoes.length; i++) {
+      var echo = echoes[i]
+      var entries = [echo.mainStat, echo.secondaryStat].concat(echo.substats || []).filter(Boolean)
+      for (var j = 0; j < entries.length; j++) {
+        var entry = entries[j]
+        var value = entry.value
+        if (entry.type === 'ATK_PCT') stats.atkPct += value / 100
+        else if (entry.type === 'FLAT_ATK') stats.flatAtk += value
+        else if (entry.type === 'CRIT_RATE') stats.critRate += value / 100
+        else if (entry.type === 'CRIT_DMG') stats.critDmg += value / 100
+        else if (entry.type === 'ELEM_DMG') stats.elemDmg += value / 100
+        else {
+          var skillKey = SKILL_DMG_MAP[entry.type]
+          if (skillKey) stats.skillDmg[skillKey] += value / 100
         }
       }
-      var totalScore = selected.reduce(function (s, e) { return s + (e._score || 0) }, 0)
-      results.push({
-        echoes: selected,
-        score: totalScore,
-        damage: 0,
-      })
+
+      if (echo.nightmareBonus) {
+        if (echo.nightmareBonus.elemDmg) stats.elemDmg += echo.nightmareBonus.elemDmg
+        if (echo.nightmareBonus.secondValue > 0) {
+          if (echo.nightmareBonus.secondType === 'critRate') {
+            stats.critRate += echo.nightmareBonus.secondValue
+          } else {
+            var nmKey = BUFF_TO_DMG_KEY[echo.nightmareBonus.secondType]
+            if (nmKey && stats.skillDmg[nmKey] != null) {
+              stats.skillDmg[nmKey] += echo.nightmareBonus.secondValue
+            }
+          }
+        }
+      }
+    }
+    return stats
+  },
+
+  collectSonataBuffs(echoes) {
+    var counts = {}
+    for (var i = 0; i < echoes.length; i++) {
+      var sonata = echoes[i].sonata
+      if (sonata) counts[sonata] = (counts[sonata] || 0) + 1
     }
 
-    results.sort(function (a, b) { return b.score - a.score })
-    return results
+    var buff = {
+      atkPct: 0,
+      elemDmg: 0,
+      critRate: 0,
+      critDmg: 0,
+      skillDmg: {},
+    }
+    var applyBuff = function (type, value) {
+      if (type === 'atkPct') buff.atkPct += value
+      else if (type === 'elemDmg') buff.elemDmg += value
+      else if (type === 'critRate') buff.critRate += value
+      else if (type === 'critDmg') buff.critDmg += value
+      else {
+        var key = BUFF_TO_DMG_KEY[type]
+        if (key) buff.skillDmg[key] = (buff.skillDmg[key] || 0) + value
+      }
+    }
+
+    Object.keys(counts).forEach(function (sonata) {
+      var effect = SONATA_EFFECTS[sonata]
+      var count = counts[sonata]
+      if (!effect) return
+      var groups = []
+      if (count >= 2 && effect.set2) groups = groups.concat(effect.set2)
+      if (count >= 3 && effect.set3) groups = groups.concat(effect.set3)
+      if (count >= 5 && effect.set5) groups = groups.concat(effect.set5)
+      for (var j = 0; j < groups.length; j++) {
+        var eff = groups[j]
+        var val = eff.stacks ? eff.value * eff.stacks : eff.value
+        applyBuff(eff.type, val)
+      }
+    })
+    return buff
+  },
+
+  isBuffEnabled(buff) {
+    return buff.enabled !== false
+  },
+
+  buffMatchesSkill(buff, skillName) {
+    if (!buff.targetSkill) return true
+    try {
+      return new RegExp(buff.targetSkill).test(skillName)
+    } catch (e) {
+      return skillName.indexOf(buff.targetSkill) >= 0
+    }
+  },
+
+  calcDamageForLoadout(echoes) {
+    var character = this._charBase
+    if (!character || !character.skills || character.skills.length === 0) return { totalExpected: 0, skills: [] }
+    var weapon = this._weapons[this.data.weaponIndex] || this._weapons[0]
+    if (!weapon) return { totalExpected: 0, skills: [] }
+
+    var echoStats = this.collectDamageEchoStats(echoes)
+    var sonataBuff = this.collectSonataBuffs(echoes)
+    var refineIdx = Math.max(0, Math.min(4, this.data.weaponRefine - 1))
+    var levelIdx = 9
+    var baseAtk = (character.baseAtk || 0) + (weapon.baseAtk || 0)
+    var totalAtkPct = echoStats.atkPct + sonataBuff.atkPct
+    var totalCritRate = 0.05 + echoStats.critRate + sonataBuff.critRate
+    var totalCritDmg = 1.5 + echoStats.critDmg + sonataBuff.critDmg
+    var baseElemDmg = echoStats.elemDmg + sonataBuff.elemDmg
+    var skillDmgBonuses = {
+      normalAtk: echoStats.skillDmg.normalAtk + (sonataBuff.skillDmg.normalAtk || 0),
+      heavyAtk: echoStats.skillDmg.heavyAtk + (sonataBuff.skillDmg.heavyAtk || 0),
+      resonanceSkill: echoStats.skillDmg.resonanceSkill + (sonataBuff.skillDmg.resonanceSkill || 0),
+      resonanceLiberation: echoStats.skillDmg.resonanceLiberation + (sonataBuff.skillDmg.resonanceLiberation || 0),
+      phantom: echoStats.skillDmg.phantom + (sonataBuff.skillDmg.phantom || 0),
+    }
+    var totalDefIgnore = 0
+    var totalResReduce = 0
+    var globalDmgDeepen = 0
+
+    if (weapon.atkPct) totalAtkPct += weapon.atkPct
+    if (weapon.critRate) totalCritRate += weapon.critRate
+    if (weapon.critDmg) totalCritDmg += weapon.critDmg
+
+    var enabledBuffs = (character.inherentBuffs || []).filter(this.isBuffEnabled)
+    for (var i = 0; i < enabledBuffs.length; i++) {
+      var buff = enabledBuffs[i]
+      if (buff.targetSkill) continue
+      if (buff.type === 'atkPct') totalAtkPct += buff.value
+      else if (buff.type === 'critRate') totalCritRate += buff.value
+      else if (buff.type === 'critDmg') totalCritDmg += buff.value
+      else if (buff.type === 'elemDmg') baseElemDmg += buff.value
+      else if (buff.type === 'defIgnore') totalDefIgnore += buff.value
+      else if (buff.type === 'resReduce') totalResReduce += buff.value
+      else if (buff.type === 'dmgDeepen') globalDmgDeepen += buff.value
+      else {
+        var buffSkillKey = BUFF_TO_DMG_KEY[buff.type]
+        if (buffSkillKey) skillDmgBonuses[buffSkillKey] += buff.value
+      }
+    }
+
+    var chainEffects = character.chainEffects || []
+    var activeChainLevel = Math.min(6, this.data.chainLevel || 0)
+    var activeChainEffects = []
+    for (var c = 0; c < chainEffects.length; c++) {
+      if (chainEffects[c].sequence <= activeChainLevel && chainEffects[c].enabled !== false) {
+        activeChainEffects.push(chainEffects[c])
+      }
+    }
+    for (var ce = 0; ce < activeChainEffects.length; ce++) {
+      var chain = activeChainEffects[ce]
+      if (chain.targetSkill) continue
+      if (chain.type === 'atkPct') totalAtkPct += chain.value
+      else if (chain.type === 'critRate') totalCritRate += chain.value
+      else if (chain.type === 'critDmg') totalCritDmg += chain.value
+      else if (chain.type === 'elemDmg') baseElemDmg += chain.value
+      else if (chain.type === 'defIgnore') totalDefIgnore += chain.value
+      else if (chain.type === 'resReduce') totalResReduce += chain.value
+      else if (chain.type === 'dmgDeepen') globalDmgDeepen += chain.value
+      else {
+        var chainSkillKey = BUFF_TO_DMG_KEY[chain.type]
+        if (chainSkillKey) skillDmgBonuses[chainSkillKey] += chain.value
+      }
+    }
+
+    var weaponDmgBonuses = {}
+    var passiveEffects = weapon.passiveEffects || []
+    for (var pe = 0; pe < passiveEffects.length; pe++) {
+      var passive = passiveEffects[pe]
+      var paramArr = weapon.passive && weapon.passive.param && weapon.passive.param[passive.paramIdx]
+      if (!paramArr) continue
+      var val = parseParamValue(paramArr[refineIdx] || paramArr[paramArr.length - 1] || '')
+      if (passive.stacks) {
+        var stackCount = passive.stackParamIdx != null
+          ? parseParamValue(weapon.passive.param[passive.stackParamIdx] && weapon.passive.param[passive.stackParamIdx][refineIdx])
+          : passive.stacks
+        val *= stackCount
+      }
+      if (passive.type === 'atkPct') totalAtkPct += val
+      else if (passive.type === 'critRate') totalCritRate += val
+      else if (passive.type === 'critDmg') totalCritDmg += val
+      else if (passive.type === 'elemDmg') baseElemDmg += val
+      else {
+        var passiveKey = BUFF_TO_DMG_KEY[passive.type]
+        if (passiveKey) weaponDmgBonuses[passiveKey] = (weaponDmgBonuses[passiveKey] || 0) + val
+      }
+    }
+
+    var totalAtk = round5(baseAtk * (1 + totalAtkPct) + echoStats.flatAtk)
+    var defMult = round9(190 / (188 + 190 * (1 - totalDefIgnore)))
+    var resMult = round5(1 - Math.max(0, 0.1 - totalResReduce))
+    var skills = character.skills.map(function (skill) {
+      var multiplierStr = skill.multipliers[levelIdx] || skill.multipliers[skill.multipliers.length - 1] || '0%'
+      var multiplier = parseMultiplierStr(multiplierStr)
+      var dmgBonus = baseElemDmg + (skill.bonusDmg || 0)
+      var skillDmgDeepen = globalDmgDeepen
+      var skillGuaranteedCrit = false
+      var dmgKey = skill.isHeavy ? 'heavyAtk' : (SKILLTYPE_TO_DMG[skill.skillType] || '')
+      if (dmgKey) {
+        dmgBonus += skillDmgBonuses[dmgKey] || 0
+        dmgBonus += weaponDmgBonuses[dmgKey] || 0
+      }
+
+      for (var b = 0; b < enabledBuffs.length; b++) {
+        var tb = enabledBuffs[b]
+        if (!tb.targetSkill || !this.buffMatchesSkill(tb, skill.name)) continue
+        if (tb.type === 'dmgDeepen') skillDmgDeepen += tb.value
+        else {
+          var tbKey = BUFF_TO_DMG_KEY[tb.type]
+          if (tbKey) dmgBonus += tb.value
+        }
+      }
+
+      for (var ac = 0; ac < activeChainEffects.length; ac++) {
+        var tc = activeChainEffects[ac]
+        if (!tc.targetSkill || !this.buffMatchesSkill(tc, skill.name)) continue
+        if (tc.type === 'guaranteedCrit') skillGuaranteedCrit = true
+        else if (tc.type === 'dmgDeepen') skillDmgDeepen += tc.value
+        else if (tc.type === 'multiplierBoost') multiplier *= (1 + tc.value)
+        else {
+          var tcKey = BUFF_TO_DMG_KEY[tc.type]
+          if (tcKey) dmgBonus += tc.value
+          else if (tc.type === 'elemDmg') dmgBonus += tc.value
+        }
+      }
+
+      var baseDmg = round5(totalAtk * multiplier)
+      var expectedCritMult = skillGuaranteedCrit ? totalCritDmg : round5(totalCritRate * totalCritDmg)
+      var expected = round5(round5(round5(round5(baseDmg * round5(1 + dmgBonus)) * round5(1 + skillDmgDeepen)) * expectedCritMult) * defMult) * resMult
+      return {
+        name: skill.name,
+        skillType: skill.skillType,
+        expected: Math.round(expected),
+      }
+    }, this)
+
+    return {
+      totalExpected: skills.reduce(function (sum, skill) { return sum + skill.expected }, 0),
+      skills: skills,
+    }
+  },
+
+  calcLoadoutDamage(echoes) {
+    var result = this.calcDamageForLoadout(echoes)
+    var activeSkillTypes = this.data.activeSkillTypes || {}
+    var activeKeys = Object.keys(activeSkillTypes).filter(function (key) { return activeSkillTypes[key] })
+    if (activeKeys.length === 0) return result.totalExpected
+    return result.skills.filter(function (skill) {
+      return activeSkillTypes[skill.skillType]
+    }).reduce(function (sum, skill) {
+      return sum + skill.expected
+    }, 0)
   },
 
   /** 保存套装 */
