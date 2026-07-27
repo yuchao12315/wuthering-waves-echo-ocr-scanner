@@ -75,6 +75,24 @@ class MiniprogramUiRegressionTest(unittest.TestCase):
         self.assertIn('calcLoadoutDamage(r.echoes)', js)
         self.assertIn('activeSkillTypes', js)
 
+    def test_loadouts_damage_controls_do_not_render_blank_buttons(self):
+        wxml = self.read('miniprogram/pages/loadouts/loadouts.wxml')
+        js = self.read('miniprogram/pages/loadouts/loadouts.js')
+
+        self.assertIn('wx:for-item="loadout"', wxml)
+        self.assertNotIn('{{this}}', wxml)
+        self.assertIn('wx:for-item="level"', wxml)
+        self.assertIn('wx:for-item="skillType"', wxml)
+        self.assertIn('wx:for-item="refine"', wxml)
+        self.assertIn("{{loadout._showDamage ? '收起伤害' : '伤害计算'}}", wxml)
+
+        self.assertIn("require('../../data/characters-base.js')", js)
+        self.assertIn("require('../../data/weapons.js')", js)
+        self.assertIn('_charBaseMap = CHARACTERS_BASE', js)
+        self.assertIn('calcDamageForLoadout(idx)', js)
+        self.assertNotIn('模拟伤害结果', js)
+        self.assertNotIn("_expectedDisplay: '—'", js)
+
 
 if __name__ == '__main__':
     unittest.main()

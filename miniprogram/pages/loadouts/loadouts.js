@@ -1,5 +1,8 @@
 // pages/loadouts/loadouts.js
 var SONATA_EFFECTS = require('../../data/sonata-effects.js')
+var CHARACTERS_BASE = require('../../data/characters-base.js')
+var CHARACTER_WEIGHTS = require('../../data/character-weights.js')
+var WEAPONS = require('../../data/weapons.js')
 
 var SONATA_NAMES = {}
 Object.keys(SONATA_EFFECTS).forEach(function (key) {
@@ -20,6 +23,28 @@ var SKILL_TYPE_LABELS = {
   '变奏技能': '变奏', '共鸣回路': '回路',
 }
 
+var SKILL_DMG_MAP = {
+  NORMAL_ATK_DMG: 'normalAtk',
+  HEAVY_ATK_DMG: 'heavyAtk',
+  RESONANCE_SKILL_DMG: 'resonanceSkill',
+  RESONANCE_LIBERATION_DMG: 'resonanceLiberation',
+}
+
+var SKILLTYPE_TO_DMG = {
+  '常态攻击': 'normalAtk',
+  '共鸣技能': 'resonanceSkill',
+  '共鸣解放': 'resonanceLiberation',
+  '共鸣回路': 'resonanceSkill',
+}
+
+var BUFF_TO_DMG_KEY = {
+  normalAtkDmg: 'normalAtk',
+  heavyAtkDmg: 'heavyAtk',
+  resonanceSkillDmg: 'resonanceSkill',
+  resonanceLiberationDmg: 'resonanceLiberation',
+  phantomDmg: 'phantom',
+}
+
 function getGrade(score) {
   if (score >= 210) return { grade: 'SSS', gradeClass: 'SSS' }
   if (score >= 195) return { grade: 'SS', gradeClass: 'SS' }
@@ -38,12 +63,54 @@ function getSkillTagClass(tag) {
   return map[tag] || 'skill-other'
 }
 
+function round5(value) {
+  return Math.round(value * 100000) / 100000
+}
+
+function round9(value) {
+  return Math.round(value * 1000000000) / 1000000000
+}
+
+function parseParamValue(paramStr) {
+  if (!paramStr) return 0
+  var match = String(paramStr).match(/^([0-9.]+)(%?)$/)
+  if (!match) return 0
+  var val = parseFloat(match[1])
+  return match[2] === '%' ? val / 100 : val
+}
+
+function parseMultiplierStr(str) {
+  if (!str || String(str).indexOf('%') < 0) return 0
+  var parts = String(str).split('+')
+  var total = 0
+  for (var i = 0; i < parts.length; i++) {
+    var trimmed = parts[i].trim()
+    var match = trimmed.match(/^([0-9.]+)%(?:\*(\d+))?$/)
+    if (match) {
+      var pct = parseFloat(match[1]) / 100
+      var count = match[2] ? parseInt(match[2]) : 1
+      total += pct * count
+    }
+  }
+  return total
+}
+
+function formatPercent(value) {
+  return (value * 100).toFixed(1) + '%'
+}
+
+function formatInteger(value) {
+  return Math.round(value || 0).toLocaleString()
+}
+
 Page({
   data: {
     loadouts: [],
     filtered: [],
     charOptions: [],
     filterCharIdx: 0,
+    chainOptions: [0, 1, 2, 3, 4, 5, 6],
+    refineOptions: [1, 2, 3, 4, 5],
 
     // 编辑
     editingId: null,
@@ -58,8 +125,8 @@ Page({
     replaceEchoes: [],
   },
 
-  _charBaseMap: {},  // characterName → base data
-  _calcMap: {},      // characterName → weights
+  _charBaseMap: CHARACTERS_BASE,  // characterName → base data
+  _calcMap: CHARACTER_WEIGHTS,      // characterName → weights
   _weaponMap: {},    // weaponType → weapons[]
 
   onShow() {
@@ -69,6 +136,15 @@ Page({
 
   /** 加载角色数据（从全局或缓存） */
   loadCharData() {
+    this._charBaseMap = CHARACTERS_BASE
+    this._calcMap = CHARACTER_WEIGHTS
+    this._weaponMap = {}
+    for (var i = 0; i < WEAPONS.length; i++) {
+      var weapon = WEAPONS[i]
+      if (!this._weaponMap[weapon.type]) this._weaponMap[weapon.type] = []
+      this._weaponMap[weapon.type].push(weapon)
+    }
+
     var app = getApp()
     if (app.globalData.selectedCharacter) {
       var c = app.globalData.selectedCharacter
@@ -105,7 +181,11 @@ Page({
   /** 格式化单个套装 */
   formatLoadout(l) {
     var gradeInfo = getGrade(l.score)
-    var hasDamageData = l.characterName in this._charBaseMap
+    var charBase = this._charBaseMap[l.characterName]
+    var weaponNames = charBase && this._weaponMap[charBase.weaponType]
+      ? this._weaponMap[charBase.weaponType].map(function (w) { return w.name })
+      : []
+    var hasDamageData = !!(charBase && weaponNames.length > 0)
 
     return Object.assign({}, l, {
       _scoreDisplay: l.score.toFixed(2),
@@ -119,7 +199,7 @@ Page({
       _skillTypeLabels: SKILL_TYPE_LABELS,
       _activeSkillTypes: {},
       _activeSkillTypeCount: 0,
-      _weaponNames: [],
+      _weaponNames: weaponNames,
       _weaponIndex: 0,
       _refine: 1,
       _damageResult: null,
@@ -213,43 +293,302 @@ Page({
     this.setData(patch)
   },
 
+  collectDamageEchoStats(echoes) {
+    var stats = {
+      atkPct: 0,
+      flatAtk: 0,
+      critRate: 0,
+      critDmg: 0,
+      elemDmg: 0,
+      energyRegen: 0,
+      skillDmg: { normalAtk: 0, heavyAtk: 0, resonanceSkill: 0, resonanceLiberation: 0, phantom: 0 },
+    }
+    for (var i = 0; i < echoes.length; i++) {
+      var echo = echoes[i]
+      var entries = [echo.mainStat, echo.secondaryStat].concat(echo.substats || []).filter(Boolean)
+      for (var j = 0; j < entries.length; j++) {
+        var entry = entries[j]
+        var value = entry.value
+        if (entry.type === 'ATK_PCT') stats.atkPct += value / 100
+        else if (entry.type === 'FLAT_ATK') stats.flatAtk += value
+        else if (entry.type === 'CRIT_RATE') stats.critRate += value / 100
+        else if (entry.type === 'CRIT_DMG') stats.critDmg += value / 100
+        else if (entry.type === 'ELEM_DMG') stats.elemDmg += value / 100
+        else if (entry.type === 'ENERGY_REGEN') stats.energyRegen += value / 100
+        else {
+          var skillKey = SKILL_DMG_MAP[entry.type]
+          if (skillKey) stats.skillDmg[skillKey] += value / 100
+        }
+      }
+
+      if (echo.nightmareBonus) {
+        if (echo.nightmareBonus.elemDmg) stats.elemDmg += echo.nightmareBonus.elemDmg
+        if (echo.nightmareBonus.secondValue > 0) {
+          if (echo.nightmareBonus.secondType === 'critRate') {
+            stats.critRate += echo.nightmareBonus.secondValue
+          } else if (echo.nightmareBonus.secondType === 'energyRegen') {
+            stats.energyRegen += echo.nightmareBonus.secondValue
+          } else {
+            var nmKey = BUFF_TO_DMG_KEY[echo.nightmareBonus.secondType]
+            if (nmKey && stats.skillDmg[nmKey] != null) stats.skillDmg[nmKey] += echo.nightmareBonus.secondValue
+          }
+        }
+      }
+    }
+    return stats
+  },
+
+  collectSonataBuffs(echoes) {
+    var counts = {}
+    for (var i = 0; i < echoes.length; i++) {
+      var sonata = echoes[i].sonata
+      if (sonata) counts[sonata] = (counts[sonata] || 0) + 1
+    }
+
+    var buff = {
+      atkPct: 0,
+      elemDmg: 0,
+      critRate: 0,
+      critDmg: 0,
+      skillDmg: {},
+    }
+    var applyBuff = function (type, value) {
+      if (type === 'atkPct') buff.atkPct += value
+      else if (type === 'elemDmg') buff.elemDmg += value
+      else if (type === 'critRate') buff.critRate += value
+      else if (type === 'critDmg') buff.critDmg += value
+      else {
+        var key = BUFF_TO_DMG_KEY[type]
+        if (key) buff.skillDmg[key] = (buff.skillDmg[key] || 0) + value
+      }
+    }
+
+    Object.keys(counts).forEach(function (sonata) {
+      var effect = SONATA_EFFECTS[sonata]
+      var count = counts[sonata]
+      if (!effect) return
+      var groups = []
+      if (count >= 2 && effect.set2) groups = groups.concat(effect.set2)
+      if (count >= 3 && effect.set3) groups = groups.concat(effect.set3)
+      if (count >= 5 && effect.set5) groups = groups.concat(effect.set5)
+      for (var j = 0; j < groups.length; j++) {
+        var eff = groups[j]
+        var val = eff.stacks ? eff.value * eff.stacks : eff.value
+        applyBuff(eff.type, val)
+      }
+    })
+    return buff
+  },
+
+  buffMatchesSkill(buff, skillName) {
+    if (!buff.targetSkill) return true
+    try {
+      return new RegExp(buff.targetSkill).test(skillName)
+    } catch (e) {
+      return skillName.indexOf(buff.targetSkill) >= 0
+    }
+  },
+
+  calculateDamage(loadout) {
+    var charBase = this._charBaseMap[loadout.characterName]
+    if (!charBase || !charBase.skills || charBase.skills.length === 0) return null
+
+    var weapons = this._weaponMap[charBase.weaponType] || []
+    var weapon = weapons[loadout._weaponIndex] || weapons[0]
+    if (!weapon) return null
+
+    var echoStats = this.collectDamageEchoStats(loadout.echoes)
+    var sonataBuff = this.collectSonataBuffs(loadout.echoes)
+    var refineIdx = Math.max(0, Math.min(4, (loadout._refine || 1) - 1))
+    var levelIdx = 9
+    var baseAtk = (charBase.baseAtk || 0) + (weapon.baseAtk || 0)
+    var totalAtkPct = echoStats.atkPct + sonataBuff.atkPct
+    var totalCritRate = 0.05 + echoStats.critRate + sonataBuff.critRate
+    var totalCritDmg = 1.5 + echoStats.critDmg + sonataBuff.critDmg
+    var baseElemDmg = echoStats.elemDmg + sonataBuff.elemDmg
+    var skillDmgBonuses = {
+      normalAtk: echoStats.skillDmg.normalAtk + (sonataBuff.skillDmg.normalAtk || 0),
+      heavyAtk: echoStats.skillDmg.heavyAtk + (sonataBuff.skillDmg.heavyAtk || 0),
+      resonanceSkill: echoStats.skillDmg.resonanceSkill + (sonataBuff.skillDmg.resonanceSkill || 0),
+      resonanceLiberation: echoStats.skillDmg.resonanceLiberation + (sonataBuff.skillDmg.resonanceLiberation || 0),
+      phantom: echoStats.skillDmg.phantom + (sonataBuff.skillDmg.phantom || 0),
+    }
+    var totalDefIgnore = 0
+    var totalResReduce = 0
+    var globalDmgDeepen = 0
+
+    if (weapon.atkPct) totalAtkPct += weapon.atkPct
+    if (weapon.critRate) totalCritRate += weapon.critRate
+    if (weapon.critDmg) totalCritDmg += weapon.critDmg
+
+    var enabledBuffs = (charBase.inherentBuffs || []).filter(function (buff) { return buff.enabled !== false })
+    for (var i = 0; i < enabledBuffs.length; i++) {
+      var buff = enabledBuffs[i]
+      if (buff.targetSkill) continue
+      if (buff.type === 'atkPct') totalAtkPct += buff.value
+      else if (buff.type === 'critRate') totalCritRate += buff.value
+      else if (buff.type === 'critDmg') totalCritDmg += buff.value
+      else if (buff.type === 'elemDmg') baseElemDmg += buff.value
+      else if (buff.type === 'defIgnore') totalDefIgnore += buff.value
+      else if (buff.type === 'resReduce') totalResReduce += buff.value
+      else if (buff.type === 'dmgDeepen') globalDmgDeepen += buff.value
+      else {
+        var buffSkillKey = BUFF_TO_DMG_KEY[buff.type]
+        if (buffSkillKey) skillDmgBonuses[buffSkillKey] += buff.value
+      }
+    }
+
+    var activeChainLevel = Math.min(6, loadout._chainLevel || 0)
+    var activeChainEffects = []
+    var chainEffects = charBase.chainEffects || []
+    for (var ce = 0; ce < chainEffects.length; ce++) {
+      if (chainEffects[ce].sequence <= activeChainLevel && chainEffects[ce].enabled !== false) activeChainEffects.push(chainEffects[ce])
+    }
+    for (var ac = 0; ac < activeChainEffects.length; ac++) {
+      var chain = activeChainEffects[ac]
+      if (chain.targetSkill) continue
+      if (chain.type === 'atkPct') totalAtkPct += chain.value
+      else if (chain.type === 'critRate') totalCritRate += chain.value
+      else if (chain.type === 'critDmg') totalCritDmg += chain.value
+      else if (chain.type === 'elemDmg') baseElemDmg += chain.value
+      else if (chain.type === 'defIgnore') totalDefIgnore += chain.value
+      else if (chain.type === 'resReduce') totalResReduce += chain.value
+      else if (chain.type === 'dmgDeepen') globalDmgDeepen += chain.value
+      else {
+        var chainSkillKey = BUFF_TO_DMG_KEY[chain.type]
+        if (chainSkillKey) skillDmgBonuses[chainSkillKey] += chain.value
+      }
+    }
+
+    var weaponDmgBonuses = {}
+    var passiveEffects = weapon.passiveEffects || []
+    for (var pe = 0; pe < passiveEffects.length; pe++) {
+      var passive = passiveEffects[pe]
+      var paramArr = weapon.passive && weapon.passive.param && weapon.passive.param[passive.paramIdx]
+      if (!paramArr) continue
+      var val = parseParamValue(paramArr[refineIdx] || paramArr[paramArr.length - 1] || '')
+      if (passive.stacks) {
+        var stackCount = passive.stackParamIdx != null
+          ? parseParamValue(weapon.passive.param[passive.stackParamIdx] && weapon.passive.param[passive.stackParamIdx][refineIdx])
+          : passive.stacks
+        val *= stackCount
+      }
+      if (passive.type === 'atkPct') totalAtkPct += val
+      else if (passive.type === 'critRate') totalCritRate += val
+      else if (passive.type === 'critDmg') totalCritDmg += val
+      else if (passive.type === 'elemDmg') baseElemDmg += val
+      else {
+        var passiveKey = BUFF_TO_DMG_KEY[passive.type]
+        if (passiveKey) weaponDmgBonuses[passiveKey] = (weaponDmgBonuses[passiveKey] || 0) + val
+      }
+    }
+
+    var totalAtk = round5(baseAtk * (1 + totalAtkPct) + echoStats.flatAtk)
+    var defMult = round9(190 / (188 + 190 * (1 - totalDefIgnore)))
+    var resMult = round5(1 - Math.max(0, 0.1 - totalResReduce))
+    var skills = (charBase.skills || []).map(function (skill) {
+      var multiplierStr = (skill.multipliers && (skill.multipliers[levelIdx] || skill.multipliers[skill.multipliers.length - 1])) || '0%'
+      var multiplier = parseMultiplierStr(multiplierStr)
+      var dmgBonus = baseElemDmg + (skill.bonusDmg || 0)
+      var skillDmgDeepen = globalDmgDeepen
+      var skillGuaranteedCrit = false
+      var dmgKey = skill.isHeavy ? 'heavyAtk' : (SKILLTYPE_TO_DMG[skill.skillType] || '')
+      if (dmgKey) {
+        dmgBonus += skillDmgBonuses[dmgKey] || 0
+        dmgBonus += weaponDmgBonuses[dmgKey] || 0
+      }
+
+      for (var b = 0; b < enabledBuffs.length; b++) {
+        var targetBuff = enabledBuffs[b]
+        if (!targetBuff.targetSkill || !this.buffMatchesSkill(targetBuff, skill.name)) continue
+        if (targetBuff.type === 'dmgDeepen') skillDmgDeepen += targetBuff.value
+        else {
+          var targetBuffKey = BUFF_TO_DMG_KEY[targetBuff.type]
+          if (targetBuffKey) dmgBonus += targetBuff.value
+        }
+      }
+
+      for (var c = 0; c < activeChainEffects.length; c++) {
+        var targetChain = activeChainEffects[c]
+        if (!targetChain.targetSkill || !this.buffMatchesSkill(targetChain, skill.name)) continue
+        if (targetChain.type === 'guaranteedCrit') skillGuaranteedCrit = true
+        else if (targetChain.type === 'dmgDeepen') skillDmgDeepen += targetChain.value
+        else if (targetChain.type === 'multiplierBoost') multiplier *= (1 + targetChain.value)
+        else {
+          var targetChainKey = BUFF_TO_DMG_KEY[targetChain.type]
+          if (targetChainKey) dmgBonus += targetChain.value
+          else if (targetChain.type === 'elemDmg') dmgBonus += targetChain.value
+        }
+      }
+
+      var baseDmg = round5(totalAtk * multiplier)
+      var dmgBonusTotal = round5(1 + dmgBonus)
+      var deepenMult = round5(1 + skillDmgDeepen)
+      var critMult = skillGuaranteedCrit ? totalCritDmg : round5(totalCritRate * totalCritDmg)
+      var expected = round5(round5(round5(round5(baseDmg * dmgBonusTotal) * deepenMult) * critMult) * defMult) * resMult
+      var crit = round5(round5(round5(round5(baseDmg * dmgBonusTotal) * deepenMult) * totalCritDmg) * defMult) * resMult
+      return {
+        name: skill.name,
+        tag: skill.tag || 'E',
+        tagClass: getSkillTagClass(skill.tag || 'E'),
+        skillType: skill.skillType || '',
+        multiplierStr: multiplierStr,
+        expected: Math.round(expected),
+        crit: Math.round(crit),
+        _expectedDisplay: formatInteger(expected),
+        _critDisplay: formatInteger(crit),
+      }
+    }, this)
+
+    return {
+      panel: {
+        atk: parseFloat(totalAtk.toFixed(1)),
+        critRate: totalCritRate,
+        critDmg: totalCritDmg,
+        elemDmg: baseElemDmg,
+        energyRegen: echoStats.energyRegen,
+      },
+      skills: skills,
+      totalExpected: skills.reduce(function (sum, skill) { return sum + skill.expected }, 0),
+    }
+  },
+
+  buildDisplayDamageResult(loadout) {
+    var result = this.calculateDamage(loadout)
+    if (!result) return null
+    var active = loadout._activeSkillTypes || {}
+    var activeKeys = Object.keys(active).filter(function (key) { return active[key] })
+    var filteredSkills = activeKeys.length === 0 ? result.skills : result.skills.filter(function (skill) {
+      return active[skill.skillType]
+    })
+    var filteredTotal = filteredSkills.reduce(function (sum, skill) { return sum + skill.expected }, 0)
+    result._critRateDisplay = formatPercent(result.panel.critRate)
+    result._critDmgDisplay = formatPercent(result.panel.critDmg)
+    result._elemDmgDisplay = formatPercent(result.panel.elemDmg)
+    result._energyDisplay = formatPercent(result.panel.energyRegen)
+    result._filteredSkills = filteredSkills
+    result._filteredTotalDisplay = formatInteger(filteredTotal)
+    return result
+  },
+
   calcDamageForLoadout(idx) {
     var loadout = this.data.filtered[idx]
     var charBase = this._charBaseMap[loadout.characterName]
     if (!charBase) return
 
-    // 提取技能类型
     var skillTypeSet = new Set()
     if (charBase.skills) {
       charBase.skills.forEach(function (s) { if (s.skillType) skillTypeSet.add(s.skillType) })
     }
     var skillTypes = Array.from(skillTypeSet)
-
-    // 模拟伤害结果 (TODO: 接入真实 calcDamage)
-    var mockSkills = (charBase.skills || []).slice(0, 5).map(function (s) { return {
-      name: s.name,
-      tag: s.tag || 'E',
-      tagClass: getSkillTagClass(s.tag || 'E'),
-      skillType: s.skillType || '',
-      multiplierStr: (s.multipliers && s.multipliers[9]) || '100%',
-      _expectedDisplay: '—',
-      _critDisplay: '—',
-    } })
-
-    var damageResult = {
-      panel: { atk: 0, critRate: 0, critDmg: 0, elemDmg: 0, energyRegen: 0 },
-      _critRateDisplay: '0%',
-      _critDmgDisplay: '0%',
-      _elemDmgDisplay: '0%',
-      _energyDisplay: '0%',
-      _filteredSkills: mockSkills,
-    }
+    var damageResult = this.buildDisplayDamageResult(loadout)
+    if (!damageResult) return
 
     var patch = {}
     patch['filtered[' + idx + ']._damageResult'] = damageResult
     patch['filtered[' + idx + ']._hasChainEffects'] = (charBase.chainEffects || []).length > 0
     patch['filtered[' + idx + ']._skillTypes'] = skillTypes
-    patch['filtered[' + idx + ']._filteredTotalDisplay'] = '—'
+    patch['filtered[' + idx + ']._filteredTotalDisplay'] = damageResult._filteredTotalDisplay
     this.setData(patch)
   },
 
@@ -258,9 +597,11 @@ Page({
     var level = e.currentTarget.dataset.level
     var idx = this.data.filtered.findIndex(function (l) { return l.id === id })
     if (idx >= 0) {
+      this.data.filtered[idx]._chainLevel = level
       var patch = {}
       patch['filtered[' + idx + ']._chainLevel'] = level
       this.setData(patch)
+      this.calcDamageForLoadout(idx)
     }
   },
 
@@ -271,20 +612,26 @@ Page({
     if (idx < 0) return
     var active = Object.assign({}, this.data.filtered[idx]._activeSkillTypes)
     if (active[type]) delete active[type]; else active[type] = true
+    this.data.filtered[idx]._activeSkillTypes = active
+    this.data.filtered[idx]._activeSkillTypeCount = Object.keys(active).length
     var patch = {}
     patch['filtered[' + idx + ']._activeSkillTypes'] = active
     patch['filtered[' + idx + ']._activeSkillTypeCount'] = Object.keys(active).length
     this.setData(patch)
+    this.calcDamageForLoadout(idx)
   },
 
   clearSkillTypes(e) {
     var targetId = e.currentTarget.dataset.id
     var idx = this.data.filtered.findIndex(function (l) { return l.id === targetId })
     if (idx >= 0) {
+      this.data.filtered[idx]._activeSkillTypes = {}
+      this.data.filtered[idx]._activeSkillTypeCount = 0
       var patch = {}
       patch['filtered[' + idx + ']._activeSkillTypes'] = {}
       patch['filtered[' + idx + ']._activeSkillTypeCount'] = 0
       this.setData(patch)
+      this.calcDamageForLoadout(idx)
     }
   },
 
@@ -292,9 +639,11 @@ Page({
     var targetId = e.currentTarget.dataset.id
     var idx = this.data.filtered.findIndex(function (l) { return l.id === targetId })
     if (idx >= 0) {
+      this.data.filtered[idx]._weaponIndex = parseInt(e.detail.value)
       var patch = {}
       patch['filtered[' + idx + ']._weaponIndex'] = parseInt(e.detail.value)
       this.setData(patch)
+      this.calcDamageForLoadout(idx)
     }
   },
 
@@ -303,9 +652,11 @@ Page({
     var refine = e.currentTarget.dataset.refine
     var idx = this.data.filtered.findIndex(function (l) { return l.id === id })
     if (idx >= 0) {
+      this.data.filtered[idx]._refine = refine
       var patch = {}
       patch['filtered[' + idx + ']._refine'] = refine
       this.setData(patch)
+      this.calcDamageForLoadout(idx)
     }
   },
 
