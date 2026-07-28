@@ -38,6 +38,8 @@ interface EchoStats {
   flatAtk: number
   hpPct: number
   flatHp: number
+  defPct: number
+  flatDef: number
   critRate: number
   critDmg: number
   elemDmg: number
@@ -50,7 +52,7 @@ interface EchoStats {
 
 function collectEchoStats(echoes: Echo[], characterName?: string): EchoStats {
   const stats: EchoStats = {
-    atkPct: 0, flatAtk: 0, hpPct: 0, flatHp: 0,
+    atkPct: 0, flatAtk: 0, hpPct: 0, flatHp: 0, defPct: 0, flatDef: 0,
     critRate: 0, critDmg: 0, elemDmg: 0, energyRegen: 0,
     skillDmg: { normalAtk: 0, heavyAtk: 0, resonanceSkill: 0, resonanceLiberation: 0, phantom: 0 },
     nightmareElemDmg: 0,
@@ -73,6 +75,8 @@ function collectEchoStats(echoes: Echo[], characterName?: string): EchoStats {
         case 'FLAT_ATK': stats.flatAtk += value; break
         case 'HP_PCT': stats.hpPct += value / 100; break
         case 'FLAT_HP': stats.flatHp += value; break
+        case 'DEF_PCT': stats.defPct += value / 100; break
+        case 'FLAT_DEF': stats.flatDef += value; break
         case 'CRIT_RATE': stats.critRate += value / 100; break
         case 'CRIT_DMG': stats.critDmg += value / 100; break
         case 'ELEM_DMG': stats.elemDmg += value / 100; break
@@ -98,13 +102,15 @@ function collectEchoStats(echoes: Echo[], characterName?: string): EchoStats {
   return stats
 }
 
-function collectSonataBuffs(echoes: Echo[]): { atkPct: number; elemDmg: number; critRate: number; critDmg: number; skillDmg: Record<string, number> } {
+function collectSonataBuffs(echoes: Echo[]): { atkPct: number; hpPct: number; defPct: number; elemDmg: number; critRate: number; critDmg: number; skillDmg: Record<string, number> } {
   const counts: Record<string, number> = {}
   for (const e of echoes) {
     if (e.sonata) counts[e.sonata] = (counts[e.sonata] ?? 0) + 1
   }
 
   let atkPct = 0
+  let hpPct = 0
+  let defPct = 0
   let elemDmg = 0
   let critRate = 0
   let critDmg = 0
@@ -139,6 +145,8 @@ function collectSonataBuffs(echoes: Echo[]): { atkPct: number; elemDmg: number; 
 
   function applyBuff(type: string, value: number) {
     if (type === 'atkPct') atkPct += value
+    else if (type === 'hpPct') hpPct += value
+    else if (type === 'defPct') defPct += value
     else if (type === 'elemDmg') elemDmg += value
     else if (type === 'critRate') critRate += value
     else if (type === 'critDmg') critDmg += value
@@ -148,7 +156,13 @@ function collectSonataBuffs(echoes: Echo[]): { atkPct: number; elemDmg: number; 
     }
   }
 
-  return { atkPct, elemDmg, critRate, critDmg, skillDmg }
+  return { atkPct, hpPct, defPct, elemDmg, critRate, critDmg, skillDmg }
+}
+
+function normalizeDamageStat(stat?: string): 'atk' | 'hp' | 'def' {
+  if (stat === 'hp' || stat === '生命') return 'hp'
+  if (stat === 'def' || stat === '防御') return 'def'
+  return 'atk'
 }
 
 function parseParamValue(paramStr: string): number {
@@ -170,6 +184,23 @@ export function parseMultiplierStr(str: string): number {
       const pct = parseFloat(match[1]) / 100
       const count = match[2] ? parseInt(match[2]) : 1
       total += pct * count
+    }
+  }
+  return total
+}
+
+function parseFlatBaseValue(str: string): number {
+  if (!str) return 0
+  const parts = str.split('+')
+  let total = 0
+  for (const part of parts) {
+    const trimmed = part.trim()
+    if (trimmed.includes('%')) continue
+    const match = trimmed.match(/^([0-9.]+)(?:\*(\d+))?$/)
+    if (match) {
+      const value = parseFloat(match[1])
+      const count = match[2] ? parseInt(match[2]) : 1
+      total += value * count
     }
   }
   return total
@@ -222,7 +253,7 @@ export function calcDamage(
   // Source tracking helpers
   type S = { label: string; value: number }
   const src = {
-    atk: [] as S[], critRate: [] as S[], critDmg: [] as S[], elemDmg: [] as S[],
+    atk: [] as S[], hp: [] as S[], def: [] as S[], critRate: [] as S[], critDmg: [] as S[], elemDmg: [] as S[],
     normalAtk: [] as S[], heavyAtk: [] as S[], resonanceSkill: [] as S[], resonanceLiberation: [] as S[],
   }
   function addSrc(cat: keyof typeof src, label: string, value: number) {
@@ -231,6 +262,8 @@ export function calcDamage(
 
   // --- Collect global buffs with source tracking ---
   let totalAtkPct = 0
+  let totalHpPct = 0
+  let totalDefPct = 0
   let totalCritRate = 0.05
   let totalCritDmg = 1.50
   let baseElemDmg = 0
@@ -245,12 +278,16 @@ export function calcDamage(
 
   // Echo stats
   if (echoStats.atkPct) { totalAtkPct += echoStats.atkPct; addSrc('atk', '声骸攻击%', echoStats.atkPct) }
+  if (echoStats.hpPct) { totalHpPct += echoStats.hpPct; addSrc('hp', '声骸生命%', echoStats.hpPct) }
+  if (echoStats.defPct) { totalDefPct += echoStats.defPct; addSrc('def', '声骸防御%', echoStats.defPct) }
   if (echoStats.critRate) { totalCritRate += echoStats.critRate; addSrc('critRate', '声骸暴击率', echoStats.critRate) }
   if (echoStats.critDmg) { totalCritDmg += echoStats.critDmg; addSrc('critDmg', '声骸暴击伤害', echoStats.critDmg) }
   if (echoStats.elemDmg) { baseElemDmg += echoStats.elemDmg; addSrc('elemDmg', '声骸属性伤害', echoStats.elemDmg) }
 
   // Sonata
   if (sonataBuff.atkPct) { totalAtkPct += sonataBuff.atkPct; addSrc('atk', '套装效果', sonataBuff.atkPct) }
+  if (sonataBuff.hpPct) { totalHpPct += sonataBuff.hpPct; addSrc('hp', '套装效果', sonataBuff.hpPct) }
+  if (sonataBuff.defPct) { totalDefPct += sonataBuff.defPct; addSrc('def', '套装效果', sonataBuff.defPct) }
   if (sonataBuff.elemDmg) { baseElemDmg += sonataBuff.elemDmg; addSrc('elemDmg', '套装效果', sonataBuff.elemDmg) }
   if (sonataBuff.critRate) { totalCritRate += sonataBuff.critRate; addSrc('critRate', '套装效果', sonataBuff.critRate) }
   if (sonataBuff.critDmg) { totalCritDmg += sonataBuff.critDmg; addSrc('critDmg', '套装效果', sonataBuff.critDmg) }
@@ -289,6 +326,8 @@ export function calcDamage(
     const lbl = buff.condition ?? '固有技能'
     switch (buff.type) {
       case 'atkPct': totalAtkPct += buff.value; addSrc('atk', lbl, buff.value); break
+      case 'hpPct': totalHpPct += buff.value; addSrc('hp', lbl, buff.value); break
+      case 'defPct': totalDefPct += buff.value; addSrc('def', lbl, buff.value); break
       case 'critRate': totalCritRate += buff.value; addSrc('critRate', lbl, buff.value); break
       case 'critDmg': totalCritDmg += buff.value; addSrc('critDmg', lbl, buff.value); break
       case 'elemDmg': baseElemDmg += buff.value; addSrc('elemDmg', lbl, buff.value); break
@@ -308,6 +347,8 @@ export function calcDamage(
     const lbl = `S${eff.sequence} ${eff.condition ?? '命座'}`
     switch (eff.type) {
       case 'atkPct': totalAtkPct += eff.value; addSrc('atk', lbl, eff.value); break
+      case 'hpPct': totalHpPct += eff.value; addSrc('hp', lbl, eff.value); break
+      case 'defPct': totalDefPct += eff.value; addSrc('def', lbl, eff.value); break
       case 'critRate': totalCritRate += eff.value; addSrc('critRate', lbl, eff.value); break
       case 'critDmg': totalCritDmg += eff.value; addSrc('critDmg', lbl, eff.value); break
       case 'elemDmg': baseElemDmg += eff.value; addSrc('elemDmg', lbl, eff.value); break
@@ -337,6 +378,8 @@ export function calcDamage(
       const lbl = `${weapon.name}被动`
       switch (eff.type) {
         case 'atkPct': totalAtkPct += val; addSrc('atk', lbl, val); break
+        case 'hpPct': totalHpPct += val; addSrc('hp', lbl, val); break
+        case 'defPct': totalDefPct += val; addSrc('def', lbl, val); break
         case 'critRate': totalCritRate += val; addSrc('critRate', lbl, val); break
         case 'critDmg': totalCritDmg += val; addSrc('critDmg', lbl, val); break
         case 'elemDmg': baseElemDmg += val; addSrc('elemDmg', lbl, val); break
@@ -349,8 +392,14 @@ export function calcDamage(
   }
 
   if (echoStats.flatAtk) addSrc('atk', '声骸固定攻击', echoStats.flatAtk)
+  if (echoStats.flatHp) addSrc('hp', '声骸固定生命', echoStats.flatHp)
+  if (echoStats.flatDef) addSrc('def', '声骸固定防御', echoStats.flatDef)
 
   const totalAtk = round5(baseAtk * (1 + totalAtkPct) + echoStats.flatAtk)
+  const baseHp = character.baseHp ?? 0
+  const baseDef = character.baseDef ?? 0
+  const totalHp = round5(baseHp * (1 + totalHpPct) + echoStats.flatHp)
+  const totalDef = round5(baseDef * (1 + totalDefPct) + echoStats.flatDef)
 
   const defReduce = totalDefIgnore
   const defPen = 0
@@ -363,8 +412,14 @@ export function calcDamage(
     baseAtk,
     weapon: weapon.name,
     totalAtkPct: round5(totalAtkPct),
+    totalHpPct: round5(totalHpPct),
+    totalDefPct: round5(totalDefPct),
     flatAtk: echoStats.flatAtk,
+    flatHp: echoStats.flatHp,
+    flatDef: echoStats.flatDef,
     totalAtk,
+    totalHp,
+    totalDef,
     critRate: totalCritRate,
     critDmg: totalCritDmg,
     baseElemDmg,
@@ -376,6 +431,7 @@ export function calcDamage(
   const skills = character.skills.map(skill => {
     const multiplierStr = skill.multipliers[levelIdx] ?? skill.multipliers[skill.multipliers.length - 1] ?? '0%'
     let multiplier = parseMultiplierStr(multiplierStr)
+    const flatBase = parseFlatBaseValue(multiplierStr)
 
     let dmgBonus = baseElemDmg + skill.bonusDmg
     let skillDmgDeepen = globalDmgDeepen
@@ -431,7 +487,9 @@ export function calcDamage(
       }
     }
 
-    const baseDmg = round5(totalAtk * multiplier)
+    const damageStat = normalizeDamageStat(skill.damageStat)
+    const baseStat = damageStat === 'hp' ? totalHp : damageStat === 'def' ? totalDef : totalAtk
+    const baseDmg = round5(baseStat * multiplier + flatBase)
     const deepenMult = round5(1 + skillDmgDeepen)
     const dmgBonusTotal = round5(1 + dmgBonus)
     const critMult = skillGuaranteedCrit ? totalCritDmg : round5(totalCritRate * totalCritDmg)
@@ -442,6 +500,9 @@ export function calcDamage(
 
     console.log(`[伤害计算] ${skill.name}`, {
       multiplier: `${multiplierStr} → ${multiplier}`,
+      damageStat,
+      baseStat,
+      flatBase,
       baseDmg,
       dmgBonus: round5(dmgBonus),
       dmgBonusTotal,
@@ -459,6 +520,7 @@ export function calcDamage(
       skillType: skill.skillType,
       multiplierStr,
       multiplier,
+      damageStat,
       expected: Math.round(expected),
       crit: Math.round(crit),
     }
@@ -474,6 +536,8 @@ export function calcDamage(
   return {
     panel: {
       atk: parseFloat(totalAtk.toFixed(1)),
+      hp: parseFloat(totalHp.toFixed(1)),
+      def: parseFloat(totalDef.toFixed(1)),
       critRate: totalCritRate,
       critDmg: totalCritDmg,
       elemDmg: baseElemDmg,
@@ -485,6 +549,8 @@ export function calcDamage(
     },
     breakdown: {
       atk: { total: parseFloat(totalAtk.toFixed(1)), baseAtk, sources: src.atk },
+      hp: { total: parseFloat(totalHp.toFixed(1)), baseHp, sources: src.hp },
+      def: { total: parseFloat(totalDef.toFixed(1)), baseDef, sources: src.def },
       critRate: { total: totalCritRate, sources: src.critRate },
       critDmg: { total: totalCritDmg, sources: src.critDmg },
       elemDmg: { total: baseElemDmg, sources: src.elemDmg },

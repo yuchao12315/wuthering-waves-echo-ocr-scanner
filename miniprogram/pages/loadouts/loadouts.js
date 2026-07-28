@@ -79,6 +79,12 @@ function parseParamValue(paramStr) {
   return match[2] === '%' ? val / 100 : val
 }
 
+function normalizeDamageStat(stat) {
+  if (stat === 'hp' || stat === '生命') return 'hp'
+  if (stat === 'def' || stat === '防御') return 'def'
+  return 'atk'
+}
+
 function parseMultiplierStr(str) {
   if (!str || String(str).indexOf('%') < 0) return 0
   var parts = String(str).split('+')
@@ -90,6 +96,23 @@ function parseMultiplierStr(str) {
       var pct = parseFloat(match[1]) / 100
       var count = match[2] ? parseInt(match[2]) : 1
       total += pct * count
+    }
+  }
+  return total
+}
+
+function parseFlatBaseValue(str) {
+  if (!str) return 0
+  var parts = String(str).split('+')
+  var total = 0
+  for (var i = 0; i < parts.length; i++) {
+    var trimmed = parts[i].trim()
+    if (trimmed.indexOf('%') >= 0) continue
+    var match = trimmed.match(/^([0-9.]+)(?:\*(\d+))?$/)
+    if (match) {
+      var value = parseFloat(match[1])
+      var count = match[2] ? parseInt(match[2]) : 1
+      total += value * count
     }
   }
   return total
@@ -297,6 +320,10 @@ Page({
     var stats = {
       atkPct: 0,
       flatAtk: 0,
+      hpPct: 0,
+      flatHp: 0,
+      defPct: 0,
+      flatDef: 0,
       critRate: 0,
       critDmg: 0,
       elemDmg: 0,
@@ -311,6 +338,10 @@ Page({
         var value = entry.value
         if (entry.type === 'ATK_PCT') stats.atkPct += value / 100
         else if (entry.type === 'FLAT_ATK') stats.flatAtk += value
+        else if (entry.type === 'HP_PCT') stats.hpPct += value / 100
+        else if (entry.type === 'FLAT_HP') stats.flatHp += value
+        else if (entry.type === 'DEF_PCT') stats.defPct += value / 100
+        else if (entry.type === 'FLAT_DEF') stats.flatDef += value
         else if (entry.type === 'CRIT_RATE') stats.critRate += value / 100
         else if (entry.type === 'CRIT_DMG') stats.critDmg += value / 100
         else if (entry.type === 'ELEM_DMG') stats.elemDmg += value / 100
@@ -347,6 +378,8 @@ Page({
 
     var buff = {
       atkPct: 0,
+      hpPct: 0,
+      defPct: 0,
       elemDmg: 0,
       critRate: 0,
       critDmg: 0,
@@ -354,6 +387,8 @@ Page({
     }
     var applyBuff = function (type, value) {
       if (type === 'atkPct') buff.atkPct += value
+      else if (type === 'hpPct') buff.hpPct += value
+      else if (type === 'defPct') buff.defPct += value
       else if (type === 'elemDmg') buff.elemDmg += value
       else if (type === 'critRate') buff.critRate += value
       else if (type === 'critDmg') buff.critDmg += value
@@ -402,7 +437,11 @@ Page({
     var refineIdx = Math.max(0, Math.min(4, (loadout._refine || 1) - 1))
     var levelIdx = 9
     var baseAtk = (charBase.baseAtk || 0) + (weapon.baseAtk || 0)
+    var baseHp = charBase.baseHp || 0
+    var baseDef = charBase.baseDef || 0
     var totalAtkPct = echoStats.atkPct + sonataBuff.atkPct
+    var totalHpPct = echoStats.hpPct + sonataBuff.hpPct
+    var totalDefPct = echoStats.defPct + sonataBuff.defPct
     var totalCritRate = 0.05 + echoStats.critRate + sonataBuff.critRate
     var totalCritDmg = 1.5 + echoStats.critDmg + sonataBuff.critDmg
     var baseElemDmg = echoStats.elemDmg + sonataBuff.elemDmg
@@ -426,6 +465,8 @@ Page({
       var buff = enabledBuffs[i]
       if (buff.targetSkill) continue
       if (buff.type === 'atkPct') totalAtkPct += buff.value
+      else if (buff.type === 'hpPct') totalHpPct += buff.value
+      else if (buff.type === 'defPct') totalDefPct += buff.value
       else if (buff.type === 'critRate') totalCritRate += buff.value
       else if (buff.type === 'critDmg') totalCritDmg += buff.value
       else if (buff.type === 'elemDmg') baseElemDmg += buff.value
@@ -448,6 +489,8 @@ Page({
       var chain = activeChainEffects[ac]
       if (chain.targetSkill) continue
       if (chain.type === 'atkPct') totalAtkPct += chain.value
+      else if (chain.type === 'hpPct') totalHpPct += chain.value
+      else if (chain.type === 'defPct') totalDefPct += chain.value
       else if (chain.type === 'critRate') totalCritRate += chain.value
       else if (chain.type === 'critDmg') totalCritDmg += chain.value
       else if (chain.type === 'elemDmg') baseElemDmg += chain.value
@@ -474,6 +517,8 @@ Page({
         val *= stackCount
       }
       if (passive.type === 'atkPct') totalAtkPct += val
+      else if (passive.type === 'hpPct') totalHpPct += val
+      else if (passive.type === 'defPct') totalDefPct += val
       else if (passive.type === 'critRate') totalCritRate += val
       else if (passive.type === 'critDmg') totalCritDmg += val
       else if (passive.type === 'elemDmg') baseElemDmg += val
@@ -484,11 +529,14 @@ Page({
     }
 
     var totalAtk = round5(baseAtk * (1 + totalAtkPct) + echoStats.flatAtk)
+    var totalHp = round5(baseHp * (1 + totalHpPct) + echoStats.flatHp)
+    var totalDef = round5(baseDef * (1 + totalDefPct) + echoStats.flatDef)
     var defMult = round9(190 / (188 + 190 * (1 - totalDefIgnore)))
     var resMult = round5(1 - Math.max(0, 0.1 - totalResReduce))
     var skills = (charBase.skills || []).map(function (skill) {
       var multiplierStr = (skill.multipliers && (skill.multipliers[levelIdx] || skill.multipliers[skill.multipliers.length - 1])) || '0%'
       var multiplier = parseMultiplierStr(multiplierStr)
+      var flatBase = parseFlatBaseValue(multiplierStr)
       var dmgBonus = baseElemDmg + (skill.bonusDmg || 0)
       var skillDmgDeepen = globalDmgDeepen
       var skillGuaranteedCrit = false
@@ -521,7 +569,9 @@ Page({
         }
       }
 
-      var baseDmg = round5(totalAtk * multiplier)
+      var damageStat = normalizeDamageStat(skill.damageStat)
+      var baseStat = damageStat === 'hp' ? totalHp : damageStat === 'def' ? totalDef : totalAtk
+      var baseDmg = round5(baseStat * multiplier + flatBase)
       var dmgBonusTotal = round5(1 + dmgBonus)
       var deepenMult = round5(1 + skillDmgDeepen)
       var critMult = skillGuaranteedCrit ? totalCritDmg : round5(totalCritRate * totalCritDmg)
@@ -533,6 +583,7 @@ Page({
         tagClass: getSkillTagClass(skill.tag || 'E'),
         skillType: skill.skillType || '',
         multiplierStr: multiplierStr,
+        damageStat: damageStat,
         expected: Math.round(expected),
         crit: Math.round(crit),
         _expectedDisplay: formatInteger(expected),
@@ -543,6 +594,8 @@ Page({
     return {
       panel: {
         atk: parseFloat(totalAtk.toFixed(1)),
+        hp: parseFloat(totalHp.toFixed(1)),
+        def: parseFloat(totalDef.toFixed(1)),
         critRate: totalCritRate,
         critDmg: totalCritDmg,
         elemDmg: baseElemDmg,

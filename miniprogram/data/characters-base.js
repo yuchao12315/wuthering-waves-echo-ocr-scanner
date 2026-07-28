@@ -683,7 +683,9 @@ module.exports = {
         "condition": "惊龙破空倍率+45%",
         "targetSkill": "惊龙破空"
       }
-    ]
+    ],
+    "baseHp": 10825,
+    "baseDef": 1258
   },
   "散华": {
     "baseAtk": 275,
@@ -1214,7 +1216,9 @@ module.exports = {
         "value": 0.2,
         "condition": "引爆冰棱/冰川后全队攻击+10%×2层"
       }
-    ]
+    ],
+    "baseHp": 10062,
+    "baseDef": 941
   },
   "凌阳": {
     "baseAtk": 437,
@@ -1854,7 +1858,9 @@ module.exports = {
         "condition": "行狮状态共鸣技能后普攻伤害加成+100%",
         "targetSkill": "普攻"
       }
-    ]
+    ],
+    "baseHp": 10387,
+    "baseDef": 1209
   },
   "折枝": {
     "baseAtk": 375,
@@ -2322,7 +2328,9 @@ module.exports = {
         "value": 0.2,
         "condition": "共鸣解放后全队攻击+20%"
       }
-    ]
+    ],
+    "baseHp": 12250,
+    "baseDef": 1197
   },
   "釉瑚": {
     "baseAtk": 262,
@@ -2915,7 +2923,9 @@ module.exports = {
         "value": 0.6,
         "condition": "施放奇珍赏后暴击伤害+15%×4层"
       }
-    ]
+    ],
+    "baseHp": 9975,
+    "baseDef": 1051
   },
   "珂莱塔": {
     "baseAtk": 462,
@@ -3506,7 +3516,9 @@ module.exports = {
         "condition": "共鸣解放死兆倍率+186.6%",
         "targetSkill": "死兆"
       }
-    ]
+    ],
+    "baseHp": 12450,
+    "baseDef": 1197
   },
   "绯雪": {
     "baseAtk": 462,
@@ -4336,7 +4348,9 @@ module.exports = {
         "condition": "预求我身·见心/归刃暴击伤害+500%",
         "targetSkill": "见心|归刃"
       }
-    ]
+    ],
+    "baseHp": 10300,
+    "baseDef": 1112
   },
   "洛瑟菈": {
     "baseAtk": 375,
@@ -4971,10 +4985,12 @@ module.exports = {
         "condition": "遗忘倍率+50%",
         "targetSkill": "遗忘"
       }
-    ]
+    ],
+    "baseHp": 12238,
+    "baseDef": 1198
   },
   "白芷": {
-    "baseAtk": 250,
+    "baseAtk": 212,
     "weaponType": "音感仪",
     "element": "冷凝",
     "ascensionStat": {
@@ -5015,7 +5031,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "hp"
       },
       {
         "name": "第二段伤害",
@@ -5044,7 +5061,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "hp"
       },
       {
         "name": "第三段伤害",
@@ -5073,7 +5091,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "hp"
       },
       {
         "name": "第四段伤害",
@@ -5102,7 +5121,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "hp"
       },
       {
         "name": "重击伤害",
@@ -5131,7 +5151,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "hp"
       },
       {
         "name": "空中攻击伤害",
@@ -5160,7 +5181,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "hp"
       },
       {
         "name": "闪避反击伤害",
@@ -5189,7 +5211,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "hp"
       },
       {
         "name": "应急预案",
@@ -5218,7 +5241,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "2",
-        "skillType": "共鸣技能"
+        "skillType": "共鸣技能",
+        "damageStat": "hp"
       },
       {
         "name": "治疗量",
@@ -5247,7 +5271,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "2",
-        "skillType": "共鸣技能"
+        "skillType": "共鸣技能",
+        "damageStat": "hp"
       },
       {
         "name": "频隙回响伤害",
@@ -5276,7 +5301,8 @@ module.exports = {
         "tag": "Q",
         "bonusDmg": 0,
         "treeId": "3",
-        "skillType": "共鸣解放"
+        "skillType": "共鸣解放",
+        "damageStat": "hp"
       },
       {
         "name": "频隙回响治疗量",
@@ -5305,7 +5331,8 @@ module.exports = {
         "tag": "Q",
         "bonusDmg": 0,
         "treeId": "3",
-        "skillType": "共鸣解放"
+        "skillType": "共鸣解放",
+        "damageStat": "hp"
       },
       {
         "name": "刹那合弥治疗量",
@@ -5334,7 +5361,8 @@ module.exports = {
         "tag": "Q",
         "bonusDmg": 0,
         "treeId": "3",
-        "skillType": "共鸣解放"
+        "skillType": "共鸣解放",
+        "damageStat": "hp"
       },
       {
         "name": "覆雪流盈",
@@ -5363,7 +5391,8 @@ module.exports = {
         "tag": "变奏",
         "bonusDmg": 0,
         "treeId": "6",
-        "skillType": "变奏技能"
+        "skillType": "变奏技能",
+        "damageStat": "hp"
       },
       {
         "name": "覆雪流盈治疗量",
@@ -5392,7 +5421,8 @@ module.exports = {
         "tag": "变奏",
         "bonusDmg": 0,
         "treeId": "6",
-        "skillType": "变奏技能"
+        "skillType": "变奏技能",
+        "damageStat": "hp"
       },
       {
         "name": "念意治疗量",
@@ -5421,7 +5451,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageStat": "hp"
       }
     ],
     "chainStats": [
@@ -5455,7 +5486,9 @@ module.exports = {
         "value": 0.12,
         "condition": "拾取天籁后全队冷凝伤害加成+12%"
       }
-    ]
+    ],
+    "baseHp": 12812,
+    "baseDef": 1002
   },
   "长离": {
     "baseAtk": 462,
@@ -6051,10 +6084,12 @@ module.exports = {
         "condition": "赫羽三相/焚身以火/离火照丹心忽视40%防御",
         "targetSkill": "赫羽三相|焚身以火|离火照丹心"
       }
-    ]
+    ],
+    "baseHp": 10387,
+    "baseDef": 1099
   },
   "安可": {
-    "baseAtk": 340,
+    "baseAtk": 425,
     "weaponType": "音感仪",
     "element": "热熔",
     "ascensionStat": {
@@ -6726,7 +6761,9 @@ module.exports = {
         "value": 0.25,
         "condition": "黑咩大暴走期间攻击+5%×5层"
       }
-    ]
+    ],
+    "baseHp": 10512,
+    "baseDef": 1246
   },
   "炽霞": {
     "baseAtk": 300,
@@ -7204,7 +7241,9 @@ module.exports = {
         "value": 0.25,
         "condition": "轰轰后全队普攻伤害+25%"
       }
-    ]
+    ],
+    "baseHp": 9087,
+    "baseDef": 953
   },
   "莫特斐": {
     "baseAtk": 250,
@@ -7675,7 +7714,9 @@ module.exports = {
         "value": 0.2,
         "condition": "施放暴烈终曲后全队攻击+20%"
       }
-    ]
+    ],
+    "baseHp": 10025,
+    "baseDef": 1136
   },
   "布兰特": {
     "baseAtk": 375,
@@ -8410,7 +8451,9 @@ module.exports = {
         "condition": "空中攻击倍率+30%",
         "targetSkill": "空中攻击"
       }
-    ]
+    ],
+    "baseHp": 11675,
+    "baseDef": 1307
   },
   "露帕": {
     "baseAtk": 387,
@@ -9178,7 +9221,9 @@ module.exports = {
         "condition": "狼舞的决意·极/荣光/变奏忽视30%防御",
         "targetSkill": "狼舞的决意|荣光|你无法逃离"
       }
-    ]
+    ],
+    "baseHp": 11912,
+    "baseDef": 1185
   },
   "嘉贝莉娜": {
     "baseAtk": 462,
@@ -10022,7 +10067,9 @@ module.exports = {
         "value": 0.6,
         "condition": "永恒位格期间普攻/重击/空中攻击/闪避反击倍率+60%"
       }
-    ]
+    ],
+    "baseHp": 10300,
+    "baseDef": 1112
   },
   "莫宁": {
     "baseAtk": 287,
@@ -10066,7 +10113,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "def"
       },
       {
         "name": "普攻第二段伤害",
@@ -10095,7 +10143,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "def"
       },
       {
         "name": "普攻第三段伤害",
@@ -10124,7 +10173,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "def"
       },
       {
         "name": "普攻第四段伤害",
@@ -10153,7 +10203,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "def"
       },
       {
         "name": "普攻·广域观测模式第一段伤害",
@@ -10182,7 +10233,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "def"
       },
       {
         "name": "普攻·广域观测模式第二段伤害",
@@ -10211,7 +10263,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "def"
       },
       {
         "name": "普攻·广域观测模式第三段伤害",
@@ -10240,7 +10293,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "def"
       },
       {
         "name": "重击伤害",
@@ -10269,7 +10323,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "def"
       },
       {
         "name": "空中攻击伤害",
@@ -10298,7 +10353,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "def"
       },
       {
         "name": "闪避反击伤害",
@@ -10327,7 +10383,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "def"
       },
       {
         "name": "闪避反击·广域观测模式伤害",
@@ -10356,7 +10413,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "def"
       },
       {
         "name": "分布式阵列治疗量",
@@ -10385,7 +10443,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "2",
-        "skillType": "共鸣技能"
+        "skillType": "共鸣技能",
+        "damageStat": "def"
       },
       {
         "name": "期望误差治疗量",
@@ -10414,7 +10473,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "2",
-        "skillType": "共鸣技能"
+        "skillType": "共鸣技能",
+        "damageStat": "def"
       },
       {
         "name": "最优求解伤害",
@@ -10443,7 +10503,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "2",
-        "skillType": "共鸣技能"
+        "skillType": "共鸣技能",
+        "damageStat": "def"
       },
       {
         "name": "分布式阵列伤害",
@@ -10472,7 +10533,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "2",
-        "skillType": "共鸣技能"
+        "skillType": "共鸣技能",
+        "damageStat": "def"
       },
       {
         "name": "临界协议",
@@ -10501,7 +10563,8 @@ module.exports = {
         "tag": "Q",
         "bonusDmg": 0,
         "treeId": "3",
-        "skillType": "共鸣解放"
+        "skillType": "共鸣解放",
+        "damageStat": "def"
       },
       {
         "name": "归敛",
@@ -10530,7 +10593,8 @@ module.exports = {
         "tag": "变奏",
         "bonusDmg": 0,
         "treeId": "6",
-        "skillType": "变奏技能"
+        "skillType": "变奏技能",
+        "damageStat": "def"
       },
       {
         "name": "谐振场治疗量",
@@ -10559,7 +10623,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageStat": "def"
       },
       {
         "name": "谐振场伤害",
@@ -10588,7 +10653,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageStat": "def"
       },
       {
         "name": "重击·位势转换伤害",
@@ -10617,7 +10683,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageStat": "def"
       },
       {
         "name": "重击·反演伤害",
@@ -10646,7 +10713,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageStat": "def"
       },
       {
         "name": "震谐响应·粒子射流伤害",
@@ -10675,7 +10743,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageStat": "def"
       }
     ],
     "chainStats": [
@@ -10718,7 +10787,9 @@ module.exports = {
         "condition": "共鸣解放·临界协议伤害+400%",
         "targetSkill": "临界协议"
       }
-    ]
+    ],
+    "baseDef": 1356,
+    "baseHp": 15375
   },
   "爱弥斯": {
     "baseAtk": 425,
@@ -11576,7 +11647,9 @@ module.exports = {
         "value": 0.4,
         "condition": "目标受到共鸣解放伤害+40%"
       }
-    ]
+    ],
+    "baseHp": 11025,
+    "baseDef": 1148
   },
   "达妮娅": {
     "baseAtk": 425,
@@ -12449,7 +12522,9 @@ module.exports = {
         "value": 0.6,
         "condition": "熵变强化时热熔伤害加成+60%"
       }
-    ]
+    ],
+    "baseHp": 11025,
+    "baseDef": 1148
   },
   "卡卡罗": {
     "baseAtk": 437,
@@ -13176,7 +13251,9 @@ module.exports = {
         "condition": "变奏技能伤害+50%",
         "targetSkill": "全境通缉|必要的手段"
       }
-    ]
+    ],
+    "baseHp": 10500,
+    "baseDef": 1185
   },
   "吟霖": {
     "baseAtk": 400,
@@ -13673,10 +13750,12 @@ module.exports = {
         "condition": "共鸣解放命中带标记目标伤害+100%",
         "targetSkill": "破天雷灭击"
       }
-    ]
+    ],
+    "baseHp": 11000,
+    "baseDef": 1283
   },
   "渊武": {
-    "baseAtk": 412,
+    "baseAtk": 225,
     "weaponType": "臂铠",
     "element": "导电",
     "ascensionStat": {
@@ -13728,7 +13807,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "def"
       },
       {
         "name": "第二段伤害",
@@ -13757,7 +13837,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "def"
       },
       {
         "name": "第三段伤害",
@@ -13786,7 +13867,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "def"
       },
       {
         "name": "第四段伤害",
@@ -13815,7 +13897,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "def"
       },
       {
         "name": "第五段伤害",
@@ -13844,7 +13927,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "def"
       },
       {
         "name": "重击伤害",
@@ -13873,7 +13957,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "def"
       },
       {
         "name": "空中攻击伤害",
@@ -13902,7 +13987,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "def"
       },
       {
         "name": "闪避反击伤害",
@@ -13931,7 +14017,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "def"
       },
       {
         "name": "拳震凌武",
@@ -13960,7 +14047,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "2",
-        "skillType": "共鸣技能"
+        "skillType": "共鸣技能",
+        "damageStat": "def"
       },
       {
         "name": "雷之楔协同攻击伤害",
@@ -13989,7 +14077,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "2",
-        "skillType": "共鸣技能"
+        "skillType": "共鸣技能",
+        "damageStat": "def"
       },
       {
         "name": "雷之楔引爆伤害",
@@ -14018,7 +14107,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "2",
-        "skillType": "共鸣技能"
+        "skillType": "共鸣技能",
+        "damageStat": "def"
       },
       {
         "name": "万壑雷伤害",
@@ -14047,7 +14137,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "2",
-        "skillType": "共鸣技能"
+        "skillType": "共鸣技能",
+        "damageStat": "def"
       },
       {
         "name": "寂土重明",
@@ -14076,7 +14167,8 @@ module.exports = {
         "tag": "Q",
         "bonusDmg": 0,
         "treeId": "3",
-        "skillType": "共鸣解放"
+        "skillType": "共鸣解放",
+        "damageStat": "def"
       },
       {
         "name": "轰雷",
@@ -14105,7 +14197,8 @@ module.exports = {
         "tag": "变奏",
         "bonusDmg": 0,
         "treeId": "6",
-        "skillType": "变奏技能"
+        "skillType": "变奏技能",
+        "damageStat": "def"
       },
       {
         "name": "掀雷伤害",
@@ -14134,7 +14227,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageStat": "def"
       },
       {
         "name": "雷厉风行普攻第一段伤害",
@@ -14163,7 +14257,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageStat": "def"
       },
       {
         "name": "雷厉风行普攻第二段伤害",
@@ -14192,7 +14287,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageStat": "def"
       },
       {
         "name": "雷厉风行普攻第三段伤害",
@@ -14221,7 +14317,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageStat": "def"
       },
       {
         "name": "雷厉风行普攻第四段伤害",
@@ -14250,7 +14347,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageStat": "def"
       },
       {
         "name": "雷厉风行普攻第五段伤害",
@@ -14279,7 +14377,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageStat": "def"
       },
       {
         "name": "雷厉风行重击伤害",
@@ -14308,7 +14407,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageStat": "def"
       },
       {
         "name": "蹑风追雷伤害",
@@ -14337,7 +14437,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageStat": "def"
       },
       {
         "name": "雷厉风行闪避反击伤害",
@@ -14366,7 +14467,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageStat": "def"
       }
     ],
     "chainStats": [
@@ -14416,7 +14518,9 @@ module.exports = {
         "value": 0.32,
         "condition": "雷之楔范围内全队防御+32%"
       }
-    ]
+    ],
+    "baseHp": 8525,
+    "baseDef": 1637
   },
   "相里要": {
     "baseAtk": 425,
@@ -15064,7 +15168,9 @@ module.exports = {
         "condition": "强化万方法则倍率+76%",
         "targetSkill": "万方法则"
       }
-    ]
+    ],
+    "baseHp": 10625,
+    "baseDef": 1222
   },
   "奥古斯塔": {
     "baseAtk": 462,
@@ -15784,10 +15890,12 @@ module.exports = {
         "value": 0.2,
         "condition": "变奏技能后全队攻击+20%"
       }
-    ]
+    ],
+    "baseHp": 10300,
+    "baseDef": 1112
   },
   "卜灵": {
-    "baseAtk": 250,
+    "baseAtk": 225,
     "weaponType": "音感仪",
     "element": "导电",
     "ascensionStat": {
@@ -16327,7 +16435,9 @@ module.exports = {
         "value": 0.5,
         "condition": "雷法·三才合一期间全队共鸣技能伤害加成+50%"
       }
-    ]
+    ],
+    "baseHp": 10625,
+    "baseDef": 1258
   },
   "丽贝卡": {
     "baseAtk": 400,
@@ -17234,7 +17344,9 @@ module.exports = {
         "value": 0.4,
         "condition": "所有来源普攻伤害加成数值+40%"
       }
-    ]
+    ],
+    "baseHp": 11600,
+    "baseDef": 1173
   },
   "忌炎": {
     "baseAtk": 437,
@@ -17857,7 +17969,9 @@ module.exports = {
         "condition": "苍躣八荒·后动消耗锐意之势每层倍率+120%×2",
         "targetSkill": "苍躣八荒"
       }
-    ]
+    ],
+    "baseHp": 10487,
+    "baseDef": 1185
   },
   "鉴心": {
     "baseAtk": 337,
@@ -18546,7 +18660,9 @@ module.exports = {
         "value": 0.8,
         "condition": "共鸣回路重击·混元气旋后共鸣解放涤净力场伤害+80%"
       }
-    ]
+    ],
+    "baseHp": 14112,
+    "baseDef": 1124
   },
   "漂泊者·气动": {
     "baseAtk": 437,
@@ -19131,10 +19247,12 @@ module.exports = {
         "condition": "共鸣技能缥缈无相倍率+30%",
         "targetSkill": "缥缈无相"
       }
-    ]
+    ],
+    "baseHp": 10775,
+    "baseDef": 1136
   },
   "秧秧": {
-    "baseAtk": 262,
+    "baseAtk": 250,
     "weaponType": "迅刀",
     "element": "气动",
     "ascensionStat": {
@@ -19585,7 +19703,9 @@ module.exports = {
         "value": 0.2,
         "condition": "空中攻击释羽后全队攻击+20%"
       }
-    ]
+    ],
+    "baseHp": 10200,
+    "baseDef": 1099
   },
   "秋水": {
     "baseAtk": 262,
@@ -20127,7 +20247,9 @@ module.exports = {
         "value": 0.08,
         "condition": "共鸣解放使暴击+8%"
       }
-    ]
+    ],
+    "baseHp": 9850,
+    "baseDef": 1075
   },
   "夏空": {
     "baseAtk": 375,
@@ -20644,7 +20766,9 @@ module.exports = {
         "value": 0.4,
         "condition": "共鸣解放伤害加成+40%"
       }
-    ]
+    ],
+    "baseHp": 12237,
+    "baseDef": 1197
   },
   "卡提希娅": {
     "baseAtk": 312,
@@ -20693,7 +20817,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "hp"
       },
       {
         "name": "第二段伤害",
@@ -20722,7 +20847,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "hp"
       },
       {
         "name": "第三段伤害",
@@ -20751,7 +20877,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "hp"
       },
       {
         "name": "第四段伤害",
@@ -20780,7 +20907,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "hp"
       },
       {
         "name": "闪避反击伤害",
@@ -20809,7 +20937,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "hp"
       },
       {
         "name": "重击伤害",
@@ -20838,7 +20967,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "hp"
       },
       {
         "name": "空中攻击",
@@ -20867,7 +20997,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "hp"
       },
       {
         "name": "空中攻击回收一剑",
@@ -20896,7 +21027,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "hp"
       },
       {
         "name": "空中攻击回收二剑",
@@ -20925,7 +21057,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "hp"
       },
       {
         "name": "空中攻击回收三剑",
@@ -20954,7 +21087,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "hp"
       },
       {
         "name": "此剑以人之名",
@@ -20983,7 +21117,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "2",
-        "skillType": "共鸣技能"
+        "skillType": "共鸣技能",
+        "damageStat": "hp"
       },
       {
         "name": "看潮怒风哮之刃伤害",
@@ -21012,7 +21147,8 @@ module.exports = {
         "tag": "Q",
         "bonusDmg": 0,
         "treeId": "3",
-        "skillType": "共鸣解放"
+        "skillType": "共鸣解放",
+        "damageStat": "hp"
       },
       {
         "name": "此剑，为潮水的过去伤害",
@@ -21041,7 +21177,8 @@ module.exports = {
         "tag": "变奏",
         "bonusDmg": 0,
         "treeId": "6",
-        "skillType": "变奏技能"
+        "skillType": "变奏技能",
+        "damageStat": "hp"
       },
       {
         "name": "此剑，为自由的未来伤害",
@@ -21070,7 +21207,8 @@ module.exports = {
         "tag": "变奏",
         "bonusDmg": 0,
         "treeId": "6",
-        "skillType": "变奏技能"
+        "skillType": "变奏技能",
+        "damageStat": "hp"
       },
       {
         "name": "普攻第一段伤害",
@@ -21099,7 +21237,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageStat": "hp"
       },
       {
         "name": "普攻第二段伤害",
@@ -21128,7 +21267,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageStat": "hp"
       },
       {
         "name": "普攻第三段伤害",
@@ -21157,7 +21297,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageStat": "hp"
       },
       {
         "name": "普攻第四段伤害",
@@ -21186,7 +21327,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageStat": "hp"
       },
       {
         "name": "普攻第五段伤害",
@@ -21215,7 +21357,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageStat": "hp"
       },
       {
         "name": "闪避反击伤害",
@@ -21244,7 +21387,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageStat": "hp"
       },
       {
         "name": "上挑攻击伤害",
@@ -21273,7 +21417,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageStat": "hp"
       },
       {
         "name": "重击伤害",
@@ -21302,7 +21447,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageStat": "hp"
       },
       {
         "name": "强化重击伤害",
@@ -21331,7 +21477,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageStat": "hp"
       },
       {
         "name": "空中攻击第一段伤害",
@@ -21360,7 +21507,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageStat": "hp"
       },
       {
         "name": "空中攻击第二段伤害",
@@ -21389,7 +21537,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageStat": "hp"
       },
       {
         "name": "空中攻击第三段伤害",
@@ -21418,7 +21567,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageStat": "hp"
       },
       {
         "name": "共鸣技能·此剑为潮浪之意伤害",
@@ -21447,7 +21597,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageStat": "hp"
       },
       {
         "name": "共鸣技能·凭风斩浪破敌伤害",
@@ -21476,7 +21627,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageStat": "hp"
       }
     ],
     "chainStats": [
@@ -21540,7 +21692,9 @@ module.exports = {
         "value": 0.2,
         "condition": "附加异常效应后全队全属性伤害加成+20%"
       }
-    ]
+    ],
+    "baseHp": 14800,
+    "baseDef": 611
   },
   "尤诺": {
     "baseAtk": 450,
@@ -22500,7 +22654,9 @@ module.exports = {
         "condition": "重击·至臻的完满倍率+1600%",
         "targetSkill": "至臻的完满"
       }
-    ]
+    ],
+    "baseHp": 10525,
+    "baseDef": 1124
   },
   "仇远": {
     "baseAtk": 375,
@@ -23082,7 +23238,9 @@ module.exports = {
         "value": 0.15,
         "condition": "无视目标15%防御"
       }
-    ]
+    ],
+    "baseHp": 12237,
+    "baseDef": 1197
   },
   "西格莉卡": {
     "baseAtk": 437,
@@ -23767,7 +23925,9 @@ module.exports = {
         "condition": "天赋?满层忽视目标7.5%×4防御",
         "targetSkill": "符语|我即语义"
       }
-    ]
+    ],
+    "baseHp": 10775,
+    "baseDef": 1136
   },
   "漂泊者·衍射": {
     "baseAtk": 375,
@@ -24308,7 +24468,9 @@ module.exports = {
         "value": 0.1,
         "condition": "共鸣技能命中后目标衍射抗性-10%"
       }
-    ]
+    ],
+    "baseHp": 11400,
+    "baseDef": 1368
   },
   "维里奈": {
     "baseAtk": 337,
@@ -24996,7 +25158,9 @@ module.exports = {
         "condition": "重击/空中攻击星星花绽放伤害+20%",
         "targetSkill": "星星花绽放"
       }
-    ]
+    ],
+    "baseHp": 14237,
+    "baseDef": 1099
   },
   "灯灯": {
     "baseAtk": 337,
@@ -25691,7 +25855,9 @@ module.exports = {
         "value": 0.2,
         "condition": "共鸣解放后全队攻击+20%"
       }
-    ]
+    ],
+    "baseHp": 8500,
+    "baseDef": 879
   },
   "守岸人": {
     "baseAtk": 287,
@@ -25746,7 +25912,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "hp"
       },
       {
         "name": "普攻第二段伤害",
@@ -25775,7 +25942,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "hp"
       },
       {
         "name": "普攻第三段伤害",
@@ -25804,7 +25972,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "hp"
       },
       {
         "name": "普攻第四段伤害",
@@ -25833,7 +26002,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "hp"
       },
       {
         "name": "重击伤害",
@@ -25862,7 +26032,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "hp"
       },
       {
         "name": "下落攻击伤害",
@@ -25891,7 +26062,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "hp"
       },
       {
         "name": "闪避反击伤害",
@@ -25920,7 +26092,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "hp"
       },
       {
         "name": "黯星·蝶伤害",
@@ -25949,7 +26122,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "2",
-        "skillType": "共鸣技能"
+        "skillType": "共鸣技能",
+        "damageStat": "hp"
       },
       {
         "name": "治疗量",
@@ -25978,7 +26152,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "2",
-        "skillType": "共鸣技能"
+        "skillType": "共鸣技能",
+        "damageStat": "hp"
       },
       {
         "name": "治疗量",
@@ -26007,7 +26182,8 @@ module.exports = {
         "tag": "Q",
         "bonusDmg": 0,
         "treeId": "3",
-        "skillType": "共鸣解放"
+        "skillType": "共鸣解放",
+        "damageStat": "hp"
       },
       {
         "name": "启迪伤害",
@@ -26036,7 +26212,8 @@ module.exports = {
         "tag": "变奏",
         "bonusDmg": 0,
         "treeId": "6",
-        "skillType": "变奏技能"
+        "skillType": "变奏技能",
+        "damageStat": "hp"
       },
       {
         "name": "洞悉伤害",
@@ -26065,7 +26242,8 @@ module.exports = {
         "tag": "变奏",
         "bonusDmg": 0,
         "treeId": "6",
-        "skillType": "变奏技能"
+        "skillType": "变奏技能",
+        "damageStat": "hp"
       },
       {
         "name": "启迪治疗量",
@@ -26094,7 +26272,8 @@ module.exports = {
         "tag": "变奏",
         "bonusDmg": 0,
         "treeId": "6",
-        "skillType": "变奏技能"
+        "skillType": "变奏技能",
+        "damageStat": "hp"
       },
       {
         "name": "洞悉治疗量",
@@ -26123,7 +26302,8 @@ module.exports = {
         "tag": "变奏",
         "bonusDmg": 0,
         "treeId": "6",
-        "skillType": "变奏技能"
+        "skillType": "变奏技能",
+        "damageStat": "hp"
       },
       {
         "name": "耀星·蝶伤害",
@@ -26152,7 +26332,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageStat": "hp"
       },
       {
         "name": "演绎伤害",
@@ -26181,7 +26362,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageStat": "hp"
       },
       {
         "name": "衍变伤害",
@@ -26210,7 +26392,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageStat": "hp"
       }
     ],
     "chainStats": [
@@ -26252,7 +26435,9 @@ module.exports = {
         "condition": "变奏技能洞悉暴击伤害+500%",
         "targetSkill": "洞悉"
       }
-    ]
+    ],
+    "baseHp": 16712,
+    "baseDef": 1099
   },
   "菲比": {
     "baseAtk": 412,
@@ -26822,7 +27007,9 @@ module.exports = {
         "value": 0.12,
         "condition": "变奏技能后衍射伤害加成+12%"
       }
-    ]
+    ],
+    "baseHp": 10825,
+    "baseDef": 1258
   },
   "赞妮": {
     "baseAtk": 437,
@@ -27528,7 +27715,9 @@ module.exports = {
         "condition": "重斩系列倍率+40%",
         "targetSkill": "重斩"
       }
-    ]
+    ],
+    "baseHp": 10775,
+    "baseDef": 1136
   },
   "千咲": {
     "baseAtk": 437,
@@ -28523,7 +28712,9 @@ module.exports = {
         "value": 0.4,
         "condition": "虚无绞痕·终焉目标受到千咲伤害+40%"
       }
-    ]
+    ],
+    "baseHp": 10775,
+    "baseDef": 1136
   },
   "琳奈": {
     "baseAtk": 375,
@@ -29462,7 +29653,9 @@ module.exports = {
         "condition": "心之彩满3层虹彩飞溅/视觉冲击伤害+30%×3",
         "targetSkill": "虹彩飞溅|视觉冲击"
       }
-    ]
+    ],
+    "baseHp": 12237,
+    "baseDef": 1197
   },
   "露西": {
     "baseAtk": 425,
@@ -30376,10 +30569,12 @@ module.exports = {
         "value": 0.4,
         "condition": "骇破·偏移/干涉目标受到重击伤害+40%"
       }
-    ]
+    ],
+    "baseHp": 11025,
+    "baseDef": 1149
   },
   "桃祈": {
-    "baseAtk": 275,
+    "baseAtk": 225,
     "weaponType": "长刃",
     "element": "湮灭",
     "ascensionStat": {
@@ -30420,7 +30615,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "def"
       },
       {
         "name": "第二段伤害",
@@ -30449,7 +30645,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "def"
       },
       {
         "name": "第三段伤害",
@@ -30478,7 +30675,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "def"
       },
       {
         "name": "第四段伤害",
@@ -30507,7 +30705,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "def"
       },
       {
         "name": "重击攻击伤害",
@@ -30536,7 +30735,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "def"
       },
       {
         "name": "重击时伤害减免",
@@ -30555,7 +30755,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "def"
       },
       {
         "name": "后发制人伤害",
@@ -30584,7 +30785,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "def"
       },
       {
         "name": "空中攻击伤害",
@@ -30613,7 +30815,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "def"
       },
       {
         "name": "闪避反击伤害",
@@ -30642,7 +30845,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageStat": "def"
       },
       {
         "name": "固若金汤",
@@ -30671,7 +30875,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "2",
-        "skillType": "共鸣技能"
+        "skillType": "共鸣技能",
+        "damageStat": "def"
       },
       {
         "name": "磐岩护壁减伤",
@@ -30690,7 +30895,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "2",
-        "skillType": "共鸣技能"
+        "skillType": "共鸣技能",
+        "damageStat": "def"
       },
       {
         "name": "不动如山",
@@ -30719,7 +30925,8 @@ module.exports = {
         "tag": "Q",
         "bonusDmg": 0,
         "treeId": "3",
-        "skillType": "共鸣解放"
+        "skillType": "共鸣解放",
+        "damageStat": "def"
       },
       {
         "name": "携攻守阵",
@@ -30748,7 +30955,8 @@ module.exports = {
         "tag": "变奏",
         "bonusDmg": 0,
         "treeId": "6",
-        "skillType": "变奏技能"
+        "skillType": "变奏技能",
+        "damageStat": "def"
       },
       {
         "name": "御反之隙第一段伤害",
@@ -30777,7 +30985,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageStat": "def"
       },
       {
         "name": "御反之隙第二段伤害",
@@ -30806,7 +31015,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageStat": "def"
       },
       {
         "name": "御反之隙第三段伤害",
@@ -30835,7 +31045,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageStat": "def"
       },
       {
         "name": "御反之隙第一段护盾",
@@ -30864,7 +31075,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageStat": "def"
       },
       {
         "name": "御反之隙第二段护盾",
@@ -30893,7 +31105,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageStat": "def"
       },
       {
         "name": "御反之隙第三段护盾",
@@ -30922,7 +31135,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageStat": "def"
       }
     ],
     "chainStats": [
@@ -30987,7 +31201,9 @@ module.exports = {
         "value": 0.4,
         "condition": "磐岩护壁护盾期间普攻/重击伤害+40%"
       }
-    ]
+    ],
+    "baseHp": 8950,
+    "baseDef": 1564
   },
   "丹瑾": {
     "baseAtk": 262,
@@ -31627,7 +31843,9 @@ module.exports = {
         "value": 0.2,
         "condition": "施放重击缭乱后全队攻击+20%"
       }
-    ]
+    ],
+    "baseHp": 9437,
+    "baseDef": 1148
   },
   "椿": {
     "baseAtk": 450,
@@ -32310,7 +32528,9 @@ module.exports = {
         "condition": "变奏技能八千春秋倍率+303%",
         "targetSkill": "八千春秋"
       }
-    ]
+    ],
+    "baseHp": 10325,
+    "baseDef": 1161
   },
   "漂泊者·湮灭": {
     "baseAtk": 412,
@@ -33019,7 +33239,9 @@ module.exports = {
         "value": 0.25,
         "condition": "暗涌状态暴击+25%"
       }
-    ]
+    ],
+    "baseHp": 10825,
+    "baseDef": 1258
   },
   "洛可可": {
     "baseAtk": 375,
@@ -33505,7 +33727,9 @@ module.exports = {
         "condition": "共鸣解放后幻想照进现实无视60%防御",
         "targetSkill": "幻想照进现实"
       }
-    ]
+    ],
+    "baseHp": 12250,
+    "baseDef": 1197
   },
   "坎特蕾拉": {
     "baseAtk": 400,
@@ -34206,7 +34430,9 @@ module.exports = {
         "value": 0.3,
         "condition": "施放共鸣解放后无视30%防御"
       }
-    ]
+    ],
+    "baseHp": 11600,
+    "baseDef": 1099
   },
   "弗洛洛": {
     "baseAtk": 437,
@@ -34831,7 +35057,9 @@ module.exports = {
         "value": 0.6,
         "condition": "指挥状态登场时湮灭伤害加成+60%"
       }
-    ]
+    ],
+    "baseHp": 10775,
+    "baseDef": 1136
   },
   "陆·赫斯": {
     "baseAtk": 462,
@@ -35566,10 +35794,66 @@ module.exports = {
         "condition": "谐度破坏后目标受斩杀日冕/日髓/判决伤害+30%",
         "targetSkill": "斩杀日冕|日髓阵列|判决大地"
       }
-    ]
+    ],
+    "baseHp": 10300,
+    "baseDef": 1112
+  },
+  "漂泊者·导电": {
+    "baseAtk": 438,
+    "weaponType": "迅刀",
+    "element": "导电",
+    "ascensionStat": {
+      "type": "critRate",
+      "value": 0.08
+    },
+    "inherentBuffs": [],
+    "chainStats": [],
+    "chainEffects": [],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [],
+    "baseHp": 10775,
+    "baseDef": 1137
+  },
+  "秧秧·玄翎": {
+    "baseAtk": 425,
+    "weaponType": "迅刀",
+    "element": "湮灭",
+    "ascensionStat": {
+      "type": "critRate",
+      "value": 0.08
+    },
+    "inherentBuffs": [],
+    "chainStats": [],
+    "chainEffects": [],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": [],
+    "baseHp": 11025,
+    "baseDef": 1148
+  },
+  "穗穗": {
+    "baseAtk": 375,
+    "weaponType": "音感仪",
+    "element": "冷凝",
+    "ascensionStat": {
+      "type": "critRate",
+      "value": 0.08
+    },
+    "inherentBuffs": [],
+    "chainStats": [],
+    "chainEffects": [],
+    "weaponPassiveMultiplier": {
+      "E": 0,
+      "Q": 0,
+      "变奏": 0
+    },
+    "skills": []
   }
-,
-  "漂泊者·导电": {"baseAtk":437,"weaponType":"迅刀","element":"导电","ascensionStat":{"type":"critRate","value":0.08},"inherentBuffs":[],"chainStats":[],"chainEffects":[],"weaponPassiveMultiplier":{"E":0,"Q":0,"变奏":0},"skills":[]},
-  "秧秧·玄翎": {"baseAtk":412,"weaponType":"迅刀","element":"湮灭","ascensionStat":{"type":"critRate","value":0.08},"inherentBuffs":[],"chainStats":[],"chainEffects":[],"weaponPassiveMultiplier":{"E":0,"Q":0,"变奏":0},"skills":[]},
-  "穗穗": {"baseAtk":375,"weaponType":"音感仪","element":"冷凝","ascensionStat":{"type":"critRate","value":0.08},"inherentBuffs":[],"chainStats":[],"chainEffects":[],"weaponPassiveMultiplier":{"E":0,"Q":0,"变奏":0},"skills":[]}
 }

@@ -37,11 +37,87 @@ const weapon: Weapon = {
 }
 
 describe('calcDamage', () => {
+  it('uses HP as the skill base stat when a skill is marked as HP-scaling', () => {
+    const hpCharacter: CharacterBase = {
+      ...character,
+      baseAtk: 100,
+      baseHp: 10000,
+      skills: [{
+        name: '生命倍率伤害',
+        multipliers: ['500+100.00%'],
+        tag: 'E',
+        bonusDmg: 0,
+        treeId: '1',
+        skillType: '共鸣技能',
+        damageStat: 'hp',
+      }],
+    }
+    const echoes: Echo[] = [{
+      id: 'hp-test',
+      monsterId: 0,
+      monsterName: '生命测试声骸',
+      cost: 1,
+      rarity: 5,
+      level: 25,
+      tuneLevel: 5,
+      sonata: '',
+      mainStat: { type: 'HP_PCT', value: 10 },
+      secondaryStat: { type: 'FLAT_HP', value: 1000 },
+      substats: [],
+    }]
+
+    const result = calcDamage(hpCharacter, weapon, 1, echoes, -1, 1, 90, 89, 0)
+    const expectedDefMult = (100 + 90) / (199 + 90 + 89)
+    const expectedCrit = Math.round(12500 * expectedDefMult * 1.5)
+    const expectedAverage = Math.round(12500 * expectedDefMult * 0.05 * 1.5)
+
+    expect(result.panel.hp).toBe(12000)
+    expect(result.skills[0].crit).toBe(expectedCrit)
+    expect(result.skills[0].expected).toBe(expectedAverage)
+  })
+
   it('uses the level defense multiplier for a level 90 character against a level 89 enemy', () => {
     const result = calcDamage(character, weapon, 1, [], -1, 1, 90, 89, 0)
     const expectedDefMult = (100 + 90) / (199 + 90 + 89)
     const expectedCrit = Math.round(10000 * expectedDefMult * 1.5)
 
+    expect(result.skills[0].crit).toBe(expectedCrit)
+  })
+
+  it('keeps unmarked skills attack-scaling even when HP and DEF stats exist', () => {
+    const atkCharacter: CharacterBase = {
+      ...character,
+      baseAtk: 1000,
+      baseHp: 50000,
+      baseDef: 3000,
+    }
+    const echoes: Echo[] = [
+      {
+        id: 'hp-def-noise',
+        monsterId: 0,
+        monsterName: '生命防御干扰声骸',
+        cost: 4,
+        rarity: 5,
+        level: 25,
+        tuneLevel: 5,
+        sonata: '',
+        mainStat: { type: 'HP_PCT', value: 50 },
+        secondaryStat: { type: 'FLAT_HP', value: 5000 },
+        substats: [
+          { type: 'DEF_PCT', value: 50 },
+          { type: 'FLAT_DEF', value: 500 },
+        ],
+      },
+    ]
+
+    const result = calcDamage(atkCharacter, weapon, 1, echoes, -1, 1, 90, 89, 0)
+    const expectedDefMult = (100 + 90) / (199 + 90 + 89)
+    const expectedCrit = Math.round(1000 * expectedDefMult * 1.5)
+
+    expect(result.panel.atk).toBe(1000)
+    expect(result.panel.hp).toBe(80000)
+    expect(result.panel.def).toBe(5000)
+    expect(result.skills[0].damageStat).toBe('atk')
     expect(result.skills[0].crit).toBe(expectedCrit)
   })
 
@@ -153,5 +229,25 @@ describe('calcDamage', () => {
     expect(result.panel.elemDmg).toBeCloseTo(1.24, 5)
     expect(result.panel.resonanceSkillDmg).toBeCloseTo(0.919, 5)
     expect(hoho.crit).toBe(43918)
+  })
+
+  it('marks weight-biased characters with the matching damage base stat', () => {
+    const characters = charactersBase as Record<string, CharacterBase>
+    const expected = [
+      { name: '白芷', damageStat: 'hp', baseHp: 12812, baseDef: 1002 },
+      { name: '守岸人', damageStat: 'hp', baseHp: 16712, baseDef: 1099 },
+      { name: '卡提希娅', damageStat: 'hp', baseHp: 14800, baseDef: 611 },
+      { name: '渊武', damageStat: 'def', baseHp: 8525, baseDef: 1637 },
+      { name: '桃祈', damageStat: 'def', baseHp: 8950, baseDef: 1564 },
+      { name: '莫宁', damageStat: 'def', baseHp: 15375, baseDef: 1356 },
+    ] as const
+
+    for (const item of expected) {
+      const character = characters[item.name]
+      if ('baseHp' in item) expect(character.baseHp, item.name).toBe(item.baseHp)
+      expect(character.baseDef, item.name).toBe(item.baseDef)
+      expect(character.skills.length, item.name).toBeGreaterThan(0)
+      expect(character.skills.every(skill => skill.damageStat === item.damageStat), item.name).toBe(true)
+    }
   })
 })

@@ -1,3 +1,5 @@
+export type DamageStat = 'atk' | 'hp' | 'def'
+
 export interface Skill {
   name: string
   multipliers: string[]
@@ -6,6 +8,8 @@ export interface Skill {
   treeId: string
   skillType: string
   isHeavy?: boolean
+  /** Base stat used by the multiplier. Defaults to attack for existing data. */
+  damageStat?: DamageStat
 }
 
 export type BuffType =
@@ -43,6 +47,8 @@ export interface ChainEffect {
 
 export interface CharacterBase {
   baseAtk: number
+  baseHp?: number
+  baseDef?: number
   weaponType: string
   element: string
   ascensionStat: { type: string; value: number }
@@ -100,6 +106,8 @@ export interface StatSource {
 
 export interface PanelBreakdown {
   atk: { total: number; baseAtk: number; sources: StatSource[] }
+  hp: { total: number; baseHp: number; sources: StatSource[] }
+  def: { total: number; baseDef: number; sources: StatSource[] }
   critRate: { total: number; sources: StatSource[] }
   critDmg: { total: number; sources: StatSource[] }
   elemDmg: { total: number; sources: StatSource[] }
@@ -112,6 +120,8 @@ export interface PanelBreakdown {
 export interface DamageResult {
   panel: {
     atk: number
+    hp: number
+    def: number
     critRate: number
     critDmg: number
     elemDmg: number
@@ -132,6 +142,7 @@ export interface SkillDamage {
   skillType: string
   multiplierStr: string
   multiplier: number
+  damageStat?: DamageStat
   expected: number
   crit: number
 }

@@ -93,6 +93,27 @@ class MiniprogramUiRegressionTest(unittest.TestCase):
         self.assertNotIn('模拟伤害结果', js)
         self.assertNotIn("_expectedDisplay: '—'", js)
 
+    def test_miniprogram_damage_formula_supports_hp_and_def_scaling(self):
+        for path in (
+            'miniprogram/pages/calculator/calculator.js',
+            'miniprogram/pages/loadouts/loadouts.js',
+        ):
+            with self.subTest(path=path):
+                js = self.read(path)
+
+                self.assertIn("entry.type === 'HP_PCT'", js)
+                self.assertIn("entry.type === 'FLAT_HP'", js)
+                self.assertIn("entry.type === 'DEF_PCT'", js)
+                self.assertIn("entry.type === 'FLAT_DEF'", js)
+                self.assertIn('var totalHp = round5', js)
+                self.assertIn('var totalDef = round5', js)
+                self.assertIn('parseFlatBaseValue(multiplierStr)', js)
+                self.assertIn('normalizeDamageStat(skill.damageStat)', js)
+                self.assertIn("damageStat === 'hp' ? totalHp", js)
+                self.assertIn("damageStat === 'def' ? totalDef", js)
+                self.assertIn('baseStat * multiplier + flatBase', js)
+                self.assertNotIn('var baseDmg = round5(totalAtk * multiplier)', js)
+
 
 if __name__ == '__main__':
     unittest.main()
