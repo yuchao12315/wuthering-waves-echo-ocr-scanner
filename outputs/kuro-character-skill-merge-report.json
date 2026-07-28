@@ -1,0 +1,91 @@
+{
+  "summary": {
+    "baseCharacters": 56,
+    "officialCharacters": 55,
+    "mergedCharacters": 55,
+    "branches": 440,
+    "created_skill": 61,
+    "official_generated_skill": 61,
+    "preserved_composite_skill": 2,
+    "unmapped_official_row": 10,
+    "updated_by_name": 925,
+    "updated_by_sequence": 103
+  },
+  "missingBaseCharacters": [],
+  "auditRows": [
+    {
+      "character": "漂泊者·导电",
+      "status": "unmapped",
+      "skillType": "共鸣回路",
+      "officialLabel": "千声翻涌·气动空中攻击治疗量"
+    },
+    {
+      "character": "陆·赫斯",
+      "status": "unmapped",
+      "skillType": "共鸣回路",
+      "officialLabel": "日髓碎刃伤害（每0.15秒）"
+    },
+    {
+      "character": "嘉贝莉娜",
+      "status": "unmapped",
+      "skillType": "共鸣回路",
+      "officialLabel": "地狱穿行伤害"
+    },
+    {
+      "character": "弗洛洛",
+      "status": "unmapped",
+      "skillType": "共鸣解放",
+      "officialLabel": "谢幕・赫卡忒伤害"
+    },
+    {
+      "character": "坎特蕾拉",
+      "status": "unmapped",
+      "skillType": "共鸣回路",
+      "officialLabel": "消耗【迷离】时治疗量"
+    },
+    {
+      "character": "布兰特",
+      "status": "unmapped",
+      "skillType": "共鸣回路",
+      "officialLabel": "涛声喝彩治疗量"
+    },
+    {
+      "character": "布兰特",
+      "status": "unmapped",
+      "skillType": "共鸣解放",
+      "officialLabel": "治疗量"
+    },
+    {
+      "character": "漂泊者·气动",
+      "status": "preserved_composite",
+      "skillType": "常态攻击",
+      "officialLabel": "第三段伤害",
+      "baseLabel": "第三段伤害"
+    },
+    {
+      "character": "漂泊者·气动",
+      "status": "unmapped",
+      "skillType": "常态攻击",
+      "officialLabel": "飞刃伤害"
+    },
+    {
+      "character": "漂泊者·气动",
+      "status": "preserved_composite",
+      "skillType": "常态攻击",
+      "officialLabel": "闪避反击伤害",
+      "baseLabel": "闪避反击伤害"
+    },
+    {
+      "character": "秋水",
+      "status": "unmapped",
+      "skillType": "变奏技能",
+      "officialLabel": "技能伤害"
+    },
+    {
+      "character": "丹瑾",
+      "status": "unmapped",
+      "skillType": "共鸣回路",
+      "officialLabel": "缭乱治疗量"
+    }
+  ]
+}

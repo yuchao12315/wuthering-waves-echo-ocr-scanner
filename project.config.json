@@ -3,6 +3,14 @@
   "projectname": "wuwa-echo-calc",
   "description": "鸣潮声骸计算器",
   "appid": "touristappid",
+  "packOptions": {
+    "ignore": [
+      {
+        "type": "file",
+        "value": "data/characters-base.json"
+      }
+    ]
+  },
   "setting": {
     "urlCheck": false,
     "es6": true,

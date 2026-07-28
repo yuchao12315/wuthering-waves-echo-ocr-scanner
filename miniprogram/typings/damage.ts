@@ -7,6 +7,7 @@ export interface Skill {
   bonusDmg: number
   treeId: string
   skillType: string
+  source?: 'kuro-official'
   isHeavy?: boolean
   /** Base stat used by the multiplier. Defaults to attack for existing data. */
   damageStat?: DamageStat
@@ -45,6 +46,14 @@ export interface ChainEffect {
   enabled?: boolean
 }
 
+export interface BranchEnhancement {
+  skillType: string
+  skillTitle: string
+  name: string
+  valueText: string
+  valuePercent: number
+}
+
 export interface CharacterBase {
   baseAtk: number
   baseHp?: number
@@ -55,6 +64,8 @@ export interface CharacterBase {
   inherentBuffs: InherentBuff[]
   chainStats: ChainStat[]
   chainEffects?: ChainEffect[]
+  /** Official skill-tree stat nodes. Stored as source data; not applied twice to damage. */
+  branchEnhancements?: BranchEnhancement[]
   weaponPassiveMultiplier: Record<string, number>
   skills: Skill[]
 }
