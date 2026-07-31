@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { calcDamage } from '@/lib/damage'
+import { calcDamage, parseMultiplierStr, selectKeySkills } from '@/lib/damage'
 import charactersBase from '@/data/characters-base.json'
 import weapons from '@/data/weapons.json'
 import type { CharacterBase, Weapon } from '@/types/damage'
@@ -37,6 +37,27 @@ const weapon: Weapon = {
 }
 
 describe('calcDamage', () => {
+  it('keeps only the five highest expected-damage skills for compact display', () => {
+    const skills = Array.from({ length: 7 }, (_, index) => ({
+      name: `技能${index + 1}`,
+      tag: 'E',
+      skillType: index % 2 === 0 ? '常态攻击' : '共鸣解放',
+      multiplierStr: '100%',
+      multiplier: 1,
+      expected: (index + 1) * 100,
+      crit: (index + 1) * 120,
+    }))
+
+    expect(selectKeySkills(skills).map(skill => skill.expected)).toEqual([700, 600, 500, 400, 300])
+    expect(skills.map(skill => skill.expected)).toEqual([100, 200, 300, 400, 500, 600, 700])
+  })
+
+  it('parses official HP/DEF multiplier suffixes and repeated percent signs', () => {
+    expect(parseMultiplierStr('19.64%*3生命')).toBeCloseTo(0.5892, 5)
+    expect(parseMultiplierStr('449.71%防御')).toBeCloseTo(4.4971, 5)
+    expect(parseMultiplierStr('21.62%%')).toBeCloseTo(0.2162, 5)
+  })
+
   it('uses HP as the skill base stat when a skill is marked as HP-scaling', () => {
     const hpCharacter: CharacterBase = {
       ...character,
@@ -69,7 +90,7 @@ describe('calcDamage', () => {
     const result = calcDamage(hpCharacter, weapon, 1, echoes, -1, 1, 90, 89, 0)
     const expectedDefMult = (100 + 90) / (199 + 90 + 89)
     const expectedCrit = Math.round(12500 * expectedDefMult * 1.5)
-    const expectedAverage = Math.round(12500 * expectedDefMult * 0.05 * 1.5)
+    const expectedAverage = Math.round(12500 * expectedDefMult * (1 + 0.05 * (1.5 - 1)))
 
     expect(result.panel.hp).toBe(12000)
     expect(result.skills[0].crit).toBe(expectedCrit)
@@ -82,6 +103,63 @@ describe('calcDamage', () => {
     const expectedCrit = Math.round(10000 * expectedDefMult * 1.5)
 
     expect(result.skills[0].crit).toBe(expectedCrit)
+  })
+
+  it('includes both critical and non-critical outcomes in expected damage', () => {
+    const result = calcDamage(character, weapon, 1, [], -1, 1, 90, 89, 0)
+    const expectedDefMult = (100 + 90) / (199 + 90 + 89)
+
+    expect(result.skills[0].expected).toBe(Math.round(10000 * expectedDefMult * 1.025))
+  })
+
+  it.each([
+    ['critRate', 0.5],
+    ['critDmg', 1],
+    ['defIgnore', 0.4],
+    ['resReduce', 0.1],
+    ['dmgDeepen', 0.5],
+    ['multiplierBoost', 0.5],
+  ] as const)('applies targeted %s effects to matching skills', (type, value) => {
+    const targetedCharacter: CharacterBase = {
+      ...character,
+      skills: [
+        { ...character.skills[0], name: '目标技能' },
+        { ...character.skills[0], name: '其他技能' },
+      ],
+      chainEffects: [{ sequence: 1, type, value, targetSkill: '^目标技能$' }],
+    }
+    const baseline = calcDamage({ ...targetedCharacter, chainEffects: [] }, weapon, 1, [], -1, 1, 90, 89, 0.1, 0)
+    const result = calcDamage(targetedCharacter, weapon, 1, [], -1, 1, 90, 89, 0.1, 1)
+
+    expect(result.skills[0].expected).toBeGreaterThan(baseline.skills[0].expected)
+    expect(result.skills[1].expected).toBe(baseline.skills[1].expected)
+  })
+
+  it('applies global multiplier boosts to every skill', () => {
+    const boosted: CharacterBase = {
+      ...character,
+      chainEffects: [{ sequence: 1, type: 'multiplierBoost', value: 0.5 }],
+    }
+    const baseline = calcDamage({ ...boosted, chainEffects: [] }, weapon, 1, [], -1, 1, 90, 89, 0.1, 0)
+    const result = calcDamage(boosted, weapon, 1, [], -1, 1, 90, 89, 0.1, 1)
+
+    expect(result.skills[0].expected).toBeGreaterThan(baseline.skills[0].expected)
+  })
+
+  it('uses an explicit damage category instead of the skill tree category', () => {
+    const liberationHeavy = {
+      ...character,
+      skills: [{ ...character.skills[0], name: '特殊重击', isHeavy: true, damageType: 'resonanceLiberation' }],
+    } as CharacterBase
+    const echoes: Echo[] = [{
+      id: 'liberation-bonus', monsterId: 0, monsterName: '测试', cost: 1, rarity: 5, level: 25, tuneLevel: 5,
+      sonata: '', mainStat: { type: 'FLAT_HP', value: 0 }, secondaryStat: { type: 'FLAT_HP', value: 0 },
+      substats: [{ type: 'RESONANCE_LIBERATION_DMG', value: 20 }, { type: 'HEAVY_ATK_DMG', value: 50 }],
+    }]
+    const baseline = calcDamage(liberationHeavy, weapon, 1, [], -1, 1, 90, 89, 0)
+    const result = calcDamage(liberationHeavy, weapon, 1, echoes, -1, 1, 90, 89, 0)
+
+    expect(result.skills[0].crit).toBeCloseTo(baseline.skills[0].crit * 1.2, -1)
   })
 
   it('keeps unmarked skills attack-scaling even when HP and DEF stats exist', () => {

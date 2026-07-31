@@ -389,6 +389,14 @@ module.exports = [
         "type": "heavyAtkDmg",
         "paramIdx": 1,
         "condition": "afterIntroOrSkill"
+      },
+      {
+        "type": "defIgnore",
+        "paramIdx": 3,
+        "condition": "shieldMaxStacks",
+        "damageType": "heavyAtk",
+        "stacks": 5,
+        "stackParamIdx": 4
       }
     ]
   },
@@ -675,6 +683,24 @@ module.exports = [
         "type": "atkPct",
         "paramIdx": 0,
         "condition": "always"
+      },
+      {
+        "type": "dmgDeepen",
+        "paramIdx": 1,
+        "condition": "afterFrostApplication",
+        "targetElement": "冷凝"
+      },
+      {
+        "type": "defIgnore",
+        "paramIdx": 2,
+        "condition": "afterFrostApplication",
+        "damageType": "resonanceLiberation"
+      },
+      {
+        "type": "dmgDeepen",
+        "paramIdx": 3,
+        "condition": "frostEffectDamage",
+        "damageType": "effect"
       }
     ]
   },
@@ -796,6 +822,19 @@ module.exports = [
         "type": "elemDmg",
         "paramIdx": 0,
         "condition": "always"
+      },
+      {
+        "type": "defIgnore",
+        "paramIdx": 1,
+        "condition": "afterResonanceEffect",
+        "damageType": "resonanceLiberation"
+      },
+      {
+        "type": "resReduce",
+        "paramIdx": 2,
+        "condition": "afterResonanceEffect",
+        "damageType": "resonanceLiberation",
+        "targetElement": "热熔"
       }
     ]
   },
@@ -884,7 +923,19 @@ module.exports = [
         ]
       ]
     },
-    "passiveEffects": []
+    "passiveEffects": [
+      {
+        "type": "resonanceSkillDmg",
+        "paramIdx": 0,
+        "condition": "afterHealing"
+      },
+      {
+        "type": "dmgDeepen",
+        "paramIdx": 2,
+        "condition": "afterAeroRoverSkill",
+        "targetElement": "气动"
+      }
+    ]
   },
   {
     "name": "不屈命定之冠",
@@ -928,7 +979,23 @@ module.exports = [
         ]
       ]
     },
-    "passiveEffects": []
+    "passiveEffects": [
+      {
+        "type": "hpPct",
+        "paramIdx": 0,
+        "condition": "always"
+      },
+      {
+        "type": "defIgnore",
+        "paramIdx": 1,
+        "condition": "afterIntroOrNormalAttack"
+      },
+      {
+        "type": "dmgDeepen",
+        "paramIdx": 2,
+        "condition": "targetHasAeroErosion"
+      }
+    ]
   },
   {
     "name": "擎渊怒涛",
@@ -1115,6 +1182,24 @@ module.exports = [
         "type": "atkPct",
         "paramIdx": 0,
         "condition": "always"
+      },
+      {
+        "type": "elemDmg",
+        "paramIdx": 1,
+        "condition": "afterNormalAttack",
+        "targetElement": "衍射"
+      },
+      {
+        "type": "dmgDeepen",
+        "paramIdx": 3,
+        "condition": "afterTuningOffset",
+        "damageType": "normalAtk"
+      },
+      {
+        "type": "defIgnore",
+        "paramIdx": 4,
+        "condition": "afterTuningOffset",
+        "damageType": "normalAtk"
       }
     ]
   },
@@ -1193,6 +1278,19 @@ module.exports = [
         "type": "atkPct",
         "paramIdx": 0,
         "condition": "always"
+      },
+      {
+        "type": "resonanceLiberationDmg",
+        "paramIdx": 1,
+        "condition": "afterIntroOrLiberation"
+      },
+      {
+        "type": "defIgnore",
+        "paramIdx": 3,
+        "condition": "shieldMaxStacks",
+        "damageType": "resonanceLiberation",
+        "stacks": 5,
+        "stackParamIdx": 5
       }
     ]
   },
@@ -1243,6 +1341,17 @@ module.exports = [
         "type": "atkPct",
         "paramIdx": 0,
         "condition": "always"
+      },
+      {
+        "type": "defIgnore",
+        "paramIdx": 1,
+        "condition": "afterNormalAttack"
+      },
+      {
+        "type": "dmgDeepen",
+        "paramIdx": 2,
+        "condition": "spectroFrazzleDamage",
+        "damageType": "effect"
       }
     ]
   },
@@ -1300,6 +1409,18 @@ module.exports = [
         "type": "atkPct",
         "paramIdx": 0,
         "condition": "always"
+      },
+      {
+        "type": "dmgDeepen",
+        "paramIdx": 1,
+        "condition": "afterIntroOrEchoSkill",
+        "damageType": "phantom"
+      },
+      {
+        "type": "defIgnore",
+        "paramIdx": 3,
+        "condition": "afterEchoSkillDamage",
+        "targetElement": "气动"
       }
     ]
   },
@@ -1533,6 +1654,27 @@ module.exports = [
         "type": "atkPct",
         "paramIdx": 0,
         "condition": "always"
+      },
+      {
+        "type": "elemDmg",
+        "paramIdx": 1,
+        "condition": "afterResonanceSkillMaxStacks",
+        "targetElement": "衍射",
+        "stacks": 2,
+        "stackParamIdx": 2
+      },
+      {
+        "type": "dmgDeepen",
+        "paramIdx": 4,
+        "condition": "afterHavocTuningOffset",
+        "damageType": "heavyAtk"
+      },
+      {
+        "type": "defIgnore",
+        "paramIdx": 5,
+        "condition": "afterHavocTuningOffset",
+        "damageType": "heavyAtk",
+        "valueScale": 0.01
       }
     ]
   },
@@ -1739,6 +1881,23 @@ module.exports = [
         "type": "atkPct",
         "paramIdx": 0,
         "condition": "always"
+      },
+      {
+        "type": "dmgDeepen",
+        "paramIdx": 1,
+        "condition": "afterEchoSkillDamage",
+        "damageType": "heavyAtk"
+      },
+      {
+        "type": "dmgDeepen",
+        "paramIdx": 3,
+        "condition": "afterHeavyAttackDamage",
+        "damageType": "phantom"
+      },
+      {
+        "type": "defIgnore",
+        "paramIdx": 6,
+        "condition": "bothEffectsActive"
       }
     ]
   },
@@ -2212,6 +2371,22 @@ module.exports = [
         "type": "atkPct",
         "paramIdx": 0,
         "condition": "always"
+      },
+      {
+        "type": "resonanceSkillDmg",
+        "paramIdx": 2,
+        "condition": "afterEchoSkillDamage"
+      },
+      {
+        "type": "dmgDeepen",
+        "paramIdx": 3,
+        "condition": "afterEchoSkillDamage",
+        "damageType": "phantom"
+      },
+      {
+        "type": "defIgnore",
+        "paramIdx": 4,
+        "condition": "afterEchoSkillDamage"
       }
     ]
   },
@@ -2276,6 +2451,26 @@ module.exports = [
         "type": "atkPct",
         "paramIdx": 0,
         "condition": "always"
+      },
+      {
+        "type": "normalAtkDmg",
+        "paramIdx": 1,
+        "condition": "targetHasSpectroFrazzleMaxStacks",
+        "stacks": 3,
+        "stackParamIdx": 2
+      },
+      {
+        "type": "heavyAtkDmg",
+        "paramIdx": 1,
+        "condition": "targetHasSpectroFrazzleMaxStacks",
+        "stacks": 3,
+        "stackParamIdx": 2
+      },
+      {
+        "type": "dmgDeepen",
+        "paramIdx": 4,
+        "condition": "afterOutroSpectroFrazzleDamage",
+        "damageType": "effect"
       }
     ]
   },
@@ -2411,6 +2606,17 @@ module.exports = [
         "type": "atkPct",
         "paramIdx": 0,
         "condition": "always"
+      },
+      {
+        "type": "normalAtkDmg",
+        "paramIdx": 6,
+        "condition": "softDreamStack1"
+      },
+      {
+        "type": "resReduce",
+        "paramIdx": 8,
+        "condition": "softDreamStack2",
+        "targetElement": "湮灭"
       }
     ]
   },
@@ -3509,32 +3715,400 @@ module.exports = [
         "condition": "always"
       }
     ]
+  },
+  {
+    "name": "天之苍苍",
+    "type": "迅刀",
+    "rarity": 5,
+    "baseAtk": 587,
+    "atkPct": 0,
+    "critRate": 0.243,
+    "critDmg": 0,
+    "passive": {
+      "effectName": "",
+      "effect": "",
+      "param": []
+    },
+    "passiveEffects": []
+  },
+  {
+    "name": "宙算仪轨",
+    "type": "长刃",
+    "rarity": 5,
+    "baseAtk": 587,
+    "atkPct": 0,
+    "critRate": 0,
+    "critDmg": 0,
+    "energyRegen": 0.518,
+    "passive": {
+      "effectName": "",
+      "effect": "",
+      "param": []
+    },
+    "passiveEffects": []
+  },
+  {
+    "name": "星序协响",
+    "type": "音感仪",
+    "rarity": 5,
+    "baseAtk": 587,
+    "atkPct": 0,
+    "critRate": 0,
+    "critDmg": 0,
+    "energyRegen": 0.518,
+    "passive": {
+      "effectName": "",
+      "effect": "",
+      "param": []
+    },
+    "passiveEffects": []
+  },
+  {
+    "name": "翼锋",
+    "type": "迅刀",
+    "rarity": 4,
+    "baseAtk": 412,
+    "atkPct": 0,
+    "critRate": 0.204,
+    "critDmg": 0,
+    "passive": {
+      "effectName": "",
+      "effect": "",
+      "param": []
+    },
+    "passiveEffects": []
+  },
+  {
+    "name": "曜光",
+    "type": "音感仪",
+    "rarity": 4,
+    "baseAtk": 412,
+    "atkPct": 0,
+    "critRate": 0,
+    "critDmg": 0.408,
+    "passive": {
+      "effectName": "",
+      "effect": "",
+      "param": []
+    },
+    "passiveEffects": []
+  },
+  {
+    "name": "凌空",
+    "type": "臂铠",
+    "rarity": 4,
+    "baseAtk": 412,
+    "atkPct": 0,
+    "critRate": 0,
+    "critDmg": 0.408,
+    "passive": {
+      "effectName": "",
+      "effect": "",
+      "param": []
+    },
+    "passiveEffects": []
+  },
+  {
+    "name": "阳焰",
+    "type": "手枪",
+    "rarity": 4,
+    "baseAtk": 412,
+    "atkPct": 0,
+    "critRate": 0.204,
+    "critDmg": 0,
+    "passive": {
+      "effectName": "",
+      "effect": "",
+      "param": []
+    },
+    "passiveEffects": []
+  },
+  {
+    "name": "金穹",
+    "type": "长刃",
+    "rarity": 4,
+    "baseAtk": 412,
+    "atkPct": 0,
+    "critRate": 0,
+    "critDmg": 0.408,
+    "passive": {
+      "effectName": "",
+      "effect": "",
+      "param": []
+    },
+    "passiveEffects": []
+  },
+  {
+    "name": "不灭航路",
+    "type": "迅刀",
+    "rarity": 5,
+    "baseAtk": 587,
+    "atkPct": 0,
+    "critRate": 0,
+    "critDmg": 0,
+    "energyRegen": 0.518,
+    "passive": {
+      "effectName": "",
+      "effect": "",
+      "param": []
+    },
+    "passiveEffects": []
+  },
+  {
+    "name": "大海的馈赠",
+    "type": "音感仪",
+    "rarity": 4,
+    "baseAtk": 412,
+    "atkPct": 0.306,
+    "critRate": 0,
+    "critDmg": 0,
+    "passive": {
+      "effectName": "",
+      "effect": "",
+      "param": []
+    },
+    "passiveEffects": []
+  },
+  {
+    "name": "虚饰的华尔兹",
+    "type": "音感仪",
+    "rarity": 4,
+    "baseAtk": 412,
+    "atkPct": 0.306,
+    "critRate": 0,
+    "critDmg": 0,
+    "passive": {
+      "effectName": "",
+      "effect": "",
+      "param": []
+    },
+    "passiveEffects": []
+  },
+  {
+    "name": "叙别的罗曼史",
+    "type": "手枪",
+    "rarity": 4,
+    "baseAtk": 412,
+    "atkPct": 0.306,
+    "critRate": 0,
+    "critDmg": 0,
+    "passive": {
+      "effectName": "",
+      "effect": "",
+      "param": []
+    },
+    "passiveEffects": []
+  },
+  {
+    "name": "酩酊的英雄志",
+    "type": "臂铠",
+    "rarity": 4,
+    "baseAtk": 412,
+    "atkPct": 0.306,
+    "critRate": 0,
+    "critDmg": 0,
+    "passive": {
+      "effectName": "",
+      "effect": "",
+      "param": []
+    },
+    "passiveEffects": []
+  },
+  {
+    "name": "风流的寓言诗",
+    "type": "迅刀",
+    "rarity": 4,
+    "baseAtk": 412,
+    "atkPct": 0.306,
+    "critRate": 0,
+    "critDmg": 0,
+    "passive": {
+      "effectName": "",
+      "effect": "",
+      "param": []
+    },
+    "passiveEffects": []
+  },
+  {
+    "name": "容赦的沉思录",
+    "type": "长刃",
+    "rarity": 4,
+    "baseAtk": 412,
+    "atkPct": 0.306,
+    "critRate": 0,
+    "critDmg": 0,
+    "passive": {
+      "effectName": "",
+      "effect": "",
+      "param": []
+    },
+    "passiveEffects": []
+  },
+  {
+    "name": "悲喜剧",
+    "type": "臂铠",
+    "rarity": 5,
+    "baseAtk": 587,
+    "atkPct": 0,
+    "critRate": 0.243,
+    "critDmg": 0,
+    "passive": {
+      "effectName": "",
+      "effect": "",
+      "param": []
+    },
+    "passiveEffects": []
+  },
+  {
+    "name": "渊海回声",
+    "type": "音感仪",
+    "rarity": 4,
+    "baseAtk": 412,
+    "atkPct": 0,
+    "critRate": 0,
+    "critDmg": 0,
+    "energyRegen": 0.388,
+    "passive": {
+      "effectName": "",
+      "effect": "",
+      "param": []
+    },
+    "passiveEffects": []
+  },
+  {
+    "name": "心之锚",
+    "type": "迅刀",
+    "rarity": 4,
+    "baseAtk": 412,
+    "atkPct": 0.306,
+    "critRate": 0,
+    "critDmg": 0,
+    "passive": {
+      "effectName": "",
+      "effect": "",
+      "param": []
+    },
+    "passiveEffects": []
+  },
+  {
+    "name": "凋亡频移",
+    "type": "长刃",
+    "rarity": 4,
+    "baseAtk": 412,
+    "atkPct": 0.306,
+    "critRate": 0,
+    "critDmg": 0,
+    "passive": {
+      "effectName": "",
+      "effect": "",
+      "param": []
+    },
+    "passiveEffects": []
+  },
+  {
+    "name": "悖论喷流",
+    "type": "手枪",
+    "rarity": 4,
+    "baseAtk": 412,
+    "atkPct": 0.306,
+    "critRate": 0,
+    "critDmg": 0,
+    "passive": {
+      "effectName": "",
+      "effect": "",
+      "param": []
+    },
+    "passiveEffects": []
+  },
+  {
+    "name": "尘云旋臂",
+    "type": "臂铠",
+    "rarity": 4,
+    "baseAtk": 412,
+    "atkPct": 0.306,
+    "critRate": 0,
+    "critDmg": 0,
+    "passive": {
+      "effectName": "",
+      "effect": "",
+      "param": []
+    },
+    "passiveEffects": []
+  },
+  {
+    "name": "核熔星盘",
+    "type": "音感仪",
+    "rarity": 4,
+    "baseAtk": 412,
+    "atkPct": 0.306,
+    "critRate": 0,
+    "critDmg": 0,
+    "passive": {
+      "effectName": "",
+      "effect": "",
+      "param": []
+    },
+    "passiveEffects": []
+  },
+  {
+    "name": "飞景",
+    "type": "迅刀",
+    "rarity": 4,
+    "baseAtk": 412,
+    "atkPct": 0.306,
+    "critRate": 0,
+    "critDmg": 0,
+    "passive": {
+      "effectName": "",
+      "effect": "",
+      "param": []
+    },
+    "passiveEffects": []
+  },
+  {
+    "name": "华彩乐段",
+    "type": "手枪",
+    "rarity": 4,
+    "baseAtk": 412,
+    "atkPct": 0,
+    "critRate": 0,
+    "critDmg": 0,
+    "energyRegen": 0.388,
+    "passive": {
+      "effectName": "",
+      "effect": "",
+      "param": []
+    },
+    "passiveEffects": []
+  },
+  {
+    "name": "不归孤军",
+    "type": "迅刀",
+    "rarity": 4,
+    "baseAtk": 412,
+    "atkPct": 0.306,
+    "critRate": 0,
+    "critDmg": 0,
+    "passive": {
+      "effectName": "",
+      "effect": "",
+      "param": []
+    },
+    "passiveEffects": []
+  },
+  {
+    "name": "无眠烈火",
+    "type": "手枪",
+    "rarity": 4,
+    "baseAtk": 412,
+    "atkPct": 0.306,
+    "critRate": 0,
+    "critDmg": 0,
+    "passive": {
+      "effectName": "",
+      "effect": "",
+      "param": []
+    },
+    "passiveEffects": []
   }
-,
-  {"name":"天之苍苍","type":"迅刀","rarity":5,"baseAtk":587,"atkPct":0,"critRate":0.243,"critDmg":0,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
-  {"name":"宙算仪轨","type":"长刃","rarity":5,"baseAtk":587,"atkPct":0,"critRate":0,"critDmg":0,"energyRegen":0.518,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
-  {"name":"星序协响","type":"音感仪","rarity":5,"baseAtk":587,"atkPct":0,"critRate":0,"critDmg":0,"energyRegen":0.518,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
-  {"name":"翼锋","type":"迅刀","rarity":4,"baseAtk":412,"atkPct":0,"critRate":0.204,"critDmg":0,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
-  {"name":"曜光","type":"音感仪","rarity":4,"baseAtk":412,"atkPct":0,"critRate":0,"critDmg":0.408,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
-  {"name":"凌空","type":"臂铠","rarity":4,"baseAtk":412,"atkPct":0,"critRate":0,"critDmg":0.408,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
-  {"name":"阳焰","type":"手枪","rarity":4,"baseAtk":412,"atkPct":0,"critRate":0.204,"critDmg":0,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
-  {"name":"金穹","type":"长刃","rarity":4,"baseAtk":412,"atkPct":0,"critRate":0,"critDmg":0.408,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
-  {"name":"不灭航路","type":"迅刀","rarity":5,"baseAtk":587,"atkPct":0,"critRate":0,"critDmg":0,"energyRegen":0.518,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
-  {"name":"大海的馈赠","type":"音感仪","rarity":4,"baseAtk":412,"atkPct":0.306,"critRate":0,"critDmg":0,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
-  {"name":"虚饰的华尔兹","type":"音感仪","rarity":4,"baseAtk":412,"atkPct":0.306,"critRate":0,"critDmg":0,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
-  {"name":"叙别的罗曼史","type":"手枪","rarity":4,"baseAtk":412,"atkPct":0.306,"critRate":0,"critDmg":0,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
-  {"name":"酩酊的英雄志","type":"臂铠","rarity":4,"baseAtk":412,"atkPct":0.306,"critRate":0,"critDmg":0,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
-  {"name":"风流的寓言诗","type":"迅刀","rarity":4,"baseAtk":412,"atkPct":0.306,"critRate":0,"critDmg":0,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
-  {"name":"容赦的沉思录","type":"长刃","rarity":4,"baseAtk":412,"atkPct":0.306,"critRate":0,"critDmg":0,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
-  {"name":"悲喜剧","type":"臂铠","rarity":5,"baseAtk":587,"atkPct":0,"critRate":0.243,"critDmg":0,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
-  {"name":"渊海回声","type":"音感仪","rarity":4,"baseAtk":412,"atkPct":0,"critRate":0,"critDmg":0,"energyRegen":0.388,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
-  {"name":"心之锚","type":"迅刀","rarity":4,"baseAtk":412,"atkPct":0.306,"critRate":0,"critDmg":0,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
-  {"name":"凋亡频移","type":"长刃","rarity":4,"baseAtk":412,"atkPct":0.306,"critRate":0,"critDmg":0,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
-  {"name":"悖论喷流","type":"手枪","rarity":4,"baseAtk":412,"atkPct":0.306,"critRate":0,"critDmg":0,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
-  {"name":"尘云旋臂","type":"臂铠","rarity":4,"baseAtk":412,"atkPct":0.306,"critRate":0,"critDmg":0,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
-  {"name":"核熔星盘","type":"音感仪","rarity":4,"baseAtk":412,"atkPct":0.306,"critRate":0,"critDmg":0,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
-  {"name":"飞景","type":"迅刀","rarity":4,"baseAtk":412,"atkPct":0.306,"critRate":0,"critDmg":0,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
-  {"name":"华彩乐段","type":"手枪","rarity":4,"baseAtk":412,"atkPct":0,"critRate":0,"critDmg":0,"energyRegen":0.388,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
-  {"name":"不归孤军","type":"迅刀","rarity":4,"baseAtk":412,"atkPct":0.306,"critRate":0,"critDmg":0,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]},
-  {"name":"无眠烈火","type":"手枪","rarity":4,"baseAtk":412,"atkPct":0.306,"critRate":0,"critDmg":0,"passive":{"effectName":"","effect":"","param":[]},"passiveEffects":[]}
 ]

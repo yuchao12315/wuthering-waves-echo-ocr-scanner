@@ -138,7 +138,6 @@ export const NIGHTMARE_BONUS_MAP: Record<string, NightmareBonus> = {
 
   // 共鸣解放+25% (角色限制: 爱弥斯)
   '辛吉勒姆': {
-    elemDmg: 0.12, elemType: '热熔',
     secondType: 'resonanceLiberationDmg', secondValue: 0.25,
     requiredCharacters: ['爱弥斯'],
   },

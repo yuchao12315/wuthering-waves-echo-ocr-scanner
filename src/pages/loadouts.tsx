@@ -4,7 +4,7 @@ import { useEchoStore } from '@/store/echo-store'
 import { useAppStore } from '@/store/app-store'
 import { EchoCard } from '@/components/echo-card'
 import { getGrade, scoreEcho } from '@/lib/scoring'
-import { calcDamage } from '@/lib/damage'
+import { calcDamage, selectKeySkills } from '@/lib/damage'
 import { SONATA_NAMES } from '@/lib/constants'
 import CHARACTERS_BASE from '@/data/characters-base.json'
 import WEAPONS from '@/data/weapons.json'
@@ -183,6 +183,18 @@ function DamagePanel({ loadout }: { loadout: SavedLoadout }) {
   const [activeTypes, setActiveTypes] = useState<Set<string>>(new Set())
   const [chainLevel, setChainLevel] = useState(0)
 
+  const allSkillTypes = useMemo(() => {
+    const seen = new Set<string>()
+    const ordered: string[] = []
+    for (const skill of charBase?.skills ?? []) {
+      if (skill.skillType && !seen.has(skill.skillType)) {
+        seen.add(skill.skillType)
+        ordered.push(skill.skillType)
+      }
+    }
+    return ordered
+  }, [charBase])
+
   if (!charBase) {
     return <p className="text-xs text-zinc-500 mt-2">暂无该角色的伤害数据</p>
   }
@@ -193,18 +205,6 @@ function DamagePanel({ loadout }: { loadout: SavedLoadout }) {
   const hasChainEffects = (charBase.chainEffects?.length ?? 0) > 0
   const result = calcDamage(charBase, weapon, refine, loadout.echoes, -1, 10, 90, 89, 0.1, chainLevel, loadout.characterName)
 
-  const allSkillTypes = useMemo(() => {
-    const seen = new Set<string>()
-    const ordered: string[] = []
-    for (const s of charBase.skills) {
-      if (s.skillType && !seen.has(s.skillType)) {
-        seen.add(s.skillType)
-        ordered.push(s.skillType)
-      }
-    }
-    return ordered
-  }, [charBase.skills])
-
   const toggleType = (t: string) => {
     setActiveTypes(prev => {
       const next = new Set(prev)
@@ -214,10 +214,10 @@ function DamagePanel({ loadout }: { loadout: SavedLoadout }) {
     })
   }
 
-  const filteredSkills = useMemo(() => {
-    if (activeTypes.size === 0) return result.skills
-    return result.skills.filter(sk => activeTypes.has(sk.skillType))
-  }, [result.skills, activeTypes])
+  const typeFilteredSkills = activeTypes.size === 0
+    ? result.skills
+    : result.skills.filter(skill => activeTypes.has(skill.skillType))
+  const filteredSkills = selectKeySkills(typeFilteredSkills)
   const filteredTotal = filteredSkills.reduce((s, sk) => s + sk.expected, 0)
 
   return (
@@ -322,7 +322,7 @@ function DamagePanel({ loadout }: { loadout: SavedLoadout }) {
         </tbody>
         <tfoot>
           <tr className="border-t border-zinc-700">
-            <td colSpan={3} className="py-1 text-zinc-400">{activeTypes.size > 0 ? '筛选期望伤害' : '总期望伤害'}</td>
+            <td colSpan={3} className="py-1 text-zinc-400">关键技能期望合计</td>
             <td className="py-1 text-right text-zinc-200 font-mono font-medium">{filteredTotal.toLocaleString()}</td>
             <td />
           </tr>

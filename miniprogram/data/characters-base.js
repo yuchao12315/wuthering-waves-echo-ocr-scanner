@@ -164,7 +164,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0.46,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "空中攻击伤害",
@@ -472,7 +473,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0.46,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageType": "heavyAtk"
       },
       {
         "name": "凌霄·闪避反击伤害",
@@ -943,7 +945,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "空中攻击伤害",
@@ -1266,7 +1269,7 @@ module.exports = {
         "type": "critDmg",
         "value": 1,
         "condition": "冰绽暴击伤害+100%",
-        "targetSkill": "冰绽"
+        "targetSkill": "^(爆裂伤害|冰川爆炸伤害|冰棱爆炸伤害|冰棘爆炸伤害)$"
       },
       {
         "sequence": 6,
@@ -1563,7 +1566,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "空中攻击伤害",
@@ -1971,8 +1975,7 @@ module.exports = {
         "sequence": 6,
         "type": "normalAtkDmg",
         "value": 1,
-        "condition": "行狮状态共鸣技能后普攻伤害加成+100%",
-        "targetSkill": "普攻"
+        "condition": "行狮状态共鸣技能后普攻伤害加成+100%"
       }
     ],
     "baseHp": 10387,
@@ -2166,7 +2169,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "空中攻击伤害",
@@ -2390,7 +2394,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageType": "heavyAtk"
       },
       {
         "name": "神来之笔伤害",
@@ -2722,7 +2727,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "空中攻击伤害",
@@ -3409,7 +3415,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "限制性策略伤害",
@@ -4008,7 +4015,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "空中攻击·常世身伤害",
@@ -4240,7 +4248,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "重击·枯霜·预求身伤害",
@@ -4269,7 +4278,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "空中攻击·预求身第一段伤害",
@@ -5616,7 +5626,8 @@ module.exports = {
         "bonusDmg": 0,
         "treeId": "1",
         "skillType": "常态攻击",
-        "damageStat": "hp"
+        "damageStat": "hp",
+        "damageType": "heavyAtk"
       },
       {
         "name": "空中攻击伤害",
@@ -6298,7 +6309,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "空中重击",
@@ -6326,7 +6338,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "闪避反击",
@@ -6866,7 +6879,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "空中攻击",
@@ -7127,7 +7141,8 @@ module.exports = {
         "tag": "Q",
         "bonusDmg": 0,
         "treeId": "3",
-        "skillType": "共鸣解放"
+        "skillType": "共鸣解放",
+        "damageType": "heavyAtk"
       },
       {
         "name": "黑咩·狂热伤害",
@@ -7583,7 +7598,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "满蓄力重击伤害",
@@ -7612,7 +7628,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "空中攻击伤害",
@@ -8641,7 +8658,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "重击·狂想即兴伤害",
@@ -8670,7 +8688,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "空中攻击第一段伤害",
@@ -9435,7 +9454,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "重击·狼咬伤害",
@@ -9464,7 +9484,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "重击·锐爪伤害",
@@ -9493,7 +9514,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "空中攻击第一段伤害",
@@ -10345,7 +10367,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "重击·燧发杀戮第二段伤害",
@@ -10374,7 +10397,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "重击·燧发杀戮第三段伤害",
@@ -10403,7 +10427,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "共鸣技能·迫近伤害",
@@ -10693,7 +10718,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageType": "heavyAtk"
       },
       {
         "name": "重击·炼羽裁决第二段伤害",
@@ -10722,7 +10748,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageType": "heavyAtk"
       },
       {
         "name": "重击·炼羽裁决第三段伤害",
@@ -10751,7 +10778,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageType": "heavyAtk"
       },
       {
         "name": "闪避反击·罪业当涤伤害",
@@ -10935,7 +10963,8 @@ module.exports = {
         "sequence": 6,
         "type": "multiplierBoost",
         "value": 0.6,
-        "condition": "永恒位格期间普攻/重击/空中攻击/闪避反击倍率+60%"
+        "condition": "永恒位格期间普攻/重击/空中攻击/闪避反击倍率+60%",
+        "targetSkill": "普攻|重击|空中攻击|闪避反击"
       }
     ],
     "baseHp": 10300,
@@ -11252,7 +11281,8 @@ module.exports = {
         "bonusDmg": 0,
         "treeId": "1",
         "skillType": "常态攻击",
-        "damageStat": "def"
+        "damageStat": "def",
+        "damageType": "heavyAtk"
       },
       {
         "name": "空中攻击伤害",
@@ -11612,7 +11642,8 @@ module.exports = {
         "bonusDmg": 0,
         "treeId": "7",
         "skillType": "共鸣回路",
-        "damageStat": "def"
+        "damageStat": "def",
+        "damageType": "heavyAtk"
       },
       {
         "name": "重击·反演伤害",
@@ -11642,7 +11673,8 @@ module.exports = {
         "bonusDmg": 0,
         "treeId": "7",
         "skillType": "共鸣回路",
-        "damageStat": "def"
+        "damageStat": "def",
+        "damageType": "heavyAtk"
       },
       {
         "name": "震谐响应·粒子射流伤害",
@@ -11795,6 +11827,18 @@ module.exports = {
         "type": "atkPct",
         "value": 0.12,
         "condition": "固有天赋·攻击"
+      },
+      {
+        "type": "critDmg",
+        "value": 0.2,
+        "condition": "附加震谐·偏移或聚爆效应后暴击伤害+20%",
+        "targetSkill": "."
+      },
+      {
+        "type": "dmgDeepen",
+        "value": 2,
+        "condition": "即刻响应状态下自身重击伤害加深200%",
+        "targetSkill": "^重击·爱弥斯"
       }
     ],
     "weaponPassiveMultiplier": {
@@ -11946,7 +11990,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "resonanceLiberation"
       },
       {
         "name": "重击·爱弥斯·二段蓄力伤害",
@@ -11975,7 +12020,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "resonanceLiberation"
       },
       {
         "name": "空中攻击·爱弥斯伤害",
@@ -12236,7 +12282,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "2",
-        "skillType": "共鸣技能"
+        "skillType": "共鸣技能",
+        "damageType": "resonanceLiberation"
       },
       {
         "name": "重击·机兵·二段蓄力伤害",
@@ -12265,7 +12312,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "2",
-        "skillType": "共鸣技能"
+        "skillType": "共鸣技能",
+        "damageType": "resonanceLiberation"
       },
       {
         "name": "空中攻击·机兵伤害",
@@ -12858,7 +12906,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "空中攻击·布景之形伤害",
@@ -13061,7 +13110,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "空中攻击·幻灭之形第一段伤害",
@@ -13206,7 +13256,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "闪避反击·幻灭之形伤害",
@@ -13797,7 +13848,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "空中攻击伤害",
@@ -14174,7 +14226,8 @@ module.exports = {
         "tag": "Q",
         "bonusDmg": 0,
         "treeId": "3",
-        "skillType": "共鸣解放"
+        "skillType": "共鸣解放",
+        "damageType": "heavyAtk"
       },
       {
         "name": "闪避反击伤害",
@@ -14584,7 +14637,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "空中攻击伤害",
@@ -15176,7 +15230,8 @@ module.exports = {
         "bonusDmg": 0,
         "treeId": "1",
         "skillType": "常态攻击",
-        "damageStat": "def"
+        "damageStat": "def",
+        "damageType": "heavyAtk"
       },
       {
         "name": "空中攻击伤害",
@@ -15626,7 +15681,8 @@ module.exports = {
         "bonusDmg": 0,
         "treeId": "7",
         "skillType": "共鸣回路",
-        "damageStat": "def"
+        "damageStat": "def",
+        "damageType": "heavyAtk"
       },
       {
         "name": "蹑风追雷伤害",
@@ -15996,7 +16052,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "空中攻击伤害",
@@ -16669,7 +16726,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "空中攻击伤害",
@@ -16785,7 +16843,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "重击·烁雷·旋切伤害",
@@ -16814,7 +16873,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "重击·烁雷·升拳伤害",
@@ -16843,7 +16903,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "闪避反击·重击·鸣铁伤害",
@@ -16872,7 +16933,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "闪避反击·烁雷·后撤伤害",
@@ -17216,7 +17278,8 @@ module.exports = {
         "sequence": 3,
         "type": "multiplierBoost",
         "value": 0.25,
-        "condition": "重击/共鸣技能/共鸣解放相关倍率+25%"
+        "condition": "重击/共鸣技能/共鸣解放相关倍率+25%",
+        "targetSkill": "重击|共鸣技能|共鸣解放|赫日威临"
       },
       {
         "sequence": 4,
@@ -17502,7 +17565,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "重击·雷山小过伤害",
@@ -17531,7 +17595,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "重击·艮为山治疗量",
@@ -17560,7 +17625,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "重击·震为雷治疗量",
@@ -17589,7 +17655,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "引雷符伤害",
@@ -18023,7 +18090,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "重击·吃枪子吧！·猎手伤害",
@@ -18052,7 +18120,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "空中攻击·猎手伤害",
@@ -18284,7 +18353,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "空中攻击·铁胆伤害",
@@ -18761,7 +18831,8 @@ module.exports = {
         "sequence": 1,
         "type": "multiplierBoost",
         "value": 0.5,
-        "condition": "猎手/铁胆技能倍率+50%"
+        "condition": "猎手/铁胆技能倍率+50%",
+        "targetSkill": "猎手|铁胆"
       },
       {
         "sequence": 2,
@@ -19054,7 +19125,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "凌空击伤害",
@@ -19701,7 +19773,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "空中攻击伤害",
@@ -20446,7 +20519,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "绞息伤害",
@@ -21091,7 +21165,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "空中攻击伤害",
@@ -22212,7 +22287,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "瞄准伤害",
@@ -22824,7 +22900,8 @@ module.exports = {
         "bonusDmg": 0,
         "treeId": "1",
         "skillType": "常态攻击",
-        "damageStat": "hp"
+        "damageStat": "hp",
+        "damageType": "normalAtk"
       },
       {
         "name": "空中攻击",
@@ -23304,7 +23381,8 @@ module.exports = {
         "bonusDmg": 0,
         "treeId": "7",
         "skillType": "共鸣回路",
-        "damageStat": "hp"
+        "damageStat": "hp",
+        "damageType": "normalAtk"
       },
       {
         "name": "强化重击伤害",
@@ -23334,7 +23412,8 @@ module.exports = {
         "bonusDmg": 0,
         "treeId": "7",
         "skillType": "共鸣回路",
-        "damageStat": "hp"
+        "damageStat": "hp",
+        "damageType": "normalAtk"
       },
       {
         "name": "空中攻击第一段伤害",
@@ -23526,7 +23605,9 @@ module.exports = {
         "sequence": 2,
         "type": "multiplierBoost",
         "value": 0.5,
-        "condition": "卡提希娅普攻/重击/闪避反击/变奏倍率+50%"
+        "condition": "卡提希娅普攻/重击/闪避反击/变奏倍率+50%",
+        "targetTreeId": "1|6",
+        "targetSkill": "^(?!空中攻击).*$"
       },
       {
         "sequence": 2,
@@ -24793,7 +24874,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "闪避反击伤害",
@@ -25464,7 +25546,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "空中攻击伤害",
@@ -25754,7 +25837,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageType": "heavyAtk"
       },
       {
         "name": "符语爆破伤害",
@@ -26204,7 +26288,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "鸣奏伤害",
@@ -26805,7 +26890,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "空中攻击第一段伤害",
@@ -26921,7 +27007,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "闪避反击伤害",
@@ -27153,7 +27240,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageType": "heavyAtk"
       },
       {
         "name": "空中攻击·星星花绽放第一段伤害",
@@ -27582,7 +27670,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "红灯·下落攻击伤害",
@@ -27901,7 +27990,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageType": "heavyAtk"
       },
       {
         "name": "强化前扑伤害",
@@ -28295,7 +28385,8 @@ module.exports = {
         "bonusDmg": 0,
         "treeId": "1",
         "skillType": "常态攻击",
-        "damageStat": "hp"
+        "damageStat": "hp",
+        "damageType": "heavyAtk"
       },
       {
         "name": "下落攻击伤害",
@@ -28893,7 +28984,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "空中攻击伤害",
@@ -29270,7 +29362,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageType": "heavyAtk"
       }
     ],
     "chainStats": [
@@ -29581,7 +29674,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "空中攻击伤害",
@@ -29900,7 +29994,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageType": "heavyAtk"
       },
       {
         "name": "重斩·将明伤害",
@@ -29929,7 +30024,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageType": "heavyAtk"
       },
       {
         "name": "重斩·终夜伤害",
@@ -29958,7 +30054,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageType": "heavyAtk"
       },
       {
         "name": "每点【焰光】增加倍率",
@@ -30016,7 +30113,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageType": "heavyAtk"
       }
     ],
     "chainStats": [
@@ -30405,7 +30503,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "空中攻击伤害",
@@ -31663,7 +31762,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "normalAtk"
       },
       {
         "name": "绮彩巡游·跃动集束伤害",
@@ -31750,7 +31850,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "normalAtk"
       },
       {
         "name": "琳奈式创想伤害",
@@ -32372,7 +32473,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "重击第二段伤害",
@@ -32401,7 +32503,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "空中攻击伤害",
@@ -32662,7 +32765,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "重击·双线程伤害",
@@ -32691,7 +32795,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "重击·多线程伤害",
@@ -32720,7 +32825,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "共鸣技能·有效载荷突进攻击伤害",
@@ -33346,7 +33452,8 @@ module.exports = {
         "bonusDmg": 0,
         "treeId": "1",
         "skillType": "常态攻击",
-        "damageStat": "def"
+        "damageStat": "def",
+        "damageType": "heavyAtk"
       },
       {
         "name": "重击时伤害减免",
@@ -33366,7 +33473,8 @@ module.exports = {
         "bonusDmg": 0,
         "treeId": "1",
         "skillType": "常态攻击",
-        "damageStat": "def"
+        "damageStat": "def",
+        "damageType": "heavyAtk"
       },
       {
         "name": "后发制人伤害",
@@ -33803,7 +33911,7 @@ module.exports = {
         "type": "dmgDeepen",
         "value": 0.5,
         "condition": "共鸣回路攻防转换伤害+50%",
-        "targetSkill": "攻防转换"
+        "targetSkill": "^御反之隙.*伤害$"
       },
       {
         "sequence": 6,
@@ -34002,7 +34110,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "空中攻击伤害",
@@ -34771,7 +34880,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "空中攻击伤害",
@@ -35503,7 +35613,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "空中攻击伤害",
@@ -35851,7 +35962,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "7",
-        "skillType": "共鸣回路"
+        "skillType": "共鸣回路",
+        "damageType": "heavyAtk"
       },
       {
         "name": "暗流·鸣刃伤害",
@@ -36254,7 +36366,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "空中攻击伤害",
@@ -36547,7 +36660,7 @@ module.exports = {
         "type": "multiplierBoost",
         "value": 0.6,
         "condition": "共鸣技能后普攻幻想照进现实倍率+60%",
-        "targetSkill": "幻想照进现实"
+        "targetTreeId": "7"
       },
       {
         "sequence": 5,
@@ -36560,14 +36673,15 @@ module.exports = {
         "sequence": 5,
         "type": "multiplierBoost",
         "value": 0.8,
-        "condition": "共鸣解放重击倍率+80%"
+        "condition": "共鸣解放重击倍率+80%",
+        "damageType": "heavyAtk"
       },
       {
         "sequence": 6,
         "type": "defIgnore",
         "value": 0.6,
         "condition": "共鸣解放后幻想照进现实无视60%防御",
-        "targetSkill": "幻想照进现实"
+        "targetTreeId": "7"
       }
     ],
     "baseHp": 12250,
@@ -36765,7 +36879,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "浮潜幻海伤害",
@@ -37526,7 +37641,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "谱曲终末伤害",
@@ -38240,7 +38356,8 @@ module.exports = {
         "tag": "E",
         "bonusDmg": 0,
         "treeId": "1",
-        "skillType": "常态攻击"
+        "skillType": "常态攻击",
+        "damageType": "heavyAtk"
       },
       {
         "name": "空中攻击第一段伤害",
@@ -39947,7 +40064,7 @@ module.exports = {
         "treeId": "7",
         "skillType": "共鸣回路",
         "source": "kuro-official",
-        "isHeavy": true
+        "damageType": "heavyAtk"
       },
       {
         "name": "重击·羽剑式伤害",
@@ -39968,7 +40085,7 @@ module.exports = {
         "treeId": "7",
         "skillType": "共鸣回路",
         "source": "kuro-official",
-        "isHeavy": true
+        "damageType": "heavyAtk"
       },
       {
         "name": "空中攻击·释羽风落伤害",

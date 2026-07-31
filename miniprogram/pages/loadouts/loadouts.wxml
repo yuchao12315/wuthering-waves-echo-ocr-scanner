@@ -130,7 +130,7 @@
           <text class="dmg-td dmg-td-right dmg-td-crit">{{sk._critDisplay}}</text>
         </view>
         <view class="dmg-footer">
-          <text class="dmg-footer-label">{{loadout._activeSkillTypeCount > 0 ? '筛选期望' : '总期望'}}</text>
+          <text class="dmg-footer-label">关键技能期望合计</text>
           <text class="dmg-footer-value">{{loadout._filteredTotalDisplay}}</text>
         </view>
       </view>

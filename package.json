@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "generate:miniprogram-damage": "node scripts/generate-miniprogram-damage.cjs",
+    "check:miniprogram-damage": "node scripts/generate-miniprogram-damage.cjs --check",
+    "build": "npm run generate:miniprogram-damage && tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },

@@ -1,4 +1,5 @@
 export type DamageStat = 'atk' | 'hp' | 'def'
+export type DamageCategory = 'normalAtk' | 'heavyAtk' | 'resonanceSkill' | 'resonanceLiberation' | 'phantom' | 'coordinated' | 'effect'
 
 export interface Skill {
   name: string
@@ -9,6 +10,8 @@ export interface Skill {
   skillType: string
   source?: 'kuro-official'
   isHeavy?: boolean
+  /** Damage bonus category. Overrides the skill-tree category and isHeavy heuristic. */
+  damageType?: DamageCategory
   /** Base stat used by the multiplier. Defaults to attack for existing data. */
   damageStat?: DamageStat
 }
@@ -18,11 +21,16 @@ export type BuffType =
   | 'normalAtkDmg' | 'heavyAtkDmg' | 'resonanceSkillDmg' | 'resonanceLiberationDmg'
   | 'hpPct' | 'defPct'
 
+export type EffectType = BuffType | 'defIgnore' | 'resReduce' | 'dmgDeepen' | 'guaranteedCrit' | 'multiplierBoost'
+
 export interface InherentBuff {
   type: BuffType | 'defIgnore' | 'resReduce' | 'dmgDeepen'
   value: number
   condition?: string
   targetSkill?: string   // regex pattern matching skill name; omit = applies to all
+  targetTreeId?: string
+  damageType?: DamageCategory
+  targetElement?: string
   enabled?: boolean      // default true; set false to mark as conditional/off by default
 }
 
@@ -35,13 +43,16 @@ export interface ChainEffect {
   /** Which sequence node unlocks this (1-6) */
   sequence: number
   /** Effect type */
-  type: BuffType | 'defIgnore' | 'resReduce' | 'dmgDeepen' | 'guaranteedCrit' | 'multiplierBoost'
+  type: EffectType
   /** Effect value (percentage as decimal, e.g. 0.30 = 30%) */
   value: number
   /** Description of the effect */
   condition?: string
   /** Regex pattern matching skill name; omit = applies to all skills */
   targetSkill?: string
+  targetTreeId?: string
+  damageType?: DamageCategory
+  targetElement?: string
   /** Whether this effect is active (default true if omitted). Set false for conditional effects. */
   enabled?: boolean
 }
@@ -71,11 +82,17 @@ export interface CharacterBase {
 }
 
 export interface WeaponPassiveEffect {
-  type: BuffType
+  type: EffectType
   paramIdx: number
   condition: string
   stacks?: number
   stackParamIdx?: number
+  targetSkill?: string
+  targetTreeId?: string
+  damageType?: DamageCategory
+  targetElement?: string
+  enabled?: boolean
+  valueScale?: number
 }
 
 export interface WeaponPassive {
