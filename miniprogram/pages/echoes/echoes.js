@@ -2,6 +2,9 @@
 var SONATA_EFFECTS = require('../../data/sonata-effects.js')
 var NIGHTMARE = require('../../data/nightmare-bonuses.js')
 var getNightmareBonus = NIGHTMARE.getNightmareBonus
+var storageService = require('../../services/storage-service.js')
+var getStorage = storageService.getStorage
+var setStorage = storageService.setStorage
 
 const STAT_DISPLAY = {
   FLAT_ATK: '攻击', ATK_PCT: '攻击%', FLAT_HP: '生命', HP_PCT: '生命%',
@@ -78,17 +81,16 @@ Page({
   _calc: null,
 
   onLoad() {
-    this.loadEchoes()
     this.initForm()
   },
 
-  onShow() {
+  async onShow() {
     const app = getApp()
     if (app.globalData.selectedCharacter && app.globalData.selectedCharacter.weights) {
       this._calc = app.globalData.selectedCharacter.weights
       this.setData({ selectedCharName: app.globalData.selectedCharacter.name })
     }
-    this.loadEchoes()
+    await this.loadEchoes()
   },
 
   openCharacterPicker() {
@@ -134,9 +136,9 @@ Page({
   },
 
   /** 加载声骸 */
-  loadEchoes() {
+  async loadEchoes() {
     try {
-      const echoes = wx.getStorageSync('echoes') || []
+      const echoes = await getStorage('echoes', [])
       this.formatEchoes(echoes)
     } catch (e) {
       console.error('加载声骸失败:', e)
@@ -285,7 +287,7 @@ Page({
     this.setData({ substats })
   },
 
-  onSubmit() {
+  async onSubmit() {
     const data = this.data
     const monsterName = data.monsterName
     const formCost = data.formCost
@@ -328,15 +330,15 @@ Page({
 
     // 保存到 Storage
     try {
-      const echoes = wx.getStorageSync('echoes') || []
+      const echoes = await getStorage('echoes', [])
       echoes.unshift(echo)
-      wx.setStorageSync('echoes', echoes)
+      await setStorage('echoes', echoes)
 
       this.setData({
         substats: [], mainStatValue: '', secStatValue: '', monsterName: '', nightmareInfo: '',
       })
 
-      this.loadEchoes()
+      await this.loadEchoes()
       wx.showToast({ title: '已添加', icon: 'success' })
     } catch (e) {
       wx.showToast({ title: '保存失败', icon: 'none' })
@@ -372,13 +374,13 @@ Page({
     const self = this
     wx.showModal({
       title: '确认', content: '删除该声骸？',
-      success: function(res) {
+      success: async function(res) {
         if (res.confirm) {
           try {
-            const echoes = wx.getStorageSync('echoes') || []
+            const echoes = await getStorage('echoes', [])
             const filtered = echoes.filter(function(e) { return e.id !== id })
-            wx.setStorageSync('echoes', filtered)
-            self.loadEchoes()
+            await setStorage('echoes', filtered)
+            await self.loadEchoes()
           } catch (e) {}
         }
       }
@@ -478,7 +480,7 @@ Page({
     return []
   },
 
-  importEchoData(data, closePanel) {
+  async importEchoData(data, closePanel) {
     var echoList = this.extractImportEchoList(data)
 
     if (echoList.length === 0) {
@@ -495,9 +497,9 @@ Page({
       return
     }
 
-    var echoes = wx.getStorageSync('echoes') || []
+    var echoes = await getStorage('echoes', [])
     Array.prototype.unshift.apply(echoes, valid)
-    wx.setStorageSync('echoes', echoes)
+    await setStorage('echoes', echoes)
 
     var skipped = echoList.length - valid.length
     this.setData({
@@ -506,11 +508,11 @@ Page({
       importText: '',
       showImportPanel: closePanel ? false : this.data.showImportPanel,
     })
-    this.loadEchoes()
+    await this.loadEchoes()
   },
 
-  onExport() {
-    const echoes = wx.getStorageSync('echoes') || []
+  async onExport() {
+    const echoes = await getStorage('echoes', [])
     if (echoes.length === 0) {
       wx.showToast({ title: '无声骸可导出', icon: 'none' })
       return
@@ -574,10 +576,10 @@ Page({
     const self = this
     wx.showModal({
       title: '确认', content: '确定删除全部 ' + this.data.echoes.length + ' 个声骸？',
-      success: function(res) {
+      success: async function(res) {
         if (res.confirm) {
-          wx.setStorageSync('echoes', [])
-          self.loadEchoes()
+          await setStorage('echoes', [])
+          await self.loadEchoes()
         }
       }
     })

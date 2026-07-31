@@ -3,6 +3,9 @@ var SONATA_EFFECTS = require('../../data/sonata-effects.js')
 var CHARACTERS_BASE = require('../../data/characters-base.js')
 var CHARACTER_WEIGHTS = require('../../data/character-weights.js')
 var WEAPONS = require('../../data/weapons.js')
+var storageService = require('../../services/storage-service.js')
+var getStorage = storageService.getStorage
+var setStorage = storageService.setStorage
 
 var SONATA_NAMES = {}
 Object.keys(SONATA_EFFECTS).forEach(function (key) {
@@ -152,9 +155,9 @@ Page({
   _calcMap: CHARACTER_WEIGHTS,      // characterName → weights
   _weaponMap: {},    // weaponType → weapons[]
 
-  onShow() {
+  async onShow() {
     this.loadCharData()
-    this.loadLoadouts()
+    await this.loadLoadouts()
   },
 
   /** 加载角色数据（从全局或缓存） */
@@ -177,9 +180,9 @@ Page({
   },
 
   /** 加载套装列表 */
-  loadLoadouts() {
+  async loadLoadouts() {
     try {
-      var loadouts = wx.getStorageSync('loadouts') || []
+      var loadouts = await getStorage('loadouts', [])
 
       // 构建角色筛选选项
       var charNameMap = {}
@@ -262,21 +265,21 @@ Page({
     this.setData({ editName: e.detail.value })
   },
 
-  onEditConfirm(e) {
+  async onEditConfirm(e) {
     var id = e.currentTarget.dataset.id
     var name = this.data.editName.trim()
     if (name) {
       try {
-        var loadouts = wx.getStorageSync('loadouts') || []
+        var loadouts = await getStorage('loadouts', [])
         var idx = loadouts.findIndex(function (l) { return l.id === id })
         if (idx >= 0) {
           loadouts[idx].name = name
-          wx.setStorageSync('loadouts', loadouts)
+          await setStorage('loadouts', loadouts)
         }
       } catch (e) {}
     }
     this.setData({ editingId: null })
-    this.loadLoadouts()
+    await this.loadLoadouts()
   },
 
   // ====== 删除 ======
@@ -285,12 +288,12 @@ Page({
     var id = e.currentTarget.dataset.id
     wx.showModal({
       title: '确认', content: '删除该套装？',
-      success: function (res) {
+      success: async function (res) {
         if (res.confirm) {
           try {
-            var loadouts = wx.getStorageSync('loadouts') || []
-            wx.setStorageSync('loadouts', loadouts.filter(function (l) { return l.id !== id }))
-            self.loadLoadouts()
+            var loadouts = await getStorage('loadouts', [])
+            await setStorage('loadouts', loadouts.filter(function (l) { return l.id !== id }))
+            await self.loadLoadouts()
           } catch (e) {}
         }
       }
@@ -714,14 +717,14 @@ Page({
   },
 
   // ====== 替换声骸 ======
-  onStartReplace(e) {
+  async onStartReplace(e) {
     var loadoutId = e.currentTarget.dataset.loadoutId
     var slot = e.currentTarget.dataset.slot
     var loadout = this.data.filtered.find(function (l) { return l.id === loadoutId })
     if (!loadout) return
 
     var cost = loadout.echoes[slot].cost
-    var echoes = wx.getStorageSync('echoes') || []
+    var echoes = await getStorage('echoes', [])
     var candidates = echoes.filter(function (e) { return e.cost === cost }).map(function (e) { return Object.assign({}, e, {
       _sonataName: SONATA_NAMES[e.sonata] || e.sonata || '',
       _mainLabel: e.mainStat ? (STAT_DISPLAY[e.mainStat.type] || e.mainStat.type) : '',
@@ -745,10 +748,10 @@ Page({
     })
   },
 
-  onReplaceSonataChange(e) {
+  async onReplaceSonataChange(e) {
     var idx = parseInt(e.detail.value)
     var key = (this.data.replaceSonataOptions[idx] && this.data.replaceSonataOptions[idx].key) || ''
-    var echoes = wx.getStorageSync('echoes') || []
+    var echoes = await getStorage('echoes', [])
     var replaceCost = this.data.replaceCost
     var candidates = echoes.filter(function (e) { return e.cost === replaceCost })
     if (key) candidates = candidates.filter(function (e) { return e.sonata === key })
@@ -762,7 +765,7 @@ Page({
     this.setData({ replaceSonataIdx: idx, replaceEchoes: candidates })
   },
 
-  onPickEcho(e) {
+  async onPickEcho(e) {
     var echoIdx = e.currentTarget.dataset.index
     var echo = this.data.replaceEchoes[echoIdx]
     if (!echo) return
@@ -771,17 +774,17 @@ Page({
     var replaceSlot = this.data.replaceSlot
 
     try {
-      var loadouts = wx.getStorageSync('loadouts') || []
+      var loadouts = await getStorage('loadouts', [])
       var idx = loadouts.findIndex(function (l) { return l.id === replaceLoadoutId })
       if (idx >= 0) {
         loadouts[idx].echoes[replaceSlot] = echo
         // TODO: 重新计算评分
-        wx.setStorageSync('loadouts', loadouts)
+        await setStorage('loadouts', loadouts)
       }
     } catch (e) {}
 
     this.setData({ replaceSlot: null, replaceLoadoutId: null })
-    this.loadLoadouts()
+    await this.loadLoadouts()
     wx.showToast({ title: '已替换', icon: 'success' })
   },
 

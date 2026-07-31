@@ -1,30 +1,14 @@
 // services/data-service.js
-// 本地静态数据优先，Storage/内存缓存加速；云函数仅作为可选兜底。
+// 本地静态数据优先，全局内存缓存加速；云函数仅作为可选兜底。
 
 var CHARACTER_BASE = require('../data/characters-base.js')
 var CHARACTER_WEIGHTS = require('../data/character-weights.js')
 var WEAPONS = require('../data/weapons.js')
 
-var CACHE_TTL = 7 * 24 * 3600 * 1000
-
 var app = getApp()
 var characterBaseMap = CHARACTER_BASE
 var characterWeightsMap = CHARACTER_WEIGHTS
 var weapons = WEAPONS
-
-function readFreshStorage(key) {
-  try {
-    var cached = wx.getStorageSync(key)
-    if (cached && Date.now() - cached.timestamp < CACHE_TTL) return cached.data
-  } catch (e) {}
-  return null
-}
-
-function writeStorage(key, data) {
-  try {
-    wx.setStorageSync(key, { data, timestamp: Date.now() })
-  } catch (e) {}
-}
 
 function canUseCloud() {
   return !!(wx.cloud && typeof wx.cloud.callFunction === 'function')
@@ -74,22 +58,14 @@ function getCharacterList() {
     return Promise.resolve(app.globalData.characterList)
   }
 
-  var cached = readFreshStorage('characterList')
-  if (cached) {
-    app.globalData.characterList = cached
-    return Promise.resolve(cached)
-  }
-
   var localList = buildCharacterList()
   if (localList.length > 0) {
     app.globalData.characterList = localList
-    writeStorage('characterList', localList)
     return Promise.resolve(localList)
   }
 
   return callCloudFunction('getCharacterList').then(function (data) {
     app.globalData.characterList = data
-    writeStorage('characterList', data)
     return data
   })
 }
@@ -101,25 +77,15 @@ function getCharacterDetail(name) {
     return Promise.resolve(app.globalData.characterCache[name])
   }
 
-  var cacheKey = 'char_' + name
-  var cached = readFreshStorage(cacheKey)
-  if (cached) {
-    if (!app.globalData.characterCache) app.globalData.characterCache = {}
-    app.globalData.characterCache[name] = cached
-    return Promise.resolve(cached)
-  }
-
   try {
     var detail = buildCharacterDetail(name)
     if (!app.globalData.characterCache) app.globalData.characterCache = {}
     app.globalData.characterCache[name] = detail
-    writeStorage(cacheKey, detail)
     return Promise.resolve(detail)
   } catch (e) {
     return callCloudFunction('getCharacterDetail', { name: name }).then(function (data) {
       if (!app.globalData.characterCache) app.globalData.characterCache = {}
       app.globalData.characterCache[name] = data
-      writeStorage(cacheKey, data)
       return data
     })
   }
@@ -132,25 +98,16 @@ function getWeapons(weaponType) {
     return Promise.resolve(app.globalData.weaponsCache[cacheKey])
   }
 
-  var cached = readFreshStorage(cacheKey)
-  if (cached) {
-    if (!app.globalData.weaponsCache) app.globalData.weaponsCache = {}
-    app.globalData.weaponsCache[cacheKey] = cached
-    return Promise.resolve(cached)
-  }
-
   var localWeapons = weaponType ? weapons.filter(function (w) { return w.type === weaponType }) : weapons
   if (localWeapons.length > 0) {
     if (!app.globalData.weaponsCache) app.globalData.weaponsCache = {}
     app.globalData.weaponsCache[cacheKey] = localWeapons
-    writeStorage(cacheKey, localWeapons)
     return Promise.resolve(localWeapons)
   }
 
   return callCloudFunction('getWeapons', weaponType ? { type: weaponType } : {}).then(function (data) {
     if (!app.globalData.weaponsCache) app.globalData.weaponsCache = {}
     app.globalData.weaponsCache[cacheKey] = data
-    writeStorage(cacheKey, data)
     return data
   })
 }

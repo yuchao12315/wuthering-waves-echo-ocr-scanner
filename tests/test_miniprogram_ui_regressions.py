@@ -1,4 +1,5 @@
 import re
+import json
 import unittest
 from pathlib import Path
 
@@ -113,6 +114,31 @@ class MiniprogramUiRegressionTest(unittest.TestCase):
                 self.assertIn("damageStat === 'def' ? totalDef", js)
                 self.assertIn('baseStat * multiplier + flatBase', js)
                 self.assertNotIn('var baseDmg = round5(totalAtk * multiplier)', js)
+
+    def test_startup_uses_async_storage_and_lazy_character_picker(self):
+        miniprogram = ROOT / 'miniprogram'
+        app_config = json.loads(self.read('miniprogram/app.json'))
+        self.assertEqual(app_config.get('lazyCodeLoading'), 'requiredComponents')
+
+        sync_calls = []
+        for path in miniprogram.rglob('*.js'):
+            content = path.read_text(encoding='utf-8')
+            for api in ('getStorageSync', 'setStorageSync', 'removeStorageSync'):
+                if api in content:
+                    sync_calls.append(f'{path.relative_to(ROOT)}:{api}')
+
+        self.assertEqual(sync_calls, [])
+
+        echoes_js = self.read('miniprogram/pages/echoes/echoes.js')
+        on_load = re.search(r'onLoad\(\)\s*\{(?P<body>.*?)\n  \},', echoes_js, re.S)
+        self.assertIsNotNone(on_load)
+        self.assertNotIn('loadEchoes()', on_load.group('body'))
+
+        for page in ('calculator', 'echoes'):
+            wxml = self.read(f'miniprogram/pages/{page}/{page}.wxml')
+            picker = re.search(r'<character-picker(?P<attrs>.*?)\/>', wxml, re.S)
+            self.assertIsNotNone(picker)
+            self.assertIn('wx:if="{{showCharacterPicker}}"', picker.group('attrs'))
 
 
 if __name__ == '__main__':

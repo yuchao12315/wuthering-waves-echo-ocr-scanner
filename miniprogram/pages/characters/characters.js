@@ -2,8 +2,6 @@
 var CHARACTER_BASE = require('../../data/characters-base.js')
 var CHARACTER_WEIGHTS = require('../../data/character-weights.js')
 
-var CACHE_TTL = 7 * 24 * 3600 * 1000
-
 function buildCharacterList() {
   return Object.keys(CHARACTER_BASE)
     .map(function (name) {
@@ -32,16 +30,6 @@ function getCharacterDetail(name) {
     return Promise.resolve(app.globalData.characterCache[name])
   }
 
-  try {
-    var cacheKey = 'char_' + name
-    var cached = wx.getStorageSync(cacheKey)
-    if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
-      if (!app.globalData.characterCache) app.globalData.characterCache = {}
-      app.globalData.characterCache[name] = cached.data
-      return Promise.resolve(cached.data)
-    }
-  } catch (e) {}
-
   var base = CHARACTER_BASE[name]
   var weights = CHARACTER_WEIGHTS[name]
   if (!base || !weights) return Promise.reject(new Error('缺少角色数据'))
@@ -56,10 +44,6 @@ function getCharacterDetail(name) {
 
   if (!app.globalData.characterCache) app.globalData.characterCache = {}
   app.globalData.characterCache[name] = detail
-
-  try {
-    wx.setStorageSync('char_' + name, { data: detail, timestamp: Date.now() })
-  } catch (e) {}
 
   return Promise.resolve(detail)
 }
@@ -110,13 +94,12 @@ Page({
 
       // 合并权重摘要信息
       var characterList = list.map(function (char) {
-        // 尝试从本地缓存获取权重数据
+        // 权重随包发布，直接读取本地数据，避免逐角色访问 storage。
         var topSubs = []
         var gradeSummary = null
-
-        var cached = wx.getStorageSync('char_' + char.name)
-        if (cached && cached.data && cached.data.weights) {
-          var subProps = cached.data.weights.sub_props || {}
+        var weights = CHARACTER_WEIGHTS[char.name]
+        if (weights) {
+          var subProps = weights.sub_props || {}
           topSubs = Object.keys(subProps)
             .filter(function (key) { return subProps[key] > 0 })
             .sort(function (a, b) { return subProps[b] - subProps[a] })
@@ -129,7 +112,7 @@ Page({
               }
             })
 
-          var grade = cached.data.weights.grade
+          var grade = weights.grade
           if (grade) {
             gradeSummary = {
               s: (grade.valid_s || []).map(function (s) { return STAT_CN[s] || s }).join('/'),

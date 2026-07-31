@@ -157,6 +157,7 @@
   </view>
 
   <character-picker
+    wx:if="{{showCharacterPicker}}"
     visible="{{showCharacterPicker}}"
     selected-name="{{selectedCharName}}"
     bindselect="onCharacterPicked"

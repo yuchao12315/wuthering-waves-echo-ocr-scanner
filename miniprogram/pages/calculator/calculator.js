@@ -7,6 +7,9 @@ var useAdvancedThresholdQuota = adQuotaService.useAdvancedThresholdQuota
 var refundAdvancedThresholdQuota = adQuotaService.refundAdvancedThresholdQuota
 var unlockCalculateByAd = adQuotaService.unlockCalculateByAd
 var unlockAdvancedThresholdByAd = adQuotaService.unlockAdvancedThresholdByAd
+var storageService = require('../../services/storage-service.js')
+var getStorage = storageService.getStorage
+var setStorage = storageService.setStorage
 
 // 套装数据（本地打包）
 var SONATA_EFFECTS = require('../../data/sonata-effects.js')
@@ -275,7 +278,7 @@ Page({
     this.refreshQuota()
   },
 
-  onShow() {
+  async onShow() {
     // 每次显示时检查全局角色选择
     var app = getApp()
     if (app.globalData.selectedCharacter) {
@@ -283,10 +286,7 @@ Page({
     }
 
     // 加载声骸库存
-    try {
-      const echoes = wx.getStorageSync('echoes')
-      if (echoes) this._echoes = echoes
-    } catch (e) {}
+    this._echoes = await getStorage('echoes', [])
   },
 
   /** 设置当前角色 */
@@ -325,16 +325,16 @@ Page({
   },
 
   /** 加载已保存的套装 */
-  loadSavedLoadouts() {
+  async loadSavedLoadouts() {
     try {
-      const loadouts = wx.getStorageSync('loadouts') || []
+      const loadouts = await getStorage('loadouts', [])
       this.setData({ savedLoadouts: loadouts })
     } catch (e) {}
   },
 
   /** 刷新本地广告配额 */
-  refreshQuota() {
-    var quota = getQuotaSummary()
+  async refreshQuota() {
+    var quota = await getQuotaSummary()
     this.setData({
       adQuotaEnabled: isAdQuotaEnabled(),
       calculateLeft: quota.calculateLeft,
@@ -491,7 +491,7 @@ Page({
     let usedAdvancedQuota = false
 
     if (this.data.hasThresholds) {
-      let advancedQuota = useAdvancedThresholdQuota()
+      let advancedQuota = await useAdvancedThresholdQuota()
       if (!advancedQuota.ok) {
         var unlocked = await unlockAdvancedThresholdByAd()
         if (!unlocked.ok) {
@@ -499,7 +499,7 @@ Page({
           return false
         }
 
-        advancedQuota = useAdvancedThresholdQuota()
+        advancedQuota = await useAdvancedThresholdQuota()
         if (!advancedQuota.ok) {
           this.refreshQuota()
           return false
@@ -508,18 +508,18 @@ Page({
       usedAdvancedQuota = true
     }
 
-    let calcQuota = useCalculateQuota()
+    let calcQuota = await useCalculateQuota()
     if (!calcQuota.ok) {
       var unlocked = await unlockCalculateByAd()
       if (!unlocked.ok) {
-        if (usedAdvancedQuota) refundAdvancedThresholdQuota()
+        if (usedAdvancedQuota) await refundAdvancedThresholdQuota()
         this.refreshQuota()
         return false
       }
 
-      calcQuota = useCalculateQuota()
+      calcQuota = await useCalculateQuota()
       if (!calcQuota.ok) {
-        if (usedAdvancedQuota) refundAdvancedThresholdQuota()
+        if (usedAdvancedQuota) await refundAdvancedThresholdQuota()
         this.refreshQuota()
         return false
       }
@@ -1319,7 +1319,7 @@ Page({
       title: '保存套装',
       editable: true,
       placeholderText: '输入套装名称',
-      success: function (res) {
+      success: async function (res) {
         if (res.confirm && res.content) {
           var loadout = {
             id: Date.now() + '-' + Math.random().toString(36).substr(2, 9),
@@ -1344,9 +1344,9 @@ Page({
           }
 
           try {
-            var loadouts = wx.getStorageSync('loadouts') || []
+            var loadouts = await getStorage('loadouts', [])
             loadouts.unshift(loadout)
-            wx.setStorageSync('loadouts', loadouts)
+            await setStorage('loadouts', loadouts)
             self.loadSavedLoadouts()
             wx.showToast({ title: '已保存', icon: 'success' })
           } catch (e) {

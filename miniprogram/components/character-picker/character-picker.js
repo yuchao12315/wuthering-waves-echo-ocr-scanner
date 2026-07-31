@@ -101,10 +101,6 @@ Component({
       if (!app.globalData.characterCache) app.globalData.characterCache = {}
       app.globalData.characterCache[name] = detail
 
-      try {
-        wx.setStorageSync('char_' + name, { data: detail, timestamp: Date.now() })
-      } catch (err) {}
-
       this.triggerEvent('select', { character: detail })
     },
   },
