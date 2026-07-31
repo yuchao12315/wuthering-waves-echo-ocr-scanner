@@ -140,6 +140,15 @@ class MiniprogramUiRegressionTest(unittest.TestCase):
             self.assertIsNotNone(picker)
             self.assertIn('wx:if="{{showCharacterPicker}}"', picker.group('attrs'))
 
+    def test_echoes_guide_opens_the_configured_bilibili_video(self):
+        js = self.read('miniprogram/pages/echoes/echoes.js')
+
+        self.assertIn('https://www.bilibili.com/video/BV1o23n6DEhV/', js)
+        self.assertIn("BILIBILI_MINIPROGRAM_APP_ID = 'wx7564fd5313d24844'", js)
+        self.assertIn("GUIDE_VIDEO_AVID = '117003717184278'", js)
+        self.assertIn('wx.navigateToMiniProgram({', js)
+        self.assertIn('wx.setClipboardData({', js)
+
 
 if __name__ == '__main__':
     unittest.main()

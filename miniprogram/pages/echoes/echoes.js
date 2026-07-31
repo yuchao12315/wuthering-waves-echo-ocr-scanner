@@ -6,6 +6,10 @@ var storageService = require('../../services/storage-service.js')
 var getStorage = storageService.getStorage
 var setStorage = storageService.setStorage
 
+var GUIDE_VIDEO_URL = 'https://www.bilibili.com/video/BV1o23n6DEhV/'
+var BILIBILI_MINIPROGRAM_APP_ID = 'wx7564fd5313d24844'
+var GUIDE_VIDEO_AVID = '117003717184278'
+
 const STAT_DISPLAY = {
   FLAT_ATK: '攻击', ATK_PCT: '攻击%', FLAT_HP: '生命', HP_PCT: '生命%',
   FLAT_DEF: '防御', DEF_PCT: '防御%', CRIT_RATE: '暴击率', CRIT_DMG: '暴击伤害',
@@ -564,11 +568,26 @@ Page({
   },
 
   onOpenGuide() {
-    wx.showModal({
-      title: '使用教程',
-      content: '这里预留导入、导出 JSON 和手动录入声骸的使用教程入口，后续可接入图文教程页。',
-      showCancel: false,
-      confirmText: '知道了',
+    var timestamp = Date.now()
+    var videoPath = 'pages/video/video?__preload_=' + (timestamp * 10 + 3)
+      + '&__key_=' + (timestamp * 10 + 4)
+      + '&avid=' + GUIDE_VIDEO_AVID
+
+    wx.navigateToMiniProgram({
+      appId: BILIBILI_MINIPROGRAM_APP_ID,
+      path: videoPath,
+      envVersion: 'release',
+      fail: function () {
+        wx.setClipboardData({
+          data: GUIDE_VIDEO_URL,
+          success: function () {
+            wx.showToast({ title: '跳转失败，链接已复制', icon: 'none' })
+          },
+          fail: function () {
+            wx.showToast({ title: '暂时无法打开教程', icon: 'none' })
+          },
+        })
+      },
     })
   },
 
