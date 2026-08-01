@@ -2,46 +2,33 @@
 
 const fs = require('node:fs')
 const path = require('node:path')
-const ts = require('typescript')
 
 const root = path.resolve(__dirname, '..')
 const sourcePath = path.join(root, 'src/lib/damage.ts')
-const outputPath = path.join(root, 'miniprogram/lib/damage.js')
+const outputPath = path.join(root, 'miniprogram/lib/damage.ts')
 
 function generate() {
   let source = fs.readFileSync(sourcePath, 'utf8')
   source = source
+    .replace("from '@/types/echo'", "from '../typings/echo'")
+    .replace("from '@/types/damage'", "from '../typings/damage'")
     .replace(
       "import SONATA_EFFECTS from '@/data/sonata-effects.json'",
-      "import SONATA_EFFECTS = require('../data/sonata-effects.js')",
+      "declare const require: (path: string) => unknown\nconst SONATA_EFFECTS = require('../data/sonata-effects.js') as Record<string, SonataEffect>",
     )
     .replace(
       "import { getNightmareBonus } from '@/data/nightmare-bonuses'",
-      "import { getNightmareBonus } from '../data/nightmare-bonuses.js'",
+      "import { getNightmareBonus } from '../data/nightmare-bonuses'",
     )
-    .replace(/^export\s+(?=(?:const|function)\s+(?:KEY_SKILL_DAMAGE_LIMIT|selectKeySkills|parseMultiplierStr|calcDamage)\b)/gm, '')
 
-  const result = ts.transpileModule(source, {
-    fileName: sourcePath,
-    compilerOptions: {
-      module: ts.ModuleKind.CommonJS,
-      target: ts.ScriptTarget.ES2019,
-      removeComments: false,
-    },
-  })
-  const commonJsBody = result.outputText
-    .replace(/^Object\.defineProperty\(exports, "__esModule", \{ value: true \}\);\r?\n/m, '')
-
-  return '// Auto-generated from src/lib/damage.ts. Do not edit directly.\n'
-    + commonJsBody
-    + '\nmodule.exports = { KEY_SKILL_DAMAGE_LIMIT, selectKeySkills, parseMultiplierStr, calcDamage }\n'
+  return '// Auto-generated from src/lib/damage.ts. Do not edit directly.\n' + source
 }
 
 const output = generate()
 if (process.argv.includes('--check')) {
   const current = fs.existsSync(outputPath) ? fs.readFileSync(outputPath, 'utf8') : ''
   if (current !== output) {
-    console.error('miniprogram/lib/damage.js is stale; run npm run generate:miniprogram-damage')
+    console.error('miniprogram/lib/damage.ts is stale; run npm run generate:miniprogram-damage')
     process.exit(1)
   }
 } else {

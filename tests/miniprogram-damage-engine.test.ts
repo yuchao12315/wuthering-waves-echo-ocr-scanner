@@ -1,19 +1,29 @@
 import { execFileSync } from 'node:child_process'
-import { readFileSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { describe, expect, it } from 'vitest'
+import ts from 'typescript'
 import { calcDamage as webCalcDamage, selectKeySkills as webSelectKeySkills } from '@/lib/damage'
 import type { CharacterBase, Weapon } from '@/types/damage'
 
 const root = resolve(import.meta.dirname, '..')
 
 function loadGeneratedEngine() {
-  const filename = resolve(root, 'miniprogram/lib/damage.js')
-  const source = readFileSync(filename, 'utf8')
+  const filename = resolve(root, 'miniprogram/lib/damage.ts')
+  const generatedSource = readFileSync(filename, 'utf8')
+  const source = ts.transpileModule(generatedSource, {
+    fileName: filename,
+    compilerOptions: {
+      module: ts.ModuleKind.CommonJS,
+      target: ts.ScriptTarget.ES2019,
+    },
+  }).outputText
   const module = { exports: {} as Record<string, unknown> }
   const localRequire = (request: string) => {
     if (request.endsWith('sonata-effects.js')) return {}
-    if (request.endsWith('nightmare-bonuses.js')) return { getNightmareBonus: () => null }
+    if (request.endsWith('nightmare-bonuses.js') || request.endsWith('nightmare-bonuses')) {
+      return { getNightmareBonus: () => null }
+    }
     throw new Error(`Unexpected generated-engine dependency: ${request}`)
   }
   new Function('require', 'exports', 'module', source)(localRequire, module.exports, module)
@@ -28,12 +38,12 @@ describe('miniprogram shared damage engine', () => {
     execFileSync(process.execPath, ['scripts/generate-miniprogram-damage.cjs', '--check'], { cwd: root })
   })
 
-  it('uses the native CommonJS module shape supported by the miniprogram runtime', () => {
-    const source = readFileSync(resolve(root, 'miniprogram/lib/damage.js'), 'utf8')
+  it('uses the TypeScript source shape handled by the configured compiler plugin', () => {
+    const source = readFileSync(resolve(root, 'miniprogram/lib/damage.ts'), 'utf8')
 
-    expect(source).toContain('module.exports = {')
-    expect(source).not.toContain('Object.defineProperty(exports')
-    expect(source).not.toMatch(/\bexports\./)
+    expect(source).toContain("from '../typings/damage'")
+    expect(source).toContain('export function calcDamage')
+    expect(existsSync(resolve(root, 'miniprogram/lib/damage.js'))).toBe(false)
   })
 
   it('keeps Web and generated miniprogram results identical', () => {
