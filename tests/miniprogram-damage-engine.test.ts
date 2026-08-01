@@ -28,6 +28,14 @@ describe('miniprogram shared damage engine', () => {
     execFileSync(process.execPath, ['scripts/generate-miniprogram-damage.cjs', '--check'], { cwd: root })
   })
 
+  it('uses the native CommonJS module shape supported by the miniprogram runtime', () => {
+    const source = readFileSync(resolve(root, 'miniprogram/lib/damage.js'), 'utf8')
+
+    expect(source).toContain('module.exports = {')
+    expect(source).not.toContain('Object.defineProperty(exports')
+    expect(source).not.toMatch(/\bexports\./)
+  })
+
   it('keeps Web and generated miniprogram results identical', () => {
     const character: CharacterBase = {
       baseAtk: 1000, baseHp: 10000, baseDef: 1000, weaponType: '迅刀', element: '热熔',

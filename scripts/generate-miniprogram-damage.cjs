@@ -19,6 +19,7 @@ function generate() {
       "import { getNightmareBonus } from '@/data/nightmare-bonuses'",
       "import { getNightmareBonus } from '../data/nightmare-bonuses.js'",
     )
+    .replace(/^export\s+(?=(?:const|function)\s+(?:KEY_SKILL_DAMAGE_LIMIT|selectKeySkills|parseMultiplierStr|calcDamage)\b)/gm, '')
 
   const result = ts.transpileModule(source, {
     fileName: sourcePath,
@@ -28,7 +29,12 @@ function generate() {
       removeComments: false,
     },
   })
-  return '// Auto-generated from src/lib/damage.ts. Do not edit directly.\n' + result.outputText
+  const commonJsBody = result.outputText
+    .replace(/^Object\.defineProperty\(exports, "__esModule", \{ value: true \}\);\r?\n/m, '')
+
+  return '// Auto-generated from src/lib/damage.ts. Do not edit directly.\n'
+    + commonJsBody
+    + '\nmodule.exports = { KEY_SKILL_DAMAGE_LIMIT, selectKeySkills, parseMultiplierStr, calcDamage }\n'
 }
 
 const output = generate()

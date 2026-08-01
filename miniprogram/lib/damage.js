@@ -1,10 +1,5 @@
 // Auto-generated from src/lib/damage.ts. Do not edit directly.
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.KEY_SKILL_DAMAGE_LIMIT = void 0;
-exports.selectKeySkills = selectKeySkills;
-exports.parseMultiplierStr = parseMultiplierStr;
-exports.calcDamage = calcDamage;
 const SONATA_EFFECTS = require("../data/sonata-effects.js");
 const nightmare_bonuses_js_1 = require("../data/nightmare-bonuses.js");
 const sonataEffects = SONATA_EFFECTS;
@@ -27,9 +22,9 @@ const BUFF_TO_DMG_KEY = {
     resonanceLiberationDmg: 'resonanceLiberation',
     phantomDmg: 'phantom',
 };
-exports.KEY_SKILL_DAMAGE_LIMIT = 5;
+const KEY_SKILL_DAMAGE_LIMIT = 5;
 /** Keep the most representative damage rows for compact loadout presentation. */
-function selectKeySkills(skills, limit = exports.KEY_SKILL_DAMAGE_LIMIT) {
+function selectKeySkills(skills, limit = KEY_SKILL_DAMAGE_LIMIT) {
     if (limit <= 0)
         return [];
     return skills
@@ -836,3 +831,5 @@ function calcDamage(character, weapon, weaponRefine, echoes, _chainNodes = -1, s
         totalExpected,
     };
 }
+
+module.exports = { KEY_SKILL_DAMAGE_LIMIT, selectKeySkills, parseMultiplierStr, calcDamage }
