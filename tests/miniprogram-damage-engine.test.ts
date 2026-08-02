@@ -1,30 +1,25 @@
 import { execFileSync } from 'node:child_process'
 import { existsSync, readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
+import { parse } from 'acorn'
 import { describe, expect, it } from 'vitest'
-import ts from 'typescript'
 import { calcDamage as webCalcDamage, selectKeySkills as webSelectKeySkills } from '@/lib/damage'
 import type { CharacterBase, Weapon } from '@/types/damage'
 
 const root = resolve(import.meta.dirname, '..')
 
 function loadGeneratedEngine() {
-  const filename = resolve(root, 'miniprogram/lib/damage.ts')
-  const generatedSource = readFileSync(filename, 'utf8')
-  const source = ts.transpileModule(generatedSource, {
-    fileName: filename,
-    compilerOptions: {
-      module: ts.ModuleKind.CommonJS,
-      target: ts.ScriptTarget.ES2019,
-    },
-  }).outputText
+  const filename = resolve(root, 'miniprogram/lib/damage.js')
+  const source = readFileSync(filename, 'utf8')
   const module = { exports: {} as Record<string, unknown> }
   const localRequire = (request: string) => {
-    if (request.endsWith('sonata-effects.js')) return {}
-    if (request.endsWith('nightmare-bonuses.js') || request.endsWith('nightmare-bonuses')) {
-      return { getNightmareBonus: () => null }
-    }
-    throw new Error(`Unexpected generated-engine dependency: ${request}`)
+    const dependencyFilename = resolve(filename, '..', request)
+    if (!existsSync(dependencyFilename)) throw new Error(`Missing generated dependency: ${dependencyFilename}`)
+
+    const dependency = { exports: {} as Record<string, unknown> }
+    const dependencySource = readFileSync(dependencyFilename, 'utf8')
+    Function('module', 'exports', dependencySource)(dependency, dependency.exports)
+    return dependency.exports
   }
   new Function('require', 'exports', 'module', source)(localRequire, module.exports, module)
   return module.exports as {
@@ -38,12 +33,13 @@ describe('miniprogram shared damage engine', () => {
     execFileSync(process.execPath, ['scripts/generate-miniprogram-damage.cjs', '--check'], { cwd: root })
   })
 
-  it('uses the TypeScript source shape handled by the configured compiler plugin', () => {
-    const source = readFileSync(resolve(root, 'miniprogram/lib/damage.ts'), 'utf8')
+  it('emits a physical ES5 CommonJS module for the miniprogram runtime', () => {
+    const source = readFileSync(resolve(root, 'miniprogram/lib/damage.js'), 'utf8')
 
-    expect(source).toContain("from '../typings/damage'")
-    expect(source).toContain('export function calcDamage')
-    expect(existsSync(resolve(root, 'miniprogram/lib/damage.js'))).toBe(false)
+    expect(() => parse(source, { ecmaVersion: 5 })).not.toThrow()
+    expect(source).toContain('module.exports = {')
+    expect(source).not.toMatch(/\bexports\./)
+    expect(existsSync(resolve(root, 'miniprogram/lib/damage.ts'))).toBe(false)
   })
 
   it('keeps Web and generated miniprogram results identical', () => {
@@ -83,6 +79,7 @@ describe('miniprogram shared damage engine', () => {
     for (const file of ['miniprogram/pages/calculator/calculator.js', 'miniprogram/pages/loadouts/loadouts.js']) {
       const source = readFileSync(resolve(root, file), 'utf8')
       expect(source).toContain("require('../../lib/damage.js')")
+      expect(source).not.toContain("require('../../lib/damage.ts')")
       expect(source).not.toContain('var totalDefIgnore')
       expect(source).not.toContain('function parseMultiplierStr')
     }
