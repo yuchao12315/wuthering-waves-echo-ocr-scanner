@@ -319,6 +319,16 @@
   color: #2563eb;
 }
 
+.damage-error-note {
+  margin: -4rpx 4rpx 16rpx;
+  padding: 14rpx 16rpx;
+  border-left: 5rpx solid #f59e0b;
+  background: #fffbeb;
+  color: #7a4b08;
+  font-size: 22rpx;
+  line-height: 1.6;
+}
+
 .result-card {
   padding: 22rpx;
   margin-bottom: 18rpx;

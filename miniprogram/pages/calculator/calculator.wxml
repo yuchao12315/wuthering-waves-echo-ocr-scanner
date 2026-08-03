@@ -206,6 +206,10 @@
       <text class="results-filtered" wx:if="{{hasThresholds && belowCount > 0}}">已过滤 {{belowCount}} 套</text>
     </view>
 
+    <view wx:if="{{rankMode === 'damage'}}" class="damage-error-note">
+      <text>计算值与游戏实测通常存在约 0%–2% 误差，复杂触发场景可能更高。若误差超过 5%，请附角色、武器、命座、技能及实测截图反馈开发者修复。</text>
+    </view>
+
     <view
       wx:for="{{filteredResults}}"
       wx:key="index"

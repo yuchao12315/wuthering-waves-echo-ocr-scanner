@@ -125,7 +125,7 @@
           <text class="dmg-td dmg-td-tag">
             <text class="tag {{sk.tagClass}}">{{sk.tag}}</text>
           </text>
-          <text class="dmg-td dmg-td-right">{{sk.multiplierStr}}</text>
+          <text class="dmg-td dmg-td-right dmg-td-multiplier">{{sk.multiplierStr}}</text>
           <text class="dmg-td dmg-td-right dmg-td-expected">{{sk._expectedDisplay}}</text>
           <text class="dmg-td dmg-td-right dmg-td-crit">{{sk._critDisplay}}</text>
         </view>
@@ -133,6 +133,10 @@
           <text class="dmg-footer-label">关键技能期望合计</text>
           <text class="dmg-footer-value">{{loadout._filteredTotalDisplay}}</text>
         </view>
+      </view>
+
+      <view wx:if="{{loadout._damageResult}}" class="damage-error-note">
+        <text>计算值与游戏实测通常存在约 0%–2% 误差，复杂触发场景可能更高。若误差超过 5%，请附角色、武器、命座、技能及实测截图反馈开发者修复。</text>
       </view>
     </view>
   </view>

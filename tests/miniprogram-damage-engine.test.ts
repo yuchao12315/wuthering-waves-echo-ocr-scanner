@@ -85,4 +85,22 @@ describe('miniprogram shared damage engine', () => {
       expect(source).not.toContain('function parseMultiplierStr')
     }
   })
+
+  it('shows the damage error range and feedback guidance on both result pages', () => {
+    for (const file of ['miniprogram/pages/calculator/calculator.wxml', 'miniprogram/pages/loadouts/loadouts.wxml']) {
+      const source = readFileSync(resolve(root, file), 'utf8')
+      expect(source).toContain('约 0%–2% 误差')
+      expect(source).toContain('若误差超过 5%')
+      expect(source).toContain('反馈开发者修复')
+    }
+  })
+
+  it('keeps long loadout multipliers from covering expected and crit damage', () => {
+    const template = readFileSync(resolve(root, 'miniprogram/pages/loadouts/loadouts.wxml'), 'utf8')
+    const styles = readFileSync(resolve(root, 'miniprogram/pages/loadouts/loadouts.wxss'), 'utf8')
+
+    expect(template).toContain('dmg-td-multiplier')
+    expect(styles).toMatch(/\.dmg-th-right,\s*\.dmg-td-right\s*\{[^}]*flex:\s*0 0 112rpx/s)
+    expect(styles).toMatch(/\.dmg-td-multiplier\s*\{[^}]*overflow-wrap:\s*anywhere/s)
+  })
 })

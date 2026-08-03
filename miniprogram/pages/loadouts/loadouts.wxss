@@ -141,9 +141,23 @@
 .dmg-row { padding: 10rpx 8rpx; border-top: 1rpx solid #edf2f7; }
 .dmg-th { color: #667085; font-weight: 600; }
 .dmg-td { color: #3f4b5f; }
-.dmg-th-name, .dmg-td-name { flex: 2; min-width: 0; }
-.dmg-th-tag, .dmg-td-tag { width: 76rpx; text-align: center; }
-.dmg-th-right, .dmg-td-right { width: 112rpx; text-align: right; }
+.dmg-th-name, .dmg-td-name { flex: 1 1 0; min-width: 0; padding-right: 6rpx; overflow: hidden; }
+.dmg-th-tag, .dmg-td-tag { flex: 0 0 58rpx; width: 58rpx; text-align: center; }
+.dmg-th-right,
+.dmg-td-right {
+  flex: 0 0 112rpx;
+  width: 112rpx;
+  min-width: 112rpx;
+  box-sizing: border-box;
+  text-align: right;
+}
+.dmg-td-multiplier {
+  padding-left: 4rpx;
+  white-space: normal;
+  word-break: break-all;
+  overflow-wrap: anywhere;
+  line-height: 1.35;
+}
 .dmg-td-expected { color: #182033; font-family: monospace; }
 .dmg-td-crit { color: #b54708; font-family: monospace; }
 
@@ -156,6 +170,16 @@
 .dmg-footer { justify-content: space-between; border-top: 1rpx solid #dbe3ef; padding: 12rpx; background: #f8fafc; }
 .dmg-footer-label { font-size: 22rpx; color: #667085; }
 .dmg-footer-value { font-size: 24rpx; color: #182033; font-family: monospace; font-weight: 700; }
+
+.damage-error-note {
+  margin-top: 14rpx;
+  padding: 14rpx 16rpx;
+  border-left: 5rpx solid #f59e0b;
+  background: #fffbeb;
+  color: #7a4b08;
+  font-size: 22rpx;
+  line-height: 1.6;
+}
 
 .modal-mask {
   position: fixed;
