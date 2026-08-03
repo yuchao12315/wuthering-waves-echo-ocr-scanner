@@ -137,6 +137,10 @@ Page({
     weaponIndex: 0,
     weaponName: '',
     weaponRefine: 1,
+    skillLevel: 10,
+    charLevel: 90,
+    enemyLevel: 89,
+    enemyResist: 10,
 
     // 命座
     chainLevel: 0,
@@ -307,6 +311,23 @@ Page({
 
   setChainLevel(e) {
     this.setData({ chainLevel: e.currentTarget.dataset.level })
+  },
+
+  onDamageConditionInput(e) {
+    var field = e.currentTarget.dataset.field
+    var limits = {
+      skillLevel: [1, 10, 10], charLevel: [1, 90, 90],
+      enemyLevel: [1, 120, 89], enemyResist: [-100, 100, 10],
+    }
+    var rule = limits[field]
+    if (!rule) return
+    var value = Number(e.detail.value)
+    if (!isFinite(value)) value = rule[2]
+    value = Math.max(rule[0], Math.min(rule[1], value))
+    var patch = {}
+    patch[field] = value
+    this.setData(patch)
+    if (this._results.length > 0 && this.data.rankMode === 'damage') this.processResults(this._results)
   },
 
   toggleSkillType(e) {
@@ -970,7 +991,8 @@ Page({
     var weapon = this._weapons[this.data.weaponIndex] || this._weapons[0]
     if (!weapon) return { totalExpected: 0, skills: [] }
     return calcDamage(
-      character, weapon, this.data.weaponRefine, echoes, -1, 10, 90, 89, 0.1,
+      character, weapon, this.data.weaponRefine, echoes, -1,
+      this.data.skillLevel, this.data.charLevel, this.data.enemyLevel, this.data.enemyResist / 100,
       this.data.chainLevel || 0, this.data.selectedCharName || undefined
     )
   },

@@ -9,6 +9,9 @@ var selectKeySkills = damageEngine.selectKeySkills
 var storageService = require('../../services/storage-service.js')
 var getStorage = storageService.getStorage
 var setStorage = storageService.setStorage
+var scoringService = require('../../services/scoring-service.js')
+var scoreEcho = scoringService.scoreEcho
+var scoreLoadout = scoringService.scoreLoadout
 
 var SONATA_NAMES = {}
 Object.keys(SONATA_EFFECTS).forEach(function (key) {
@@ -55,6 +58,34 @@ function formatInteger(value) {
   return Math.round(value || 0).toLocaleString()
 }
 
+function formatSigned(value, digits, suffix) {
+  var rounded = Number(value || 0).toFixed(digits)
+  return (value > 0 ? '+' : '') + rounded + (suffix || '')
+}
+
+function clampNumber(value, min, max, fallback) {
+  var number = Number(value)
+  if (!isFinite(number)) return fallback
+  return Math.max(min, Math.min(max, number))
+}
+
+function sanitizeEcho(echo) {
+  return {
+    id: echo.id,
+    monsterId: echo.monsterId,
+    monsterName: echo.monsterName,
+    cost: echo.cost,
+    rarity: echo.rarity,
+    level: echo.level,
+    tuneLevel: echo.tuneLevel,
+    sonata: echo.sonata,
+    mainStat: echo.mainStat,
+    secondaryStat: echo.secondaryStat,
+    substats: echo.substats,
+    nightmareBonus: echo.nightmareBonus,
+  }
+}
+
 Page({
   data: {
     loadouts: [],
@@ -75,6 +106,7 @@ Page({
     replaceSonataOptions: [],
     replaceSonataIdx: 0,
     replaceEchoes: [],
+    replacementPreview: null,
   },
 
   _charBaseMap: CHARACTERS_BASE,  // characterName → base data
@@ -154,6 +186,10 @@ Page({
       _weaponNames: weaponNames,
       _weaponIndex: 0,
       _refine: 1,
+      _skillLevel: 10,
+      _charLevel: 90,
+      _enemyLevel: 89,
+      _enemyResist: 10,
       _damageResult: null,
       _filteredTotalDisplay: '',
       echoes: l.echoes.map(function (e) {
@@ -252,7 +288,9 @@ Page({
     var weapon = weapons[loadout._weaponIndex] || weapons[0]
     if (!weapon) return null
     var result = calcDamage(
-      charBase, weapon, loadout._refine || 1, loadout.echoes, -1, 10, 90, 89, 0.1,
+      charBase, weapon, loadout._refine || 1, loadout.echoes, -1,
+      loadout._skillLevel || 10, loadout._charLevel || 90, loadout._enemyLevel || 89,
+      (loadout._enemyResist == null ? 10 : loadout._enemyResist) / 100,
       loadout._chainLevel || 0, loadout.characterName
     )
     result.skills = result.skills.map(function (skill) {
@@ -280,6 +318,7 @@ Page({
     result._elemDmgDisplay = formatPercent(result.panel.elemDmg)
     result._energyDisplay = formatPercent(result.panel.energyRegen)
     result._filteredSkills = filteredSkills
+    result._filteredTotal = filteredTotal
     result._filteredTotalDisplay = formatInteger(filteredTotal)
     return result
   },
@@ -373,6 +412,79 @@ Page({
     }
   },
 
+  onDamageConditionInput(e) {
+    var id = e.currentTarget.dataset.id
+    var field = e.currentTarget.dataset.field
+    var idx = this.data.filtered.findIndex(function (l) { return l.id === id })
+    if (idx < 0) return
+    var limits = {
+      _skillLevel: [1, 10, 10], _charLevel: [1, 90, 90],
+      _enemyLevel: [1, 120, 89], _enemyResist: [-100, 100, 10],
+    }
+    if (!limits[field]) return
+    var rule = limits[field]
+    var value = clampNumber(e.detail.value, rule[0], rule[1], rule[2])
+    this.data.filtered[idx][field] = value
+    var patch = {}
+    patch['filtered[' + idx + '].' + field] = value
+    this.setData(patch)
+    this.calcDamageForLoadout(idx)
+  },
+
+  onShareReport(e) {
+    var id = e.currentTarget.dataset.id
+    var loadout = this.data.filtered.find(function (item) { return item.id === id })
+    if (!loadout) return
+    var result = loadout._damageResult || this.buildDisplayDamageResult(loadout)
+    if (!result) return
+    var ctx = wx.createCanvasContext('shareCanvas', this)
+    var width = 750
+    var height = 1050
+    function text(value, x, y, size, color, bold) {
+      ctx.setFillStyle(color || '#182033')
+      ctx.setFontSize(size || 24)
+      ctx.setTextAlign('left')
+      ctx.fillText((bold ? '' : '') + String(value), x, y)
+    }
+    function short(value, max) {
+      value = String(value || '')
+      return value.length > max ? value.substring(0, max - 1) + '…' : value
+    }
+    ctx.setFillStyle('#f4f6fb'); ctx.fillRect(0, 0, width, height)
+    ctx.setFillStyle('#ffffff'); ctx.fillRect(34, 34, width - 68, height - 68)
+    text('鸣潮声骸搭配报告', 64, 92, 34, '#182033', true)
+    text(short(loadout.name, 18), 64, 142, 28, '#2563eb', true)
+    text(loadout.characterName + '  ·  总评分 ' + loadout._scoreDisplay + ' ' + loadout._grade, 64, 184, 23, '#475467')
+    text('角色 Lv.' + loadout._charLevel + '  技能 Lv.' + loadout._skillLevel + '  敌人 Lv.' + loadout._enemyLevel + '  抗性 ' + loadout._enemyResist + '%', 64, 224, 21, '#667085')
+    text('攻击 ' + result.panel.atk + '    暴击 ' + result._critRateDisplay + '    暴伤 ' + result._critDmgDisplay, 64, 278, 24)
+    text('关键技能期望合计  ' + result._filteredTotalDisplay, 64, 326, 29, '#16794b', true)
+    var y = 382
+    loadout.echoes.forEach(function (echo, index) {
+      ctx.setFillStyle('#f8fafc'); ctx.fillRect(64, y - 28, 622, 74)
+      text('C' + echo.cost, 80, y, 21, '#2563eb', true)
+      text(short(echo.monsterName, 8), 132, y, 22)
+      text(short(echo._sonataName, 9), 350, y, 20, '#667085')
+      text(short(echo._mainLabel + ' ' + (echo.mainStat ? echo.mainStat.value : ''), 14), 132, y + 29, 19, '#667085')
+      y += 88
+    })
+    y += 12
+    text('关键技能', 64, y, 25, '#182033', true); y += 42
+    result._filteredSkills.slice(0, 5).forEach(function (skill) {
+      text(short(skill.name, 18), 64, y, 21)
+      text(skill._expectedDisplay, 510, y, 21, '#475467')
+      text(skill._critDisplay, 615, y, 21, '#b54708')
+      y += 38
+    })
+    text('计算值与游戏实测通常存在约 0%–2% 误差', 64, height - 76, 19, '#7a8499')
+    var self = this
+    ctx.draw(false, function () {
+      wx.canvasToTempFilePath({ canvasId: 'shareCanvas', width: width, height: height, destWidth: 1500, destHeight: 2100, fileType: 'png', success: function (res) {
+        if (wx.showShareImageMenu) wx.showShareImageMenu({ path: res.tempFilePath })
+        else wx.previewImage({ urls: [res.tempFilePath] })
+      }, fail: function () { wx.showToast({ title: '报告生成失败', icon: 'none' }) } }, self)
+    })
+  },
+
   // ====== 替换声骸 ======
   async onStartReplace(e) {
     var loadoutId = e.currentTarget.dataset.loadoutId
@@ -382,11 +494,12 @@ Page({
 
     var cost = loadout.echoes[slot].cost
     var echoes = await getStorage('echoes', [])
-    var candidates = echoes.filter(function (e) { return e.cost === cost }).map(function (e) { return Object.assign({}, e, {
+    var calc = this._calcMap[loadout.characterName]
+    var candidates = echoes.filter(function (e) { return e.cost === cost && e.id !== loadout.echoes[slot].id }).map(function (e) { return Object.assign({}, e, {
       _sonataName: SONATA_NAMES[e.sonata] || e.sonata || '',
       _mainLabel: e.mainStat ? (STAT_DISPLAY[e.mainStat.type] || e.mainStat.type) : '',
       _subLabels: (e.substats || []).map(function (s) { return (STAT_DISPLAY[s.type] || s.type) + ' ' + s.value }),
-      _score: '',
+      _score: calc ? scoreEcho(e, calc).toFixed(2) : '',
     }) })
 
     // 构建套装筛选选项
@@ -402,6 +515,7 @@ Page({
       replaceSonataOptions: sonataOptions,
       replaceSonataIdx: 0,
       replaceEchoes: candidates,
+      replacementPreview: null,
     })
   },
 
@@ -410,22 +524,64 @@ Page({
     var key = (this.data.replaceSonataOptions[idx] && this.data.replaceSonataOptions[idx].key) || ''
     var echoes = await getStorage('echoes', [])
     var replaceCost = this.data.replaceCost
+    var loadout = this.data.filtered.find(function (item) { return item.id === this.data.replaceLoadoutId }, this)
+    var calc = loadout && this._calcMap[loadout.characterName]
     var candidates = echoes.filter(function (e) { return e.cost === replaceCost })
     if (key) candidates = candidates.filter(function (e) { return e.sonata === key })
+    if (loadout) candidates = candidates.filter(function (e) { return e.id !== loadout.echoes[this.data.replaceSlot].id }, this)
 
     candidates = candidates.map(function (e) { return Object.assign({}, e, {
       _sonataName: SONATA_NAMES[e.sonata] || e.sonata || '',
       _mainLabel: e.mainStat ? (STAT_DISPLAY[e.mainStat.type] || e.mainStat.type) : '',
       _subLabels: (e.substats || []).map(function (s) { return (STAT_DISPLAY[s.type] || s.type) + ' ' + s.value }),
+      _score: calc ? scoreEcho(e, calc).toFixed(2) : '',
     }) })
 
-    this.setData({ replaceSonataIdx: idx, replaceEchoes: candidates })
+    this.setData({ replaceSonataIdx: idx, replaceEchoes: candidates, replacementPreview: null })
   },
 
-  async onPickEcho(e) {
+  onPreviewReplacement(e) {
     var echoIdx = e.currentTarget.dataset.index
     var echo = this.data.replaceEchoes[echoIdx]
     if (!echo) return
+
+    var replaceLoadoutId = this.data.replaceLoadoutId
+    var replaceSlot = this.data.replaceSlot
+    var loadout = this.data.filtered.find(function (item) { return item.id === replaceLoadoutId })
+    var calc = loadout && this._calcMap[loadout.characterName]
+    if (!loadout || !calc) return
+
+    var nextEchoes = loadout.echoes.map(function (item, index) {
+      return index === replaceSlot ? sanitizeEcho(echo) : sanitizeEcho(item)
+    })
+    var beforeScore = scoreLoadout(loadout.echoes, calc)
+    var afterScore = scoreLoadout(nextEchoes, calc)
+    var beforeDamage = this.buildDisplayDamageResult(loadout)
+    var afterDamage = this.buildDisplayDamageResult(Object.assign({}, loadout, { echoes: nextEchoes }))
+    var beforeTotal = beforeDamage ? beforeDamage._filteredTotal : 0
+    var afterTotal = afterDamage ? afterDamage._filteredTotal : 0
+
+    this.setData({
+      replacementPreview: {
+        candidateIndex: echoIdx,
+        echo: echo,
+        scoreAfter: afterScore,
+        scoreBeforeDisplay: beforeScore.toFixed(2),
+        scoreAfterDisplay: afterScore.toFixed(2),
+        scoreDeltaDisplay: formatSigned(afterScore - beforeScore, 2),
+        damageBeforeDisplay: formatInteger(beforeTotal),
+        damageAfterDisplay: formatInteger(afterTotal),
+        damageDeltaDisplay: formatSigned(beforeTotal ? (afterTotal - beforeTotal) / beforeTotal * 100 : 0, 2, '%'),
+        critRateDeltaDisplay: formatSigned(((afterDamage ? afterDamage.panel.critRate : 0) - (beforeDamage ? beforeDamage.panel.critRate : 0)) * 100, 1, '%'),
+        critDmgDeltaDisplay: formatSigned(((afterDamage ? afterDamage.panel.critDmg : 0) - (beforeDamage ? beforeDamage.panel.critDmg : 0)) * 100, 1, '%'),
+        energyDeltaDisplay: formatSigned(((afterDamage ? afterDamage.panel.energyRegen : 0) - (beforeDamage ? beforeDamage.panel.energyRegen : 0)) * 100, 1, '%'),
+      },
+    })
+  },
+
+  async onConfirmReplacement() {
+    var preview = this.data.replacementPreview
+    if (!preview) return
 
     var replaceLoadoutId = this.data.replaceLoadoutId
     var replaceSlot = this.data.replaceSlot
@@ -434,18 +590,21 @@ Page({
       var loadouts = await getStorage('loadouts', [])
       var idx = loadouts.findIndex(function (l) { return l.id === replaceLoadoutId })
       if (idx >= 0) {
-        loadouts[idx].echoes[replaceSlot] = echo
-        // TODO: 重新计算评分
+        loadouts[idx].echoes[replaceSlot] = sanitizeEcho(preview.echo)
+        loadouts[idx].score = preview.scoreAfter
         await setStorage('loadouts', loadouts)
       }
-    } catch (e) {}
+    } catch (e) {
+      wx.showToast({ title: '替换失败', icon: 'none' })
+      return
+    }
 
-    this.setData({ replaceSlot: null, replaceLoadoutId: null })
+    this.setData({ replaceSlot: null, replaceLoadoutId: null, replacementPreview: null })
     await this.loadLoadouts()
     wx.showToast({ title: '已替换', icon: 'success' })
   },
 
   onCloseReplace() {
-    this.setData({ replaceSlot: null, replaceLoadoutId: null })
+    this.setData({ replaceSlot: null, replaceLoadoutId: null, replacementPreview: null })
   },
 })

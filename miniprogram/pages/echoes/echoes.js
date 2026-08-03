@@ -5,6 +5,7 @@ var getNightmareBonus = NIGHTMARE.getNightmareBonus
 var storageService = require('../../services/storage-service.js')
 var getStorage = storageService.getStorage
 var setStorage = storageService.setStorage
+var scoreEcho = require('../../services/scoring-service.js').scoreEcho
 
 var GUIDE_VIDEO_URL = 'https://www.bilibili.com/video/BV1o23n6DEhV/'
 var BILIBILI_MINIPROGRAM_APP_ID = 'wx7564fd5313d24844'
@@ -188,8 +189,7 @@ Page({
 
   /** 简单评分 */
   calcScore(echo) {
-    // TODO: 使用 scoring.ts 的 scoreEcho
-    return 20 + Math.random() * 25
+    return scoreEcho(echo, this._calc)
   },
 
   /** 应用筛选和排序 */

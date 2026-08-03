@@ -145,7 +145,7 @@ describe('miniprogram shared damage engine', () => {
 
   it('refreshes saved loadouts when returning to the calculator page', () => {
     const source = readFileSync(resolve(root, 'miniprogram/pages/calculator/calculator.js'), 'utf8')
-    const onShow = source.match(/async onShow\(\)\s*\{([\s\S]*?)\n  \},\n\n  \/\*\* 设置当前角色/)
+    const onShow = source.match(/async onShow\(\)\s*\{([\s\S]*?)\n {2}\},\n\n {2}\/\*\* 设置当前角色/)
 
     expect(onShow).not.toBeNull()
     expect(onShow?.[1]).toContain('await this.loadSavedLoadouts()')
@@ -173,5 +173,40 @@ describe('miniprogram shared damage engine', () => {
     expect(readFileSync(resolve(root, 'src/workers/loadout-worker.ts'), 'utf8')).not.toContain('回退到散件模式')
     expect(readFileSync(resolve(root, 'miniprogram/pages/calculator/calculator.wxml'), 'utf8'))
       .toContain('当前库存无法组成所选完整套装')
+  })
+
+  it('uses deterministic scoring for replacement previews and echo sorting', () => {
+    const source = readFileSync(resolve(root, 'miniprogram/services/scoring-service.js'), 'utf8')
+    const module = { exports: {} as Record<string, unknown> }
+    Function('require', 'module', 'exports', source)(
+      () => ({ getNightmareBonus: () => null }), module, module.exports,
+    )
+    const scoring = module.exports as {
+      scoreEcho: (echo: Record<string, unknown>, calc: Record<string, unknown>) => number
+    }
+    const calc = {
+      score_max: [100, 100, 100],
+      main_props: { '4': { 暴击: 1 } },
+      sub_props: { 暴击: 2 },
+      skill_weight: [0, 0, 0, 0],
+    }
+    const echo = { cost: 4, mainStat: { type: 'CRIT_RATE', value: 22 }, substats: [{ type: 'CRIT_RATE', value: 10 }] }
+
+    expect(scoring.scoreEcho(echo, calc)).toBe(21)
+    expect(readFileSync(resolve(root, 'miniprogram/pages/echoes/echoes.js'), 'utf8')).not.toContain('Math.random() * 25')
+  })
+
+  it('connects all P0 controls to working page handlers', () => {
+    const loadoutJs = readFileSync(resolve(root, 'miniprogram/pages/loadouts/loadouts.js'), 'utf8')
+    const loadoutWxml = readFileSync(resolve(root, 'miniprogram/pages/loadouts/loadouts.wxml'), 'utf8')
+    const calculatorJs = readFileSync(resolve(root, 'miniprogram/pages/calculator/calculator.js'), 'utf8')
+    expect(loadoutWxml).toContain('onPreviewReplacement')
+    expect(loadoutWxml).toContain('onConfirmReplacement')
+    expect(loadoutJs).toContain('preview.scoreAfter')
+    expect(loadoutWxml).toContain('onShareReport')
+    expect(loadoutJs).toContain("wx.canvasToTempFilePath")
+    expect(loadoutJs).toContain("wx.showShareImageMenu")
+    expect(loadoutJs).toContain('loadout._skillLevel || 10')
+    expect(calculatorJs).toContain('this.data.enemyResist / 100')
   })
 })

@@ -34,6 +34,7 @@
       </view>
 
       <view class="delete-btn" bindtap="onDeleteLoadout" data-id="{{loadout.id}}">删除</view>
+      <view wx:if="{{loadout._hasDamageData}}" class="share-btn" bindtap="onShareReport" data-id="{{loadout.id}}">分享报告</view>
     </view>
 
     <!-- 声骸卡片列表 -->
@@ -86,6 +87,15 @@
             bindtap="setRefine" data-id="{{loadout.id}}" data-refine="{{refine}}">{{refine}}</view>
         </view>
       </view>
+
+      <view class="condition-row">
+        <text class="panel-label">计算条件:</text>
+        <label>角色<input type="number" value="{{loadout._charLevel}}" bindblur="onDamageConditionInput" data-id="{{loadout.id}}" data-field="_charLevel" /></label>
+        <label>技能<input type="number" value="{{loadout._skillLevel}}" bindblur="onDamageConditionInput" data-id="{{loadout.id}}" data-field="_skillLevel" /></label>
+        <label>敌人<input type="number" value="{{loadout._enemyLevel}}" bindblur="onDamageConditionInput" data-id="{{loadout.id}}" data-field="_enemyLevel" /></label>
+        <label>抗性<input type="digit" value="{{loadout._enemyResist}}" bindblur="onDamageConditionInput" data-id="{{loadout.id}}" data-field="_enemyResist" /><text>%</text></label>
+      </view>
+      <view class="condition-note">等级参与防御乘区，抗性按敌人未减抗前的基础值计算；技能等级支持 1–10 级。</view>
 
       <!-- 面板属性 -->
       <view wx:if="{{loadout._damageResult}}" class="stat-grid">
@@ -161,8 +171,23 @@
         <text>无匹配声骸</text>
       </view>
 
-      <scroll-view scroll-y class="modal-list" wx:else>
-        <view wx:for="{{replaceEchoes}}" wx:key="id" class="modal-echo-card" bindtap="onPickEcho" data-index="{{index}}">
+      <view wx:if="{{replacementPreview}}" class="replacement-preview">
+        <view class="preview-title">替换收益预览</view>
+        <view class="preview-grid">
+          <view class="preview-stat"><text>总评分</text><text>{{replacementPreview.scoreBeforeDisplay}} → {{replacementPreview.scoreAfterDisplay}}</text><text class="preview-delta">{{replacementPreview.scoreDeltaDisplay}}</text></view>
+          <view class="preview-stat"><text>关键伤害</text><text>{{replacementPreview.damageBeforeDisplay}} → {{replacementPreview.damageAfterDisplay}}</text><text class="preview-delta">{{replacementPreview.damageDeltaDisplay}}</text></view>
+          <view class="preview-stat"><text>暴击率</text><text class="preview-delta">{{replacementPreview.critRateDeltaDisplay}}</text></view>
+          <view class="preview-stat"><text>暴击伤害</text><text class="preview-delta">{{replacementPreview.critDmgDeltaDisplay}}</text></view>
+          <view class="preview-stat"><text>共鸣效率</text><text class="preview-delta">{{replacementPreview.energyDeltaDisplay}}</text></view>
+        </view>
+        <view class="preview-actions">
+          <view class="preview-cancel" bindtap="onCloseReplace">取消</view>
+          <view class="preview-confirm" bindtap="onConfirmReplacement">确认替换</view>
+        </view>
+      </view>
+
+      <scroll-view wx:if="{{replaceEchoes.length > 0}}" scroll-y class="modal-list">
+        <view wx:for="{{replaceEchoes}}" wx:key="id" class="modal-echo-card {{replacementPreview && replacementPreview.candidateIndex === index ? 'modal-echo-selected' : ''}}" bindtap="onPreviewReplacement" data-index="{{index}}">
           <view class="echo-header">
             <view class="echo-cost echo-cost-{{item.cost}}">C{{item.cost}}</view>
             <text class="echo-name">{{item.monsterName}}</text>
@@ -173,8 +198,10 @@
           <view class="echo-subs">
             <text wx:for="{{item._subLabels}}" wx:for-item="sub" wx:key="*this" class="sub-tag">{{sub}}</text>
           </view>
+          <text class="candidate-hint">点击预览替换收益</text>
         </view>
       </scroll-view>
     </view>
   </view>
+  <canvas canvas-id="shareCanvas" class="share-canvas"></canvas>
 </view>

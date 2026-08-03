@@ -81,6 +81,15 @@
           bindtap="clearSkillTypes"
         >清除</text>
       </view>
+
+      <view class="damage-condition-row mt12">
+        <text class="label-sm">计算条件:</text>
+        <label>角色<input type="number" value="{{charLevel}}" bindblur="onDamageConditionInput" data-field="charLevel" /></label>
+        <label>技能<input type="number" value="{{skillLevel}}" bindblur="onDamageConditionInput" data-field="skillLevel" /></label>
+        <label>敌人<input type="number" value="{{enemyLevel}}" bindblur="onDamageConditionInput" data-field="enemyLevel" /></label>
+        <label>抗性<input type="digit" value="{{enemyResist}}" bindblur="onDamageConditionInput" data-field="enemyResist" /><text>%</text></label>
+      </view>
+      <view class="damage-condition-note">等级参与防御乘区，抗性为敌人未减抗前的基础值；技能等级支持 1–10 级。</view>
     </block>
   </view>
 
