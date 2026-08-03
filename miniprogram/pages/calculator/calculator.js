@@ -195,9 +195,6 @@ Page({
     })
     this.setData({ allSonatas })
 
-    // 加载已保存的套装
-    this.loadSavedLoadouts()
-
     // 加载广告配额
     this.refreshQuota()
   },
@@ -208,6 +205,9 @@ Page({
     if (app.globalData.selectedCharacter) {
       this.setCharacter(app.globalData.selectedCharacter)
     }
+
+    // Tab 切回时同步套装页的新增、删除和修改
+    await this.loadSavedLoadouts()
 
     // 加载声骸库存
     this._echoes = await getStorage('echoes', [])
@@ -252,7 +252,12 @@ Page({
   async loadSavedLoadouts() {
     try {
       const loadouts = await getStorage('loadouts', [])
-      this.setData({ savedLoadouts: loadouts })
+      var currentExcluded = this.data.excludedIds || {}
+      var nextExcluded = {}
+      for (var i = 0; i < loadouts.length; i++) {
+        if (currentExcluded[loadouts[i].id]) nextExcluded[loadouts[i].id] = true
+      }
+      this.setData({ savedLoadouts: loadouts, excludedIds: nextExcluded })
     } catch (e) {}
   },
 
@@ -483,6 +488,7 @@ Page({
   processResults(results) {
     var rankMode = this.data.rankMode
     var costFilter = this.data.costFilter
+    var sonatas = this.data.sonatas || []
     var activeSkillTypeCount = this.data.activeSkillTypeCount
     var minCritRate = this.data.minCritRate
     var minEnergyRegen = this.data.minEnergyRegen
@@ -493,7 +499,7 @@ Page({
 
     // 排序
     var sorted = results.slice().filter(function (r) {
-      return this.matchesCostFilter(r.echoes, costFilter)
+      return this.matchesCostFilter(r.echoes, costFilter) && this.matchesSelectedSonatas(r.echoes, sonatas)
     }, this)
     if (rankMode === 'damage' && this._charBase) {
       sorted = sorted.map(function (r) {
@@ -753,6 +759,20 @@ Page({
     return true
   },
 
+  matchesSelectedSonatas(echoes, sonatas) {
+    if (!sonatas || sonatas.length === 0) return true
+    if (!echoes || echoes.length !== 5) return false
+    if (sonatas.length === 1) {
+      return echoes.every(function (echo) { return echo.sonata === sonatas[0] })
+    }
+    if (sonatas.length === 2) {
+      var count1 = echoes.filter(function (echo) { return echo.sonata === sonatas[0] }).length
+      var count2 = echoes.filter(function (echo) { return echo.sonata === sonatas[1] }).length
+      return count1 >= 2 && count2 >= 2
+    }
+    return false
+  },
+
   findBestCombinations(bucket1, bucket3, bucket4, distributions, sonataConstraint) {
     var top10 = []
     var minTopScore = -Infinity
@@ -800,18 +820,16 @@ Page({
     if (sonatas.length === 1) {
       var single = sonatas[0]
       var singleFiltered = echoes.filter(function (e) { return e.sonata === single })
-      if (singleFiltered.length >= 5) {
-        filtered = singleFiltered
-        sonataConstraint = { type: 'single', sonata: single }
-      }
+      if (singleFiltered.length < 5) return []
+      filtered = singleFiltered
+      sonataConstraint = { type: 'single', sonata: single }
     } else if (sonatas.length === 2) {
       var s1 = sonatas[0]
       var s2 = sonatas[1]
       var count1 = echoes.filter(function (e) { return e.sonata === s1 }).length
       var count2 = echoes.filter(function (e) { return e.sonata === s2 }).length
-      if (count1 >= 2 && count2 >= 2) {
-        sonataConstraint = { type: 'dual', sonatas: [s1, s2] }
-      }
+      if (count1 < 2 || count2 < 2) return []
+      sonataConstraint = { type: 'dual', sonatas: [s1, s2] }
     }
 
     filtered = filtered.filter(function (echo) {

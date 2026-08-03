@@ -197,6 +197,10 @@
     <text>当前没有组合能满足阈值 (共 {{sortedResults.length}} 套, 全部低于阈值)</text>
   </view>
 
+  <view class="filter-warning" wx:if="{{!computing && computeProgress === 100 && sonatas.length > 0 && sortedResults.length === 0}}">
+    <text>当前库存无法组成所选完整套装，请补充声骸或调整套装筛选</text>
+  </view>
+
   <!-- 结果列表 -->
   <view class="results" wx:if="{{filteredResults.length > 0}}">
     <view class="results-header">

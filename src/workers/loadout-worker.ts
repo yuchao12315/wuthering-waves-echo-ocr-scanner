@@ -332,25 +332,23 @@ function calculate(echoes: Echo[], calc: CalcJson, config: Config, allEchoes: Ec
     filtered = echoes.filter(e => e.sonata === sonatas[0]);
     console.log(`[Worker] 单套装模式: ${sonatas[0]}, 匹配${filtered.length}个声骸`);
     if (filtered.length < 5) {
-      console.log(`[Worker] ⚠ 该套装声骸不足5个(${filtered.length}个)，回退到散件模式`);
-      filtered = echoes;
-      sonataConstraint = { type: 'none' };
-    } else {
-      sonataConstraint = { type: 'single', sonata: sonatas[0] };
+      console.log(`[Worker] 该套装声骸不足5个(${filtered.length}个)，严格筛选返回空结果`);
+      postMessage({ results: [] });
+      return;
     }
+    sonataConstraint = { type: 'single', sonata: sonatas[0] };
   } else if (sonatas.length === 2) {
     // Path A-2: ≥2 from each + 1 wildcard, cost=12
     const count1 = echoes.filter(e => e.sonata === sonatas[0]).length;
     const count2 = echoes.filter(e => e.sonata === sonatas[1]).length;
     console.log(`[Worker] 双合鸣模式: ${sonatas[0]}(${count1}个) + ${sonatas[1]}(${count2}个)`);
     if (count1 < 2 || count2 < 2) {
-      console.log(`[Worker] ⚠ 套装声骸不足(需各≥2)，回退到散件模式`);
-      filtered = echoes;
-      sonataConstraint = { type: 'none' };
-    } else {
-      filtered = echoes;
-      sonataConstraint = { type: 'dual', sonatas: [sonatas[0], sonatas[1]] };
+      console.log('[Worker] 套装声骸不足(需各≥2)，严格筛选返回空结果');
+      postMessage({ results: [] });
+      return;
     }
+    filtered = echoes;
+    sonataConstraint = { type: 'dual', sonatas: [sonatas[0], sonatas[1]] };
   } else {
     // Path B: no sonata constraint, cost≤12
     filtered = echoes;
