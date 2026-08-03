@@ -22714,6 +22714,27 @@ module.exports = {
       {
         "type": "elemDmg",
         "value": 0.12
+      },
+      {
+        "type": "hpPct",
+        "value": 0.12,
+        "condition": "角色属性加成节点生命提升12%"
+      },
+      {
+        "type": "critRate",
+        "value": 0.08,
+        "condition": "角色属性加成节点暴击提升8%"
+      },
+      {
+        "type": "dmgDeepen",
+        "value": 0.3,
+        "condition": "固有技能·以风刻痕留蚀（1至3层风蚀）"
+      },
+      {
+        "type": "dmgDeepen",
+        "value": 1.3,
+        "condition": "高层风蚀额外30%及看潮怒风哮之刃每层20%（5层）",
+        "targetSkill": "看潮怒风哮之刃"
       }
     ],
     "weaponPassiveMultiplier": {
@@ -23051,7 +23072,8 @@ module.exports = {
         "bonusDmg": 0,
         "treeId": "2",
         "skillType": "共鸣技能",
-        "damageStat": "hp"
+        "damageStat": "hp",
+        "damageType": "normalAtk"
       },
       {
         "name": "看潮怒风哮之刃伤害",
@@ -23601,6 +23623,13 @@ module.exports = {
       }
     ],
     "chainEffects": [
+      {
+        "sequence": 1,
+        "type": "critDmg",
+        "value": 1,
+        "condition": "芙露德莉斯120点决意时暴击伤害提升100%",
+        "targetTreeId": "3|7"
+      },
       {
         "sequence": 2,
         "type": "multiplierBoost",

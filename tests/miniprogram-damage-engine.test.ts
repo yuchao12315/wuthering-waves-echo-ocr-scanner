@@ -9,7 +9,7 @@ import type { CharacterBase, Weapon } from '@/types/damage'
 const root = resolve(import.meta.dirname, '..')
 
 function loadGeneratedEngine() {
-  const filename = resolve(root, 'miniprogram/lib/damage.js')
+  const filename = resolve(root, 'miniprogram/services/damage.js')
   const source = readFileSync(filename, 'utf8')
   const module = { exports: {} as Record<string, unknown> }
   const localRequire = (request: string) => {
@@ -34,11 +34,12 @@ describe('miniprogram shared damage engine', () => {
   })
 
   it('emits a physical ES5 CommonJS module for the miniprogram runtime', () => {
-    const source = readFileSync(resolve(root, 'miniprogram/lib/damage.js'), 'utf8')
+    const source = readFileSync(resolve(root, 'miniprogram/services/damage.js'), 'utf8')
 
     expect(() => parse(source, { ecmaVersion: 5 })).not.toThrow()
     expect(source).toContain('module.exports = {')
     expect(source).not.toMatch(/\bexports\./)
+    expect(existsSync(resolve(root, 'miniprogram/lib/damage.js'))).toBe(false)
     expect(existsSync(resolve(root, 'miniprogram/lib/damage.ts'))).toBe(false)
   })
 
@@ -78,8 +79,8 @@ describe('miniprogram shared damage engine', () => {
   it('keeps page-level formula copies removed', () => {
     for (const file of ['miniprogram/pages/calculator/calculator.js', 'miniprogram/pages/loadouts/loadouts.js']) {
       const source = readFileSync(resolve(root, file), 'utf8')
-      expect(source).toContain("require('../../lib/damage.js')")
-      expect(source).not.toContain("require('../../lib/damage.ts')")
+      expect(source).toContain("require('../../services/damage.js')")
+      expect(source).not.toContain("require('../../lib/damage")
       expect(source).not.toContain('var totalDefIgnore')
       expect(source).not.toContain('function parseMultiplierStr')
     }

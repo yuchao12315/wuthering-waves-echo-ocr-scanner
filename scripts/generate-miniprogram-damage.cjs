@@ -6,7 +6,7 @@ const ts = require('typescript')
 
 const root = path.resolve(__dirname, '..')
 const sourcePath = path.join(root, 'src/lib/damage.ts')
-const outputPath = path.join(root, 'miniprogram/lib/damage.js')
+const outputPath = path.join(root, 'miniprogram/services/damage.js')
 
 function generate() {
   let source = fs.readFileSync(sourcePath, 'utf8')
@@ -41,7 +41,7 @@ const output = generate()
 if (process.argv.includes('--check')) {
   const current = fs.existsSync(outputPath) ? fs.readFileSync(outputPath, 'utf8') : ''
   if (current !== output) {
-    console.error('miniprogram/lib/damage.js is stale; run npm run generate:miniprogram-damage')
+    console.error('miniprogram/services/damage.js is stale; run npm run generate:miniprogram-damage')
     process.exit(1)
   }
 } else {

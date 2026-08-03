@@ -14,7 +14,7 @@ var setStorage = storageService.setStorage
 // 套装数据（本地打包）
 var SONATA_EFFECTS = require('../../data/sonata-effects.js')
 var WEAPONS = require('../../data/weapons.js')
-var calcDamage = require('../../lib/damage.js').calcDamage
+var calcDamage = require('../../services/damage.js').calcDamage
 
 // 技能类型中文映射
 var SKILL_TYPE_LABELS = {

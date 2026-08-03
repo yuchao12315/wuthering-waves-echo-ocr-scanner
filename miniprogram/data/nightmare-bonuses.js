@@ -15,6 +15,7 @@
  *   - energyRegen: 共鸣效率
  *   - critRate: 暴击率
  * secondValue: 第二加成数值 (小数)
+ * secondRequiredCharacters: 第二加成的角色限制
  * requiredCharacters: 角色限制 (仅指定角色装备时生效, 不填=所有角色)
  */
 
@@ -37,6 +38,13 @@ const NIGHTMARE_BONUS_MAP = {
   '梦魇·凯尔匹': {
     elemDmg: 0.12, elemType: '冷凝',
     secondType: 'aeroDmg', secondValue: 0.12,
+  },
+
+  // 气动+10%；卡提希娅/气动漂泊者额外+10%
+  '共鸣回响·芙露德莉斯': {
+    elemDmg: 0.10, elemType: '气动',
+    secondType: 'aeroDmg', secondValue: 0.10,
+    secondRequiredCharacters: ['卡提希娅', '漂泊者·气动'],
   },
 
   // 冷凝 - 协同攻击伤害+30%
@@ -130,9 +138,6 @@ const NIGHTMARE_BONUS_MAP = {
   },
   // Wiki 已收录但固定加成数值未公开；识别为梦魇声骸，不参与评分加成。
   '共鸣回响·冠顶苍隼': {
-    secondType: 'phantomDmg', secondValue: 0,
-  },
-  '共鸣回响·芙露德莉斯': {
     secondType: 'phantomDmg', secondValue: 0,
   },
   '梦魇·刺玫菇': {

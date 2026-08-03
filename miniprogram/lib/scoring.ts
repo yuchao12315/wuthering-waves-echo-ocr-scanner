@@ -5,8 +5,8 @@
  * 单词条得分 = 词条数值 × 当前词条权重 / score_max × 50
  */
 
-import type { Echo, StatType } from '../typings/echo'
-import type { CalcJson } from '../typings/character'
+import type { Echo, StatType } from '../types/echo'
+import type { CalcJson } from '../types/character'
 import { CN_TO_STAT, costToIndex } from './constants'
 import { getNightmareBonus } from '../data/nightmare-bonuses'
 

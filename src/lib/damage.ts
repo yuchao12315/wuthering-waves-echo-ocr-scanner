@@ -62,7 +62,7 @@ interface EchoStats {
   nightmareSecondValue: number
 }
 
-function collectEchoStats(echoes: Echo[], characterName?: string): EchoStats {
+function collectEchoStats(echoes: Echo[], characterName?: string, characterElement?: string): EchoStats {
   const stats: EchoStats = {
     atkPct: 0, flatAtk: 0, hpPct: 0, flatHp: 0, defPct: 0, flatDef: 0,
     critRate: 0, critDmg: 0, elemDmg: 0, energyRegen: 0,
@@ -72,7 +72,8 @@ function collectEchoStats(echoes: Echo[], characterName?: string): EchoStats {
     nightmareSecondValue: 0,
   }
 
-  for (const echo of echoes) {
+  for (let echoIndex = 0; echoIndex < echoes.length; echoIndex += 1) {
+    const echo = echoes[echoIndex]
     const allEntries = [
       echo.mainStat,
       echo.secondaryStat,
@@ -100,11 +101,19 @@ function collectEchoStats(echoes: Echo[], characterName?: string): EchoStats {
       }
     }
 
-    // Nightmare bonus: use stored field or auto-match by name (with character filter)
+    // Fixed Echo Skill bonuses only apply to the Echo equipped in the main slot.
+    if (echoIndex !== 0) continue
+
     const nmBonus = echo.nightmareBonus ?? getNightmareBonus(echo.monsterName, characterName)
     if (nmBonus) {
-      stats.nightmareElemDmg += nmBonus.elemDmg ?? 0
-      if (nmBonus.secondValue > 0) {
+      if (!nmBonus.elemType || nmBonus.elemType === characterElement) {
+        stats.nightmareElemDmg += nmBonus.elemDmg ?? 0
+      }
+      const secondAllowed = !nmBonus.secondRequiredCharacters?.length
+        || Boolean(characterName && nmBonus.secondRequiredCharacters.includes(characterName))
+      if (secondAllowed && nmBonus.secondType === 'aeroDmg' && characterElement === '气动') {
+        stats.nightmareElemDmg += nmBonus.secondValue
+      } else if (secondAllowed && nmBonus.secondValue > 0) {
         stats.nightmareSecondType = nmBonus.secondType
         stats.nightmareSecondValue += nmBonus.secondValue
       }
@@ -268,7 +277,7 @@ export function calcDamage(
   characterName?: string,
 ): DamageResult {
   void _chainNodes
-  const echoStats = collectEchoStats(echoes, characterName)
+  const echoStats = collectEchoStats(echoes, characterName, character.element)
   const sonataBuff = collectSonataBuffs(echoes)
   const refineIdx = Math.max(0, Math.min(4, weaponRefine - 1))
   const levelIdx = Math.max(0, Math.min(18, skillLevel - 1))
@@ -310,6 +319,7 @@ export function calcDamage(
 
   // Weapon secondary stat
   if (weapon.atkPct) { totalAtkPct += weapon.atkPct; addSrc('atk', `${weapon.name}副属性`, weapon.atkPct) }
+  if (weapon.hpPct) { totalHpPct += weapon.hpPct; addSrc('hp', `${weapon.name}副属性`, weapon.hpPct) }
   if (weapon.critRate) { totalCritRate += weapon.critRate; addSrc('critRate', `${weapon.name}副属性`, weapon.critRate) }
   if (weapon.critDmg) { totalCritDmg += weapon.critDmg; addSrc('critDmg', `${weapon.name}副属性`, weapon.critDmg) }
 

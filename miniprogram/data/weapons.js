@@ -943,6 +943,7 @@ module.exports = [
     "rarity": 5,
     "baseAtk": 412,
     "atkPct": 0,
+    "hpPct": 0.722,
     "critRate": 0,
     "critDmg": 0,
     "passive": {

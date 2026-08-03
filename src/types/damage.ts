@@ -107,6 +107,7 @@ export interface Weapon {
   rarity: number
   baseAtk: number
   atkPct: number
+  hpPct?: number
   critRate: number
   critDmg: number
   passive: WeaponPassive

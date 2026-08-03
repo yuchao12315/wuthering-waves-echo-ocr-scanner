@@ -1,4 +1,4 @@
-import type { Cost } from '../typings/echo'
+import type { Cost } from '../types/echo'
 
 // All valid 5-echo cost distributions where sum <= 12
 // Each entry is [cost1, cost2, cost3, cost4, cost5] sorted desc

@@ -58,8 +58,8 @@ function selectKeySkills(skills, limit) {
 var round5 = function (v) { return Math.round(v * 1e5) / 1e5; };
 /** Round to 9 decimal places (defense multiplier) */
 var round9 = function (v) { return Math.round(v * 1e9) / 1e9; };
-function collectEchoStats(echoes, characterName) {
-    var _a, _b;
+function collectEchoStats(echoes, characterName, characterElement) {
+    var _a, _b, _c;
     var stats = {
         atkPct: 0, flatAtk: 0, hpPct: 0, flatHp: 0, defPct: 0, flatDef: 0,
         critRate: 0, critDmg: 0, elemDmg: 0, energyRegen: 0,
@@ -68,14 +68,14 @@ function collectEchoStats(echoes, characterName) {
         nightmareSecondType: '',
         nightmareSecondValue: 0,
     };
-    for (var _i = 0, echoes_1 = echoes; _i < echoes_1.length; _i++) {
-        var echo = echoes_1[_i];
+    for (var echoIndex = 0; echoIndex < echoes.length; echoIndex += 1) {
+        var echo = echoes[echoIndex];
         var allEntries = __spreadArray([
             echo.mainStat,
             echo.secondaryStat
         ], echo.substats, true).filter(Boolean);
-        for (var _c = 0, allEntries_1 = allEntries; _c < allEntries_1.length; _c++) {
-            var entry = allEntries_1[_c];
+        for (var _i = 0, allEntries_1 = allEntries; _i < allEntries_1.length; _i++) {
+            var entry = allEntries_1[_i];
             if (!entry)
                 continue;
             var type = entry.type, value = entry.value;
@@ -117,11 +117,20 @@ function collectEchoStats(echoes, characterName) {
                 }
             }
         }
-        // Nightmare bonus: use stored field or auto-match by name (with character filter)
+        // Fixed Echo Skill bonuses only apply to the Echo equipped in the main slot.
+        if (echoIndex !== 0)
+            continue;
         var nmBonus = (_a = echo.nightmareBonus) !== null && _a !== void 0 ? _a : (0, nightmare_bonuses_js_1.getNightmareBonus)(echo.monsterName, characterName);
         if (nmBonus) {
-            stats.nightmareElemDmg += (_b = nmBonus.elemDmg) !== null && _b !== void 0 ? _b : 0;
-            if (nmBonus.secondValue > 0) {
+            if (!nmBonus.elemType || nmBonus.elemType === characterElement) {
+                stats.nightmareElemDmg += (_b = nmBonus.elemDmg) !== null && _b !== void 0 ? _b : 0;
+            }
+            var secondAllowed = !((_c = nmBonus.secondRequiredCharacters) === null || _c === void 0 ? void 0 : _c.length)
+                || Boolean(characterName && nmBonus.secondRequiredCharacters.includes(characterName));
+            if (secondAllowed && nmBonus.secondType === 'aeroDmg' && characterElement === '气动') {
+                stats.nightmareElemDmg += nmBonus.secondValue;
+            }
+            else if (secondAllowed && nmBonus.secondValue > 0) {
                 stats.nightmareSecondType = nmBonus.secondType;
                 stats.nightmareSecondValue += nmBonus.secondValue;
             }
@@ -132,8 +141,8 @@ function collectEchoStats(echoes, characterName) {
 function collectSonataBuffs(echoes) {
     var _a;
     var counts = {};
-    for (var _i = 0, echoes_2 = echoes; _i < echoes_2.length; _i++) {
-        var e = echoes_2[_i];
+    for (var _i = 0, echoes_1 = echoes; _i < echoes_1.length; _i++) {
+        var e = echoes_1[_i];
         if (e.sonata)
             counts[e.sonata] = ((_a = counts[e.sonata]) !== null && _a !== void 0 ? _a : 0) + 1;
     }
@@ -292,7 +301,7 @@ function calcDamage(character, weapon, weaponRefine, echoes, _chainNodes, skillL
     if (enemyResist === void 0) { enemyResist = 0.1; }
     if (chainLevel === void 0) { chainLevel = 0; }
     void _chainNodes;
-    var echoStats = collectEchoStats(echoes, characterName);
+    var echoStats = collectEchoStats(echoes, characterName, character.element);
     var sonataBuff = collectSonataBuffs(echoes);
     var refineIdx = Math.max(0, Math.min(4, weaponRefine - 1));
     var levelIdx = Math.max(0, Math.min(18, skillLevel - 1));
@@ -331,6 +340,10 @@ function calcDamage(character, weapon, weaponRefine, echoes, _chainNodes, skillL
     if (weapon.atkPct) {
         totalAtkPct += weapon.atkPct;
         addSrc('atk', "".concat(weapon.name, "\u526F\u5C5E\u6027"), weapon.atkPct);
+    }
+    if (weapon.hpPct) {
+        totalHpPct += weapon.hpPct;
+        addSrc('hp', "".concat(weapon.name, "\u526F\u5C5E\u6027"), weapon.hpPct);
     }
     if (weapon.critRate) {
         totalCritRate += weapon.critRate;
