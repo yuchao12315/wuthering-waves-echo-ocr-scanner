@@ -17,6 +17,21 @@ var MAIN_STAT_VALUES = {
   4: { ATK_PCT: 33, HP_PCT: 33, DEF_PCT: 41.5, CRIT_RATE: 22, CRIT_DMG: 44, HEAL_BONUS: 26.4, FLAT_ATK: 150 },
 }
 
+var SEC_STAT_VALUES = {
+  1: { FLAT_HP: 2280 },
+  3: { FLAT_ATK: 100 },
+  4: { FLAT_ATK: 150 },
+}
+
+var MAX_SUB_VALUES = {
+  CRIT_RATE: 10.5, CRIT_DMG: 21,
+  ATK_PCT: 11.6, HP_PCT: 11.6, DEF_PCT: 14.7,
+  FLAT_ATK: 60, FLAT_HP: 580, FLAT_DEF: 70,
+  ENERGY_REGEN: 12.4,
+  NORMAL_ATK_DMG: 11.6, HEAVY_ATK_DMG: 11.6,
+  RESONANCE_SKILL_DMG: 11.6, RESONANCE_LIBERATION_DMG: 11.6,
+}
+
 var SKILL_INDEX = {
   '普攻伤害加成': 0,
   '重击伤害加成': 1,
@@ -84,11 +99,56 @@ function scoreEcho(echo, calc) {
   return isNaN(score) ? 0 : Math.round(score * 10000) / 10000
 }
 
+function roundScore(value) {
+  return Math.round((value || 0) * 10000) / 10000
+}
+
+function scoreEchoDetailed(echo, calc) {
+  if (!echo || !calc) return { total: 0, scoreMax: 0, details: [] }
+  var scoreMax = (calc.score_max || [])[costToIndex(echo.cost)] || 0
+  if (!scoreMax) return { total: 0, scoreMax: 0, details: [] }
+  var details = []
+
+  function addDetail(field, stat, valueForScore, maxValue, weight) {
+    if (!stat || typeof stat.value !== 'number') return
+    var score = roundScore(valueForScore * weight / scoreMax * 50)
+    var maxScore = roundScore(maxValue * weight / scoreMax * 50)
+    details.push({
+      scoreKey: field + '-' + stat.type + '-' + stat.value,
+      field: field,
+      label: STAT_TO_CN[stat.type] || stat.type,
+      valueDisplay: String(stat.value),
+      score: score,
+      scoreDisplay: score.toFixed(2),
+      maxDisplay: maxScore.toFixed(2),
+    })
+  }
+
+  if (echo.mainStat) {
+    var mainFixed = (MAIN_STAT_VALUES[echo.cost] || {})[echo.mainStat.type]
+    addDetail('主词条', echo.mainStat, mainFixed == null ? echo.mainStat.value : mainFixed, mainFixed == null ? echo.mainStat.value : mainFixed, getMainWeight(echo.mainStat.type, echo.cost, calc))
+  }
+  if (echo.secondaryStat) {
+    var secondaryMax = (SEC_STAT_VALUES[echo.cost] || {})[echo.secondaryStat.type]
+    addDetail('副属性', echo.secondaryStat, echo.secondaryStat.value, secondaryMax == null ? echo.secondaryStat.value : secondaryMax, getMainWeight(echo.secondaryStat.type, echo.cost, calc))
+  }
+  ;(echo.substats || []).forEach(function (stat) {
+    addDetail('副词条', stat, stat.value, MAX_SUB_VALUES[stat.type] || stat.value, getSubWeight(stat.type, calc))
+  })
+
+  return {
+    total: roundScore(details.reduce(function (sum, detail) { return sum + detail.score }, 0)),
+    scoreMax: scoreMax,
+    details: details,
+  }
+}
+
 function scoreLoadout(echoes, calc) {
   return (echoes || []).reduce(function (sum, echo) { return sum + scoreEcho(echo, calc) }, 0)
 }
 
 module.exports = {
   scoreEcho: scoreEcho,
+  scoreEchoDetailed: scoreEchoDetailed,
   scoreLoadout: scoreLoadout,
 }

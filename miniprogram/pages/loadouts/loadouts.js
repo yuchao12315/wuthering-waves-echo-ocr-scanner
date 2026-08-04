@@ -12,6 +12,7 @@ var setStorage = storageService.setStorage
 var scoringService = require('../../services/scoring-service.js')
 var scoreEcho = scoringService.scoreEcho
 var scoreLoadout = scoringService.scoreLoadout
+var scoreEchoDetailed = scoringService.scoreEchoDetailed
 
 var SONATA_NAMES = {}
 Object.keys(SONATA_EFFECTS).forEach(function (key) {
@@ -128,6 +129,8 @@ Page({
     await this.loadLoadouts()
   },
 
+  noop() {},
+
   /** 加载角色数据（从全局或缓存） */
   loadCharData() {
     this._charBaseMap = CHARACTERS_BASE
@@ -203,13 +206,20 @@ Page({
       _damageResult: null,
       _filteredTotalDisplay: '',
       echoes: orderEchoesForMainSlot(l.echoes).map(function (e) {
+        var detail = this._calcMap[l.characterName]
+          ? scoreEchoDetailed(e, this._calcMap[l.characterName])
+          : { total: 0, scoreMax: 0, details: [] }
         return Object.assign({}, e, {
         _shortName: e.monsterName.length > 4 ? e.monsterName.substring(0, 4) + '..' : e.monsterName,
         _sonataName: SONATA_NAMES[e.sonata] || e.sonata || '',
         _mainLabel: e.mainStat ? (STAT_DISPLAY[e.mainStat.type] || e.mainStat.type) : '',
+        _secondaryLabel: e.secondaryStat ? (STAT_DISPLAY[e.secondaryStat.type] || e.secondaryStat.type) + ' ' + e.secondaryStat.value : '',
         _subLabels: (e.substats || []).map(function (s) { return (STAT_DISPLAY[s.type] || s.type) + ' ' + s.value }),
+        _scoreDisplay: scoreEcho(e, this._calcMap[l.characterName]).toFixed(2),
+        _scoreMaxDisplay: detail.scoreMax.toFixed(3),
+        _scoreDetails: detail.details,
         })
-      }),
+      }, this),
     })
   },
 
@@ -449,7 +459,7 @@ Page({
     if (!result) return
     var ctx = wx.createCanvasContext('shareCanvas', this)
     var width = 750
-    var height = 1050
+    var height = 1760
     function text(value, x, y, size, color, bold) {
       ctx.setFillStyle(color || '#182033')
       ctx.setFontSize(size || 24)
@@ -469,13 +479,23 @@ Page({
     text('攻击 ' + result.panel.atk + '    暴击 ' + result._critRateDisplay + '    暴伤 ' + result._critDmgDisplay, 64, 278, 24)
     text('关键技能期望合计  ' + result._filteredTotalDisplay, 64, 326, 29, '#16794b', true)
     var y = 382
-    loadout.echoes.forEach(function (echo, index) {
-      ctx.setFillStyle('#f8fafc'); ctx.fillRect(64, y - 28, 622, 74)
+    loadout.echoes.forEach(function (echo) {
+      ctx.setFillStyle('#f8fafc'); ctx.fillRect(64, y - 28, 622, 176)
       text('C' + echo.cost, 80, y, 21, '#2563eb', true)
-      text(short(echo.monsterName, 8), 132, y, 22)
-      text(short(echo._sonataName, 9), 350, y, 20, '#667085')
-      text(short(echo._mainLabel + ' ' + (echo.mainStat ? echo.mainStat.value : ''), 14), 132, y + 29, 19, '#667085')
-      y += 88
+      text(short(echo.monsterName, 13), 132, y, 22)
+      text(short(echo._sonataName, 10), 390, y, 19, '#667085')
+      text('评分 ' + echo._scoreDisplay, 580, y, 19, '#2563eb')
+      var attributes = []
+      if (echo.mainStat) attributes.push('主 ' + echo._mainLabel + ' ' + echo.mainStat.value)
+      if (echo._secondaryLabel) attributes.push('副 ' + echo._secondaryLabel)
+      echo._subLabels.forEach(function (label) { attributes.push(label) })
+      attributes.forEach(function (label, index) {
+        var column = index % 2
+        var row = Math.floor(index / 2)
+        text(short(label, 17), 80 + column * 300, y + 32 + row * 27, 17, '#475467')
+      })
+      text('C' + echo.cost + ' MAX ' + echo._scoreMaxDisplay, 500, y + 140, 16, '#7a8499')
+      y += 190
     })
     y += 12
     text('关键技能', 64, y, 25, '#182033', true); y += 42
@@ -488,7 +508,7 @@ Page({
     text('计算值与游戏实测通常存在约 0%–2% 误差', 64, height - 76, 19, '#7a8499')
     var self = this
     ctx.draw(false, function () {
-      wx.canvasToTempFilePath({ canvasId: 'shareCanvas', width: width, height: height, destWidth: 1500, destHeight: 2100, fileType: 'png', success: function (res) {
+      wx.canvasToTempFilePath({ canvasId: 'shareCanvas', width: width, height: height, destWidth: 1500, destHeight: 3520, fileType: 'png', success: function (res) {
         if (wx.showShareImageMenu) wx.showShareImageMenu({ path: res.tempFilePath })
         else wx.previewImage({ urls: [res.tempFilePath] })
       }, fail: function () { wx.showToast({ title: '报告生成失败', icon: 'none' }) } }, self)

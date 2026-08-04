@@ -24,6 +24,17 @@ type LoadoutsPage = Record<string, unknown> & {
   }
 }
 
+type EchoesPage = Record<string, unknown> & {
+  data: Record<string, unknown> & {
+    filterMainStatOptions: Array<{ key: string; label: string }>
+    filteredEchoes: Array<Record<string, unknown>>
+  }
+  setData: (patch: Record<string, unknown>) => void
+  initForm: () => void
+  formatEchoes: (echoes: Array<Record<string, unknown>>) => void
+  onFilterMainStatChange: (event: { detail: { value: string } }) => void
+}
+
 function loadCalculatorPage() {
   const filename = resolve(root, 'miniprogram/pages/calculator/calculator.js')
   const source = readFileSync(filename, 'utf8')
@@ -64,12 +75,35 @@ function loadLoadoutsPage() {
     if (request.includes('weapons')) return [{ name: '测试武器', type: '长刃' }]
     if (request.includes('damage')) return { calcDamage: () => ({}), selectKeySkills: () => [] }
     if (request.includes('storage-service')) return { getStorage: () => [], setStorage: () => undefined }
-    if (request.includes('scoring-service')) return { scoreEcho: () => 0, scoreLoadout: () => 0 }
+    if (request.includes('scoring-service')) return {
+      scoreEcho: () => 0,
+      scoreEchoDetailed: () => ({ total: 0, scoreMax: 0, details: [] }),
+      scoreLoadout: () => 0,
+    }
     throw new Error(`Unexpected loadouts dependency: ${request}`)
   }
 
   Function('require', 'Page', source)(localRequire, (definition: LoadoutsPage) => { page = definition })
   if (!page) throw new Error('Loadouts page was not registered')
+  return page
+}
+
+function loadEchoesPage() {
+  const filename = resolve(root, 'miniprogram/pages/echoes/echoes.js')
+  const source = readFileSync(filename, 'utf8')
+  let page: EchoesPage | undefined
+  const localRequire = (request: string) => {
+    if (request.includes('sonata-effects')) return { setA: { name: '套装A' } }
+    if (request.includes('nightmare-bonuses')) return { getNightmareBonus: () => null }
+    if (request.includes('storage-service')) return { getStorage: () => [], setStorage: () => undefined }
+    if (request.includes('scoring-service')) return { scoreEcho: () => 0 }
+    throw new Error(`Unexpected echoes dependency: ${request}`)
+  }
+
+  Function('require', 'Page', source)(localRequire, (definition: EchoesPage) => { page = definition })
+  if (!page) throw new Error('Echoes page was not registered')
+  page.data = structuredClone(page.data)
+  page.setData = function (patch) { Object.assign(this.data, patch) }
   return page
 }
 
@@ -267,6 +301,11 @@ describe('miniprogram shared damage engine', () => {
     )
     const scoring = module.exports as {
       scoreEcho: (echo: Record<string, unknown>, calc: Record<string, unknown>) => number
+      scoreEchoDetailed: (echo: Record<string, unknown>, calc: Record<string, unknown>) => {
+        total: number
+        scoreMax: number
+        details: Array<{ field: string; label: string; scoreDisplay: string }>
+      }
     }
     const calc = {
       score_max: [100, 100, 100],
@@ -277,6 +316,14 @@ describe('miniprogram shared damage engine', () => {
     const echo = { cost: 4, mainStat: { type: 'CRIT_RATE', value: 22 }, substats: [{ type: 'CRIT_RATE', value: 10 }] }
 
     expect(scoring.scoreEcho(echo, calc)).toBe(21)
+    expect(scoring.scoreEchoDetailed(echo, calc)).toMatchObject({
+      total: 21,
+      scoreMax: 100,
+      details: [
+        { field: '主词条', label: '暴击', scoreDisplay: '11.00' },
+        { field: '副词条', label: '暴击', scoreDisplay: '10.00' },
+      ],
+    })
     expect(readFileSync(resolve(root, 'miniprogram/pages/echoes/echoes.js'), 'utf8')).not.toContain('Math.random() * 25')
   })
 
@@ -292,5 +339,42 @@ describe('miniprogram shared damage engine', () => {
     expect(loadoutJs).toContain("wx.showShareImageMenu")
     expect(loadoutJs).toContain('loadout._skillLevel || 10')
     expect(calculatorJs).toContain('this.data.enemyResist / 100')
+  })
+
+  it('keeps the replacement overlay open while changing its Sonata filter', () => {
+    const template = readFileSync(resolve(root, 'miniprogram/pages/loadouts/loadouts.wxml'), 'utf8')
+    expect(template).toContain('<view class="modal-content" catchtap="noop">')
+  })
+
+  it('filters the Echo inventory by the selected main stat', () => {
+    const page = loadEchoesPage()
+    page.initForm()
+    page.formatEchoes([
+      { id: 'crit', monsterName: '暴击声骸', cost: 4, sonata: 'setA', mainStat: { type: 'CRIT_RATE', value: 22 }, substats: [] },
+      { id: 'hp', monsterName: '生命声骸', cost: 4, sonata: 'setA', mainStat: { type: 'HP_PCT', value: 33 }, substats: [] },
+    ])
+
+    page.onFilterMainStatChange({ detail: { value: '1' } })
+
+    expect(page.data.filterMainStatOptions[1]).toMatchObject({ key: 'CRIT_RATE' })
+    expect(page.data.filteredEchoes.map((echo: Record<string, unknown>) => echo.id)).toEqual(['crit'])
+  })
+
+  it('prevents saving the same character and Echo-id combination twice', () => {
+    const source = readFileSync(resolve(root, 'miniprogram/pages/calculator/calculator.js'), 'utf8')
+    expect(source).toContain('findDuplicateLoadout')
+    expect(source).toContain("title: '套装已存在'")
+    expect(source).toContain('duplicate.name')
+  })
+
+  it('shows detailed Echo scoring and includes full Echo stats in share reports', () => {
+    const source = readFileSync(resolve(root, 'miniprogram/pages/loadouts/loadouts.js'), 'utf8')
+    const template = readFileSync(resolve(root, 'miniprogram/pages/loadouts/loadouts.wxml'), 'utf8')
+
+    expect(template).toContain('echo._scoreDetails')
+    expect(template).toContain('echo._scoreMaxDisplay')
+    expect(source).toContain('scoreEchoDetailed')
+    expect(source).toContain('echo._secondaryLabel')
+    expect(source).toContain('echo._subLabels.forEach')
   })
 })

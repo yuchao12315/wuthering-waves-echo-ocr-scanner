@@ -31,6 +31,11 @@ const VALID_MAIN_STATS = {
   4: ['ATK_PCT', 'HP_PCT', 'DEF_PCT', 'CRIT_RATE', 'CRIT_DMG', 'HEAL_BONUS', 'ELEM_DMG'],
 }
 
+const FILTER_MAIN_STATS = [
+  'CRIT_RATE', 'CRIT_DMG', 'HP_PCT', 'ATK_PCT', 'DEF_PCT',
+  'ELEM_DMG', 'ENERGY_REGEN', 'HEAL_BONUS', 'FLAT_HP', 'FLAT_ATK',
+]
+
 const NM_SECOND_LABELS = {
   resonanceSkillDmg: '共鸣技能伤害', resonanceLiberationDmg: '共鸣解放伤害',
   normalAtkDmg: '普攻伤害', heavyAtkDmg: '重击伤害',
@@ -72,6 +77,8 @@ Page({
     filterSonataIdx: 0,
     filterCost: 0,
     filterHasMain: false,
+    filterMainStatOptions: [],
+    filterMainStatIdx: 0,
     sortIdx: 0,
 
     // 导入
@@ -131,12 +138,16 @@ Page({
     Object.keys(SONATA_NAMES).forEach(function(k) {
       filterOptions.push({ key: k, label: SONATA_NAMES[k] })
     })
+    const filterMainStatOptions = [{ key: '', label: '全部主词条' }].concat(FILTER_MAIN_STATS.map(function(type) {
+      return { key: type, label: STAT_DISPLAY[type] || type }
+    }))
 
     this.setData({
       sonataKeys, sonataNames, sonataIndex: 0,
       mainStatLabels: mainLabels, mainStatTypes: mainTypes, mainStatIndex: 0,
       subStatLabels: subLabels,
       filterSonataOptions: filterOptions, filterSonataIdx: 0,
+      filterMainStatOptions, filterMainStatIdx: 0,
     })
   },
 
@@ -199,6 +210,8 @@ Page({
     const filterSonataIdx = data.filterSonataIdx
     const filterCost = data.filterCost
     const filterHasMain = data.filterHasMain
+    const filterMainStatOptions = data.filterMainStatOptions || []
+    const filterMainStatIdx = data.filterMainStatIdx || 0
     const sortIdx = data.sortIdx
     const filterSonataOptions = data.filterSonataOptions
     let list = echoes.slice()
@@ -217,6 +230,12 @@ Page({
 
     if (filterHasMain) {
       list = list.filter(function(e) { return e.mainStat != null })
+    }
+
+    const mainStatOption = filterMainStatOptions[filterMainStatIdx]
+    const mainStatType = mainStatOption ? mainStatOption.key : ''
+    if (mainStatType) {
+      list = list.filter(function(e) { return e.mainStat && e.mainStat.type === mainStatType })
     }
 
     if (sortIdx === 1 && this._calc) {
@@ -254,6 +273,11 @@ Page({
 
   onMainValueInput(e) {
     this.setData({ mainStatValue: e.detail.value })
+  },
+
+  onFilterMainStatChange(e) {
+    this.setData({ filterMainStatIdx: parseInt(e.detail.value) })
+    this.applyFilters()
   },
 
   onSecStatChange(e) {

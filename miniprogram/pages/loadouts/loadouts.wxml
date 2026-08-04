@@ -48,8 +48,19 @@
             </view>
             <view class="echo-sonata">{{echo._sonataName}}</view>
             <view class="echo-main" wx:if="{{echo.mainStat}}">{{echo._mainLabel}} {{echo.mainStat.value}}</view>
+            <view class="echo-secondary" wx:if="{{echo._secondaryLabel}}">{{echo._secondaryLabel}}</view>
             <view class="echo-subs">
               <text wx:for="{{echo._subLabels}}" wx:for-item="sub" wx:key="*this" class="sub-tag">{{sub}}</text>
+            </view>
+            <view class="echo-score-summary" wx:if="{{echo._scoreMaxDisplay}}">
+              <text>评分 {{echo._scoreDisplay}}</text>
+              <text>C{{echo.cost}} MAX {{echo._scoreMaxDisplay}}</text>
+            </view>
+            <view class="echo-score-details" wx:if="{{echo._scoreDetails.length > 0}}">
+              <view wx:for="{{echo._scoreDetails}}" wx:for-item="detail" wx:key="scoreKey" class="echo-score-detail">
+                <text>{{detail.field}} {{detail.label}} {{detail.valueDisplay}}</text>
+                <text class="echo-score-value">{{detail.scoreDisplay}}分</text>
+              </view>
             </view>
           </view>
           <view class="replace-btn" bindtap="onStartReplace" data-loadout-id="{{loadout.id}}" data-slot="{{echoIdx}}">替换</view>
@@ -153,7 +164,7 @@
 
   <!-- 替换弹窗 -->
   <view wx:if="{{replaceSlot !== null}}" class="modal-mask" bindtap="onCloseReplace">
-    <view class="modal-content" catchtap="">
+    <view class="modal-content" catchtap="noop">
       <view class="modal-header">
         <text class="modal-title">选择 C{{replaceCost}} 声骸替换</text>
         <text class="modal-close" bindtap="onCloseReplace">✕</text>

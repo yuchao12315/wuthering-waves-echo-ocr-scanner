@@ -109,6 +109,11 @@
           bindtap="setFilterCost" data-cost="{{item}}">{{item === 0 ? '全部' : 'C' + item}}</view>
       </view>
 
+      <!-- 主词条筛选 -->
+      <picker mode="selector" range="{{filterMainStatOptions}}" range-key="label" value="{{filterMainStatIdx}}" bindchange="onFilterMainStatChange">
+        <view class="filter-picker">{{filterMainStatOptions[filterMainStatIdx].label}} ▾</view>
+      </picker>
+
       <!-- 有主词条 -->
       <view class="checkbox-row" bindtap="toggleFilterMain">
         <view class="checkbox {{filterHasMain ? 'checkbox-on' : ''}}"></view>

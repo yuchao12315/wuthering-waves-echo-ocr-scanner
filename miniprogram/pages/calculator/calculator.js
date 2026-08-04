@@ -114,6 +114,18 @@ function orderEchoesForMainSlot(echoes) {
   })
 }
 
+function getLoadoutSignature(characterName, echoes) {
+  var ids = (echoes || []).map(function (echo) { return String(echo.id || '') }).sort()
+  return String(characterName || '') + '|' + ids.join('|')
+}
+
+function findDuplicateLoadout(loadouts, characterName, echoes) {
+  var signature = getLoadoutSignature(characterName, echoes)
+  return (loadouts || []).find(function (loadout) {
+    return getLoadoutSignature(loadout.characterName, loadout.echoes) === signature
+  })
+}
+
 function getWeapons(weaponType) {
   var weapons = weaponType ? WEAPONS.filter(function (w) { return w.type === weaponType }) : WEAPONS
   return Promise.resolve(weapons)
@@ -1011,11 +1023,28 @@ Page({
   },
 
   /** 保存套装 */
-  onSaveLoadout(e) {
+  async onSaveLoadout(e) {
     var self = this
     var idx = e.currentTarget.dataset.index
     var result = this._results[idx]
     if (!result) return
+
+    var existingLoadouts
+    try {
+      existingLoadouts = await getStorage('loadouts', [])
+    } catch (error) {
+      wx.showToast({ title: '读取套装失败', icon: 'none' })
+      return
+    }
+    var duplicate = findDuplicateLoadout(existingLoadouts, this.data.selectedChar.name, result.echoes)
+    if (duplicate) {
+      wx.showModal({
+        title: '套装已存在',
+        content: '该声骸组合已保存为「' + duplicate.name + '」，请勿重复保存。',
+        showCancel: false,
+      })
+      return
+    }
 
     wx.showModal({
       title: '保存套装',
@@ -1047,6 +1076,15 @@ Page({
 
           try {
             var loadouts = await getStorage('loadouts', [])
+            duplicate = findDuplicateLoadout(loadouts, loadout.characterName, loadout.echoes)
+            if (duplicate) {
+              wx.showModal({
+                title: '套装已存在',
+                content: '该声骸组合已保存为「' + duplicate.name + '」，请勿重复保存。',
+                showCancel: false,
+              })
+              return
+            }
             loadouts.unshift(loadout)
             await setStorage('loadouts', loadouts)
             self.loadSavedLoadouts()
