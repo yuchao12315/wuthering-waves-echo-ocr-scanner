@@ -178,7 +178,9 @@ function findBestCombinations(
     for (const p1 of picks1) {
       for (const p3 of picks3) {
         for (const p4 of picks4) {
-          const combined = [...p1, ...p3, ...p4];
+          // The first Echo is the equipped active Echo for fixed Echo Skill bonuses.
+          // Buckets are already score-sorted, so this also preserves same-Cost order.
+          const combined = [...p4, ...p3, ...p1];
 
           // 相同Cost的声骸名不能相同（同名声骸不叠加套装效果）
           let hasDupName = false;
@@ -353,7 +355,7 @@ function calculate(echoes: Echo[], calc: CalcJson, config: Config, allEchoes: Ec
     score: scoreEcho(e, calc),
     cost: e.cost,
     sonata: e.sonata,
-    monsterName: (e as any).monsterName ?? '',
+    monsterName: (e as unknown as { monsterName?: string }).monsterName ?? '',
   }));
 
   // Group by cost

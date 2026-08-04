@@ -41,6 +41,16 @@ function getGrade(score) {
   return { grade: 'C', gradeClass: 'C' }
 }
 
+function orderEchoesForMainSlot(echoes) {
+  return (echoes || []).map(function (echo, index) {
+    return { echo: echo, index: index }
+  }).sort(function (a, b) {
+    return b.echo.cost - a.echo.cost || a.index - b.index
+  }).map(function (item) {
+    return item.echo
+  })
+}
+
 function getSkillTagClass(tag) {
   var map = {
     E: 'skill-e',
@@ -192,7 +202,7 @@ Page({
       _enemyResist: 10,
       _damageResult: null,
       _filteredTotalDisplay: '',
-      echoes: l.echoes.map(function (e) {
+      echoes: orderEchoesForMainSlot(l.echoes).map(function (e) {
         return Object.assign({}, e, {
         _shortName: e.monsterName.length > 4 ? e.monsterName.substring(0, 4) + '..' : e.monsterName,
         _sonataName: SONATA_NAMES[e.sonata] || e.sonata || '',
@@ -590,7 +600,13 @@ Page({
       var loadouts = await getStorage('loadouts', [])
       var idx = loadouts.findIndex(function (l) { return l.id === replaceLoadoutId })
       if (idx >= 0) {
-        loadouts[idx].echoes[replaceSlot] = sanitizeEcho(preview.echo)
+        var displayed = this.data.filtered.find(function (item) { return item.id === replaceLoadoutId })
+        var replacedEcho = displayed && displayed.echoes[replaceSlot]
+        var storageSlot = replacedEcho
+          ? loadouts[idx].echoes.findIndex(function (echo) { return echo.id === replacedEcho.id })
+          : replaceSlot
+        if (storageSlot < 0) storageSlot = replaceSlot
+        loadouts[idx].echoes[storageSlot] = sanitizeEcho(preview.echo)
         loadouts[idx].score = preview.scoreAfter
         await setStorage('loadouts', loadouts)
       }

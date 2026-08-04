@@ -104,6 +104,16 @@ function getGrade(score) {
   return { grade: 'C', gradeClass: 'C' }
 }
 
+function orderEchoesForMainSlot(echoes) {
+  return (echoes || []).map(function (echo, index) {
+    return { echo: echo, index: index }
+  }).sort(function (a, b) {
+    return b.echo.cost - a.echo.cost || a.index - b.index
+  }).map(function (item) {
+    return item.echo
+  })
+}
+
 function getWeapons(weaponType) {
   var weapons = weaponType ? WEAPONS.filter(function (w) { return w.type === weaponType }) : WEAPONS
   return Promise.resolve(weapons)
@@ -519,7 +529,9 @@ Page({
     var energyThreshold = minEnergyRegen ? parseFloat(minEnergyRegen) / 100 : 0
 
     // 排序
-    var sorted = results.slice().filter(function (r) {
+    var sorted = results.slice().map(function (r) {
+      return Object.assign({}, r, { echoes: orderEchoesForMainSlot(r.echoes) })
+    }).filter(function (r) {
       return this.matchesCostFilter(r.echoes, costFilter) && this.matchesSelectedSonatas(r.echoes, sonatas)
     }, this)
     if (rankMode === 'damage' && this._charBase) {
@@ -797,7 +809,9 @@ Page({
       for (var i = 0; i < picks1.length; i++) {
         for (var j = 0; j < picks3.length; j++) {
           for (var k = 0; k < picks4.length; k++) {
-            var combined = picks1[i].concat(picks3[j], picks4[k])
+            // The damage engine treats the first Echo as the equipped active Echo.
+            // Keep Cost 4 first while preserving score order within the same Cost.
+            var combined = picks4[k].concat(picks3[j], picks1[i])
             if (this.hasDuplicateSameCostName(combined)) continue
             if (!this.matchesSonataConstraint(combined, sonataConstraint)) continue
 

@@ -18,6 +18,12 @@ type CalculatorPage = Record<string, unknown> & {
   ) => unknown[]
 }
 
+type LoadoutsPage = Record<string, unknown> & {
+  formatLoadout: (loadout: Record<string, unknown>) => {
+    echoes: Array<{ id: string; cost: number }>
+  }
+}
+
 function loadCalculatorPage() {
   const filename = resolve(root, 'miniprogram/pages/calculator/calculator.js')
   const source = readFileSync(filename, 'utf8')
@@ -44,6 +50,26 @@ function loadCalculatorPage() {
 
   Function('require', 'Page', source)(localRequire, (definition: CalculatorPage) => { page = definition })
   if (!page) throw new Error('Calculator page was not registered')
+  return page
+}
+
+function loadLoadoutsPage() {
+  const filename = resolve(root, 'miniprogram/pages/loadouts/loadouts.js')
+  const source = readFileSync(filename, 'utf8')
+  let page: LoadoutsPage | undefined
+  const localRequire = (request: string) => {
+    if (request.includes('sonata-effects')) return {}
+    if (request.includes('characters-base')) return { 卡提希娅: { weaponType: '长刃' } }
+    if (request.includes('character-weights')) return {}
+    if (request.includes('weapons')) return [{ name: '测试武器', type: '长刃' }]
+    if (request.includes('damage')) return { calcDamage: () => ({}), selectKeySkills: () => [] }
+    if (request.includes('storage-service')) return { getStorage: () => [], setStorage: () => undefined }
+    if (request.includes('scoring-service')) return { scoreEcho: () => 0, scoreLoadout: () => 0 }
+    throw new Error(`Unexpected loadouts dependency: ${request}`)
+  }
+
+  Function('require', 'Page', source)(localRequire, (definition: LoadoutsPage) => { page = definition })
+  if (!page) throw new Error('Loadouts page was not registered')
   return page
 }
 
@@ -203,6 +229,34 @@ describe('miniprogram shared damage engine', () => {
 
     const overBudget = makeEchoes([4, 4, 3, 1, 1], selectedSet)
     expect(page.calculateLoadouts(overBudget, page._calc, { sonatas: ['selected-set'], costFilter: 'all' }, overBudget)).toEqual([])
+  })
+
+  it('keeps Cost 4 echoes first so the active Echo fixed bonus is applied', () => {
+    const calculator = loadCalculatorPage()
+    calculator._calc = { score_max: [1, 1, 1], main_props: {}, sub_props: {}, skill_weight: [0, 0, 0, 0] }
+    const echoes = [1, 1, 1, 4, 4].map((cost, index) => ({
+      id: `echo-${index}`,
+      monsterName: `声骸-${index}`,
+      cost,
+      sonata: 'selected-set',
+      mainStat: null,
+      secondaryStat: null,
+      substats: [{ type: 'CRIT_RATE', value: 10 }, { type: 'CRIT_DMG', value: 20 }],
+    }))
+
+    const [calculated] = calculator.calculateLoadouts(
+      echoes, calculator._calc, { sonatas: ['selected-set'], costFilter: '4+4+1+1+1' }, echoes,
+    )
+    const calculatedEchoes = (calculated as { echoes: Array<{ id: string; cost: number }> }).echoes
+    expect(calculatedEchoes.map(echo => echo.cost)).toEqual([4, 4, 1, 1, 1])
+    expect(calculatedEchoes.slice(0, 2).map(echo => echo.id)).toEqual(['echo-3', 'echo-4'])
+
+    const loadouts = loadLoadoutsPage()
+    const formatted = loadouts.formatLoadout({
+      id: 'saved', name: 'saved', characterName: '卡提希娅', score: 0, echoes,
+    })
+    expect(formatted.echoes.map(echo => echo.cost)).toEqual([4, 4, 1, 1, 1])
+    expect(formatted.echoes.slice(0, 2).map(echo => echo.id)).toEqual(['echo-3', 'echo-4'])
   })
 
   it('uses deterministic scoring for replacement previews and echo sorting', () => {
