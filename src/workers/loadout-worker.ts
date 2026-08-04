@@ -124,21 +124,6 @@ function scoreEcho(echo: Echo, calc: CalcJson): number {
   return scoreMax > 0 ? (rawScore / scoreMax) * 50 : 0;
 }
 
-function getCostDistributions(totalCost: number): number[][] {
-  // Each echo has cost 1, 3, or 4. We need 5 echoes summing to totalCost.
-  // Returns arrays of [count1, count3, count4] where count1+count3+count4=5
-  const results: number[][] = [];
-  for (let c4 = 0; c4 <= 5; c4++) {
-    for (let c3 = 0; c3 <= 5 - c4; c3++) {
-      const c1 = 5 - c4 - c3;
-      if (c1 * 1 + c3 * 3 + c4 * 4 === totalCost) {
-        results.push([c1, c3, c4]);
-      }
-    }
-  }
-  return results;
-}
-
 function getCostDistributionsLeq(maxCost: number): number[][] {
   const results: number[][] = [];
   for (let c4 = 0; c4 <= 5; c4++) {
@@ -338,7 +323,7 @@ function calculate(echoes: Echo[], calc: CalcJson, config: Config, allEchoes: Ec
     }
     sonataConstraint = { type: 'single', sonata: sonatas[0] };
   } else if (sonatas.length === 2) {
-    // Path A-2: ≥2 from each + 1 wildcard, cost=12
+    // Path A-2: ≥2 from each + 1 wildcard, total cost≤12
     const count1 = echoes.filter(e => e.sonata === sonatas[0]).length;
     const count2 = echoes.filter(e => e.sonata === sonatas[1]).length;
     console.log(`[Worker] 双合鸣模式: ${sonatas[0]}(${count1}个) + ${sonatas[1]}(${count2}个)`);
@@ -388,7 +373,7 @@ function calculate(echoes: Echo[], calc: CalcJson, config: Config, allEchoes: Ec
     distributions = [[3, 0, 2]];
     console.log(`[Worker] Cost分配筛选: 4+4+1+1+1`);
   } else if (sonatas.length === 1 || sonatas.length === 2) {
-    distributions = getCostDistributions(12);
+    distributions = getCostDistributionsLeq(12);
   } else {
     distributions = getCostDistributionsLeq(12);
   }

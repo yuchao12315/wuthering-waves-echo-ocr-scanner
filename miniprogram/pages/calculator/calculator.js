@@ -673,19 +673,6 @@ Page({
     return null
   },
 
-  getCostDistributions(totalCost) {
-    var results = []
-    for (var c4 = 0; c4 <= 5; c4++) {
-      for (var c3 = 0; c3 <= 5 - c4; c3++) {
-        var c1 = 5 - c4 - c3
-        if (c1 + c3 * 3 + c4 * 4 === totalCost) {
-          results.push([c1, c3, c4])
-        }
-      }
-    }
-    return results
-  },
-
   getCostDistributionsLeq(maxCost) {
     var results = []
     for (var c4 = 0; c4 <= 5; c4++) {
@@ -884,7 +871,7 @@ Page({
     } else if (costFilter === '4+4+1+1+1') {
       distributions = [[3, 0, 2]]
     } else if (sonatas.length === 1 || sonatas.length === 2) {
-      distributions = this.getCostDistributions(12)
+      distributions = this.getCostDistributionsLeq(12)
     } else {
       distributions = this.getCostDistributionsLeq(12)
     }

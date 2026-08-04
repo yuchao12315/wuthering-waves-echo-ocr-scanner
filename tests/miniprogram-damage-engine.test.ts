@@ -175,6 +175,36 @@ describe('miniprogram shared damage engine', () => {
       .toContain('当前库存无法组成所选完整套装')
   })
 
+  it('keeps explicit and unrestricted cost distributions consistent', () => {
+    const page = loadCalculatorPage()
+    page._calc = { score_max: [1, 1, 1], main_props: {}, sub_props: {}, skill_weight: [0, 0, 0, 0] }
+    const makeEchoes = (costs: number[], sonatas: string[]) => costs.map((cost, index) => ({
+      id: `cost-${costs.join('')}-${index}`,
+      monsterName: `声骸-${index}`,
+      cost,
+      sonata: sonatas[index],
+      mainStat: null,
+      secondaryStat: null,
+      substats: [{ type: 'CRIT_RATE', value: 10 }, { type: 'CRIT_DMG', value: 20 }],
+    }))
+    const selectedSet = Array(5).fill('selected-set')
+
+    for (const [costFilter, costs] of [
+      ['4+3+3+1+1', [4, 3, 3, 1, 1]],
+      ['4+4+1+1+1', [4, 4, 1, 1, 1]],
+    ] as const) {
+      const completeSet = makeEchoes([...costs], selectedSet)
+      const scattered = makeEchoes([...costs], ['set-a', 'set-b', 'set-c', 'set-d', 'set-e'])
+
+      expect(page.calculateLoadouts(completeSet, page._calc, { sonatas: ['selected-set'], costFilter }, completeSet)).toHaveLength(1)
+      expect(page.calculateLoadouts(completeSet, page._calc, { sonatas: ['selected-set'], costFilter: 'all' }, completeSet)).toHaveLength(1)
+      expect(page.calculateLoadouts(scattered, page._calc, { sonatas: [], costFilter: 'all' }, scattered)).toHaveLength(1)
+    }
+
+    const overBudget = makeEchoes([4, 4, 3, 1, 1], selectedSet)
+    expect(page.calculateLoadouts(overBudget, page._calc, { sonatas: ['selected-set'], costFilter: 'all' }, overBudget)).toEqual([])
+  })
+
   it('uses deterministic scoring for replacement previews and echo sorting', () => {
     const source = readFileSync(resolve(root, 'miniprogram/services/scoring-service.js'), 'utf8')
     const module = { exports: {} as Record<string, unknown> }
